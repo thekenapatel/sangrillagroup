@@ -1,0 +1,66 @@
+/* NAVBAR CONTAINER */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: white;
+    color: black;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* INNER CONTAINER */
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 22px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LOGO */
+.logo {
+    font-size: 20px;
+    font-weight: 666;
+    letter-spacing: 22%;
+    font-family: "Philosopher", sans-serif;
+}
+
+/* MENU */
+.nav-menu {
+    display: flex;
+    gap: 32px;
+    font-size: 15px;
+    font-family: "Outfit", sans-serif;
+    font-weight: 500;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #555;
+    transition: 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #007ADD;
+}
+
+/* ICONS */
+.nav-icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+}

@@ -1,0 +1,212 @@
+/* CONTAINER */
+.projects {
+    padding: 80px 20px;
+    font-family: "Outfit", sans-serif;
+}
+
+/* RESPONSIVE PADDING */
+@media (min-width: 768px) {
+    .projects {
+        padding: 80px 160px;
+    }
+}
+
+/* TITLE */
+.projects-title {
+    font-weight: 500;
+    font-size: 48px;
+    margin-bottom: 35px;
+    text-align: left;
+}
+
+
+/* HORIZONTAL SCROLL CONTAINER */
+.projects-scroll {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+}
+
+/* HIDE SCROLLBAR (clean look) */
+.projects-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* CARD SIZE */
+.project-card {
+    min-width: 320px;
+    height: 400px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+/* IMAGE */
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* HOVER ZOOM */
+.project-card:hover .project-image {
+    transform: scale(1.1);
+}
+
+
+/* CARD */
+.project-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* IMAGE */
+.project-image {
+    width: 380px;
+    height: 500px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* HOVER ZOOM */
+.project-card:hover .project-image {
+    transform: scale(1.1);
+}
+
+/* OVERLAY */
+.project-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* TEXT */
+.project-text {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    color: white;
+}
+
+.project-name {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.project-location {
+    font-size: 14px;
+    color: #d1d5db;
+}
+
+.projects-scroll {
+    cursor: grab;
+}
+
+.projects-scroll:active {
+    cursor: grabbing;
+}
+
+
+
+
+
+
+
+/* FILTERS */
+.projects-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* FILTER BUTTON */
+.filter-item {
+    padding: 10px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    /* color: #aaa; */
+    transition: 0.3s ease;
+    font-size: 16px;
+}
+
+.filter-item:hover {
+    color: rgb(108, 108, 108);
+    user-select: none;
+}
+
+/* ACTIVE */
+.filter-item.active {
+    background: black;
+    color: white;
+}
+
+/* SCROLL */
+.projects-scroll {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    cursor: grab;
+}
+
+.projects-scroll:active {
+    cursor: grabbing;
+}
+
+/* HIDE SCROLLBAR */
+.projects-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* CARD */
+.project-card {
+    min-width: 320px;
+    height: 400px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* IMAGE */
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+
+/* HOVER ZOOM */
+.project-card:hover .project-image {
+    transform: scale(1.1);
+}
+
+/* OVERLAY */
+.project-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* TEXT */
+.project-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+}
+
+.project-name {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.project-location {
+    font-size: 14px;
+    color: #ccc;
+}
