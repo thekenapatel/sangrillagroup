@@ -1,0 +1,181 @@
+.journey-section {
+  padding: 140px 0;
+  background-color: #0B0F19; /* High-end ultra dark slate/navy */
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+.journey-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+
+.journey-header h2 {
+  font-size: clamp(3.2rem, 5vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #ffffff 0%, #9ca3af 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+}
+
+.journey-intro {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #9ca3af;
+  font-weight: 300;
+  max-width: 90%;
+}
+
+.journey-tagline {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 600;
+  color: #007ADD; /* Sangrilla's primary blue brand color */
+  line-height: 1.3;
+  letter-spacing: 1px;
+  margin-top: 60px;
+  border-left: 6px solid #007ADD;
+  padding-left: 25px;
+}
+
+.journey-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  position: relative;
+}
+
+.journey-stats::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, #334155, transparent);
+  z-index: 0;
+}
+
+.stat-item {
+  position: relative;
+  padding-left: 50px;
+  z-index: 1;
+}
+
+.stat-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 15px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #007ADD;
+  box-shadow: 0 0 15px rgba(0, 122, 221, 0.8);
+}
+
+.stat-metric {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.stat-item p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #d1d5db;
+  font-weight: 300;
+  margin: 0;
+}
+
+.stat-item strong {
+  font-weight: 500;
+  color: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .journey-container {
+    grid-template-columns: 1fr;
+    gap: 70px;
+    padding: 0 40px;
+  }
+  
+  .journey-section {
+    padding: 100px 0;
+  }
+
+  .journey-header h2 {
+    /* Use clamp instead of fixed size to prevent text overflow */
+    font-size: clamp(2.8rem, 8vw, 4rem); 
+  }
+}
+
+@media (max-width: 768px) {
+  .journey-section {
+    padding: 70px 0;
+  }
+  
+  .journey-container {
+    padding: 0 24px;
+  }
+  
+  .journey-header h2 {
+    font-size: clamp(2.2rem, 10vw, 2.8rem);
+    hyphens: auto;
+    word-wrap: break-word;
+    margin-bottom: 20px;
+  }
+
+  .journey-intro {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  .journey-tagline {
+    font-size: 1.4rem;
+    margin-top: 30px;
+    padding-left: 15px;
+    border-left-width: 4px;
+  }
+  
+  .journey-stats {
+    gap: 40px;
+  }
+  
+  .stat-metric {
+    font-size: 1.6rem;
+  }
+  
+  .journey-stats::before {
+    left: 4px;
+  }
+  
+  .stat-item {
+    padding-left: 30px;
+  }
+  
+  .stat-item::before {
+    left: 0;
+    width: 10px;
+    height: 10px;
+    top: 10px;
+  }
+
+  .stat-item p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+}

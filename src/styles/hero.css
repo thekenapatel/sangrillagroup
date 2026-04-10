@@ -1,76 +1,213 @@
-/* HERO CONTAINER */
-.hero {
+.hero-morph {
     height: 100vh;
+    width: 100%;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
-
+    background: #020202;
+    /* Deep architectural black */
 }
 
-/* VIDEO BACKGROUND */
-.hero-video {
+/* 1. The Morphing Canvas */
+.morph-canvas {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transform: scale(1.05);
 }
 
-/* DARK OVERLAY */
-.hero-overlay {
+.morph-image {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.8;
 }
 
-/* CONTENT */
-.hero-content {
-    text-align: center;
-    color: white;
-    z-index: 10;
-    padding: 0 16px;
+/* Subtle Film Grain for Luxury feel */
+.hero-morph::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 5;
 }
 
-/* TITLE */
-.hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 64px;
-    letter-spacing: 2px;
+.morph-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+    z-index: 2;
 }
 
-/* SUBTITLE */
-.hero-subtitle {
-    margin-top: 16px;
-    font-size: 20px;
-    color: #d1d5db;
+/* 2. Floating Typography (Parallax Branding) */
+.hero-branding {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    pointer-events: none;
 }
 
-/* BUTTON */
-.hero-btn {
-    margin-top: 32px;
-    padding: 12px 24px;
-    border: 1px solid white;
-    background: transparent;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.brand-parallax {
+    display: flex;
+    gap: 0.2em;
 }
 
-.hero-btn:hover {
-    background: white;
-    color: black;
+.floating-letter {
+    font-family: 'Philosopher', sans-serif;
+    font-size: clamp(4rem, 18vw, 14rem);
+    font-weight: 666;
+    /* Specific weight requested by user */
+    color: #fff;
+    line-height: 0.8;
+    text-transform: uppercase;
+    text-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    user-select: none;
+    will-change: transform;
 }
 
-/* 📱 RESPONSIVE */
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: 36px;
+.brand-tagline-moral {
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(1rem, 2.5vw, 1.8rem);
+    letter-spacing: 0.4em;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 40px;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+/* 3. Horizon HUD (Minimalist Nav) */
+.hero-horizon {
+    position: absolute;
+    bottom: 80px;
+    width: 100%;
+    z-index: 30;
+    display: flex;
+    justify-content: center;
+}
+
+.horizon-line-wrapper {
+    width: 80%;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.horizon-bar {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+}
+
+.horizon-labels {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: rgba(255, 255, 255, 0.4);
+    pointer-events: none;
+}
+
+/* 4. Social Sidebar (Sharp Luxury) */
+.hero-socials-fixed {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.social-box {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    text-decoration: none;
+    /* Transition removed as per request */
+}
+
+/* Instant dark hover, no transition or animation */
+.social-box:hover {
+    background: #000;
+    border-color: #000;
+    color: #fff;
+}
+
+/* 📱 Responsive Engineering */
+@media (max-width: 1024px) {
+    .floating-letter {
+        font-size: 6rem;
+        /* Slightly smaller for tablets */
     }
 
-    .hero-subtitle {
-        font-size: 16px;
+    .brand-parallax {
+        gap: 0;
+    }
+
+    .hero-socials-fixed {
+        left: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .floating-letter {
+        font-size: 3.2rem;
+    }
+
+    .brand-tagline-moral {
+        font-size: 0.8rem;
+        letter-spacing: 0.2em;
+        margin-top: 20px;
+    }
+
+    .hero-horizon {
+        bottom: 120px;
+    }
+
+    .horizon-labels {
+        font-size: 8px;
+        letter-spacing: 2px;
+    }
+
+    .hero-socials-fixed {
+        left: 50%;
+        top: unset;
+        bottom: 40px;
+        transform: translateX(-50%);
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .social-box {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+@media (max-width: 480px) {
+    .floating-letter {
+        font-size: 2.7rem;
+        letter-spacing: 7px;
     }
 }

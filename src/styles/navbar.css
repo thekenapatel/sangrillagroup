@@ -1,66 +1,167 @@
-/* NAVBAR CONTAINER */
+/* NAVBAR - Shivalik Style */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    background: white;
-    color: black;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #f0f0f0;
 }
 
-/* INNER CONTAINER */
 .navbar-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 22px 24px;
+    padding: 45px 100px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 70px;
 }
 
-/* LOGO */
 .logo {
-    font-size: 20px;
-    font-weight: 666;
-    letter-spacing: 22%;
     font-family: "Philosopher", sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #111;
+    text-decoration: none;
 }
 
-/* MENU */
 .nav-menu {
     display: flex;
-    gap: 32px;
-    font-size: 15px;
-    font-family: "Outfit", sans-serif;
+    gap: 42px;
+    font-family: "Poppins", sans-serif;
+    font-size: 15.5px;
     font-weight: 500;
 }
 
 .nav-menu a {
     text-decoration: none;
-    color: #555;
-    transition: 0.3s;
+    color: #444;
+    transition: color 0.3s;
 }
 
-.nav-menu a:hover {
+.nav-menu a:hover,
+.nav-menu a.active {
     color: #007ADD;
 }
 
-/* ICONS */
 .nav-icons {
     display: flex;
-    gap: 20px;
     align-items: center;
+    gap: 20px;
 }
 
 .icon {
     cursor: pointer;
+    color: #333;
+    transition: all 0.3s;
 }
 
-/* MOBILE */
+.icon:hover {
+    color: #007ADD;
+    transform: scale(1.1);
+}
+
+/* ===================== FULL MENU ===================== */
+.full-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease;
+    z-index: 999;
+    border-top: 1px solid #f0f0f0;
+}
+
+.full-menu.open {
+    max-height: 520px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 50px 100px;
+}
+
+.menu-column {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 0 30px;
+    border-right: 1px solid #e5e5e5;
+}
+
+.menu-column:first-child {
+    padding-left: 0;
+}
+
+.menu-column:last-child {
+    padding-right: 0;
+    border-right: none;
+}
+
+.menu-column a {
+    font-family: "Poppins", sans-serif;
+    font-size: 15.5px;
+    color: #555;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.menu-column a:hover,
+.menu-column a.active {
+    color: #007ADD;
+}
+
+/* ==================== RESPONSIVE ==================== */
+
 @media (max-width: 768px) {
     .nav-menu {
         display: none;
+    }
+
+    .navbar-container {
+        padding: 20px 24px;
+        height: 72px;
+    }
+
+    .logo {
+        font-size: 23px;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px 30px;
+        padding: 30px 24px;
+    }
+
+    .menu-column {
+        border-right: none;
+        padding: 0;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .menu-grid {
+        grid-template-columns: repeat(5, 1fr);
+        padding: 40px 40px;
+    }
+
+    .menu-column {
+        padding: 0 15px;
+    }
+
+    .menu-column:last-child {
+        border-right: none;
     }
 }

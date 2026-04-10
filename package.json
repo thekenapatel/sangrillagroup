@@ -1,5 +1,6 @@
 {
   "name": "sangrillagroup",
+  "homepage": "https://www.sangrillagroup.com",
   "version": "1.0.0",
   "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
   "main": "eslint.config.js",
@@ -45,6 +46,7 @@
     "fdir": "^6.5.0",
     "file-entry-cache": "^8.0.0",
     "find-up": "^5.0.0",
+    "firebase": "^12.11.0",
     "flat-cache": "^4.0.1",
     "flatted": "^3.4.2",
     "fraction.js": "^5.3.4",

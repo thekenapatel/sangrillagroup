@@ -67,7 +67,7 @@ const Projects = () => {
       : projects.filter(p => p.category === activeFilter);
 
   return (
-    <div className="projects">
+    <div className="projects-section">
       <h2 className="projects-title">Our Projects</h2>
 
       {/* FILTERS */}
@@ -105,11 +105,11 @@ const Projects = () => {
       >
         {filteredProjects.map((project, index) => (
           <div key={index} className="project-card">
-            <img src={project.image} className="project-image" />
+            <div className="project-image-wrapper">
+              <img src={project.image} className="project-image" />
+            </div>
 
-            <div className="project-overlay"></div>
-
-            <div className="project-text">
+            <div className="project-info">
               <h3 className="project-name">{project.name}</h3>
               <p className="project-location">{project.location}</p>
             </div>

@@ -1,8 +1,8 @@
 .footer {
     background-color: #0e0e0e;
     color: #e5e7eb;
-    padding: 90px 160px 70px 160px;
-    font-family: "Outfit", sans-serif;
+    padding: 100px 0;
+    font-family: "Poppins", sans-serif;
 }
 
 /* Top container */
@@ -109,13 +109,37 @@
 
 /* 📱 Responsive */
 @media (max-width: 768px) {
+    .footer {
+        padding: 60px 20px;
+        text-align: center;
+    }
+
     .footer-container {
         flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .footer-column {
+        min-width: 100%;
     }
 
     .footer-bottom {
         flex-direction: column;
-        gap: 10px;
+        align-items: center;
+        gap: 20px;
         text-align: center;
+    }
+
+    .footer-bottom-left {
+        align-items: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .footer-links {
+        justify-content: center;
     }
 }

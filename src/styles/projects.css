@@ -1,127 +1,26 @@
 /* CONTAINER */
-.projects {
-    padding: 80px 20px;
-    font-family: "Outfit", sans-serif;
-}
-
-/* RESPONSIVE PADDING */
-@media (min-width: 768px) {
-    .projects {
-        padding: 80px 160px;
-    }
+.projects-section {
+    padding: 80px 0;
+    font-family: "Poppins", sans-serif;
+    overflow: hidden;
 }
 
 /* TITLE */
 .projects-title {
-    font-weight: 500;
-    font-size: 48px;
+    font-weight: 700;
+    font-size: clamp(2.5rem, 5vw, 4rem);
     margin-bottom: 35px;
+    margin-top: 100px;
     text-align: left;
+    color: #1a1a1a;
+    letter-spacing: -1px;
 }
-
-
-/* HORIZONTAL SCROLL CONTAINER */
-.projects-scroll {
-    display: flex;
-    gap: 24px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding-bottom: 10px;
-}
-
-/* HIDE SCROLLBAR (clean look) */
-.projects-scroll::-webkit-scrollbar {
-    display: none;
-}
-
-/* CARD SIZE */
-.project-card {
-    min-width: 320px;
-    height: 400px;
-    flex-shrink: 0;
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-}
-
-/* IMAGE */
-.project-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-/* HOVER ZOOM */
-.project-card:hover .project-image {
-    transform: scale(1.1);
-}
-
-
-/* CARD */
-.project-card {
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-/* IMAGE */
-.project-image {
-    width: 380px;
-    height: 500px;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-/* HOVER ZOOM */
-.project-card:hover .project-image {
-    transform: scale(1.1);
-}
-
-/* OVERLAY */
-.project-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-}
-
-/* TEXT */
-.project-text {
-    position: absolute;
-    bottom: 24px;
-    left: 24px;
-    color: white;
-}
-
-.project-name {
-    font-size: 20px;
-    font-weight: 300;
-}
-
-.project-location {
-    font-size: 14px;
-    color: #d1d5db;
-}
-
-.projects-scroll {
-    cursor: grab;
-}
-
-.projects-scroll:active {
-    cursor: grabbing;
-}
-
-
-
-
-
-
 
 /* FILTERS */
 .projects-filters {
     display: flex;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 /* FILTER BUTTON */
@@ -129,9 +28,14 @@
     padding: 10px 25px;
     border-radius: 10px;
     cursor: pointer;
-    /* color: #aaa; */
     transition: 0.3s ease;
     font-size: 16px;
+    text-align: center;
+}
+
+.filter-item:first-child {
+    padding-left: 0;
+    padding: 10px 25px;
 }
 
 .filter-item:hover {
@@ -143,34 +47,84 @@
 .filter-item.active {
     background: black;
     color: white;
+    text-align: center;
 }
 
-/* SCROLL */
+/* SCROLL CONTAINER */
 .projects-scroll {
-    display: flex;
-    gap: 24px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 373px;
+    gap: 40px;
     overflow-x: auto;
+    overflow-y: hidden;
     scroll-behavior: smooth;
+    padding-bottom: 25px;
+    padding-top: 20px;
+    margin-top: -20px;
     cursor: grab;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
 }
 
 .projects-scroll:active {
     cursor: grabbing;
 }
 
-/* HIDE SCROLLBAR */
+/* Beautiful custom horizontal smooth scrollbar */
 .projects-scroll::-webkit-scrollbar {
-    display: none;
+    height: 8px;
 }
 
-/* CARD */
+.projects-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.projects-scroll::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.projects-scroll:hover::-webkit-scrollbar-thumb {
+    background: #dfdfdf;
+}
+
+.projects-scroll::-webkit-scrollbar-thumb:hover {
+    background: #007ADD;
+}
+
+/* CARD SECTION - Fixed Square Aspect Ratio */
 .project-card {
-    min-width: 320px;
-    height: 400px;
-    flex-shrink: 0;
-    border-radius: 12px;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    scroll-snap-align: start;
+    cursor: pointer;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    height: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* IMAGE WRAPPER - This is the perfect 1:1 format Square */
+.project-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    /* Forces webkit browser engine to maintain border-radius clipping during child transform scales */
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
 }
 
 /* IMAGE */
@@ -178,35 +132,49 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: 0.5s ease;
+    transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 /* HOVER ZOOM */
 .project-card:hover .project-image {
-    transform: scale(1.1);
+    transform: scale(1.08);
 }
 
-/* OVERLAY */
-.project-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-}
-
-/* TEXT */
-.project-text {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    color: white;
+/* INFO SECTION */
+.project-info {
+    padding: 25px 25px 30px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: left;
 }
 
 .project-name {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 4px;
+    margin-top: 0;
+    letter-spacing: 0.5px;
 }
 
 .project-location {
-    font-size: 14px;
-    color: #ccc;
+    color: #007ADD;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    margin-top: 0;
+}
+
+/* Responsive adjustment for Mobile to match everything else */
+@media (max-width: 768px) {
+    .projects-scroll {
+        padding-left: 24px;
+        padding-right: 24px;
+        grid-auto-columns: 85vw;
+        /* Match scale dynamically on phones */
+        gap: 30px;
+    }
 }

@@ -1,0 +1,255 @@
+.upcoming-section {
+  padding: 120px 0;
+  background: #0a0a0a;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.upcoming-header, .upcoming-grid {
+  text-align: left;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 100px;
+}
+
+.upcoming-section::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 40%;
+  height: 40%;
+  background: radial-gradient(circle, rgba(0, 122, 221, 0.1) 0%, transparent 70%);
+  filter: blur(80px);
+  z-index: 0;
+}
+
+.upcoming-header {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 80px;
+}
+
+.upcoming-header h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.upcoming-header p {
+  font-size: 1.1rem;
+  color: #888;
+  max-width: 600px;
+  margin-left: 0;
+}
+
+.upcoming-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.upcoming-card {
+  position: relative;
+  height: 500px;
+  border-radius: 30px;
+  overflow: hidden;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.upcoming-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(0, 122, 221, 0.3);
+}
+
+.upcoming-image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.upcoming-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(15px) grayscale(0.5);
+  transform: scale(1.1);
+  transition: filter 0.6s ease, transform 0.6s ease;
+}
+
+.upcoming-card:hover .upcoming-image-container img {
+  filter: blur(0) grayscale(0);
+  transform: scale(1);
+}
+
+.upcoming-card-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+  z-index: 2;
+}
+
+.upcoming-badge {
+  background: rgba(0, 122, 221, 1);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.upcoming-info h3 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.upcoming-info p {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 25px;
+}
+
+.countdown-timer {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.countdown-box {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 10px 15px;
+  border-radius: 12px;
+  text-align: center;
+  min-width: 60px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.countdown-num {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #007ADD;
+}
+
+.countdown-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.notify-form {
+  display: flex;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+}
+
+.upcoming-card:hover .notify-form {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.notify-form input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 12px 15px;
+  color: white;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.notify-form button {
+  background: #007ADD;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.3s ease;
+}
+
+.notify-form button:hover {
+  background: #005fa3;
+}
+
+@media (max-width: 1024px) {
+  .upcoming-header, .upcoming-grid {
+    padding: 0 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .upcoming-section {
+    padding: 80px 0;
+  }
+
+  .upcoming-header, .upcoming-grid {
+    padding: 0 24px;
+    text-align: center;
+  }
+
+  .upcoming-header h2 {
+    font-size: 2.5rem;
+  }
+
+  .upcoming-header p {
+    margin: 0 auto;
+  }
+
+  .upcoming-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .upcoming-card {
+    height: auto;
+    min-height: 450px;
+  }
+
+  .upcoming-card-content {
+    padding: 30px;
+  }
+
+  .upcoming-info h3 {
+    font-size: 1.8rem;
+  }
+  
+  .notify-form {
+    opacity: 1;
+    transform: translateY(0);
+    flex-direction: column;
+  }
+
+  .countdown-timer {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .countdown-box {
+    min-width: 50px;
+    padding: 8px 10px;
+  }
+}

@@ -1,0 +1,86 @@
+.generic-page {
+  padding: 120px 5% 60px 5%;
+  /* Top padding to account for fixed navbar if any */
+  min-height: 80vh;
+  background-color: var(--background, #fff);
+  color: var(--text-color, #1f2937);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.page-header h1 {
+  font-size: clamp(2.5rem, 5vw, 3rem);
+  font-weight: 700;
+  color: #1f2937;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.page-content {
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4b5563;
+}
+
+.compact-content {
+  text-align: left;
+}
+
+/* About Us specific styles */
+.about-us-page .intro {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 25px;
+}
+
+.about-us-page p {
+  margin-bottom: 20px;
+}
+
+.about-us-page .highlight {
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #007ADD;
+  /* Using the hover color from social icons as an accent */
+  border-left: 4px solid #007ADD;
+  padding-left: 20px;
+  margin: 35px 0;
+  background-color: #f8fafc;
+  padding-right: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 0 8px 8px 0;
+}
+
+.vision-section {
+  margin-top: 50px;
+  background-color: #f9fafb;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  text-align: center;
+}
+
+.vision-section h2 {
+  font-size: 2rem;
+  color: #1f2937;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.vision-section p {
+  margin-bottom: 0;
+  font-size: 1.15rem;
+}

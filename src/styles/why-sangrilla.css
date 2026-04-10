@@ -1,0 +1,153 @@
+.why-sangrilla {
+  padding: 100px 0;
+  background: #fff;
+  overflow: hidden;
+}
+
+.why-header,
+.why-grid,
+.stats-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 100px;
+}
+
+.why-header {
+  text-align: left;
+  margin-bottom: 70px;
+}
+
+.why-header h2 {
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 15px;
+}
+
+.why-header p {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.why-card {
+  padding: 40px;
+  background: #fcfcfc;
+  border-radius: 24px;
+  border: 1px solid #eee;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.why-card:hover {
+  background: #fff;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+  border-color: #007ADD;
+  transform: translateY(-5px);
+}
+
+.why-card-icon {
+  font-size: 3rem;
+  margin-bottom: 25px;
+  display: block;
+}
+
+.why-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 15px;
+}
+
+.why-card p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 80px;
+  border-top: 1px solid #eee;
+  padding-top: 60px;
+  gap: 30px;
+}
+
+.stat-box {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #007ADD;
+  margin-bottom: 5px;
+}
+
+.stat-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 1024px) {
+
+  .why-header,
+  .why-grid,
+  .stats-grid {
+    padding: 0 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .why-sangrilla {
+    padding: 60px 0;
+  }
+
+  .why-header,
+  .why-grid,
+  .stats-grid {
+    padding: 0 24px;
+    text-align: center;
+  }
+
+  .why-header h2 {
+    font-size: 2.2rem;
+  }
+
+  .why-header p {
+    margin: 0 auto;
+  }
+
+  .why-card {
+    padding: 30px 20px;
+  }
+
+  .why-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-top: 40px;
+    margin-top: 50px;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+  }
+}
