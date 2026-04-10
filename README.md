@@ -2,7 +2,7 @@
 
 Modern and elegant official website for **Sangrilla Group**, a leading real estate developer in Gujarat, India.
 
-**Live Website:** [sangrillagroup.com](https://www.sangrillagroup.com/)
+**Live Website:** [sangrillagroup](https://www.sangrillagroup.com/)
 
 ## About
 
