@@ -34,4 +34,4 @@ Sangrilla Group has been creating premium residential and commercial spaces for 
 
 **Your Dream. Our Commitment.**
 
-Made with ❤️ for Sangrilla Group
+Made with 🩵 for Sangrilla Group
