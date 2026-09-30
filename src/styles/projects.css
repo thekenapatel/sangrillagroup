@@ -1,8 +1,16 @@
-/* CONTAINER */
-.projects-section {
-    padding: 80px 0;
+/* CONTAINER WRAPPERS */
+.hp-projects-wrap {
+    /* padding: 100px 0; */
+    padding: 100px max(100px, calc((100% - 1400px) / 2 + 100px));
     font-family: "Poppins", sans-serif;
     overflow: hidden;
+    background-color: #fff;
+}
+
+.hp-projects-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    /* padding: 0 100px; */
 }
 
 /* TITLE */
@@ -10,7 +18,7 @@
     font-weight: 700;
     font-size: clamp(2.5rem, 5vw, 4rem);
     margin-bottom: 35px;
-    margin-top: 100px;
+    margin-top: 0;
     text-align: left;
     color: #1a1a1a;
     letter-spacing: -1px;
@@ -20,7 +28,7 @@
 .projects-filters {
     display: flex;
     gap: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 /* FILTER BUTTON */
@@ -30,24 +38,19 @@
     cursor: pointer;
     transition: 0.3s ease;
     font-size: 16px;
+    font-weight: 500;
     text-align: center;
-}
-
-.filter-item:first-child {
-    padding-left: 0;
-    padding: 10px 25px;
+    border: 1px solid transparent;
 }
 
 .filter-item:hover {
-    color: rgb(108, 108, 108);
-    user-select: none;
+    color: #676767;
 }
 
 /* ACTIVE */
 .filter-item.active {
     background: black;
     color: white;
-    text-align: center;
 }
 
 /* SCROLL CONTAINER */
@@ -59,19 +62,23 @@
     overflow-x: auto;
     overflow-y: hidden;
     scroll-behavior: smooth;
-    padding-bottom: 25px;
+    padding-bottom: 40px;
     padding-top: 20px;
     margin-top: -20px;
     cursor: grab;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+
+    /* Align start of scroll with container padding */
+    /* padding-left: calc((100vw - 1400px) / 2 + 100px);
+    padding-right: 100px; */
 }
 
 .projects-scroll:active {
     cursor: grabbing;
 }
 
-/* Beautiful custom horizontal smooth scrollbar */
+/* Custom Scrollbar */
 .projects-scroll::-webkit-scrollbar {
     height: 8px;
 }
@@ -83,98 +90,206 @@
 .projects-scroll::-webkit-scrollbar-thumb {
     background: #e0e0e0;
     border-radius: 10px;
-    transition: background 0.3s ease;
-}
-
-.projects-scroll:hover::-webkit-scrollbar-thumb {
-    background: #dfdfdf;
 }
 
 .projects-scroll::-webkit-scrollbar-thumb:hover {
     background: #007ADD;
 }
 
-/* CARD SECTION - Fixed Square Aspect Ratio */
+/* DOTS */
+.projects-dots {
+    display: none;
+    /* Hidden on desktop */
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.project-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.project-dot.active {
+    background: #007ADD;
+    transform: scale(1.2);
+}
+
+/* CARD SECTION */
 .project-card {
     display: flex;
     flex-direction: column;
     position: relative;
     overflow: hidden;
-    border-radius: 12px;
+    border-radius: 20px;
+    border: 1px solid #f0f0f0;
     background: white;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-    scroll-snap-align: start;
-    cursor: pointer;
-    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    /* scroll-snap-align: start; */
+    /* transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); */
     height: 100%;
 }
 
+/* 
 .project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-}
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+} */
 
-/* IMAGE WRAPPER - This is the perfect 1:1 format Square */
+/* IMAGE WRAPPER */
 .project-image-wrapper {
     position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
     overflow: hidden;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    /* Forces webkit browser engine to maintain border-radius clipping during child transform scales */
     -webkit-mask-image: -webkit-radial-gradient(white, black);
     mask-image: radial-gradient(white, black);
 }
 
-/* IMAGE */
 .project-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    /* transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1); */
 }
 
-/* HOVER ZOOM */
+/* 
 .project-card:hover .project-image {
     transform: scale(1.08);
-}
+} */
 
 /* INFO SECTION */
 .project-info {
-    padding: 25px 25px 30px;
+    padding: 25px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    text-align: left;
 }
 
 .project-name {
     font-size: 1.4rem;
     font-weight: 700;
     color: #111;
-    margin-bottom: 4px;
-    margin-top: 0;
+    margin: 0 0 4px 0;
     letter-spacing: 0.5px;
 }
 
 .project-location {
-    color: #007ADD;
+    /* color: #007ADD; */
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 8px;
-    margin-top: 0;
+    margin: 0 0 15px 0;
+}
+
+/* Action Buttons */
+.project-card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid #f5f5f5;
+}
+
+.pc-btn {
+    flex: 1;
+    text-align: center;
+    padding: 12px 8px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    border: 1px solid #d6d6d6;
+    /* transition: all 0.3s ease; */
+}
+
+.pc-btn-enquire {
+    background: #f8f8f8;
+    color: #444;
+}
+
+.pc-btn-enquire:hover {
+    background: #eee;
+}
+
+.pc-btn-explore {
+    background: #111;
+    color: #fff;
+}
+
+.pc-btn-explore:hover {
+    background: #007ADD;
+}
+
+/* Status Badge */
+.project-card-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #007ADD;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 2;
+    /* backdrop-filter: blur(4px); */
 }
 
 /* Responsive adjustment for Mobile to match everything else */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
+    .hp-projects-wrap {
+        padding: 60px 20px;
+    }
+
+    .projects-title {
+        /* font-weight: 500; */
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .filter-item.active {
+        padding: 9px 22px;
+    }
+
+    .filter-item {
+        padding: 9px 22px;
+    }
+
+    .projects-filters {
+        margin-bottom: 15px;
+    }
+
     .projects-scroll {
-        padding-left: 24px;
-        padding-right: 24px;
-        grid-auto-columns: 85vw;
-        /* Match scale dynamically on phones */
-        gap: 30px;
+        grid-auto-columns: 89vw;
+        scrollbar-width: none;
+        gap: 20px;
+        padding-bottom: 0px;
+    }
+
+    .projects-scroll::-webkit-scrollbar {
+        display: block;
+        height: 6px;
+    }
+
+    .projects-scroll::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .projects-scroll::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 10px;
+    }
+
+    .projects-dots {
+        display: flex;
     }
 }

@@ -9,10 +9,9 @@ const Journey = () => {
         {/* Left Side: Massive Title and Hero Tagline */}
         <motion.div 
           className="journey-header"
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
           <h2>Our Journey & <br /> Achievements</h2>
           <p className="journey-intro">
@@ -27,49 +26,25 @@ const Journey = () => {
         {/* Right Side: Key Achievements & Timeline formatting */}
         <div className="journey-stats">
           
-          <motion.div 
-            className="stat-item"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          <div className="stat-item">
             <div className="stat-metric">25+ Years</div>
             <p>For over two decades, <strong>SANGRILLA</strong> has been a trusted name in construction, transforming dreams into reality since 2000.</p>
-          </motion.div>
+          </div>
 
-          <motion.div 
-            className="stat-item"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <div className="stat-metric">1,50,000+ sqm</div>
+          <div className="stat-item">
+            <div className="stat-metric">10 lakh+ sq. ft.</div>
             <p>Proudly developed massive expanses of premium property, offering a combination of <strong>residential bungalows, townships, apartments & commercial spaces</strong>.</p>
-          </motion.div>
+          </div>
 
-          <motion.div 
-            className="stat-item"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <div className="stat-metric">1500+ Families</div>
+          <div className="stat-item">
+            <div className="stat-metric">1000+ Families</div>
             <p>Deeply trusted by thousands across Gujarat, delivering quality, trust, and timely execution across absolutely every single project.</p>
-          </motion.div>
+          </div>
 
-          <motion.div 
-            className="stat-item"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-          >
+          <div className="stat-item">
             <div className="stat-metric">Always Building</div>
-            <p>We look toward the future with multiple active sites, including two prestigious projects currently under construction – <strong>Anantaa Homes</strong> and <strong>Supan Residency</strong>.</p>
-          </motion.div>
+            <p>We look toward the future with multiple active sites, spearheaded by our flagship project currently under construction – <strong>Sangrilla Meadows</strong>.</p>
+          </div>
 
         </div>
       </div>

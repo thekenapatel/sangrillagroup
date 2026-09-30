@@ -1,165 +1,153 @@
-import { useState } from "react";
-import "../styles/commercial.css";
+import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
+import { MapPin, ArrowRight, MessageCircle } from "lucide-react";
+import { residentialProjects } from "../data/allProjects";
+import "../styles/fullscreen-listing.css";
+import OptimizedImage from "../components/OptimizedImage";
 
-const tryLoadImage = (name: string) => {
-  return new URL(`../assets/residential/${name}`, import.meta.url).href;
-};
-
-const upcomingProjects = [
-  {
-    id: 1,
-    name: "Anantaa Homes",
-    place: "Ahmedabad",
-    description: "A modern residential development offering spacious and contemporary homes with excellent amenities and great connectivity.",
-    imageName: "up_res_1.jpg",
-    fallbackName: "up_res_1.png",
-    fallbackUrl: "https://placehold.co/600x600/1f2937/ffffff?text=Anantaa+Homes"
-  },
-  {
-    id: 2,
-    name: "Supan Residency",
-    place: "Ahmedabad",
-    description: "An upcoming premium residential project designed for comfortable and luxurious living.",
-    imageName: "up_res_2.jpg",
-    fallbackName: "up_res_2.png",
-    fallbackUrl: "https://placehold.co/600x600/1f2937/ffffff?text=Supan+Residency"
+const resolveImage = (path: string): string => {
+  if (!path) return "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=1200";
+  if (path.startsWith('http') || path.startsWith('data:') || path.startsWith('/') || path.startsWith('blob:')) {
+    return path;
   }
-];
-
-const completedProjects = [
-  {
-    id: 3,
-    name: "Sangrilla Bunglows",
-    place: "Ahmedabad",
-    description: "Premium independent bungalows featuring luxurious living spaces in a prime location.",
-    imageName: "com_res_1.jpg",
-    fallbackName: "com_res_1.png",
-    fallbackUrl: "https://placehold.co/600x600/1f2937/ffffff?text=Sangrilla+Bunglows"
-  },
-  {
-    id: 4,
-    name: "Sangrilla Township",
-    place: "Ahmedabad",
-    description: "A large-scale, well-planned residential township with comprehensive amenities and vibrant community living.",
-    imageName: "com_res_2.jpg",
-    fallbackName: "com_res_2.png",
-    fallbackUrl: "https://placehold.co/600x600/1f2937/ffffff?text=Sangrilla+Township"
-  },
-  {
-    id: 5,
-    name: "Swagat Bunglows",
-    place: "Ahmedabad",
-    description: "Elegant and spacious bungalows known for superior quality construction and comfortable family homes.",
-    imageName: "com_res_3.jpg",
-    fallbackName: "com_res_3.png",
-    fallbackUrl: "https://placehold.co/600x600/1f2937/ffffff?text=Swagat+Bunglows"
-  },
-  {
-    id: 6,
-    name: "Anantaa Park",
-    place: "Ahmedabad",
-    description: "A serene residential project with beautiful landscaping and modern homes.",
-    imageName: "com_res_4.jpg",
-    fallbackName: "com_res_4.png",
-    fallbackUrl: "https://placehold.co/600x600/1f2937/ffffff?text=Anantaa+Park"
-  },
-  {
-    id: 7,
-    name: "Supan Residency",
-    place: "Ahmedabad",
-    description: "High-quality residential apartments offering excellent value and a modern lifestyle.",
-    imageName: "com_res_5.jpg",
-    fallbackName: "com_res_5.png",
-    fallbackUrl: "https://placehold.co/600x600/1f2937/ffffff?text=Supan+Residency"
-  },
-  {
-    id: 8,
-    name: "Satyam Bunglows",
-    place: "Ahmedabad",
-    description: "Classic and spacious bungalows built with trust and superior workmanship.",
-    imageName: "com_res_6.jpg",
-    fallbackName: "com_res_6.png",
-    fallbackUrl: "https://placehold.co/600x600/1f2937/ffffff?text=Satyam+Bunglows"
-  },
-  {
-    id: 9,
-    name: "Anantaa Bunglows",
-    place: "Ahmedabad",
-    description: "Premium bungalow project delivering luxurious and spacious independent homes.",
-    imageName: "com_res_7.jpg",
-    fallbackName: "com_res_7.png",
-    fallbackUrl: "https://placehold.co/600x600/1f2937/ffffff?text=Anantaa+Bunglows"
-  },
-  {
-    id: 10,
-    name: "Sangrilla White House",
-    place: "Ahmedabad",
-    description: "Elegant premium residential bungalows with a distinctive modern white-themed design.",
-    imageName: "com_res_8.jpg",
-    fallbackName: "com_res_8.png",
-    fallbackUrl: "https://placehold.co/600x600/1f2937/ffffff?text=White+House"
+  try {
+    return new URL(`../assets/${path}`, import.meta.url).href;
+  } catch {
+    return "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=1200";
   }
-];
-
-const ProjectCard = ({ project }: { project: any }) => {
-  const [imgSrc, setImgSrc] = useState(tryLoadImage(project.imageName));
-
-  const handleError = () => {
-    if (imgSrc.endsWith(project.imageName)) {
-      setImgSrc(tryLoadImage(project.fallbackName));
-    } else {
-      setImgSrc(project.fallbackUrl);
-    }
-  };
-
-  return (
-    <div className="project-card">
-      <div className="project-image-wrapper">
-        <img 
-          src={imgSrc} 
-          alt={project.name} 
-          onError={handleError}
-          className="project-image"
-        />
-      </div>
-      <div className="project-info">
-        <h3>{project.name}</h3>
-        <span className="project-location">{project.place && project.place}</span>
-        {project.description && <p>{project.description}</p>}
-      </div>
-    </div>
-  );
 };
 
 const Residential = () => {
+  const [activeIndex, setActiveIndex] = useState(() => {
+    const saved = sessionStorage.getItem("residentialActiveIndex");
+    return saved ? parseInt(saved, 10) : 0;
+  });
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const scrollLeft = scrollRef.current.scrollLeft;
+      const width = scrollRef.current.clientWidth;
+      const index = Math.round(scrollLeft / width);
+      if (index !== activeIndex) {
+        setActiveIndex(index);
+        sessionStorage.setItem("residentialActiveIndex", index.toString());
+      }
+    }
+  };
+
+  const scrollToSection = (index: number, behavior: ScrollBehavior = "smooth") => {
+    if (scrollRef.current) {
+      const width = scrollRef.current.clientWidth;
+      scrollRef.current.scrollTo({
+        left: index * width,
+        behavior: behavior
+      });
+    }
+  };
+
+  useEffect(() => {
+    // Restore scroll position on mount
+    if (activeIndex !== 0) {
+      const timer = setTimeout(() => {
+        scrollToSection(activeIndex, "auto");
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      // If we are at the first slide and scrolling LEFT or UP significantly
+      if (activeIndex === 0 && (e.deltaX < -50 || e.deltaY < -50)) {
+        navigate("/");
+      }
+    };
+
+    el.addEventListener("wheel", handleWheel);
+    el.addEventListener("scroll", handleScroll);
+    
+    return () => {
+      el.removeEventListener("wheel", handleWheel);
+      el.removeEventListener("scroll", handleScroll);
+    };
+  }, [activeIndex, navigate]);
+
   return (
-    <div className="commercial-page">
-      <div className="commercial-hero">
-        <h1>Residential Projects</h1>
-        <p className="commercial-subtitle">
-          At SANGRILLA, we create high-quality homes and townships that offer comfort, elegance, and lasting value for families.
-        </p>
+    <div className="fs-portfolio-wrapper">
+      <div className="fs-scroll-container" ref={scrollRef}>
+        {residentialProjects.map((project, index) => (
+          <section key={project.id} className="fs-project-section">
+            {/* Background Layer */}
+            <div className="fs-bg-layer">
+              <OptimizedImage
+                src={resolveImage(project.images[0])}
+                className="fs-bg-image"
+                alt={project.name}
+                containerClassName="fs-bg-image-container"
+              />
+              <div className="fs-bg-overlay" />
+            </div>
+
+            {/* Content Panel */}
+            <div className="fs-content-panel">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.5 }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="fs-breadcrumb">
+                  <Link to="/">Home</Link>
+                  <span>/</span>
+                  <span className="fs-current">Residential</span>
+                </div>
+                <h1 className="fs-title">{project.name}</h1>
+                <p className="fs-tagline">{project.tagline}</p>
+                
+                <div className="fs-meta">
+                  <div className="fs-badge">
+                    <MapPin size={18} />
+                    {project.location}{project.year ? ` · ${project.year}` : ""}
+                  </div>
+                  {project.status === "under-construction" && (
+                    <div className="fs-badge" style={{ background: '#007ADD', color: '#fff', border: 'none', fontWeight: 600 }}>
+                      Under Construction
+                    </div>
+                  )}
+                </div>
+
+                <p className="fs-description">{project.description}</p>
+
+                <div className="fs-actions">
+                  <Link to={`/project/${project.id}`} className="fs-btn fs-btn-explore">
+                    Explore Lifestyle <ArrowRight size={20} />
+                  </Link>
+                  <Link to="/contact" className="fs-btn fs-btn-enquire">
+                    <MessageCircle size={20} /> Enquire
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+          </section>
+        ))}
       </div>
 
-      <div className="projects-section">
-        <h2 className="section-title">Upcoming Projects</h2>
-        <div className="projects-grid">
-          {upcomingProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
-      </div>
-
-      <div className="projects-section">
-        <h2 className="section-title">Delivered Projects</h2>
-        <div className="scrollable-container-wrapper">
-          <div className="projects-grid scrollable-horizontal-grid">
-            {completedProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
-          <div className="scrollable-fade-right"></div>
-        </div>
+      {/* Navigation Dots */}
+      <div className="fs-bottom-nav">
+        {residentialProjects.map((_, idx) => (
+          <button
+            key={idx}
+            className={`fs-dot ${idx === activeIndex ? 'active' : ''}`}
+            onClick={() => scrollToSection(idx)}
+            title={`Slide ${idx + 1}`}
+          />
+        ))}
       </div>
     </div>
   );

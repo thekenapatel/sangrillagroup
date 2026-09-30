@@ -1,8 +1,32 @@
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-weight: 700;
+}
+
+/* Prioritize Text Visibility */
+body {
+    background-color: #fff;
+    color: #1d1d1f;
+    line-height: 1.5;
+    overflow-x: hidden;
 }
 
 .container {
@@ -15,4 +39,74 @@
     .container {
         padding: 0 24px;
     }
+}
+
+/* Premium Image Ghost Loading Styles */
+.image-container {
+    position: relative;
+    overflow: hidden;
+    background-color: #f5f5f7;
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* Hardware acceleration for container */
+    transform: translateZ(0);
+}
+
+.image-container.ghost-loading::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.6) 50%,
+            rgba(255, 255, 255, 0) 100%);
+    animation: ghost-shimmer 2s infinite linear;
+}
+
+@keyframes ghost-shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.optimized-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.02);
+    /* Hardware acceleration & smooth performance */
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 1.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: block;
+}
+
+.optimized-image.loaded {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Smooth Scrolling Overrides */
+.pd-horizontal-scroller,
+.tbc-editorial-grid {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    /* Hide scrollbars but keep functionality */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.pd-horizontal-scroller::-webkit-scrollbar,
+.tbc-editorial-grid::-webkit-scrollbar {
+    display: none;
 }

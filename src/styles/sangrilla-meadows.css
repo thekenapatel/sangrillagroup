@@ -1,0 +1,2979 @@
+/* ==========================================================================
+   SANAGRILLA MEADOWS - DEDICATED PROJECT STYLING
+   Desktop/Laptop (>=1024px): Grand, Luxury, Full-Scale & Impactful
+   Tablet & Mobile (<1024px): Compact, Clean, Spacious & Small Letters
+   ========================================================================== */
+
+.meadows-page {
+  background-color: #faf9f7;
+  color: #1a1a1a;
+  min-height: 100vh;
+  padding-top: 90px;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.meadows-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+/* ==========================================================================
+   1. HERO SECTION (Desktop: Full Scale & Grand)
+   ========================================================================== */
+.meadows-hero {
+  padding: 30px 0 50px;
+}
+
+.meadows-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #888;
+}
+
+.meadows-breadcrumb a {
+  color: #888;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.meadows-breadcrumb a:hover {
+  color: #007ADD;
+}
+
+.meadows-breadcrumb-sep {
+  color: #ccc;
+}
+
+.meadows-breadcrumb-current {
+  color: #007ADD;
+}
+
+/* Badges Row */
+.meadows-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+  align-items: center;
+}
+
+.meadows-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.meadows-badge-uc {
+  background: rgba(0, 122, 221, 0.1);
+  color: #007ADD;
+  border: 1px solid rgba(0, 122, 221, 0.25);
+}
+
+.meadows-badge-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #007ADD;
+  box-shadow: 0 0 0 0 rgba(0, 122, 221, 0.7);
+  animation: meadowsPulse 1.8s infinite;
+}
+
+@keyframes meadowsPulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 122, 221, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(0, 122, 221, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 122, 221, 0);
+  }
+}
+
+.meadows-badge-pre {
+  background: rgba(220, 38, 38, 0.08);
+  color: #dc2626;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.meadows-badge-cat {
+  background: #eeede9;
+  color: #444;
+}
+
+/* Titles */
+.meadows-hero-title {
+  font-size: clamp(3.2rem, 5.2vw, 4.5rem);
+  font-family: 'Philosopher', sans-serif;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #111;
+  letter-spacing: -1.5px;
+  margin: 50px 0 20px 0;
+}
+
+.meadows-hero-tagline {
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  color: #007ADD;
+  font-weight: 600;
+  margin: 0 0 16px;
+  letter-spacing: -0.3px;
+}
+
+.meadows-hero-intro {
+  font-size: 1.22rem;
+  color: #4b5563;
+  max-width: 880px;
+  line-height: 1.7;
+  margin: 0 0 28px;
+  font-weight: 400;
+}
+
+/* Action Buttons */
+.meadows-hero-cta-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 25px;
+}
+
+.meadows-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #007ADD;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0, 122, 221, 0.25);
+}
+
+.meadows-btn-primary:hover {
+  background: #0066bb;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(0, 122, 221, 0.35);
+}
+
+.meadows-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: #111;
+  padding: 14px 26px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.meadows-btn-secondary:hover {
+  background: #f9fafb;
+  border-color: #111;
+  transform: translateY(-2px);
+}
+
+.meadows-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.04);
+  color: #374151;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.meadows-btn-ghost:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: #000;
+}
+
+/* Quick Jump Navigation Bar */
+.meadows-quick-nav-bar {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 16px 2px 20px;
+  margin: 50px 0 5px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.meadows-quick-nav-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.meadows-quick-nav-item {
+  flex-shrink: 0;
+  padding: 10px 20px;
+  border-radius: 30px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #4b5563;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.meadows-quick-nav-item:hover,
+.meadows-quick-nav-item.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+/* Banner Gallery Card */
+.meadows-banner-wrapper {
+  margin-top: 30px;
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.09);
+  background: #000;
+}
+
+.meadows-banner-image {
+  width: 100%;
+  height: clamp(340px, 45vw, 540px);
+  object-fit: cover;
+  display: block;
+  opacity: 0.92;
+  transition: transform 0.8s ease;
+}
+
+.meadows-banner-wrapper:hover .meadows-banner-image {
+  transform: scale(1.02);
+}
+
+.meadows-banner-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.meadows-banner-caption h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: #fff;
+}
+
+.meadows-banner-project-title {
+  font-family: 'Philosopher', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 4px;
+  color: #fff;
+}
+
+.meadows-banner-caption p {
+  margin: 0;
+  color: #e5e7eb;
+  font-size: 0.95rem;
+}
+
+.meadows-banner-pills {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.meadows-banner-pill {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   2. OVERVIEW & HIGHLIGHTS
+   ========================================================================== */
+.meadows-section {
+  padding: 70px 0;
+  border-top: 1px solid #ebe9e3;
+}
+
+.meadows-section-header {
+  margin-bottom: 35px;
+}
+
+.meadows-section-subtitle {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #007ADD;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.meadows-section-title {
+  font-size: clamp(2.3rem, 3.8vw, 3rem);
+  font-weight: 800;
+  color: #111;
+  letter-spacing: -0.8px;
+  margin: 0 0 18px;
+}
+
+.meadows-overview-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 50px;
+  align-items: start;
+}
+
+.meadows-overview-text {
+  font-size: 1.18rem;
+  line-height: 1.85;
+  color: #374151;
+}
+
+.meadows-overview-text p {
+  margin: 0 0 18px;
+}
+
+.meadows-overview-meta-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  padding: 35px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
+}
+
+.meadows-overview-meta-card h4 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 20px;
+  color: #111;
+}
+
+.meadows-meta-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.meadows-meta-row {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 0.95rem;
+}
+
+.meadows-meta-label {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.meadows-meta-val {
+  color: #111;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* Callout Highlights */
+.meadows-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.meadows-highlight-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.meadows-highlight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.06);
+  border-color: #cbd5e1;
+}
+
+.meadows-highlight-icon-wrap {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: rgba(0, 122, 221, 0.08);
+  color: #007ADD;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.meadows-highlight-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* ==========================================================================
+   PHOTOS SECTION (HORIZONTAL SCROLLER - Exactly as other projects)
+   ========================================================================== */
+.meadows-photos-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+.meadows-photos-scroller {
+  display: flex;
+  width: 100%;
+  gap: 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 8px 2px 20px;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #ddd #f0f0f0;
+  cursor: grab;
+}
+
+.meadows-photos-scroller:active {
+  cursor: grabbing;
+}
+
+.meadows-page .meadows-photos-scroller::-webkit-scrollbar {
+  display: block;
+  height: 8px;
+}
+
+.meadows-page .meadows-photos-scroller::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+.meadows-page .meadows-photos-scroller::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 10px;
+}
+
+.meadows-page .meadows-photos-scroller::-webkit-scrollbar-thumb:hover {
+  background: #007ADD;
+}
+
+.meadows-photo-slide {
+  position: relative;
+  flex: 0 0 clamp(280px, 38vw, 460px);
+  aspect-ratio: 12 / 10;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  /* background: #eee; */
+  scroll-snap-align: start;
+}
+
+.meadows-photo-slide .pd-photo-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s ease;
+}
+
+.meadows-photo-slide:hover .pd-photo-img {
+  transform: scale(1.03);
+}
+
+.pd-photos-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pd-section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #111;
+  margin: 0 0 20px 0;
+}
+
+.pd-horizontal-scroller {
+  display: flex;
+  gap: 30px;
+  overflow-x: auto;
+  padding-top: 15px;
+  padding-bottom: 25px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  background: transparent;
+  cursor: grab;
+  user-select: none;
+}
+
+.pd-horizontal-scroller:active {
+  cursor: grabbing;
+}
+
+.pd-horizontal-scroller::-webkit-scrollbar {
+  height: 8px;
+}
+
+.pd-horizontal-scroller::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pd-horizontal-scroller::-webkit-scrollbar-thumb {
+  background: #e0e0e0;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.pd-horizontal-scroller:hover::-webkit-scrollbar-thumb {
+  background: #dfdfdf;
+}
+
+.pd-horizontal-scroller::-webkit-scrollbar-thumb:hover {
+  background: #007ADD;
+}
+
+.pd-photo-wrapper {
+  flex: 0 0 clamp(300px, 40vw, 500px);
+  aspect-ratio: 12 / 10;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #eee;
+  position: relative;
+  border: 1px solid #e5e7eb;
+  /* box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06); */
+  transition: transform 0.4s ease, 0.4s ease;
+}
+
+.pd-photo-wrapper:hover {
+  transform: translateY(-2px);
+  /* box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12); */
+}
+
+.pd-photo-wrapper:hover .pd-photo-img {
+  transform: scale(1.05);
+}
+
+.pd-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s ease;
+}
+
+.pd-photo-container {
+  width: 100%;
+  height: 100%;
+}
+
+.pd-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.86) 0%, rgba(0, 0, 0, 0.38) 45%, transparent 75%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px 20px;
+  color: #fff;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pd-photo-overlay h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+}
+
+.pd-photo-overlay p {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   3. LOCATION & CONNECTIVITY DETAILS
+   ========================================================================== */
+.meadows-location-hero-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  padding: 35px;
+  margin-bottom: 35px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
+}
+
+.meadows-location-hero-card h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 18px;
+  color: #111;
+}
+
+.meadows-unified-location-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid #e5e7eb;
+  border-radius: 28px;
+  padding: 26px 26px 20px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.meadows-unified-location-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(0, 122, 221, 0.08) 0%, transparent 28%);
+  pointer-events: none;
+}
+
+.meadows-unified-location-card>* {
+  position: relative;
+  z-index: 1;
+}
+
+.meadows-unified-site-id {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 74px;
+}
+
+.meadows-unified-pin-ring {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 122, 221, 0.08);
+  border: 1px solid rgba(0, 122, 221, 0.15);
+  color: #007ADD;
+  flex-shrink: 0;
+}
+
+.meadows-unified-site-id-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.meadows-unified-eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: #007ADD;
+}
+
+.meadows-unified-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 2.2vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.meadows-unified-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0, 122, 221, 0.15), rgba(148, 163, 184, 0.18), rgba(0, 122, 221, 0.05));
+}
+
+.meadows-address-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  align-items: stretch;
+}
+
+.meadows-address-item {
+  padding: 16px 18px;
+  background: #f9fafb;
+  border: 1px solid #edf1f4;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 92px;
+}
+
+.meadows-unified-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.meadows-unified-address-block {
+  flex: 1;
+}
+
+.meadows-unified-address-label {
+  margin: 0 0 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: #6b7280;
+}
+
+.meadows-unified-address-text {
+  margin: 0;
+  color: #374151;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.meadows-unified-coords {
+  margin: 12px 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(16, 185, 129, 0.08);
+  color: #166534;
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.meadows-unified-directions-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #007ADD 0%, #005fb4 100%);
+  color: #fff;
+  padding: 15px 22px;
+  border-radius: 14px;
+  font-size: 0.94rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0 12px 26px rgba(0, 122, 221, 0.24);
+  white-space: nowrap;
+  transition: all 0.25s ease;
+  min-width: 180px;
+}
+
+.meadows-unified-directions-btn:hover {
+  background: linear-gradient(135deg, #0069be 0%, #00529a 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(0, 122, 221, 0.32);
+}
+
+@media (max-width: 768px) {
+  .meadows-unified-location-card {
+    padding: 20px 18px 18px;
+    border-radius: 22px;
+  }
+
+  .meadows-unified-site-id {
+    align-items: flex-start;
+  }
+
+  .meadows-unified-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .meadows-unified-directions-btn {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+.meadows-address-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: #6b7280;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.meadows-address-val {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.4;
+}
+
+.meadows-address-item {
+  padding: 14px 18px;
+  background: #f9fafb;
+  border-radius: 14px;
+  border: 1px solid #f3f4f6;
+}
+
+.meadows-address-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #6b7280;
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.meadows-address-val {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111;
+}
+
+/* Table */
+.meadows-table-container {
+  background: #fff;
+  border-radius: 24px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
+}
+
+.meadows-table-header {
+  padding: 24px 30px;
+  background: #fafafa;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.meadows-table-header h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+  color: #111;
+}
+
+.meadows-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.meadows-conn-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.meadows-conn-table th {
+  background: #f9fafb;
+  padding: 16px 25px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #4b5563;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.meadows-conn-table td {
+  padding: 16px 25px;
+  font-size: 0.95rem;
+  color: #374151;
+  border-bottom: 1px solid #f3f4f6;
+  white-space: nowrap;
+}
+
+.meadows-conn-table tr:last-child td {
+  border-bottom: none;
+}
+
+.meadows-conn-table tr:hover {
+  background-color: #f8fafc;
+}
+
+.meadows-conn-landmark {
+  font-weight: 600;
+  color: #111;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.meadows-conn-distance {
+  color: #007ADD;
+  font-weight: 600;
+}
+
+.meadows-conn-time {
+  color: #4b5563;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   GOOGLE MAPS CTA CARD
+   ========================================================================== */
+.meadows-maps-card {
+  margin-top: 30px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  padding: 36px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.meadows-maps-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(180deg, #007ADD 0%, #00b4d8 100%);
+  border-radius: 4px 0 0 4px;
+}
+
+.meadows-maps-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+  flex: 1;
+}
+
+.meadows-maps-pin-ring {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: rgba(0, 122, 221, 0.08);
+  border: 2px solid rgba(0, 122, 221, 0.2);
+  color: #007ADD;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  animation: meadowsPulse 2.5s infinite;
+}
+
+.meadows-maps-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meadows-maps-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #007ADD;
+}
+
+.meadows-maps-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #111;
+  margin: 2px 0 6px;
+  letter-spacing: -0.3px;
+}
+
+.meadows-maps-address {
+  font-size: 0.92rem;
+  color: #4b5563;
+  line-height: 1.7;
+  margin: 0 0 10px;
+}
+
+.meadows-maps-coords {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f3f4f6;
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #6b7280;
+  width: fit-content;
+}
+
+.meadows-maps-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.meadows-maps-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #007ADD;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 28px rgba(0, 122, 221, 0.28);
+  white-space: nowrap;
+}
+
+.meadows-maps-btn:hover {
+  background: #0066bb;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(0, 122, 221, 0.38);
+}
+
+.meadows-maps-hint {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin: 0;
+  text-align: center;
+}
+
+/* ==========================================================================
+   VISUAL LOCATION SHOWCASE
+   ========================================================================== */
+.meadows-location-visual {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.meadows-location-visual--single {
+  grid-template-columns: 1fr;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Left: Key Plan ── */
+.meadows-loc-keyplan-wrap {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #f0f4f8;
+  border: 1px solid #e5e7eb;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.meadows-loc-keyplan-badge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  color: #007ADD;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 122, 221, 0.18);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+}
+
+.meadows-loc-keyplan-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.7s ease;
+}
+
+.meadows-loc-keyplan-wrap:hover .meadows-loc-keyplan-img {
+  transform: scale(1.03);
+}
+
+.meadows-loc-keyplan-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 22px 22px 18px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, transparent 100%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.meadows-loc-keyplan-dot {
+  /* width: 6px;
+  height: 6px; */
+  border-radius: 50%;
+  background: #007ADD;
+  /* flex-shrink: 0; */
+}
+
+/* ── Right: CTA Panel ── */
+.meadows-loc-cta-panel {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  padding: 38px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.meadows-loc-cta-panel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  /* width: 160px;
+  height: 160px; */
+  background: radial-gradient(circle, rgba(0, 122, 221, 0.06) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.meadows-loc-cta-icon-ring {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  background: rgba(0, 122, 221, 0.08);
+  border: 1.5px solid rgba(0, 122, 221, 0.18);
+  color: #007ADD;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  flex-shrink: 0;
+}
+
+.meadows-loc-cta-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #007ADD;
+  margin: 0 0 6px;
+}
+
+.meadows-loc-cta-heading {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #111;
+  letter-spacing: -0.5px;
+  margin: 0 0 14px;
+  line-height: 1.2;
+}
+
+.meadows-loc-cta-address {
+  font-size: 0.95rem;
+  color: #4b5563;
+  line-height: 1.75;
+  margin: 0 0 18px;
+}
+
+.meadows-loc-cta-divider {
+  height: 1px;
+  background: #f0f0f0;
+  margin: 4px 0 16px;
+}
+
+.meadows-loc-cta-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.meadows-loc-cta-pills span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #f6f7f9;
+  border: 1px solid #ebebeb;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.meadows-loc-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.meadows-loc-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: #007ADD;
+  color: #fff;
+  padding: 13px 26px;
+  border-radius: 14px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 22px rgba(0, 122, 221, 0.28);
+  white-space: nowrap;
+}
+
+.meadows-loc-btn-primary:hover {
+  background: #0061c3;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 122, 221, 0.38);
+}
+
+.meadows-loc-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: #fff;
+  color: #111;
+  padding: 13px 22px;
+  border-radius: 14px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1.5px solid #d1d5db;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.meadows-loc-btn-secondary:hover {
+  border-color: #111;
+  background: #f9f9f9;
+  transform: translateY(-2px);
+}
+
+.meadows-loc-cta-note {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .meadows-location-visual {
+    grid-template-columns: 1fr;
+  }
+
+  .meadows-loc-keyplan-wrap {
+    min-height: 240px;
+  }
+
+  .meadows-loc-cta-panel {
+    padding: 28px 24px;
+  }
+
+  .meadows-loc-cta-heading {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .meadows-maps-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px 24px;
+    gap: 24px;
+  }
+
+  .meadows-maps-right {
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .meadows-maps-btn {
+    justify-content: center;
+  }
+
+  .meadows-maps-title {
+    font-size: 1.15rem;
+  }
+}
+
+/* ==========================================================================
+   4. LAYOUT & PLOT DETAILS
+   ========================================================================== */
+.meadows-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.meadows-stat-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
+}
+
+.meadows-stat-num {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #007ADD;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.meadows-stat-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111;
+  margin: 0;
+}
+
+.meadows-stat-desc {
+  font-size: 0.85rem;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Layout Note Card */
+.meadows-layout-note-card {
+  background: linear-gradient(135deg, #111 0%, #1f2937 100%);
+  color: #fff;
+  border-radius: 24px;
+  padding: 35px 40px;
+  margin-top: 25px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.meadows-layout-note-card h4 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: #fff;
+}
+
+.meadows-layout-note-quote {
+  font-size: 1.1rem;
+  color: #e5e7eb;
+  line-height: 1.7;
+  font-weight: 300;
+  font-style: italic;
+  margin: 0 0 20px;
+}
+
+.meadows-ownership-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #67e8f9;
+}
+
+/* ==========================================================================
+   5. SAMPLE VILLA / UNIT SPECIFICATIONS
+   ========================================================================== */
+.meadows-villa-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+}
+
+.meadows-villa-card {
+  background: #fff;
+  border-radius: 24px;
+  border: 1px solid #e5e7eb;
+  padding: 35px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.meadows-villa-card.featured {
+  border-color: #007ADD;
+  box-shadow: 0 20px 45px rgba(0, 122, 221, 0.1);
+  position: relative;
+}
+
+.meadows-villa-card-badge {
+  position: absolute;
+  top: -14px;
+  right: 35px;
+  background: #007ADD;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 5px 16px;
+  border-radius: 20px;
+}
+
+.meadows-villa-header {
+  margin-bottom: 25px;
+}
+
+.meadows-villa-header h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 8px;
+}
+
+.meadows-villa-subtitle {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.meadows-villa-specs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.meadows-villa-spec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f3f4f6;
+  gap: 15px;
+}
+
+.meadows-spec-title {
+  color: #4b5563;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.meadows-spec-value {
+  color: #111;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+.meadows-villa-perks {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.meadows-villa-perks-title {
+  color: #166534;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin: 0 0 6px;
+}
+
+.meadows-villa-perks-desc {
+  color: #15803d;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.meadows-rental-note {
+  font-size: 0.8rem;
+  color: #166534;
+  margin-top: 6px;
+  display: block;
+}
+
+/* ==========================================================================
+   6. AMENITIES SECTION
+   ========================================================================== */
+.meadows-amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 18px;
+}
+
+.meadows-amenity-box {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.3s ease;
+}
+
+.meadows-amenity-box:hover {
+  border-color: #007ADD;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0, 122, 221, 0.08);
+}
+
+.meadows-amenity-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(0, 122, 221, 0.08);
+  color: #007ADD;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.meadows-amenity-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+/* Footer Tags */
+.meadows-tags-container {
+  margin-top: 35px;
+  padding: 22px 28px;
+  background: #fff;
+  border-radius: 20px;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.meadows-tag-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.meadows-tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #007ADD;
+}
+
+/* ==========================================================================
+   7. WHY DHOLERA SIR — CONTEXT SECTION
+   ========================================================================== */
+.meadows-dholera-card {
+  background: #fff;
+  border-radius: 28px;
+  border: 1px solid #e5e7eb;
+  padding: 45px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.04);
+}
+
+.meadows-dholera-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.meadows-dholera-stat-item {
+  background: #f9fafb;
+  border-radius: 18px;
+  padding: 24px;
+  border: 1px solid #f3f4f6;
+}
+
+.meadows-dholera-stat-num {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 6px;
+}
+
+.meadows-dholera-stat-label {
+  font-size: 0.88rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.meadows-infra-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+  margin-bottom: 35px;
+}
+
+.meadows-infra-card {
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 20px;
+  padding: 26px;
+}
+
+.meadows-infra-card h4 {
+  font-size: 1.12rem;
+  font-weight: 700;
+  margin: 0 0 10px;
+  color: #111;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.meadows-infra-card p {
+  font-size: 0.95rem;
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Partners Logos / Mentions */
+.meadows-partners-section {
+  padding: 25px 0;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  margin: 35px 0;
+}
+
+.meadows-partners-section h5 {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #6b7280;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 18px;
+}
+
+.meadows-partners-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.meadows-partner-chip {
+  background: #f3f4f6;
+  color: #1f2937;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* 9 Zones */
+.meadows-zones-wrap h5 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 16px;
+}
+
+.meadows-zones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.meadows-zone-pill {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #374151;
+  text-align: center;
+}
+
+/* ==========================================================================
+   8. PRICING SECTION
+   ========================================================================== */
+.meadows-pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+}
+
+.meadows-pricing-card {
+  background: #fff;
+  border-radius: 28px;
+  border: 1px solid #e5e7eb;
+  padding: 40px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.meadows-pricing-card.premium {
+  border-color: #007ADD;
+  box-shadow: 0 20px 45px rgba(0, 122, 221, 0.12);
+}
+
+.meadows-pricing-tag {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #007ADD;
+  margin-bottom: 12px;
+}
+
+.meadows-pricing-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 20px;
+}
+
+.meadows-price-figure {
+  margin-bottom: 25px;
+}
+
+.meadows-price-prefix {
+  font-size: 0.95rem;
+  color: #6b7280;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.meadows-price-amount {
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  font-weight: 800;
+  color: #111;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.meadows-price-unit {
+  font-size: 1rem;
+  color: #6b7280;
+  font-weight: 500;
+  margin-left: 6px;
+}
+
+.meadows-pricing-points {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.meadows-pricing-points li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.meadows-pricing-points li svg {
+  color: #16a34a;
+  flex-shrink: 0;
+}
+
+.meadows-pricing-disclaimer {
+  background: #fdf2f2;
+  border: 1px solid #fee2e2;
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-top: 30px;
+  font-size: 0.85rem;
+  color: #991b1b;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   9. CONTACT / CTA SECTION
+   ========================================================================== */
+.meadows-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  background: #fff;
+  border-radius: 32px;
+  border: 1px solid #e5e7eb;
+  padding: 45px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.05);
+}
+
+.meadows-contact-info h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 12px;
+  letter-spacing: -0.5px;
+}
+
+.meadows-contact-info p {
+  color: #4b5563;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0 0 35px;
+}
+
+.meadows-contact-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 35px;
+}
+
+.meadows-channel-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.meadows-channel-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(0, 122, 221, 0.08);
+  color: #007ADD;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.meadows-channel-text h5 {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #6b7280;
+  margin: 0 0 4px;
+}
+
+.meadows-channel-text a,
+.meadows-channel-text p {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111;
+  margin: 0;
+  text-decoration: none;
+}
+
+.meadows-channel-text a:hover {
+  color: #007ADD;
+}
+
+/* Contact Form */
+.meadows-form-wrap {
+  background: #f9fafb;
+  border-radius: 24px;
+  padding: 35px;
+  border: 1px solid #f3f4f6;
+}
+
+.meadows-form-wrap h4 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 8px;
+}
+
+.meadows-form-wrap p {
+  font-size: 0.88rem;
+  color: #6b7280;
+  margin: 0 0 25px;
+}
+
+.meadows-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.meadows-input-group label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.meadows-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  font-size: 0.95rem;
+  color: #111;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.meadows-input:focus {
+  border-color: #007ADD;
+  box-shadow: 0 0 0 3px rgba(0, 122, 221, 0.15);
+}
+
+.meadows-select {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  font-size: 0.95rem;
+  color: #111;
+  outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.meadows-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  font-size: 0.95rem;
+  color: #111;
+  outline: none;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 80px;
+  box-sizing: border-box;
+}
+
+.meadows-form-submit {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  background: #007ADD;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.meadows-form-submit:hover {
+  background: #0066bb;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 122, 221, 0.25);
+}
+
+/* ==========================================================================
+   10. MANDATORY DISCLAIMER
+   ========================================================================== */
+.meadows-disclaimer-section {
+  padding: 40px 0 70px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.meadows-disclaimer-box {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 24px 30px;
+}
+
+.meadows-disclaimer-box h6 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #6b7280;
+  margin: 0 0 10px;
+}
+
+.meadows-disclaimer-text {
+  font-size: 0.78rem;
+  color: #6b7280;
+  line-height: 1.7;
+  margin: 0;
+  text-align: justify;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (TABLETS: 641px - 1024px)
+   Moderately scaled down, spacious, readable
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .meadows-container {
+    padding: 0 24px;
+  }
+
+  .meadows-hero {
+    padding: 24px 0 40px;
+  }
+
+  .meadows-hero-title {
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+  }
+
+  .meadows-hero-tagline {
+    font-size: 1.25rem;
+  }
+
+  .meadows-hero-intro {
+    font-size: 1.05rem;
+  }
+
+  .meadows-section {
+    padding: 50px 0;
+  }
+
+  .meadows-section-title {
+    font-size: 2rem;
+  }
+
+  .pd-section-title {
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+  }
+
+  .meadows-overview-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .pd-photo-wrapper {
+    flex: 0 0 350px;
+    border-radius: 14px;
+  }
+
+  .meadows-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .meadows-villa-grid,
+  .meadows-pricing-grid,
+  .meadows-infra-grid,
+  .meadows-contact-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .meadows-contact-grid {
+    padding: 35px 28px;
+  }
+}
+
+/* ==========================================================================
+   WHAT OUR INVESTORS SAY SECTION
+   ========================================================================== */
+.meadows-investors-intro {
+  font-size: 1.05rem;
+  color: #64748b;
+  max-width: 760px;
+  margin: 12px 0 0 0;
+  line-height: 1.6;
+}
+
+.meadows-investors-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  background: linear-gradient(135deg, #f8faff 0%, #ffffff 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 22px 28px;
+  margin: 28px 0 36px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.meadows-investor-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.meadows-investor-stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(0, 122, 221, 0.08);
+  color: #007ADD;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.meadows-investor-stat-val {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.meadows-investor-stat-label {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 2px 0 0;
+}
+
+.meadows-investors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.meadows-investor-card {
+  position: relative;
+  background: #ffffff;
+  border: 1.5px solid #eef2f6;
+  border-radius: 22px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.meadows-investor-card:hover {
+  transform: translateY(-5px);
+  border-color: #007ADD;
+  box-shadow: 0 20px 40px rgba(0, 122, 221, 0.1);
+}
+
+.meadows-investor-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meadows-investor-stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.meadows-investor-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #059669;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.meadows-investor-highlight {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+  font-family: 'Philosopher', 'Poppins', sans-serif;
+}
+
+.meadows-investor-quote {
+  font-size: 0.94rem;
+  color: #475569;
+  line-height: 1.65;
+  margin: 0 0 24px 0;
+  font-style: normal;
+}
+
+.meadows-investor-divider {
+  height: 1px;
+  background: #f1f5f9;
+  margin-bottom: 18px;
+}
+
+.meadows-investor-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  flex-wrap: wrap;
+}
+
+.meadows-investor-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.meadows-investor-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.meadows-investor-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 2px 0;
+}
+
+.meadows-investor-role {
+  font-size: 0.78rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.meadows-investor-plot {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #007ADD;
+  background: rgba(0, 122, 221, 0.08);
+  padding: 4px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (MOBILE PHONES: <= 640px)
+   "much smaller and spacious and clean design and small letters. and easily understandable and user centric"
+   ========================================================================== */
+@media (max-width: 640px) {
+  .meadows-page {
+    padding-top: 75px;
+  }
+
+  .meadows-container {
+    padding: 0 16px;
+  }
+
+  .meadows-hero {
+    padding: 16px 0 24px;
+  }
+
+  .meadows-breadcrumb {
+    font-size: 0.68rem;
+    margin: 15px 0;
+    letter-spacing: 0.5px;
+  }
+
+  .meadows-badges-row {
+    gap: 6px;
+    margin-bottom: 50px;
+  }
+
+  .meadows-badge {
+    font-size: 0.65rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.4px;
+  }
+
+  .meadows-hero-title {
+    font-size: 1.55rem;
+    font-weight: 800;
+    letter-spacing: -0.4px;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+
+  .meadows-hero-tagline {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .meadows-hero-intro {
+    font-size: 0.80rem;
+    line-height: 1.55;
+    color: #4b5563;
+    margin-bottom: 14px;
+  }
+
+  .meadows-hero-cta-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .meadows-btn-primary,
+  .meadows-btn-secondary,
+  .meadows-btn-ghost {
+    width: 100%;
+    padding: 11px 12px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+    justify-content: center;
+  }
+
+  /* Quick Nav on mobile */
+  .meadows-quick-nav-bar {
+    padding: 8px 0 12px;
+    gap: 6px;
+    margin: 50px 0 16px;
+  }
+
+  .meadows-quick-nav-item {
+    padding: 4px 10px;
+    font-size: 0.68rem;
+    border-radius: 20px;
+  }
+
+  /* Banner on mobile */
+  .meadows-banner-wrapper {
+    margin-top: 14px;
+    border-radius: 14px;
+  }
+
+  .meadows-banner-image {
+    height: 190px;
+  }
+
+  .meadows-banner-overlay {
+    padding: 12px 14px;
+  }
+
+  .meadows-banner-caption h3 {
+    font-size: 0.95rem;
+    margin: 0 0 3px;
+  }
+
+  .meadows-banner-project-title {
+    font-size: 1.25rem;
+  }
+
+  .meadows-banner-caption p {
+    font-size: 0.72rem;
+  }
+
+  .meadows-banner-pills {
+    display: none;
+    /* Keep clean and uncluttered on mobile */
+  }
+
+  /* Section containers on mobile */
+  .meadows-section {
+    padding: 36px 0;
+  }
+
+  .meadows-section-header {
+    margin-bottom: 18px;
+  }
+
+  .meadows-section-subtitle {
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+  }
+
+  .meadows-section-title {
+    font-size: 1.25rem;
+    letter-spacing: -0.3px;
+    margin-bottom: 6px;
+  }
+
+  .meadows-overview-text {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: #374151;
+  }
+
+  .meadows-overview-text p {
+    margin-bottom: 10px;
+  }
+
+  .meadows-overview-meta-card {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .meadows-overview-meta-card h4 {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+
+  .meadows-meta-row {
+    font-size: 0.76rem;
+    padding-bottom: 5px;
+  }
+
+  /* Highlights on mobile: clean 1 column */
+  .meadows-highlights-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .meadows-highlight-card {
+    padding: 12px 14px;
+    border-radius: 10px;
+    gap: 10px;
+  }
+
+  .meadows-highlight-icon-wrap {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+
+  .meadows-highlight-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  /* Photos Horizontal Scroller on Mobile - Matching other projects */
+  .pd-photos-section {
+    gap: 10px;
+  }
+
+  .pd-section-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #111;
+    margin: 0 0 10px 0;
+  }
+
+  .pd-horizontal-scroller {
+    gap: 10px;
+    padding-bottom: 10px;
+  }
+
+  .pd-photo-wrapper {
+    flex: 0 0 240px;
+    aspect-ratio: 16 / 10;
+    border-radius: 10px;
+  }
+
+  /* Location on mobile */
+  .meadows-location-hero-card {
+    padding: 20px 15px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+  }
+
+  .meadows-location-hero-card h4 {
+    font-size: 0.9rem;
+    margin-bottom: 17px;
+  }
+
+  .meadows-address-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .meadows-address-item {
+    padding: 7px 10px;
+    border-radius: 8px;
+  }
+
+  .meadows-address-label {
+    font-size: 0.62rem;
+  }
+
+  .meadows-address-val {
+    font-size: 0.78rem;
+  }
+
+  /* Table on mobile */
+  .meadows-table-header {
+    padding: 17px 12px;
+  }
+
+  .meadows-table-header h4 {
+    font-size: 0.82rem;
+  }
+
+  .meadows-conn-table th {
+    padding: 8px 10px;
+    font-size: 0.65rem;
+  }
+
+  .meadows-conn-table td {
+    padding: 8px 10px;
+    font-size: 0.74rem;
+  }
+
+  .meadows-conn-landmark {
+    gap: 6px;
+  }
+
+  /* Stats grid on mobile */
+  .meadows-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .meadows-stat-card {
+    padding: 17px 14px;
+    border-radius: 10px;
+    gap: 4px;
+  }
+
+  .meadows-stat-num {
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  .meadows-stat-title {
+    font-size: 0.74rem;
+    font-weight: 700;
+  }
+
+  .meadows-stat-desc {
+    font-size: 0.68rem;
+    line-height: 1.35;
+  }
+
+  .meadows-layout-note-card {
+    padding: 14px;
+    border-radius: 12px;
+    margin-top: 25px;
+  }
+
+  .meadows-layout-note-card h4 {
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .meadows-layout-note-quote {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .meadows-ownership-badge {
+    font-size: 0.7rem;
+    padding: 5px 10px;
+  }
+
+  /* Villa specs on mobile */
+  .meadows-villa-card {
+    padding: 30px 17px;
+    border-radius: 14px;
+  }
+
+  .meadows-villa-header h3 {
+    font-size: 1.15rem;
+    margin-bottom: 4px;
+  }
+
+  .meadows-villa-subtitle {
+    font-size: 0.76rem;
+  }
+
+  .meadows-villa-specs-list {
+    font-size: 0.6rem;
+    gap: 6px;
+  }
+
+  .meadows-villa-spec-row {
+    padding-bottom: 7px;
+  }
+
+  .meadows-spec-title {
+    font-size: 0.74rem;
+  }
+
+  .meadows-spec-value {
+    font-size: 0.76rem;
+  }
+
+  .meadows-villa-perks {
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
+
+  .meadows-villa-perks-title {
+    font-size: 0.7rem;
+  }
+
+  .meadows-villa-perks-desc {
+    font-size: 0.88rem;
+  }
+
+  /* Amenities on mobile: 2 clean compact columns */
+  .meadows-amenities-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .meadows-amenity-box {
+    padding: 10px 12px;
+    border-radius: 10px;
+    gap: 8px;
+  }
+
+  .meadows-amenity-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+  }
+
+  .meadows-amenity-name {
+    font-size: 0.72rem;
+  }
+
+  .meadows-tags-container {
+    padding: 10px 12px;
+    border-radius: 10px;
+    gap: 5px;
+  }
+
+  .meadows-tag-item {
+    font-size: 0.68rem;
+    padding: 4px 8px;
+  }
+
+  /* Why Dholera on mobile */
+  .meadows-dholera-card {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .meadows-dholera-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+    margin-bottom: 12px;
+  }
+
+  .meadows-dholera-stat-item {
+    padding: 17px 10px;
+    border-radius: 10px;
+  }
+
+  .meadows-dholera-stat-num {
+    font-size: 1rem;
+    margin-bottom: 2px;
+  }
+
+  .meadows-dholera-stat-label {
+    font-size: 0.68rem;
+    line-height: 1.3;
+  }
+
+  .meadows-infra-card {
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .meadows-infra-card h4 {
+    font-size: 0.88rem;
+    margin-bottom: 3px;
+  }
+
+  .meadows-infra-card p {
+    font-size: 0.75rem;
+    line-height: 1.45;
+  }
+
+  .meadows-partner-chip {
+    font-size: 0.68rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+
+  .meadows-zone-pill {
+    font-size: 0.68rem;
+    padding: 4px 8px;
+  }
+
+  /* Pricing on mobile */
+  .meadows-pricing-card {
+    padding: 30px 16px;
+    border-radius: 14px;
+  }
+
+  .meadows-pricing-title {
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+  }
+
+  .meadows-price-amount {
+    font-size: 1.6rem;
+  }
+
+  .meadows-price-unit {
+    font-size: 0.75rem;
+  }
+
+  .meadows-pricing-points {
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .meadows-pricing-points li {
+    font-size: 0.75rem;
+    gap: 6px;
+  }
+
+  .meadows-pricing-disclaimer {
+    padding: 10px 12px;
+    font-size: 0.7rem;
+  }
+
+  /* Contact on mobile */
+  .meadows-contact-grid {
+    padding: 40px 19px;
+    border-radius: 14px;
+    gap: 18px;
+  }
+
+  .meadows-contact-info h3 {
+    font-size: 1.25rem;
+    margin-bottom: 4px;
+  }
+
+  .meadows-contact-info p {
+    font-size: 0.78rem;
+    margin-bottom: 14px;
+  }
+
+  .meadows-contact-channels {
+    gap: 10px;
+    margin: 24px 0;
+  }
+
+  .meadows-channel-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+
+  .meadows-channel-text h5 {
+    font-size: 0.65rem;
+  }
+
+  .meadows-channel-text a,
+  .meadows-channel-text p {
+    font-size: 0.8rem;
+  }
+
+  .meadows-form-wrap {
+    padding: 30px 15px;
+    border-radius: 12px;
+  }
+
+  .meadows-form-wrap h4 {
+    font-size: 0.95rem;
+  }
+
+  .meadows-form-wrap p {
+    font-size: 0.74rem;
+    margin-bottom: 30px;
+  }
+
+  .meadows-input,
+  .meadows-select,
+  .meadows-textarea {
+    padding: 7px 10px;
+    font-size: 0.78rem;
+    border-radius: 6px;
+  }
+
+  .meadows-input-group {
+    margin: 7px 0;
+  }
+
+  .meadows-form-submit {
+    padding: 9px;
+    font-size: 0.82rem;
+    border-radius: 8px;
+  }
+
+  /* Disclaimer on mobile */
+  .meadows-disclaimer-section {
+    padding: 20px 0 35px;
+  }
+
+  .meadows-disclaimer-box {
+    padding: 30px 15px;
+    border-radius: 10px;
+  }
+
+  .meadows-disclaimer-text {
+    font-size: 0.68rem;
+    line-height: 1.5;
+  }
+
+  /* Investors section on mobile */
+  .meadows-investors-stats-bar {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    gap: 12px;
+    margin: 20px 0 24px;
+  }
+
+  .meadows-investor-stat-item {
+    gap: 12px;
+  }
+
+  .meadows-investor-stat-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .meadows-investor-stat-val {
+    font-size: 1.1rem;
+  }
+
+  .meadows-investors-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .meadows-investor-card {
+    padding: 20px 18px;
+  }
+
+  .meadows-investor-highlight {
+    font-size: 0.95rem;
+  }
+
+  .meadows-investor-quote {
+    font-size: 0.82rem;
+    line-height: 1.55;
+    margin-bottom: 16px;
+  }
+
+  .meadows-investor-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}

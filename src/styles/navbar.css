@@ -39,13 +39,21 @@
 
 .nav-menu a {
     text-decoration: none;
-    color: #444;
+    color: #666;
     transition: color 0.3s;
 }
 
 .nav-menu a:hover,
 .nav-menu a.active {
-    color: #007ADD;
+    color: black;
+}
+
+.estate-brand-link {
+    color: #007ADD !important;
+}
+
+.estate-brand-link:hover {
+    color: #007ADD !important;
 }
 
 .nav-icons {
@@ -61,7 +69,7 @@
 }
 
 .icon:hover {
-    color: #007ADD;
+    color: black;
     transform: scale(1.1);
 }
 
@@ -113,14 +121,14 @@
 .menu-column a {
     font-family: "Poppins", sans-serif;
     font-size: 15.5px;
-    color: #555;
+    color: #666;
     text-decoration: none;
     transition: all 0.3s;
 }
 
 .menu-column a:hover,
 .menu-column a.active {
-    color: #007ADD;
+    color: black;
 }
 
 /* ==================== RESPONSIVE ==================== */
@@ -163,5 +171,19 @@
 
     .menu-column:last-child {
         border-right: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .full-menu.open {
+        max-height: 540px;
+    }
+
+    .navbar-container {
+        padding: 45px 24px;
+    }
+
+    .menu-grid {
+        gap: 40px 60px;
     }
 }

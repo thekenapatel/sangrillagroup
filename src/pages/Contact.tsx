@@ -1,7 +1,27 @@
+import { useState } from "react";
 import { Mail, Phone, MapPin, MessageSquare, Send } from "lucide-react";
 import "../styles/contact.css";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const phoneNumber = "919737227999";
+    const text = `*New Inquiry from Sangrilla Group Website*\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Message:* ${formData.message}`;
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`;
+    
+    window.open(whatsappUrl, "_blank");
+    
+    // Clear inputs
+    setFormData({ name: "", email: "", message: "" });
+  };
+
   return (
     <div className="contact-page">
       <div className="container">
@@ -13,19 +33,37 @@ const Contact = () => {
         </header>
 
         <div className="contact-grid">
-          {/* Left Column: Form Placeholder */}
+          {/* Left Column: Form Section */}
           <div className="contact-form-section">
             <div className="glass-card form-container">
               <h3>Send us a Message</h3>
-              <form onSubmit={(e) => e.preventDefault()}>
+              <form onSubmit={handleSubmit}>
                 <div className="input-group">
-                  <input type="text" placeholder="Full Name" required />
+                  <input 
+                    type="text" 
+                    placeholder="Full Name" 
+                    required 
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  />
                 </div>
                 <div className="input-group">
-                  <input type="email" placeholder="Email Address" required />
+                  <input 
+                    type="email" 
+                    placeholder="Email Address" 
+                    required 
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
                 </div>
                 <div className="input-group">
-                  <textarea placeholder="How can we help you?" rows={5} required></textarea>
+                  <textarea 
+                    placeholder="How can we help you?" 
+                    rows={5} 
+                    required
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  ></textarea>
                 </div>
                 <button type="submit" className="submit-btn">
                   Send Message <Send size={18} />
@@ -56,8 +94,8 @@ const Contact = () => {
                 </div>
                 <div className="info-text">
                   <h3>Call Us</h3>
-                  <p>Office: +91 99873 22645</p>
-                  <a href="tel:+919987322645">Speak with us →</a>
+                  <p>Office: +91 97372 27999</p>
+                  <a href="tel:+919737227999">Speak with us →</a>
                 </div>
               </div>
 
@@ -68,8 +106,8 @@ const Contact = () => {
                 </div>
                 <div className="info-text">
                   <h3>WhatsApp</h3>
-                  <p>Direct: +91 95377 02727</p>
-                  <a href="https://wa.me/919537702727" target="_blank" rel="noreferrer">
+                  <p>Direct: +91 97372 27999</p>
+                  <a href="https://wa.me/919737227999" target="_blank" rel="noreferrer">
                     Start a chat →
                   </a>
                 </div>
@@ -83,7 +121,7 @@ const Contact = () => {
                 <div className="info-text">
                   <h3>Visit Office</h3>
                   <p>
-                    Sangrilla Group, The CBD Mall, Nr. Vaishnodevi Circle, Ahmedabad
+                    417, Sangrilla Group, The CBD Mall, Nr. Vaishnodevi Circle, Ahmedabad
                   </p>
                   <a href="https://share.google/NcvYGsqTMM12hqJ6N" target="_blank" rel="noreferrer">
                     Get directions →

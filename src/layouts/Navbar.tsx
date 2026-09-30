@@ -43,11 +43,11 @@ const Navbar = () => {
 
           {/* DESKTOP MENU - Hidden on mobile */}
           <div className="nav-menu">
+            <NavLink to="/project/sangrilla-meadows">Dholera</NavLink>
             <NavLink to="/commercial">Commercial</NavLink>
             <NavLink to="/residential">Residential</NavLink>
             <NavLink to="/plots">Plots</NavLink>
             <NavLink to="/services">Services</NavLink>
-            <NavLink to="/insights">Insights</NavLink>
             <NavLink to="/about-us">About Us</NavLink>
             <NavLink to="/contact">Contact</NavLink>
           </div>
@@ -68,6 +68,7 @@ const Navbar = () => {
           <div className="menu-grid">
             {/* Column 1 */}
             <div className="menu-column">
+              <Link to="/project/sangrilla-meadows" onClick={closeMobileMenu}>Dholera</Link>
               <Link to="/commercial" onClick={closeMobileMenu}>Commercial</Link>
               <Link to="/residential" onClick={closeMobileMenu}>Residential</Link>
               <Link to="/plots" onClick={closeMobileMenu}>Plots</Link>
@@ -81,8 +82,8 @@ const Navbar = () => {
 
             {/* Column 3 */}
             <div className="menu-column">
+              <Link to="/under-construction-projects" onClick={closeMobileMenu}>Under Construction</Link>
               <Link to="/ready-property" onClick={closeMobileMenu}>Ready Property</Link>
-              <Link to="/services" onClick={closeMobileMenu}>Services</Link>
               <Link to="/completed-projects" onClick={closeMobileMenu}>Completed Projects</Link>
             </div>
 

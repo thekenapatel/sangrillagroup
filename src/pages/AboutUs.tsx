@@ -1,6 +1,22 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/page.css";
 
 const AboutUs = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      // If we are at the top and scrolling UP significantly
+      if (window.scrollY <= 0 && e.deltaY < -50) {
+        navigate("/");
+      }
+    };
+
+    window.addEventListener("wheel", handleWheel);
+    return () => window.removeEventListener("wheel", handleWheel);
+  }, [navigate]);
+
   return (
     <div className="generic-page about-us-page">
       <div className="page-header">

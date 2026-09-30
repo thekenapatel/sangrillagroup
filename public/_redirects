@@ -1,0 +1,3 @@
+/api/contacts/check   /.netlify/functions/contacts   200!
+/api/contacts         /.netlify/functions/contacts   200!
+/*                    /index.html                    200

@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import { motion, animate, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import "../styles/why-sangrilla.css";
 
 const reasons = [
@@ -21,28 +21,48 @@ const reasons = [
 ];
 
 const stats = [
-  { number: "25+", text: "Years of Excellence" },
-  { number: "1500+", text: "Happy Families" },
-  { number: "15+", text: "Completed Projects" }
+  { value: 15, suffix: "+", text: "Completed Projects" },
+  { value: 25, suffix: "+", text: "Years of Excellence" },
+  { value: 1000, suffix: "+", text: "Happy Families" },
+  { value: 1000000, suffix: "+", text: "Total sq.ft" }
 ];
+
+const AnimatedCounter: React.FC<{ value: number; suffix?: string }> = ({ value, suffix = "" }) => {
+  const [displayValue, setDisplayValue] = useState("0");
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(0, value, {
+        duration: 2,
+        ease: "easeOut",
+        onUpdate: (latest) => {
+          setDisplayValue(Math.round(latest).toLocaleString('en-IN'));
+        }
+      });
+      return controls.stop;
+    }
+  }, [isInView, value]);
+
+  return <span ref={ref}>{displayValue}{suffix}</span>;
+};
 
 const WhySangrilla: React.FC = () => {
   return (
     <section className="why-sangrilla">
       <div className="why-header">
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
           Why Sangrilla
         </motion.h2>
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
         >
           A localized touch for the city we call home. Discover why Sangrilla is the preferred choice for premium living.
         </motion.p>
@@ -50,34 +70,28 @@ const WhySangrilla: React.FC = () => {
 
       <div className="why-grid">
         {reasons.map((reason, index) => (
-          <motion.div
+          <div
             key={index}
             className="why-card"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
           >
             <span className="why-card-icon">{reason.icon}</span>
             <h3>{reason.title}</h3>
             <p>{reason.description}</p>
-          </motion.div>
+          </div>
         ))}
       </div>
 
       <div className="stats-grid">
         {stats.map((stat, index) => (
-          <motion.div
+          <div
             key={index}
             className="stat-box"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
           >
-            <span className="stat-number">{stat.number}</span>
+            <span className="stat-number">
+              <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+            </span>
             <span className="stat-text">{stat.text}</span>
-          </motion.div>
+          </div>
         ))}
       </div>
     </section>

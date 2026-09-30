@@ -1,0 +1,24 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+# Route contacts check endpoint to Netlify serverless function
+[[redirects]]
+  from = "/api/contacts/check"
+  to = "/.netlify/functions/contacts"
+  status = 200
+  force = true
+
+# Route contacts create endpoint to Netlify serverless function
+[[redirects]]
+  from = "/api/contacts"
+  to = "/.netlify/functions/contacts"
+  status = 200
+  force = true
+
+# Single Page App (SPA) redirect for React Router deep linking
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

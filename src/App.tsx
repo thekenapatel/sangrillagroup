@@ -27,9 +27,20 @@ import ProposeLand from "./pages/ProposeLand";
 import ProposeProject from "./pages/ProposeProject";
 import RegisterVendor from "./pages/RegisterVendor";
 import RegisterChannelPartner from "./pages/RegisterChannelPartner";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfUse from "./pages/TermsOfUse";
+import Estate from "./pages/Estate";
+import ProjectDetail from "./pages/ProjectDetail";
+import UnderConstructionProjects from "./pages/UnderConstructionProjects";
+import SangrillaMeadowsDetail from "./pages/SangrillaMeadowsDetail";
+
+import Chatbot from "./components/ChatBot AI/Chatbot";
 
 function App() {
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(() => {
+    // Show splash if on root path
+    return window.location.pathname === "/" || window.location.pathname === "";
+  });
 
   const handleSplashComplete = useCallback(() => {
     setShowSplash(false);
@@ -73,13 +84,23 @@ function App() {
         <Route path="/insights" element={<Insights />} />
         <Route path="/ready-property" element={<ReadyProperty />} />
         <Route path="/completed-projects" element={<CompletedProjects />} />
+        <Route path="/under-construction-projects" element={<UnderConstructionProjects />} />
+        <Route path="/under-construction" element={<UnderConstructionProjects />} />
+        <Route path="/project/sangrilla-meadows" element={<SangrillaMeadowsDetail />} />
+        <Route path="/under-construction/sangrilla-meadows" element={<SangrillaMeadowsDetail />} />
         <Route path="/articles" element={<Articles />} />
         <Route path="/propose-land" element={<ProposeLand />} />
         <Route path="/propose-project" element={<ProposeProject />} />
         <Route path="/register-vendor" element={<RegisterVendor />} />
         <Route path="/register-channel-partner" element={<RegisterChannelPartner />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-use" element={<TermsOfUse />} />
+        <Route path="/estate" element={<Estate />} />
+        <Route path="/project/:id" element={<ProjectDetail />} />
+
       </Routes>
 
+      <Chatbot />
       <Footer />
     </Router>
   );

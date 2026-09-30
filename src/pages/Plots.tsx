@@ -1,13 +1,138 @@
-import "../styles/page.css";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { MapPin, ArrowRight, MessageCircle } from "lucide-react";
+import "../styles/completed-projects.css";
+import OptimizedImage from "../components/OptimizedImage";
+import plotsVillasImg from "../assets/residential/res-plotsandvillas/plotsandvillas2.jpg";
+
+const plotProjects = [
+  {
+    id: "sangrilla-meadows",
+    name: "Sangrilla Meadows",
+    tagline: "Residential Plots & Luxurious Villas",
+    location: "Dholera-SIR, Gujarat",
+    status: "under-construction",
+    badge: "Under Construction / Pre-Launch",
+    image: "/assets/meadows/up_res_1.jpg",
+    desc: "India's First Greenfield Smart City — Dholera SIR, just steps away. 145 thoughtfully planned villa plots from 100 to 300 Sq. Yards with modern infrastructure and immediate Dastavej.",
+    price: "Starting at ₹7,500 / Sq. Yd.",
+    link: "/project/sangrilla-meadows"
+  },
+  {
+    id: "sangrilla-plots-villas",
+    name: "Sangrilla Plots & Villas",
+    tagline: "Where Land Meets Luxury",
+    location: "Dahegam",
+    status: "completed",
+    badge: "Delivered Landmark",
+    image: plotsVillasImg,
+    desc: "Elegant premium residential plots and villas in Dahegam with a distinctive modern design — a perfect blend of open spaces and luxury community living.",
+    price: "Delivered & Occupied",
+    link: "/project/sangrilla-plots-villas"
+  }
+];
 
 const Plots = () => {
   return (
-    <div className="generic-page">
-      <div className="page-header">
-        <h1>Plots</h1>
-      </div>
-      <div className="page-content">
-        <p>This section is currently under development. Please check back later for more information about our plots.</p>
+    <div className="completed-page">
+      <div className="completed-container">
+        <div className="completed-hero">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Residential Plots
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Strategic land investments and master-planned residential plotting developments across Gujarat&apos;s prime growth corridors.
+          </motion.p>
+        </div>
+
+        <div className="completed-grid">
+          {plotProjects.map((project) => (
+            <Link key={project.id} to={project.link} className="completed-card-link">
+              <motion.div
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="completed-card"
+              >
+                <div className="card-image-box">
+                  <OptimizedImage
+                    src={project.image}
+                    alt={project.name}
+                    className="project-image"
+                  />
+                  <div className="card-overlay" style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                    <span
+                      className="tag"
+                      style={{
+                        background: project.status === "under-construction" ? "#007ADD" : "#16a34a",
+                        color: "#fff",
+                        fontWeight: 700
+                      }}
+                    >
+                      {project.badge}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="card-content">
+                  <div className="card-header">
+                    <div>
+                      <h3>{project.name}</h3>
+                      <p className="card-type-minimal" style={{ color: "#007ADD", fontWeight: 600 }}>
+                        {project.tagline}
+                      </p>
+                    </div>
+                    <div className="location-tag">
+                      <span className="icon">
+                        <MapPin size={14} style={{ display: "inline", verticalAlign: "middle" }} />
+                      </span>
+                      {project.location}
+                    </div>
+                  </div>
+
+                  <p className="card-desc" style={{ fontSize: "0.92rem", color: "#4b5563", lineHeight: 1.6, margin: "14px 0" }}>
+                    {project.desc}
+                  </p>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      marginTop: "15px",
+                      paddingTop: "15px",
+                      borderTop: "1px solid #f0f0f0"
+                    }}
+                  >
+                    <span style={{ fontSize: "0.88rem", fontWeight: 700, color: "#111" }}>
+                      {project.price}
+                    </span>
+                    <span
+                      style={{
+                        color: "#007ADD",
+                        fontWeight: 600,
+                        fontSize: "0.85rem",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "4px"
+                      }}
+                    >
+                      View Project <ArrowRight size={14} />
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

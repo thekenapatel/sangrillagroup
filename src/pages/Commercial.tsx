@@ -1,119 +1,149 @@
-import { useState } from "react";
-import "../styles/commercial.css";
+import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
+import { MapPin, ArrowRight, MessageCircle } from "lucide-react";
+import { commercialProjects } from "../data/allProjects";
+import "../styles/fullscreen-listing.css";
+import OptimizedImage from "../components/OptimizedImage";
 
-// We'll dynamically resolve these to prevent the app from crashing if 
-// the user hasn't added the files with the exact names or extensions yet.
-// The user specified names without extensions ("up_1", "com_1", etc).
-const tryLoadImage = (name: string) => {
-  // Vite specific way to resolve assets or fail gracefully
-  return new URL(`../assets/commercial/${name}`, import.meta.url).href;
-};
-
-const upcomingProjects = [
-  {
-    id: 1,
-    name: "Anantaa Homes",
-    place: "Ahmedabad",
-    imageName: "up_1.jpg",
-    fallbackName: "up_1.png",
-    fallbackUrl: "https://placehold.co/600x800/1f2937/ffffff?text=Anantaa+Homes"
-  },
-  {
-    id: 2,
-    name: "Supan Residency",
-    place: "Ahmedabad",
-    imageName: "up_2.jpg",
-    fallbackName: "up_2.png",
-    fallbackUrl: "https://placehold.co/600x800/1f2937/ffffff?text=Supan+Residency"
+const resolveImage = (path: string): string => {
+  if (!path) return "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200";
+  if (path.startsWith('http') || path.startsWith('data:') || path.startsWith('/') || path.startsWith('blob:')) {
+    return path;
   }
-];
-
-const completedProjects = [
-  {
-    id: 3,
-    name: "Sangrilla Complex",
-    place: "Ahmedabad",
-    description: "A well-designed commercial complex offering prime shop and office spaces with high footfall.",
-    imageName: "com_1.jpg",
-    fallbackName: "com_1.png",
-    fallbackUrl: "https://placehold.co/600x800/1f2937/ffffff?text=Sangrilla+Complex"
-  },
-  {
-    id: 4,
-    name: "Sangrilla Plaza",
-    place: "Gandhinagar",
-    description: "Modern commercial plaza ideal for retail, showrooms, and business establishments.",
-    imageName: "com_2.jpg",
-    fallbackName: "com_2.png",
-    fallbackUrl: "https://placehold.co/600x800/1f2937/ffffff?text=Sangrilla+Plaza"
-  },
-  {
-    id: 5,
-    name: "Ananta Business Park",
-    place: "Ahmedabad",
-    description: "Premium business park developed for offices, corporate spaces, and professional services.",
-    imageName: "com_3.jpg",
-    fallbackName: "com_3.png",
-    fallbackUrl: "https://placehold.co/600x800/1f2937/ffffff?text=Ananta+Business+Park"
+  try {
+    return new URL(`../assets/${path}`, import.meta.url).href;
+  } catch {
+    return "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200";
   }
-];
-
-const ProjectCard = ({ project }: { project: any }) => {
-  const [imgSrc, setImgSrc] = useState(tryLoadImage(project.imageName));
-
-  const handleError = () => {
-    if (imgSrc.endsWith(project.imageName)) {
-      setImgSrc(tryLoadImage(project.fallbackName));
-    } else {
-      setImgSrc(project.fallbackUrl);
-    }
-  };
-
-  return (
-    <div className="project-card">
-      <div className="project-image-wrapper">
-        <img 
-          src={imgSrc} 
-          alt={project.name} 
-          onError={handleError}
-          className="project-image"
-        />
-      </div>
-      <div className="project-info">
-        <h3>{project.name}</h3>
-        <span className="project-location">{project.place}</span>
-        {project.description && <p>{project.description}</p>}
-      </div>
-    </div>
-  );
 };
 
 const Commercial = () => {
+  const [activeIndex, setActiveIndex] = useState(() => {
+    const saved = sessionStorage.getItem("commercialActiveIndex");
+    return saved ? parseInt(saved, 10) : 0;
+  });
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const scrollLeft = scrollRef.current.scrollLeft;
+      const width = scrollRef.current.clientWidth;
+      const index = Math.round(scrollLeft / width);
+      if (index !== activeIndex) {
+        setActiveIndex(index);
+        sessionStorage.setItem("commercialActiveIndex", index.toString());
+      }
+    }
+  };
+
+  const scrollToSection = (index: number, behavior: ScrollBehavior = "smooth") => {
+    if (scrollRef.current) {
+      const width = scrollRef.current.clientWidth;
+      scrollRef.current.scrollTo({
+        left: index * width,
+        behavior: behavior
+      });
+    }
+  };
+
+  useEffect(() => {
+    // Restore scroll position on mount
+    if (activeIndex !== 0) {
+      const timer = setTimeout(() => {
+        scrollToSection(activeIndex, "auto");
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      // If we are at the first slide and scrolling LEFT or UP significantly
+      if (activeIndex === 0 && (e.deltaX < -50 || e.deltaY < -50)) {
+        navigate("/");
+      }
+    };
+
+    el.addEventListener("wheel", handleWheel);
+    el.addEventListener("scroll", handleScroll);
+    
+    return () => {
+      el.removeEventListener("wheel", handleWheel);
+      el.removeEventListener("scroll", handleScroll);
+    };
+  }, [activeIndex, navigate]);
+
   return (
-    <div className="commercial-page">
-      <div className="commercial-hero">
-        <h1>Commercial Projects</h1>
-        <p className="commercial-subtitle">
-          SANGRILLA develops high-quality commercial and mixed-use properties designed for business success, excellent visibility, and strong investment returns.
-        </p>
+    <div className="fs-portfolio-wrapper">
+      <div className="fs-scroll-container" ref={scrollRef}>
+        {commercialProjects.map((project, index) => (
+          <section key={project.id} className="fs-project-section">
+            {/* Background Layer */}
+            <div className="fs-bg-layer">
+              <OptimizedImage
+                src={resolveImage(project.images[0])}
+                className="fs-bg-image"
+                alt={project.name}
+                containerClassName="fs-bg-image-container"
+              />
+              <div className="fs-bg-overlay" />
+            </div>
+
+            {/* Content Panel */}
+            <div className="fs-content-panel">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.5 }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="fs-breadcrumb">
+                  <Link to="/">Home</Link>
+                  <span>/</span>
+                  <span className="fs-current">Commercial</span>
+                </div>
+                {/* <span className="fs-project-type">Commercial Portfolio</span> */}
+                <h1 className="fs-title">{project.name}</h1>
+                <p className="fs-tagline">{project.tagline}</p>
+                
+                <div className="fs-meta">
+                  <div className="fs-badge">
+                    <MapPin size={18} />
+                    {project.location}{project.year ? ` · ${project.year}` : ""}
+                  </div>
+                </div>
+
+                <p className="fs-description">{project.description}</p>
+
+                <div className="fs-actions">
+                  <Link to={`/project/${project.id}`} className="fs-btn fs-btn-explore">
+                    Explore Project <ArrowRight size={20} />
+                  </Link>
+                  <Link to="/contact" className="fs-btn fs-btn-enquire">
+                    <MessageCircle size={20} /> Enquire
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+          </section>
+        ))}
       </div>
 
-      <div className="projects-section">
-        <h2 className="section-title">Upcoming Projects</h2>
-        <div className="projects-grid">
-          {upcomingProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
-      </div>
-
-      <div className="projects-section">
-        <h2 className="section-title">Completed Projects</h2>
-        <div className="projects-grid">
-          {completedProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+      {/* Navigation Dots */}
+      <div className="fs-bottom-nav">
+        {commercialProjects.map((_, idx) => (
+          <button
+            key={idx}
+            className={`fs-dot ${idx === activeIndex ? 'active' : ''}`}
+            onClick={() => scrollToSection(idx)}
+            title={`Slide ${idx + 1}`}
+          />
+        ))}
       </div>
     </div>
   );

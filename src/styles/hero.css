@@ -3,27 +3,11 @@
     width: 100%;
     position: relative;
     overflow: hidden;
-    background: #020202;
-    /* Deep architectural black */
-}
-
-/* 1. The Morphing Canvas */
-.morph-canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.morph-image {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.8;
+    background: #1f1f1f;
+    /* Pure Noir Black */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Subtle Film Grain for Luxury feel */
@@ -32,96 +16,60 @@
     position: absolute;
     inset: 0;
     background: url('https://grainy-gradients.vercel.app/noise.svg');
-    opacity: 0.15;
+    /* opacity: 0.01; */
     pointer-events: none;
     z-index: 5;
 }
 
-.morph-overlay {
+/* Minimalist Background Image (Subtle) */
+.hero-bg-container {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
-    z-index: 2;
+    z-index: 1;
+    /* opacity: 0.01; */
 }
 
-/* 2. Floating Typography (Parallax Branding) */
+.hero-bg-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(3%) brightness(0.3);
+}
+
+/* 2. Refined Static Branding */
 .hero-branding {
-    position: absolute;
-    inset: 0;
+    position: relative;
+    z-index: 20;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    z-index: 20;
-    pointer-events: none;
+    text-align: center;
 }
 
-.brand-parallax {
-    display: flex;
-    gap: 0.2em;
-}
-
-.floating-letter {
+.hero-title {
     font-family: 'Philosopher', sans-serif;
-    font-size: clamp(4rem, 18vw, 14rem);
+    font-size: clamp(3rem, 15vw, 12rem);
     font-weight: 666;
-    /* Specific weight requested by user */
     color: #fff;
-    line-height: 0.8;
+    line-height: 1;
     text-transform: uppercase;
-    text-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    display: inline-block;
+    letter-spacing: 0.15em;
+    margin: 0;
     user-select: none;
-    will-change: transform;
 }
 
 .brand-tagline-moral {
     font-family: "Poppins", sans-serif;
-    font-size: clamp(1rem, 2.5vw, 1.8rem);
-    letter-spacing: 0.4em;
-    color: rgba(255, 255, 255, 0.7);
-    margin-top: 40px;
+    font-size: clamp(0.8rem, 2vw, 1.4rem);
+    letter-spacing: 0.45em;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 20px;
     text-transform: uppercase;
     user-select: none;
 }
 
-/* 3. Horizon HUD (Minimalist Nav) */
-.hero-horizon {
-    position: absolute;
-    bottom: 80px;
-    width: 100%;
-    z-index: 30;
-    display: flex;
-    justify-content: center;
-}
-
-.horizon-line-wrapper {
-    width: 80%;
-    max-width: 1400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-.horizon-bar {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
-}
-
-.horizon-labels {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 4px;
-    color: rgba(255, 255, 255, 0.4);
-    pointer-events: none;
-}
-
-/* 4. Social Sidebar (Sharp Luxury) */
+/* 3. Social Sidebar (Sharp Luxury) */
 .hero-socials-fixed {
     position: absolute;
     left: 40px;
@@ -134,35 +82,49 @@
 }
 
 .social-box {
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(10px);
     text-decoration: none;
-    /* Transition removed as per request */
+    transition: all 0.3s ease;
 }
 
-/* Instant dark hover, no transition or animation */
 .social-box:hover {
-    background: #000;
-    border-color: #000;
-    color: #fff;
+    background: #fff;
+    border-color: #fff;
+    color: #000;
+}
+
+/* 4. Minimal Horizon Line */
+.hero-horizon {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    max-width: 800px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+    z-index: 10;
 }
 
 /* 📱 Responsive Engineering */
-@media (max-width: 1024px) {
-    .floating-letter {
-        font-size: 6rem;
-        /* Slightly smaller for tablets */
+@media (max-width: 1500px) {
+    .hero-title {
+        font-size: 7.5rem;
     }
 
-    .brand-parallax {
-        gap: 0;
+}
+
+@media (max-width: 1024px) {
+    .hero-title {
+        font-size: 6.9rem;
     }
 
     .hero-socials-fixed {
@@ -170,30 +132,22 @@
     }
 }
 
-@media (max-width: 768px) {
-    .floating-letter {
-        font-size: 3.2rem;
+@media (max-width: 800px) {
+    .hero-title {
+        font-size: 4rem;
+        letter-spacing: 0.1em;
     }
 
     .brand-tagline-moral {
-        font-size: 0.8rem;
-        letter-spacing: 0.2em;
-        margin-top: 20px;
-    }
-
-    .hero-horizon {
-        bottom: 120px;
-    }
-
-    .horizon-labels {
-        font-size: 8px;
-        letter-spacing: 2px;
+        font-size: 0.7rem;
+        letter-spacing: 0.3em;
+        margin-top: 15px;
     }
 
     .hero-socials-fixed {
         left: 50%;
         top: unset;
-        bottom: 40px;
+        bottom: 30px;
         transform: translateX(-50%);
         flex-direction: row;
         gap: 20px;
@@ -203,11 +157,14 @@
         width: 44px;
         height: 44px;
     }
+
+    .hero-horizon {
+        display: none;
+    }
 }
 
 @media (max-width: 480px) {
-    .floating-letter {
-        font-size: 2.7rem;
-        letter-spacing: 7px;
+    .hero-title {
+        font-size: 3rem;
     }
 }

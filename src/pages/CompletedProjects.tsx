@@ -1,142 +1,112 @@
 import { useState } from "react";
-import "../styles/commercial.css";
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import "../styles/completed-projects.css";
+import OptimizedImage from "../components/OptimizedImage";
+import { allProjects, type Project } from "../data/allProjects";
 
-const tryLoadImage = (imagePath: string, isCommercial: boolean) => {
-  if (isCommercial) {
-    return new URL(`../assets/commercial/${imagePath}`, import.meta.url).href;
-  }
-  return new URL(`../assets/residential/${imagePath}`, import.meta.url).href;
-};
-
-const completedProjectsData = [
-  {
-    id: 1,
-    name: "Sangrilla Complex",
-    place: "Ahmedabad",
-    description: "A well-designed commercial complex offering prime shop and office spaces with high footfall.",
-    imageName: "com_1.jpg",
-    isCommercial: true
-  },
-  {
-    id: 2,
-    name: "Sangrilla Bunglows",
-    place: "Ahmedabad",
-    description: "Premium independent bungalows featuring luxurious living spaces in a prime location.",
-    imageName: "com_res_1.jpg",
-    isCommercial: false
-  },
-  {
-    id: 3,
-    name: "Sangrilla Township",
-    place: "Ahmedabad",
-    description: "A large-scale, well-planned residential township with comprehensive amenities and vibrant community living.",
-    imageName: "com_res_2.jpg",
-    isCommercial: false
-  },
-  {
-    id: 4,
-    name: "Swagat Bunglows",
-    place: "Ahmedabad",
-    description: "Elegant and spacious bungalows known for superior quality construction and comfortable family homes.",
-    imageName: "com_res_3.jpg",
-    isCommercial: false
-  },
-  {
-    id: 5,
-    name: "Anantaa Park",
-    place: "Ahmedabad",
-    description: "A serene residential project with beautiful landscaping and modern homes.",
-    imageName: "com_res_4.jpg",
-    isCommercial: false
-  },
-  {
-    id: 6,
-    name: "Supan Residency",
-    place: "Ahmedabad",
-    description: "High-quality residential apartments offering excellent value and a modern lifestyle.",
-    imageName: "com_res_5.jpg",
-    isCommercial: false
-  },
-  {
-    id: 7,
-    name: "Satyam Bunglows",
-    place: "Ahmedabad",
-    description: "Classic and spacious bungalows built with trust and superior workmanship.",
-    imageName: "com_res_6.jpg",
-    isCommercial: false
-  },
-  {
-    id: 8,
-    name: "Sangrilla Plaza",
-    place: "Gandhinagar",
-    description: "Modern commercial plaza ideal for retail, showrooms, and business establishments.",
-    imageName: "com_2.jpg",
-    isCommercial: true
-  },
-  {
-    id: 9,
-    name: "Anantaa Bunglows",
-    place: "Ahmedabad",
-    description: "Premium bungalow project delivering luxurious and spacious independent homes.",
-    imageName: "com_res_7.jpg",
-    isCommercial: false
-  },
-  {
-    id: 10,
-    name: "Ananta Business Park",
-    place: "Ahmedabad",
-    description: "Premium business park developed for offices, corporate spaces, and professional services.",
-    imageName: "com_3.jpg",
-    isCommercial: true
-  },
-  {
-    id: 11,
-    name: "Sangrilla White House",
-    place: "Ahmedabad",
-    description: "Elegant premium residential bungalows with a distinctive modern white-themed design.",
-    imageName: "com_res_8.jpg",
-    isCommercial: false
-  }
-];
-
-const ProjectCard = ({ project }: { project: any }) => {
-  const [imgSrc, setImgSrc] = useState(tryLoadImage(project.imageName, project.isCommercial));
+const ProjectCard = ({ project }: { project: Project }) => {
+  const projectType = project.specs.find(s => s.label === "Type")?.value || (project.type === 'commercial' ? 'Commercial' : 'Residential');
+  const projectYear = project.year || project.specs.find(s => s.label.includes("Year"))?.value;
 
   return (
-    <div className="project-card">
-      <div className="project-image-wrapper">
-        <img 
-          src={imgSrc} 
-          alt={project.name} 
-          onError={() => setImgSrc(`https://placehold.co/600x600/1f2937/ffffff?text=${project.name.replace(/ /g, '+')}`)}
-          className="project-image"
-        />
-      </div>
-      <div className="project-info">
-        <h3 className="project-name">{project.name}</h3>
-        <span className="project-location">{project.place && project.place}</span>
-        {project.description && <p>{project.description}</p>}
-      </div>
-    </div>
+    <Link to={`/project/${project.id}`} className="completed-card-link">
+      <motion.div 
+        layout
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        transition={{ duration: 0.6, ease: [0.165, 0.84, 0.44, 1] }}
+        className="completed-card"
+      >
+        <div className="card-image-box">
+          <OptimizedImage 
+            src={project.images[0]} 
+            alt={project.name} 
+            className="project-image"
+          />
+          <div className="card-overlay">
+            <span className="tag">{project.type}</span>
+          </div>
+        </div>
+        <div className="card-content">
+          <div className="card-header">
+            <div>
+              <h3>{project.name}</h3>
+              <p className="card-type-minimal">{projectType} {projectYear ? `· ${projectYear}` : ""}</p>
+            </div>
+            <div className="location-tag">
+              <span className="icon">📍</span>
+              {project.location}
+            </div>
+          </div>
+          
+          {/* <p className="card-desc">{project.description}</p> */}
+          
+          {/* {project.inventory && (
+            <div className="card-footer">
+              {project.inventory.slice(0, 2).map((item, idx) => (
+                <div key={idx} className="inventory-badge">
+                  <strong>{item.floor}:</strong> {item.count}
+                </div>
+              ))}
+            </div>
+          )} */}
+        </div>
+      </motion.div>
+    </Link>
   );
 };
 
 const CompletedProjects = () => {
-  return (
-    <div className="commercial-page">
-      <div className="commercial-hero">
-        <h1>Completed Projects</h1>
-        <p className="commercial-subtitle">
-          Over the past two decades, Sangrilla has successfully built and delivered a diverse portfolio of landmark spaces across the state, from luxurious serene bungalows and robust commercial plazas to vibrant residential townships.
-        </p>
-      </div>
+  const [filter, setFilter] = useState<"all" | "commercial" | "residential">("all");
 
-      <div className="projects-section">
-        <div className="projects-grid">
-          {completedProjectsData.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+  const filteredProjects = allProjects.filter((p) => {
+    if (p.status !== "completed") return false;
+    if (filter === "all") return true;
+    return p.type === filter;
+  });
+
+  return (
+    <div className="completed-page">
+      <div className="completed-container">
+        <div className="completed-hero">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Completed Projects
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Over two decades of crafting landmark spaces that define the skyline of Gujarat. 
+            Discover our portfolio of successfully delivered commercial plazas and residential townships.
+          </motion.p>
+        </div>
+
+        <div className="filter-controls">
+          {(["all", "commercial", "residential"] as const).map((type) => (
+            <button
+              key={type}
+              onClick={() => setFilter(type)}
+              className={`filter-btn ${filter === type ? "active" : ""}`}
+            >
+              {type}
+            </button>
           ))}
         </div>
+
+        <motion.div layout className="completed-grid">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 .env
+atlas-credentials.env
 dist-ssr
 *.local
 

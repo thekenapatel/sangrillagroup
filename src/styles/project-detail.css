@@ -1,0 +1,462 @@
+/* ============================================ */
+/* PAGE SHELL                                   */
+/* ============================================ */
+.project-detail-page {
+  background-color: #faf9f7;
+  color: #111;
+  min-height: 100vh;
+  padding-top: 100px;
+  /* Space for navbar */
+  padding-bottom: 100px;
+
+}
+
+.project-detail-linear-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+/* ============================================ */
+/* HEADER SECTION                               */
+/* ============================================ */
+.pd-linear-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.pd-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.pd-breadcrumb-link {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #aaa;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.pd-breadcrumb-link:hover {
+  color: #007ADD;
+}
+
+.pd-breadcrumb-separator {
+  font-size: 0.75rem;
+  color: #ddd;
+}
+
+.pd-breadcrumb-current {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #555;
+}
+
+.pd-linear-title {
+  /* font-family: 'Philosopher', serif; */
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #111;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.pd-linear-tagline {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  color: #666;
+  font-weight: 300;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.pd-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.pd-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 40px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.pd-location {
+  background: #eeede9;
+  color: #444;
+}
+
+.pd-status {
+  background: rgba(0, 122, 221, 0.08);
+  color: #007ADD;
+  border: 1px solid rgba(0, 122, 221, 0.15);
+}
+
+.pd-status.done {
+  background: rgba(22, 163, 74, 0.08);
+  color: #16a34a;
+  border: 1px solid rgba(22, 163, 74, 0.15);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.status-dot.pulse {
+  animation: pdPulse 2s infinite;
+}
+
+@keyframes pdPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 122, 221, 0.6);
+    transform: scale(0.95);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 122, 221, 0);
+    transform: scale(1);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 122, 221, 0);
+    transform: scale(0.95);
+  }
+}
+
+/* ============================================ */
+/* SPECS SECTION                                */
+/* ============================================ */
+.pd-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  padding: 40px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.pd-spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pd-spec-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.pd-spec-value {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #111;
+}
+
+/* ============================================ */
+/* DESCRIPTION SECTION                          */
+/* ============================================ */
+.pd-description-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.pd-section-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  margin: 0;
+}
+
+.pd-description-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #444;
+  margin: 0;
+  max-width: 800px;
+}
+
+.pd-contact-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #111;
+  color: #fff;
+  padding: 16px 32px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.pd-contact-btn:hover {
+  background: #007ADD;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 122, 221, 0.2);
+}
+
+/* ============================================ */
+/* PHOTOS SECTION (GALLERY)                     */
+/* ============================================ */
+.pd-photos-section {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.pd-horizontal-scroller {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  background: #faf9f7;
+}
+
+.pd-horizontal-scroller::-webkit-scrollbar {
+  height: 6px;
+}
+
+.pd-horizontal-scroller::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+.pd-horizontal-scroller::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 10px;
+}
+
+.pd-horizontal-scroller::-webkit-scrollbar-thumb:hover {
+  background: #007ADD;
+}
+
+.pd-photo-wrapper {
+  flex: 0 0 450px;
+  aspect-ratio: 16 / 10;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #eee;
+  /* box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06); */
+}
+
+
+.pd-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.pd-photo-wrapper:hover .pd-photo-img {
+  transform: scale(1.05);
+}
+
+/* ============================================ */
+/* AMENITIES SECTION                            */
+/* ============================================ */
+.pd-amenities-section {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.pd-amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.pd-amenity-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+  font-size: 0.95rem;
+  color: #444;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.pd-amenity-icon {
+  color: #007ADD;
+  flex-shrink: 0;
+}
+
+/* ============================================ */
+/* INVENTORY / CONFIGURATION SECTION            */
+/* ============================================ */
+.pd-inventory-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pd-inventory-card-single {
+  /* background: #fff; */
+  padding: 0;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.pd-inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pd-inventory-table th {
+  /* background: #f8f7f4; */
+  text-align: left;
+  padding: 20px 30px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.pd-inventory-table td {
+  padding: 24px 30px;
+  font-size: 1rem;
+  color: #333;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.pd-inventory-table tr:last-child td {
+  border-bottom: none;
+}
+
+.pd-inventory-table .floor-cell {
+  font-weight: 500;
+  color: #111;
+}
+
+.pd-inventory-table .count-cell {
+  font-weight: 500;
+  color: #007ADD;
+}
+
+.pd-inventory-table .size-cell {
+  font-weight: 500;
+  color: #666;
+}
+
+@media (max-width: 600px) {
+
+  .pd-inventory-table th,
+  .pd-inventory-table td {
+    padding: 16px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ============================================ */
+/* NOT FOUND                                    */
+/* ============================================ */
+.pd-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 20px;
+}
+
+/* ============================================ */
+/* RESPONSIVE                                   */
+/* ============================================ */
+@media (max-width: 768px) {
+  .project-detail-linear-container {
+    padding: 0 24px;
+    gap: 60px;
+  }
+
+  .pd-photo-wrapper {
+    flex: 0 0 85vw;
+  }
+
+  .pd-specs-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pd-specs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pd-linear-title {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .pd-spec-value {
+    font-size: 1.3rem;
+  }
+
+
+  .pd-amenities-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .pd-inventory-table th,
+  .pd-inventory-table td {
+    padding: 19px 13px;
+    font-size: 0.79rem;
+  }
+
+  .project-detail-linear-container {
+    gap: 90px;
+  }
+
+  .pd-inventory-section,
+  .pd-description-section,
+  .pd-photos-section,
+  .pd-amenities-section {
+    gap: 13px;
+  }
+
+}

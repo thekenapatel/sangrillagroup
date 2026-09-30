@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import "../styles/lifestyle.css";
+import OptimizedImage from "../components/OptimizedImage";
 import ZenGarden from "../assets/lifestyle images/zen_garden.png";
 import KidsArena from "../assets/lifestyle images/kids_arena.png";
 import CommunitySpirit from "../assets/lifestyle images/community_spirit.png";
@@ -74,20 +75,18 @@ const Lifestyle: React.FC = () => {
     <section className="lifestyle-section">
       <div className="lifestyle-header container">
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
           The Sangrilla Life
         </motion.h2>
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Show how life feels inside our projects — the perfect blend of luxury, 
+          Show how life feels inside our projects — the perfect blend of luxury,
           nature, and community designed for those who seek the extraordinary.
         </motion.p>
       </div>
@@ -101,20 +100,16 @@ const Lifestyle: React.FC = () => {
         onMouseMove={handleMouseMove}
       >
         {lifestyleMoments.map((moment, index) => (
-          <motion.div
+          <div
             key={index}
             className="lifestyle-card"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
           >
-            <img src={moment.image} alt={moment.title} />
+            <OptimizedImage src={moment.image} alt={moment.title} />
             <div className="lifestyle-overlay">
               <h3>{moment.title}</h3>
               <p>{moment.description}</p>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </section>
