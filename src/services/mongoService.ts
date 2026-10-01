@@ -164,7 +164,7 @@ export const saveContactDetails = async (
         return {
           success: true,
           isDuplicate: true,
-          message: 'Contact already exists in database. Downloading your brochure...',
+          message: 'Contact already exists. Downloading your brochure...',
           id: data.data?.id
         };
       }
@@ -172,7 +172,7 @@ export const saveContactDetails = async (
       return {
         success: true,
         isDuplicate: false,
-        message: 'Details saved to MongoDB Atlas! Downloading your brochure...',
+        message: 'Details saved, Downloading your brochure...',
         id: data.data?.id
       };
     } else {
@@ -185,7 +185,7 @@ export const saveContactDetails = async (
     return {
       success: false,
       isDuplicate: false,
-      message: 'Failed to save to MongoDB: ' + (error.message || 'Server error'),
+      message: 'Failed to save, Please try again later: ' + (error.message || 'Server error'),
       error: error.message
     };
   }

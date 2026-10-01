@@ -1048,7 +1048,7 @@ const SangrillaMeadowsDetail: React.FC = () => {
                       value={formData.interest}
                       onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
                     >
-                      <option value="Residential Plots">Residential Plots (100–300 Sq. Yd.)</option>
+                      <option value="Residential Plots">Residential Plots (120–350 Sq. Yd.)</option>
                       <option value="2BHK Weekend Villa">2BHK Weekend Villa (₹36 Lakhs)</option>
                       <option value="Site Visit Booking">Book Complimentary Site Visit</option>
                       <option value="General Information">General Investment Inquiry</option>
