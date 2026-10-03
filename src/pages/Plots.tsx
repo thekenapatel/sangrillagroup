@@ -19,6 +19,19 @@ const plotProjects = [
     link: "/project/sangrilla-meadows"
   },
   {
+    id: "sangrilla-meadows-plan",
+    name: "Sangrilla Meadows Plan",
+    tagline: "Live Interactive Master Plan & Plot Demarcation",
+    location: "Dholera Smart City (SIR), Gujarat",
+    status: "active",
+    badge: "Interactive 3D Plotter",
+    image: "/assets/meadows/up_res_1.jpg",
+    desc: "Explore the Sangrilla Meadows Master Plan with high-resolution GIS vector plotting. Live availability across all 145 residential villa plots, Vastu facing, dimensions, and seamless site visit scheduling.",
+    price: "Live Availability & Demarcation",
+    link: "/sangrilla-meadows-plan",
+    isExternal: false
+  },
+  {
     id: "sangrilla-plots-villas",
     name: "Sangrilla Plots & Villas",
     tagline: "Where Land Meets Luxury",
@@ -28,7 +41,8 @@ const plotProjects = [
     image: plotsVillasImg,
     desc: "Elegant premium residential plots and villas in Dahegam with a distinctive modern design — a perfect blend of open spaces and luxury community living.",
     price: "Delivered & Occupied",
-    link: "/project/sangrilla-plots-villas"
+    link: "/project/sangrilla-plots-villas",
+    isExternal: false
   }
 ];
 
@@ -54,8 +68,8 @@ const Plots = () => {
         </div>
 
         <div className="completed-grid">
-          {plotProjects.map((project) => (
-            <Link key={project.id} to={project.link} className="completed-card-link">
+          {plotProjects.map((project) => {
+            const cardContent = (
               <motion.div
                 layout
                 initial={{ opacity: 0, y: 20 }}
@@ -125,13 +139,33 @@ const Plots = () => {
                         gap: "4px"
                       }}
                     >
-                      View Project <ArrowRight size={14} />
+                      {project.isExternal ? "Open 3D Plotter ↗" : "View Project"} <ArrowRight size={14} />
                     </span>
                   </div>
                 </div>
               </motion.div>
-            </Link>
-          ))}
+            );
+
+            if (project.isExternal) {
+              return (
+                <a
+                  key={project.id}
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="completed-card-link"
+                >
+                  {cardContent}
+                </a>
+              );
+            }
+
+            return (
+              <Link key={project.id} to={project.link} className="completed-card-link">
+                {cardContent}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

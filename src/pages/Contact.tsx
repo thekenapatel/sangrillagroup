@@ -11,13 +11,13 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const phoneNumber = "919737227999";
     const text = `*New Inquiry from Sangrilla Group Website*\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Message:* ${formData.message}`;
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`;
-    
+
     window.open(whatsappUrl, "_blank");
-    
+
     // Clear inputs
     setFormData({ name: "", email: "", message: "" });
   };
@@ -39,27 +39,27 @@ const Contact = () => {
               <h3>Send us a Message</h3>
               <form onSubmit={handleSubmit}>
                 <div className="input-group">
-                  <input 
-                    type="text" 
-                    placeholder="Full Name" 
-                    required 
+                  <input
+                    type="text"
+                    placeholder="Full Name"
+                    required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   />
                 </div>
                 <div className="input-group">
-                  <input 
-                    type="email" 
-                    placeholder="Email Address" 
-                    required 
+                  <input
+                    type="email"
+                    placeholder="Email Address"
+                    required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   />
                 </div>
                 <div className="input-group">
-                  <textarea 
-                    placeholder="How can we help you?" 
-                    rows={5} 
+                  <textarea
+                    placeholder="How can we help you?"
+                    rows={5}
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -118,10 +118,19 @@ const Contact = () => {
                 <div className="icon-box">
                   <MapPin />
                 </div>
-                <div className="info-text">
-                  <h3>Visit Office</h3>
+                <div className="info-text address-block">
+                  <h3>Sales Office Address</h3>
                   <p>
-                    417, Sangrilla Group, The CBD Mall, Nr. Vaishnodevi Circle, Ahmedabad
+                    A/507, Money Plant High Street, Jagatpur, S.G. Highway, Gota, Ahmedabad – 382470, Gujarat, India.
+                  </p>
+                  <a href="https://maps.app.goo.gl/rPaedTaKUW62Se6V9" target="_blank" rel="noreferrer">
+                    Get directions →
+                  </a>
+                </div>
+                <div className="info-text address-block">
+                  <h3>Registered Office</h3>
+                  <p>
+                    417, Sangrilla Group, The CBD Mall, Nr. Vaishnodevi Circle, Ahmedabad - 382421, Gujarat, India.
                   </p>
                   <a href="https://share.google/NcvYGsqTMM12hqJ6N" target="_blank" rel="noreferrer">
                     Get directions →

@@ -135,11 +135,15 @@
     color: #111;
 }
 
+.address-block+.address-block {
+    margin-top: 24px;
+}
+
 .info-text p {
     color: #666;
     font-size: 0.95rem;
     line-height: 1.5;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .info-text a {

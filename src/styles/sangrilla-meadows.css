@@ -2383,6 +2383,10 @@
     padding: 16px 0 24px;
   }
 
+  .meadows-unified-title {
+    font-size: 1.5rem;
+  }
+
   .meadows-breadcrumb {
     font-size: 0.68rem;
     margin: 15px 0;

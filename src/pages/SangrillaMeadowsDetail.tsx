@@ -291,6 +291,14 @@ const SangrillaMeadowsDetail: React.FC = () => {
             <button onClick={() => scrollTo("contact-section", "contact")} className="meadows-btn-primary">
               <Send size={15} /> Enquire Now
             </button>
+            <Link
+              to="/project/sangrilla-meadows/master-plan"
+              className="meadows-btn-ghost"
+              style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}
+            >
+              <Layers size={15} className="text-emerald-400" />
+              <span>Interactive Master Plan</span>
+            </Link>
             <button onClick={handleDownloadBrochure} className="meadows-btn-secondary">
               <Download size={15} /> Download Brochure
             </button>
@@ -323,7 +331,7 @@ const SangrillaMeadowsDetail: React.FC = () => {
               className={`meadows-quick-nav-item ${activeTab === 'layout' ? 'active' : ''}`}
               onClick={() => scrollTo("layout-section", "layout")}
             >
-              Plot Details
+              Layout &amp; Plots
             </button>
             {/* <button
               className={`meadows-quick-nav-item ${activeTab === 'villas' ? 'active' : ''}`}
@@ -567,12 +575,169 @@ const SangrillaMeadowsDetail: React.FC = () => {
         </section>
 
         {/* ============================================================
-            4. LAYOUT / PLOT DETAILS
+            INTERACTIVE PLOTTER CALLOUT (BELOW LOCATION SECTION)
+            ============================================================ */}
+        <section className="meadows-section" style={{ paddingTop: "0.5rem", paddingBottom: "1.5rem" }}>
+          <div
+            className="meadows-plotter-feature-banner"
+            style={{
+              position: "relative",
+              overflow: "hidden",
+              borderRadius: "1.5rem",
+              background: "linear-gradient(135deg, #060b14 0%, #0a1324 50%, #030712 100%)",
+              border: "1px solid rgba(212, 175, 55, 0.35)",
+              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 35px rgba(212, 175, 55, 0.12)",
+              padding: "2.5rem 2.25rem",
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "2rem"
+            }}
+          >
+            {/* Ambient Background Glow Effect */}
+            <div
+              style={{
+                position: "absolute",
+                top: "-60px",
+                right: "10%",
+                width: "280px",
+                height: "280px",
+                borderRadius: "50%",
+                background: "radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%)",
+                filter: "blur(40px)",
+                pointerEvents: "none"
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                bottom: "-60px",
+                left: "5%",
+                width: "260px",
+                height: "260px",
+                borderRadius: "50%",
+                background: "radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%)",
+                filter: "blur(40px)",
+                pointerEvents: "none"
+              }}
+            />
+
+            <div style={{ maxWidth: "680px", position: "relative", zIndex: 2 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "0.75rem" }}>
+                <span
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    padding: "0.3rem 0.85rem",
+                    borderRadius: "9999px",
+                    fontSize: "0.72rem",
+                    fontWeight: 800,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    background: "rgba(212, 175, 55, 0.12)",
+                    color: "#f5c542",
+                    border: "1px solid rgba(212, 175, 55, 0.3)"
+                  }}
+                >
+                  <Sparkles size={12} className="text-amber-400" />
+                  <span>Digital Master Plan</span>
+                </span>
+                <span
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "5px",
+                    fontSize: "0.72rem",
+                    fontWeight: 700,
+                    color: "#94a3b8"
+                  }}
+                >
+                  <ShieldCheck size={13} className="text-emerald-400" />
+                  145 Demarcated Plots &amp; Villas
+                </span>
+              </div>
+
+              <h3
+                style={{
+                  fontSize: "1.75rem",
+                  fontWeight: 900,
+                  color: "#ffffff",
+                  letterSpacing: "-0.02em",
+                  margin: "0 0 0.75rem 0",
+                  lineHeight: 1.25
+                }}
+              >
+                Experience the Sangrilla Meadows Interactive Plotter
+              </h3>
+
+              <p
+                style={{
+                  fontSize: "0.95rem",
+                  color: "#cbd5e1",
+                  lineHeight: 1.65,
+                  margin: 0
+                }}
+              >
+                Immerse yourself in our interactive digital master plan. Smoothly zoom and pan through residential plots and luxury villas, inspect real-time availability, vastu alignments, dimensions, and architectural floor plans in Aakru Village, Dholera SIR.
+              </p>
+            </div>
+
+            <div style={{ position: "relative", zIndex: 2 }}>
+              <a
+                href="/project/sangrilla-meadows/master-plan"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open(
+                    `${window.location.origin}/project/sangrilla-meadows/master-plan`,
+                    "_blank",
+                    "noopener,noreferrer"
+                  );
+                }}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  padding: "1.1rem 2rem",
+                  borderRadius: "1rem",
+                  background: "linear-gradient(135deg, #d4af37 0%, #f59e0b 50%, #b8860b 100%)",
+                  color: "#0a0a0a",
+                  fontWeight: 800,
+                  fontSize: "1rem",
+                  letterSpacing: "0.02em",
+                  textDecoration: "none",
+                  boxShadow: "0 10px 25px -5px rgba(245, 158, 11, 0.4), 0 0 15px rgba(212, 175, 55, 0.3)",
+                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                  cursor: "pointer"
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-2px) scale(1.02)";
+                  e.currentTarget.style.boxShadow = "0 15px 30px -5px rgba(245, 158, 11, 0.5), 0 0 25px rgba(212, 175, 55, 0.5)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0) scale(1)";
+                  e.currentTarget.style.boxShadow = "0 10px 25px -5px rgba(245, 158, 11, 0.4), 0 0 15px rgba(212, 175, 55, 0.3)";
+                }}
+              >
+                <span>Explore Sangrilla Meadows Plotter →</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================
+            4. LAYOUT & PLOT DETAILS
             ============================================================ */}
         <section className="meadows-section" id="layout-section">
           <div className="meadows-section-header">
-            <span className="meadows-section-subtitle">Master Planning</span>
+            <span className="meadows-section-subtitle">Official Dholera SIR Demarcation</span>
             <h2 className="meadows-section-title">Layout &amp; Plot Details</h2>
+            <p style={{ fontSize: "0.95rem", color: "#64748b", marginTop: "4px", maxWidth: "680px" }}>
+              Thoughtfully planned residential development with clear demarcations, wide internal roads, and dedicated open leisure spaces across 145 clear-titled villa plots.
+            </p>
           </div>
 
           <div className="meadows-stats-grid">
@@ -618,11 +783,80 @@ const SangrillaMeadowsDetail: React.FC = () => {
               <div className="meadows-stat-desc">7.5 m Internal Roads | 12 m Main Spine Road</div>
             </div>
 
-            <div className="meadows-stat-card">
-              <div className="meadows-stat-num">Your Plot, Your Title.</div>
-              <div className="meadows-stat-title">Independent ownership with complete documentation.</div>
-              {/* <div className="meadows-stat-desc">Individual, freehold plot ownership</div> */}
+          </div>
+
+          {/* Interactive Master Plan & Plotter Callout */}
+          <div
+            style={{
+              marginTop: "2rem",
+              padding: "1.75rem 2rem",
+              borderRadius: "1.25rem",
+              background: "linear-gradient(135deg, #09121f 0%, #030712 100%)",
+              border: "1px solid rgba(16, 185, 129, 0.3)",
+              boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.5)",
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "1.5rem"
+            }}
+          >
+            <div style={{ maxWidth: "600px" }}>
+              <span
+                style={{
+                  display: "inline-block",
+                  padding: "0.2rem 0.65rem",
+                  borderRadius: "9999px",
+                  fontSize: "0.7rem",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
+                  background: "rgba(16, 185, 129, 0.15)",
+                  color: "#34d399",
+                  border: "1px solid rgba(16, 185, 129, 0.3)",
+                  marginBottom: "0.5rem"
+                }}
+              >
+                Official Master Plan &amp; Plotter
+              </span>
+              <h3 style={{ fontSize: "1.25rem", fontWeight: 800, color: "#fff", margin: "0.25rem 0" }}>
+                Explore Sangrilla Meadows Interactive 3D Plotter
+              </h3>
+              <p style={{ fontSize: "0.85rem", color: "#94a3b8", lineHeight: 1.6, margin: 0 }}>
+                Inspect all 145 villa plots with live availability, dimensions, Vastu alignment, and Satellite GIS demarcation in Aakru Village, Dholera SIR.
+              </p>
             </div>
+            <a
+              href="/project/sangrilla-meadows/master-plan"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                window.open(
+                  `${window.location.origin}/project/sangrilla-meadows/master-plan`,
+                  "_blank",
+                  "noopener,noreferrer"
+                );
+              }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "0.85rem 1.5rem",
+                borderRadius: "0.85rem",
+                background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+                color: "#022c22",
+                fontWeight: 800,
+                fontSize: "0.875rem",
+                textDecoration: "none",
+                boxShadow: "0 10px 15px -3px rgba(16, 185, 129, 0.3)",
+                transition: "all 0.2s ease",
+                cursor: "pointer"
+              }}
+            >
+              <Layers size={16} />
+              <span>Launch Interactive Master Plan ↗</span>
+            </a>
           </div>
 
           {/* Layout Note Callout */}

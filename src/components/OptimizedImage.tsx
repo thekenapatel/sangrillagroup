@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef, ImgHTMLAttributes } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import type { FC, ImgHTMLAttributes, SyntheticEvent } from 'react';
 
 // Global memory cache for loaded images to ensure instant display on return
 const imageCache = new Set<string>();
@@ -11,7 +12,7 @@ interface OptimizedImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   fallbackSrc?: string;
 }
 
-const OptimizedImage: React.FC<OptimizedImageProps> = ({ 
+const OptimizedImage: FC<OptimizedImageProps> = ({ 
   src, 
   alt, 
   className = '', 
@@ -94,7 +95,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     };
   }, [isInView, src, fallbackSrc]);
 
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const handleImageError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     if (!error) {
       setError(true);
       setCurrentSrc(fallbackSrc);
@@ -102,7 +103,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     if (onError) onError(e);
   };
 
-  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const handleImageLoad = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     imageCache.add(src);
     setIsLoaded(true);
     if (onLoad) onLoad(e);

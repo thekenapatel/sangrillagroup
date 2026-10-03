@@ -115,11 +115,11 @@ const Residential = () => {
                     <MapPin size={18} />
                     {project.location}{project.year ? ` · ${project.year}` : ""}
                   </div>
-                  {project.status === "under-construction" && (
+                  {/* {project.status === "under-construction" && (
                     <div className="fs-badge" style={{ background: '#007ADD', color: '#fff', border: 'none', fontWeight: 600 }}>
                       Under Construction
                     </div>
-                  )}
+                  )} */}
                 </div>
 
                 <p className="fs-description">{project.description}</p>

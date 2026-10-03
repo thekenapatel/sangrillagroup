@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./layouts/Navbar";
 import Hero from "./sections/Hero";
 import Projects from "./sections/Projects";
@@ -33,27 +33,24 @@ import Estate from "./pages/Estate";
 import ProjectDetail from "./pages/ProjectDetail";
 import UnderConstructionProjects from "./pages/UnderConstructionProjects";
 import SangrillaMeadowsDetail from "./pages/SangrillaMeadowsDetail";
+import MasterPlanPage from "./pages/MasterPlanPage";
+import AvirahiCityPage from "./pages/AvirahiCityPage";
 
 import Chatbot from "./components/ChatBot AI/Chatbot";
 
-function App() {
-  const [showSplash, setShowSplash] = useState(() => {
-    // Show splash if on root path
-    return window.location.pathname === "/" || window.location.pathname === "";
-  });
-
-  const handleSplashComplete = useCallback(() => {
-    setShowSplash(false);
-  }, []);
-
-  if (showSplash) {
-    return <SplashScreen onComplete={handleSplashComplete} />;
-  }
+function AppContent() {
+  const location = useLocation();
+  const isPlotter =
+    location.pathname.includes("plotter") ||
+    location.pathname.includes("avirahi-city") ||
+    location.pathname.includes("meadows-plan") ||
+    location.pathname.includes("sangrilla-meadows-plan") ||
+    location.pathname.includes("master-plan");
 
   return (
-    <Router basename="/">
+    <>
       <ScrollToTop />
-      <Navbar />
+      {!isPlotter && <Navbar />}
 
       <Routes>
         {/* Home Page */}
@@ -88,6 +85,16 @@ function App() {
         <Route path="/under-construction" element={<UnderConstructionProjects />} />
         <Route path="/project/sangrilla-meadows" element={<SangrillaMeadowsDetail />} />
         <Route path="/under-construction/sangrilla-meadows" element={<SangrillaMeadowsDetail />} />
+        <Route path="/project/sangrilla-meadows/master-plan" element={<MasterPlanPage />} />
+        <Route path="/sangrilla-meadows/master-plan" element={<MasterPlanPage />} />
+        <Route path="/under-construction/sangrilla-meadows/master-plan" element={<MasterPlanPage />} />
+        {/* Sangrilla Meadows Plan - High Resolution Interactive GIS Plotter */}
+        <Route path="/sangrilla-meadows-plan" element={<MasterPlanPage />} />
+        <Route path="/meadows-plan" element={<MasterPlanPage />} />
+        <Route path="/avirahi-city" element={<AvirahiCityPage />} />
+        <Route path="/avirahi-city/plotter" element={<AvirahiCityPage />} />
+        <Route path="/dholera/avirahi-city" element={<AvirahiCityPage />} />
+        <Route path="/project/avirahi-city" element={<AvirahiCityPage />} />
         <Route path="/articles" element={<Articles />} />
         <Route path="/propose-land" element={<ProposeLand />} />
         <Route path="/propose-project" element={<ProposeProject />} />
@@ -100,8 +107,29 @@ function App() {
 
       </Routes>
 
-      <Chatbot />
-      <Footer />
+      {!isPlotter && <Chatbot />}
+      {!isPlotter && <Footer />}
+    </>
+  );
+}
+
+function App() {
+  const [showSplash, setShowSplash] = useState(() => {
+    // Show splash if on root path
+    return window.location.pathname === "/" || window.location.pathname === "";
+  });
+
+  const handleSplashComplete = useCallback(() => {
+    setShowSplash(false);
+  }, []);
+
+  if (showSplash) {
+    return <SplashScreen onComplete={handleSplashComplete} />;
+  }
+
+  return (
+    <Router basename="/">
+      <AppContent />
     </Router>
   );
 }
