@@ -299,7 +299,7 @@ const SangrillaMeadowsDetail: React.FC = () => {
               <Layers size={15} className="text-emerald-400" />
               <span>Interactive Master Plan</span>
             </Link>
-            <button onClick={handleDownloadBrochure} className="meadows-btn-secondary">
+            <button type="button" onClick={handleDownloadBrochure} className="meadows-btn-secondary">
               <Download size={15} /> Download Brochure
             </button>
             <button onClick={handleBookVisit} className="meadows-btn-ghost">

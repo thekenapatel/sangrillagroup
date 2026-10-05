@@ -37,6 +37,11 @@ import {
   LINK_ROAD_CORRIDOR_GPS,
   METRO_CORRIDOR_GPS
 } from "../../data/sangrillaMeadowsData";
+import MasterPlanLegend from "./MasterPlanLegend";
+import type { MasterPlanNavLevel } from "./MasterPlanNavigation";
+
+export type MapTileStyle = "satellite" | "streets" | "dark";
+export type CategoryFilter = "all" | "local" | "transit" | "smartcity" | "industry" | "cities";
 
 interface MasterPlanMapCanvasProps {
   plots: PlotUnit[];
@@ -45,10 +50,11 @@ interface MasterPlanMapCanvasProps {
   onSelectPlot: (plot: PlotUnit) => void;
   isFullscreen: boolean;
   onToggleFullscreen: () => void;
+  navigationLevel?: MasterPlanNavLevel;
+  onNavigateToVillas?: () => void;
+  tileStyle?: MapTileStyle;
+  onTileStyleChange?: (style: MapTileStyle) => void;
 }
-
-type MapTileStyle = "satellite" | "streets" | "dark";
-type CategoryFilter = "all" | "local" | "transit" | "smartcity" | "industry" | "cities";
 
 export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
   plots,
@@ -56,24 +62,39 @@ export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
   selectedPlot,
   onSelectPlot,
   isFullscreen,
-  onToggleFullscreen
+  onToggleFullscreen,
+  navigationLevel = "master",
+  onNavigateToVillas,
+  tileStyle: tileStyleProp,
+  onTileStyleChange
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
 
   // Layer groups refs for dynamic updating without remounting map
   const tileLayerGroupRef = useRef<L.LayerGroup | null>(null);
-  const plotsLayerGroupRef = useRef<L.LayerGroup | null>(null);
   const corridorsLayerGroupRef = useRef<L.LayerGroup | null>(null);
-  const landmarksLayerGroupRef = useRef<L.LayerGroup | null>(null);
-  const routeLineLayerGroupRef = useRef<L.LayerGroup | null>(null);
   const blueprintOverlayRef = useRef<L.ImageOverlay | null>(null);
+  const amenitiesLayerGroupRef = useRef<L.LayerGroup | null>(null);
+  const plotsLayerGroupRef = useRef<L.LayerGroup | null>(null);
+  const routeLineLayerGroupRef = useRef<L.LayerGroup | null>(null);
+  const landmarksLayerGroupRef = useRef<L.LayerGroup | null>(null);
   const plotPolygonsMapRef = useRef<Map<number, L.Polygon>>(new Map());
 
   // UI States
-  const [tileStyle, setTileStyle] = useState<MapTileStyle>("satellite");
+  const [internalTileStyle, setInternalTileStyle] = useState<MapTileStyle>("satellite");
+  const activeTileStyle = tileStyleProp || internalTileStyle;
+
+  const handleSetTileStyle = (style: MapTileStyle) => {
+    setInternalTileStyle(style);
+    onTileStyleChange?.(style);
+  };
+
   const [showBlueprint, setShowBlueprint] = useState<boolean>(true);
+  const [blueprintTheme, setBlueprintTheme] = useState<"clean" | "gold">("clean");
   const [blueprintOpacity, setBlueprintOpacity] = useState<number>(0.85);
+  const [showAmenities, setShowAmenities] = useState<boolean>(true);
+  const [selectedAmenity, setSelectedAmenity] = useState<CommonAmenityArea | null>(null);
   const [showLandmarks, setShowLandmarks] = useState<boolean>(true);
   const [showDistanceRings, setShowDistanceRings] = useState<boolean>(true);
   const [showCorridors, setShowCorridors] = useState<boolean>(true);
@@ -82,6 +103,12 @@ export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isExplorerOpen, setIsExplorerOpen] = useState<boolean>(false);
+
+  // Computed counts for the interactive Legend
+  const availableCount = useMemo(() => plots.filter((p) => p.status === "available").length, [plots]);
+  const reservedCount = useMemo(() => plots.filter((p) => p.status === "reserved").length, [plots]);
+  const bookedCount = useMemo(() => plots.filter((p) => p.status === "booked").length, [plots]);
+  const villaCount = useMemo(() => plots.filter((p) => p.type === "Luxurious Villa").length, [plots]);
 
   // Center coordinate of Sangrilla Meadows
   const projectCenter: [number, number] = SAN_GRILLA_MEADOWS_META.centerCoordinates;
@@ -129,19 +156,15 @@ export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
       // Layer groups
       const tileGroup = L.layerGroup().addTo(map);
       const corridorsGroup = L.layerGroup().addTo(map);
-      const plotsGroup = L.layerGroup().addTo(map);
-      const routeLineGroup = L.layerGroup().addTo(map);
-      const landmarksGroup = L.layerGroup().addTo(map);
 
-      tileLayerGroupRef.current = tileGroup;
-      corridorsGroupRef.current = corridorsGroup;
-      plotsLayerGroupRef.current = plotsGroup;
-      routeLineLayerGroupRef.current = routeLineGroup;
-      landmarksLayerGroupRef.current = landmarksGroup;
+      // Clean Cropped or Luxury Gold Blueprint Image Overlay
+      const initialBlueprintUrl =
+        blueprintTheme === "gold"
+          ? "/assets/meadows/layout_luxury_gold.png"
+          : "/assets/meadows/layout_clean_cropped.png";
 
-      // Clean Cropped Blueprint Image Overlay (No white borders)
       const blueprint = L.imageOverlay(
-        "/assets/meadows/layout_clean_cropped.png",
+        initialBlueprintUrl,
         [
           [22.2650, 72.0071],
           [22.2685, 72.0095]
@@ -153,6 +176,18 @@ export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
         }
       ).addTo(map);
       blueprintOverlayRef.current = blueprint;
+
+      const amenitiesGroup = L.layerGroup().addTo(map);
+      const plotsGroup = L.layerGroup().addTo(map);
+      const routeLineGroup = L.layerGroup().addTo(map);
+      const landmarksGroup = L.layerGroup().addTo(map);
+
+      tileLayerGroupRef.current = tileGroup;
+      corridorsGroupRef.current = corridorsGroup;
+      amenitiesLayerGroupRef.current = amenitiesGroup;
+      plotsLayerGroupRef.current = plotsGroup;
+      routeLineLayerGroupRef.current = routeLineGroup;
+      landmarksLayerGroupRef.current = landmarksGroup;
 
       // Township Boundary Outline (Gold & Emerald)
       if (TOWNSHIP_BOUNDARY_GPS && TOWNSHIP_BOUNDARY_GPS.length > 0) {
@@ -292,12 +327,12 @@ export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
     }
   }, [showCorridors, showDistanceRings]);
 
-  // Update Base Map Tiles (Uses authentic Google Maps tiles)
+  // Update Base Map Tiles (Authentic Google Maps tiles & Carto Dark)
   useEffect(() => {
     if (!tileLayerGroupRef.current) return;
     tileLayerGroupRef.current.clearLayers();
 
-    if (tileStyle === "satellite") {
+    if (activeTileStyle === "satellite") {
       // Google Maps Hybrid (Satellite Imagery + Street & Place Names)
       const googleHybrid = L.tileLayer(
         "https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
@@ -307,7 +342,7 @@ export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
         }
       );
       tileLayerGroupRef.current.addLayer(googleHybrid);
-    } else if (tileStyle === "streets") {
+    } else if (activeTileStyle === "streets") {
       // Google Maps Standard Roadmap / Streets
       const googleStreets = L.tileLayer(
         "https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
@@ -325,7 +360,7 @@ export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
       );
       tileLayerGroupRef.current.addLayer(cartoDark);
     }
-  }, [tileStyle]);
+  }, [activeTileStyle]);
 
   // Update Blueprint Visibility & Opacity
   useEffect(() => {
@@ -337,7 +372,113 @@ export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
     }
   }, [showBlueprint, blueprintOpacity]);
 
-  // Render 145 Vector Plots on Map (DATA ONLY ON CLICK, NOT HOVER)
+  // Update Blueprint Theme (Clean CAD vs Luxury Gold)
+  useEffect(() => {
+    if (!blueprintOverlayRef.current) return;
+    const url =
+      blueprintTheme === "gold"
+        ? "/assets/meadows/layout_luxury_gold.png"
+        : "/assets/meadows/layout_clean_cropped.png";
+    blueprintOverlayRef.current.setUrl(url);
+  }, [blueprintTheme]);
+
+  // Render Common Amenity Areas (COP-1 through COP-7) directly on the Map
+  useEffect(() => {
+    if (!amenitiesLayerGroupRef.current || !mapInstanceRef.current) return;
+    amenitiesLayerGroupRef.current.clearLayers();
+
+    if (!showAmenities) return;
+
+    COMMON_AMENITY_AREAS.forEach((amenity) => {
+      if (!amenity.gpsPolygon || amenity.gpsPolygon.length < 3) return;
+
+      const isClubhouse = amenity.code === "COP-6";
+      const isGateway = amenity.code === "COP-7";
+
+      const poly = L.polygon(amenity.gpsPolygon, {
+        color: isClubhouse ? "#fbbf24" : isGateway ? "#38bdf8" : "#10b981",
+        weight: isClubhouse ? 2.5 : 2,
+        dashArray: isClubhouse ? undefined : "5, 4",
+        fillColor: isClubhouse ? "#d97706" : isGateway ? "#0284c7" : "#059669",
+        fillOpacity: 0.45,
+        interactive: true
+      });
+
+      poly.bindTooltip(
+        `<div style="padding: 4px 6px; font-family: sans-serif; font-size: 11px; font-weight: 800; color: #ffffff; line-height: 1.3;">
+          <div style="color: ${isClubhouse ? '#fef08a' : isGateway ? '#7dd3fc' : '#34d399'}; display: flex; align-items: center; gap: 4px;">
+            ${isClubhouse ? '🏰' : isGateway ? '🏛️' : '🌿'} ${amenity.code}: ${amenity.name}
+          </div>
+          <div style="color: #cbd5e1; font-size: 10px;">${amenity.areaSqYd} Sq. Yd. (${amenity.areaSqMtr} m²)</div>
+          <div style="color: #94a3b8; font-size: 9.5px; max-width: 200px; margin-top: 2px;">${amenity.description}</div>
+        </div>`,
+        { direction: "top", offset: [0, -5], opacity: 0.95 }
+      );
+
+      poly.on("click", (e) => {
+        L.DomEvent.stopPropagation(e);
+        setSelectedAmenity(amenity);
+      });
+
+      poly.on("mouseover", () => {
+        poly.setStyle({
+          fillOpacity: 0.75,
+          weight: 3.5,
+          color: "#fef08a"
+        });
+      });
+
+      poly.on("mouseout", () => {
+        poly.setStyle({
+          fillOpacity: 0.45,
+          weight: isClubhouse ? 2.5 : 2,
+          color: isClubhouse ? "#fbbf24" : isGateway ? "#38bdf8" : "#10b981"
+        });
+      });
+
+      amenitiesLayerGroupRef.current?.addLayer(poly);
+
+      // Centered badge marker
+      if (amenity.gpsCenter) {
+        const badgeIcon = L.divIcon({
+          className: "amenity-badge-marker",
+          html: `
+            <div style="
+              display: inline-flex;
+              align-items: center;
+              gap: 3px;
+              background: ${isClubhouse ? 'linear-gradient(135deg, #78350f 0%, #451a03 100%)' : isGateway ? 'linear-gradient(135deg, #075985 0%, #082f49 100%)' : 'linear-gradient(135deg, #064e3b 0%, #022c22 100%)'};
+              color: ${isClubhouse ? '#fef08a' : isGateway ? '#bae6fd' : '#a7f3d0'};
+              border: 1.5px solid ${isClubhouse ? '#fbbf24' : isGateway ? '#38bdf8' : '#34d399'};
+              padding: 2px 7px;
+              border-radius: 9999px;
+              font-size: 9px;
+              font-weight: 800;
+              white-space: nowrap;
+              box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+              backdrop-filter: blur(4px);
+              cursor: pointer;
+              user-select: none;
+            ">
+              <span>${isClubhouse ? '🏰' : isGateway ? '🏛️' : '🌿'}</span>
+              <span>${amenity.code}</span>
+            </div>
+          `,
+          iconSize: [60, 20],
+          iconAnchor: [30, 10]
+        });
+
+        const badgeMarker = L.marker(amenity.gpsCenter, { icon: badgeIcon });
+        badgeMarker.on("click", (e) => {
+          L.DomEvent.stopPropagation(e);
+          setSelectedAmenity(amenity);
+        });
+        amenitiesLayerGroupRef.current?.addLayer(badgeMarker);
+      }
+    });
+  }, [showAmenities]);
+
+  // Render 145 Vector Plots on Map (Aware of Filters & Navigation Tier)
   useEffect(() => {
     if (!plotsLayerGroupRef.current || !mapInstanceRef.current) return;
     plotsLayerGroupRef.current.clearLayers();
@@ -349,6 +490,16 @@ export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
       const isFiltered = filteredPlotIds.has(plot.id);
       const isSelected = selectedPlot?.id === plot.id;
       const isVilla = plot.type === "Luxurious Villa";
+      const isResidential = plot.type === "Residential Plot";
+
+      // If in Villa navigation mode, dim residential plots and emphasize villas!
+      // If in Residential navigation mode, dim villas and emphasize residential plots!
+      let levelDimmed = false;
+      if (navigationLevel === "villa" && !isVilla) {
+        levelDimmed = true;
+      } else if (navigationLevel === "residential" && !isResidential) {
+        levelDimmed = true;
+      }
 
       // Status color
       let fillColor = "#10b981"; // available (green)
@@ -366,17 +517,23 @@ export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
       }
 
       const polygon = L.polygon(plot.gpsPolygon, {
-        color: isSelected ? "#ffffff" : strokeColor,
-        weight: isSelected ? 3.5 : 1.5,
-        fillColor,
-        fillOpacity: isSelected ? 0.85 : isFiltered ? 0.5 : 0.1,
-        interactive: isFiltered
+        color: isSelected ? "#ffffff" : (isVilla && navigationLevel === "villa") ? "#fbbf24" : strokeColor,
+        weight: isSelected ? 3.5 : (isVilla && navigationLevel === "villa") ? 3 : 1.5,
+        fillColor: (isVilla && navigationLevel === "villa") ? "#f59e0b" : fillColor,
+        fillOpacity: isSelected
+          ? 0.85
+          : levelDimmed
+          ? 0.08
+          : isFiltered
+          ? 0.55
+          : 0.1,
+        interactive: isFiltered && !levelDimmed
       });
 
       // Tooltip on hover showing plot number, area and status
       polygon.bindTooltip(
         `<div style="padding: 2px 4px; font-family: sans-serif; font-size: 11px; font-weight: 800; color: #ffffff; line-height: 1.3;">
-          <div style="color: #fbbf24;">Plot #${plot.plotNumber} (${plot.type})</div>
+          <div style="color: #fbbf24;">${isVilla ? '👑 ' : ''}Plot #${plot.plotNumber} (${plot.type})</div>
           <div>${plot.areaSqYards} Sq. Yd. • ${plot.facing} Facing</div>
           <div style="color: ${fillColor}; font-size: 10px; font-weight: 900; text-transform: uppercase;">● ${plot.status}</div>
         </div>`,
@@ -400,9 +557,15 @@ export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
 
       polygon.on("mouseout", () => {
         polygon.setStyle({
-          fillOpacity: isSelected ? 0.85 : isFiltered ? 0.5 : 0.1,
-          weight: isSelected ? 3.5 : 1.5,
-          color: isSelected ? "#ffffff" : strokeColor
+          fillOpacity: isSelected
+            ? 0.85
+            : levelDimmed
+            ? 0.08
+            : isFiltered
+            ? 0.55
+            : 0.1,
+          weight: isSelected ? 3.5 : (isVilla && navigationLevel === "villa") ? 3 : 1.5,
+          color: isSelected ? "#ffffff" : (isVilla && navigationLevel === "villa") ? "#fbbf24" : strokeColor
         });
       });
 
@@ -411,11 +574,22 @@ export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
 
       // Render Plot Number Label at plot center
       if (plot.gpsCoordinates && isFiltered) {
+        const isDim = levelDimmed;
         const numIcon = L.divIcon({
           className: "leaflet-plot-number-marker",
-          html: `<div style="color: ${isSelected ? '#fef08a' : '#ffffff'}; font-size: 8.5px; font-weight: 900; text-shadow: 0 0 3px #000, 0 1px 2px #000; pointer-events: none; text-align: center; line-height: 1; user-select: none;">${plot.plotNumber}</div>`,
-          iconSize: [18, 12],
-          iconAnchor: [9, 6]
+          html: `<div style="
+            color: ${isSelected ? '#fef08a' : isVilla ? '#fde047' : '#ffffff'};
+            font-size: ${isSelected ? '10px' : '8.5px'};
+            font-weight: 900;
+            text-shadow: 0 0 3px #000, 0 1px 2px #000;
+            pointer-events: none;
+            text-align: center;
+            line-height: 1;
+            user-select: none;
+            opacity: ${isDim ? 0.25 : 1};
+          ">${isVilla && navigationLevel === 'villa' ? '👑 ' : ''}${plot.plotNumber}</div>`,
+          iconSize: [22, 12],
+          iconAnchor: [11, 6]
         });
         const numMarker = L.marker([plot.gpsCoordinates.lat, plot.gpsCoordinates.lng], {
           icon: numIcon,
@@ -424,7 +598,7 @@ export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
         plotsLayerGroupRef.current?.addLayer(numMarker);
       }
     });
-  }, [plots, filteredPlotIds, selectedPlot, onSelectPlot]);
+  }, [plots, filteredPlotIds, selectedPlot, onSelectPlot, navigationLevel]);
 
   // Zoom / Fly to selected plot when clicked
   useEffect(() => {
@@ -768,44 +942,118 @@ export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
         {/* Google Map Tile Style Selector */}
         <div className="bg-slate-950/95 backdrop-blur-md border border-slate-800 rounded-2xl p-1.5 shadow-2xl flex flex-col gap-1 text-[11px] text-white">
           <button
-            onClick={() => setTileStyle("satellite")}
+            onClick={() => handleSetTileStyle("satellite")}
             className={`px-3 py-1.5 rounded-xl font-semibold text-left transition-colors flex items-center justify-between ${
-              tileStyle === "satellite"
+              activeTileStyle === "satellite"
                 ? "bg-gradient-to-r from-amber-500/20 to-amber-600/20 text-amber-300 border border-amber-500/40"
                 : "text-slate-400 hover:text-white"
             }`}
           >
             <span>Satellite (Google)</span>
-            {tileStyle === "satellite" && <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />}
+            {activeTileStyle === "satellite" && <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />}
           </button>
           <button
-            onClick={() => setTileStyle("streets")}
+            onClick={() => handleSetTileStyle("streets")}
             className={`px-3 py-1.5 rounded-xl font-semibold text-left transition-colors flex items-center justify-between ${
-              tileStyle === "streets"
+              activeTileStyle === "streets"
                 ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
                 : "text-slate-400 hover:text-white"
             }`}
           >
             <span>Google Streets</span>
-            {tileStyle === "streets" && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />}
+            {activeTileStyle === "streets" && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />}
           </button>
           <button
-            onClick={() => setTileStyle("dark")}
+            onClick={() => handleSetTileStyle("dark")}
             className={`px-3 py-1.5 rounded-xl font-semibold text-left transition-colors flex items-center justify-between ${
-              tileStyle === "dark"
+              activeTileStyle === "dark"
                 ? "bg-indigo-500/20 text-indigo-300 border border-indigo-500/40"
                 : "text-slate-400 hover:text-white"
             }`}
           >
             <span>Cyber Dark</span>
-            {tileStyle === "dark" && <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />}
+            {activeTileStyle === "dark" && <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />}
           </button>
         </div>
 
-        {/* Layer Toggles (Surroundings, Blueprint, Rings) */}
+        {/* Layer Toggles (Surroundings, Blueprint, Amenities, Rings) */}
         <div className="bg-slate-950/95 backdrop-blur-md border border-slate-800 rounded-2xl p-2.5 shadow-2xl text-[11px] text-white space-y-2">
-          {/* Surrounding Places Toggle */}
+          {/* Blueprint Overlay Toggle */}
           <div className="flex items-center justify-between gap-2">
+            <span className="font-semibold text-slate-300 flex items-center gap-1.5">
+              <Layers size={12} className="text-amber-400" />
+              <span>Layout Overlay</span>
+            </span>
+            <button
+              onClick={() => setShowBlueprint(!showBlueprint)}
+              className={`text-[10px] px-2 py-0.5 rounded-md font-bold uppercase transition-colors ${
+                showBlueprint ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40" : "bg-slate-800 text-slate-400"
+              }`}
+            >
+              {showBlueprint ? "On" : "Off"}
+            </button>
+          </div>
+          {showBlueprint && (
+            <div className="space-y-1.5 pt-0.5 border-t border-slate-900">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-[10px] text-slate-400">Style:</span>
+                <div className="flex items-center gap-1 bg-slate-900 p-0.5 rounded-lg border border-slate-800 text-[10px]">
+                  <button
+                    onClick={() => setBlueprintTheme("clean")}
+                    className={`px-1.5 py-0.5 rounded font-medium ${
+                      blueprintTheme === "clean" ? "bg-slate-700 text-white font-bold" : "text-slate-400 hover:text-white"
+                    }`}
+                  >
+                    Clean CAD
+                  </button>
+                  <button
+                    onClick={() => setBlueprintTheme("gold")}
+                    className={`px-1.5 py-0.5 rounded font-medium ${
+                      blueprintTheme === "gold" ? "bg-amber-500/30 text-amber-300 font-bold border border-amber-500/40" : "text-slate-400 hover:text-white"
+                    }`}
+                  >
+                    Luxury Gold
+                  </button>
+                </div>
+              </div>
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-[10px] text-slate-400">Opacity:</span>
+                <div className="flex items-center gap-1.5">
+                  <input
+                    type="range"
+                    min="0.2"
+                    max="1"
+                    step="0.05"
+                    value={blueprintOpacity}
+                    onChange={(e) => setBlueprintOpacity(parseFloat(e.target.value))}
+                    className="w-16 accent-amber-400 h-1 bg-slate-800 rounded cursor-pointer"
+                  />
+                  <span className="text-[10px] text-slate-300 font-mono w-6 text-right">
+                    {Math.round(blueprintOpacity * 100)}%
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Parks & Amenities Toggle */}
+          <div className="flex items-center justify-between gap-2 pt-1 border-t border-slate-800">
+            <span className="font-semibold text-slate-300 flex items-center gap-1.5">
+              <Trees size={12} className="text-emerald-400" />
+              <span>Parks &amp; COP (7)</span>
+            </span>
+            <button
+              onClick={() => setShowAmenities(!showAmenities)}
+              className={`text-[10px] px-2 py-0.5 rounded-md font-bold uppercase transition-colors ${
+                showAmenities ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40" : "bg-slate-800 text-slate-400"
+              }`}
+            >
+              {showAmenities ? "On" : "Off"}
+            </button>
+          </div>
+
+          {/* Surrounding Places Toggle */}
+          <div className="flex items-center justify-between gap-2 pt-1 border-t border-slate-800">
             <span className="font-semibold text-slate-300 flex items-center gap-1.5">
               <Compass size={12} className="text-amber-400" />
               <span>Surroundings</span>
@@ -821,7 +1069,7 @@ export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
           </div>
 
           {/* Corridors & Distance Rings */}
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center justify-between gap-2 pt-1 border-t border-slate-800">
             <span className="font-semibold text-slate-300 flex items-center gap-1.5">
               <Radio size={12} className="text-emerald-400" />
               <span>Corridors &amp; Rings</span>
@@ -838,33 +1086,6 @@ export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
               {showCorridors ? "On" : "Off"}
             </button>
           </div>
-
-          {/* Blueprint Overlay Toggle */}
-          <div className="flex items-center justify-between gap-2 pt-1 border-t border-slate-800">
-            <span className="font-semibold text-slate-300">Layout Overlay</span>
-            <button
-              onClick={() => setShowBlueprint(!showBlueprint)}
-              className={`text-[10px] px-2 py-0.5 rounded-md font-bold uppercase transition-colors ${
-                showBlueprint ? "bg-emerald-500/20 text-emerald-400" : "bg-slate-800 text-slate-400"
-              }`}
-            >
-              {showBlueprint ? "On" : "Off"}
-            </button>
-          </div>
-          {showBlueprint && (
-            <div className="flex items-center gap-2 pt-0.5">
-              <span className="text-[10px] text-slate-400">Opacity:</span>
-              <input
-                type="range"
-                min="0.2"
-                max="1"
-                step="0.05"
-                value={blueprintOpacity}
-                onChange={(e) => setBlueprintOpacity(parseFloat(e.target.value))}
-                className="w-20 accent-amber-400 h-1 bg-slate-800 rounded cursor-pointer"
-              />
-            </div>
-          )}
         </div>
 
         {/* Zoom In, Out, Recenter & Fullscreen Controls */}
@@ -901,38 +1122,79 @@ export const MasterPlanMapCanvas: React.FC<MasterPlanMapCanvasProps> = ({
         </div>
       </div>
 
-      {/* Floating Instructions Bottom Pill */}
+      {/* Floating Villa Navigation Banner (when in Villa mode) */}
+      {navigationLevel === "villa" && (
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 z-[400] bg-slate-950/95 backdrop-blur-xl border border-amber-500/50 rounded-2xl px-4 py-2 shadow-2xl flex items-center gap-3 text-xs text-white animate-in fade-in duration-200">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
+            <span className="font-extrabold text-amber-300">
+              👑 Viewing 46 Luxurious Villas
+            </span>
+            <span className="text-[11px] text-slate-300 hidden sm:inline">
+              • Highlighting Ground Floor &amp; Loft Architectural Layouts
+            </span>
+          </div>
+          {onNavigateToVillas && (
+            <button
+              onClick={onNavigateToVillas}
+              className="px-3 py-1 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs rounded-xl shadow-md flex items-center gap-1 transition-all"
+            >
+              <span>📐 View Villa Floor Plans</span>
+              <ChevronRight size={13} />
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* Floating Selected Amenity Details Card */}
+      {selectedAmenity && (
+        <div className="absolute bottom-20 left-4 z-[450] max-w-sm bg-slate-950/95 backdrop-blur-xl border border-emerald-500/50 rounded-2xl p-4 text-white shadow-2xl animate-in fade-in duration-200">
+          <div className="flex items-center justify-between gap-3 mb-2">
+            <div className="flex items-center gap-2">
+              <span className="w-7 h-7 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-sm font-bold">
+                {selectedAmenity.code === "COP-6" ? "🏰" : selectedAmenity.code === "COP-7" ? "🏛️" : "🌿"}
+              </span>
+              <div>
+                <h4 className="font-extrabold text-xs text-white">
+                  {selectedAmenity.code}: {selectedAmenity.name}
+                </h4>
+                <p className="text-[10px] text-amber-400 font-semibold">
+                  {selectedAmenity.areaSqYd} Sq. Yd. • {selectedAmenity.areaSqMtr} m²
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setSelectedAmenity(null)}
+              className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition-colors"
+            >
+              <X size={15} />
+            </button>
+          </div>
+          <p className="text-[11px] text-slate-300 leading-relaxed mb-3">
+            {selectedAmenity.description}
+          </p>
+          <div className="flex items-center justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-800/80">
+            <span>Common Open Space (COP)</span>
+            <span className="text-emerald-400 font-bold">100% Fully Planned</span>
+          </div>
+        </div>
+      )}
+
+      {/* Bottom Center Prompt Pill */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[400] pointer-events-none hidden md:block">
         <div className="bg-slate-950/95 backdrop-blur-xl border border-amber-500/30 text-amber-200/90 px-4 py-2 rounded-full text-xs font-semibold shadow-2xl flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
-          <span>Real Google Satellite Map • Click any landmark to view route, distance &amp; travel times</span>
+          <span>Google Map GIS Master Plan • Click any plot or amenity to view details</span>
         </div>
       </div>
 
-      {/* Bottom Color Status Legend */}
-      <div className="absolute bottom-4 left-4 z-[400] hidden sm:flex items-center gap-3 bg-slate-950/95 backdrop-blur-md border border-slate-800 rounded-2xl px-4 py-2.5 shadow-2xl text-xs text-white">
-        <span className="text-amber-400 text-[11px] uppercase tracking-wider font-bold">145 Plots:</span>
-        <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-emerald-500 border border-emerald-300" />
-          <span className="text-slate-200">Available</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-amber-400 border border-amber-300" />
-          <span className="text-slate-200">Reserved</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-rose-500 border border-rose-300" />
-          <span className="text-slate-200">Sold</span>
-        </div>
-        <span className="text-slate-700">|</span>
-        <button
-          onClick={handleRecenter}
-          className="text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1"
-        >
-          <Crosshair size={12} />
-          <span>Main Project</span>
-        </button>
-      </div>
+      {/* Bottom Interactive Legend */}
+      <MasterPlanLegend
+        availableCount={availableCount}
+        reservedCount={reservedCount}
+        bookedCount={bookedCount}
+        villaCount={villaCount}
+      />
 
       {/* Side Slide-Out / Explorer Drawer for All Surrounding Locations */}
       {isExplorerOpen && (

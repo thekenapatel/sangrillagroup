@@ -76,6 +76,7 @@ export const BrochureModal: React.FC<BrochureModalProps> = ({
     if (!validate()) return;
 
     setIsSubmitting(true);
+    downloadBrochure(brochureUrl, brochureFileName);
 
     try {
       const result = await saveContactDetails({
@@ -87,9 +88,6 @@ export const BrochureModal: React.FC<BrochureModalProps> = ({
 
       if (result.success) {
         setIsSuccess(true);
-
-        // Trigger automatic brochure PDF download
-        downloadBrochure(brochureUrl, brochureFileName);
       } else {
         setPhoneError(result.message || "Failed to submit. Please try again.");
       }

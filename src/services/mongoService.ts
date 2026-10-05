@@ -1,9 +1,8 @@
 /**
- * MongoDB Atlas Direct Frontend Service
+ * Sangrilla Group Lead Capture & Contact Service
  * 
- * Interacts with MongoDB Atlas (UserInfo database -> ContactDetails collection)
- * directly from the frontend using Vite environment variables.
- * Automatically checks and prevents duplicate contact numbers.
+ * Interacts with the backend API to securely record leads in MongoDB Atlas.
+ * No MongoDB credentials or packages exist on the client side.
  */
 
 export interface ContactSubmission {
@@ -22,21 +21,34 @@ export interface MongoResult {
   error?: string;
 }
 
-// Access environment variables configured in .env with VITE_ prefix
-export const ATLAS_ENV = {
-  uri: import.meta.env.VITE_MONGODB_URI || '',
-  username: import.meta.env.VITE_MONGODB_USERNAME || '',
-  password: import.meta.env.VITE_MONGODB_PASSWORD || '',
-  database: import.meta.env.VITE_MONGODB_DATABASE || 'UserInfo',
-  collection: import.meta.env.VITE_MONGODB_COLLECTION || 'ContactDetails',
-};
-
 const LOCAL_STORAGE_KEY = 'sangrilla_contact_history';
 
 /**
- * Helper to normalize a phone number (removes non-digits)
+ * Returns the configured API base URL without trailing slashes.
+ * In development, defaults to http://localhost:5000 if VITE_API_BASE_URL is not set.
+ */
+export const getApiBaseUrl = (): string => {
+  const envUrl = import.meta.env.VITE_API_BASE_URL;
+  if (envUrl && typeof envUrl === 'string' && envUrl.trim()) {
+    return envUrl.trim().replace(/\/+$/, '');
+  }
+  return '';
+};
+
+/**
+ * Safely constructs an API endpoint URL.
+ */
+export const getApiUrl = (endpoint: string): string => {
+  const base = getApiBaseUrl();
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  return base ? `${base}${cleanEndpoint}` : cleanEndpoint;
+};
+
+/**
+ * Helper to normalize a phone number (removes all non-digits)
  */
 export const normalizePhone = (phone: string): string => {
+  if (!phone) return '';
   return phone.replace(/\D/g, '');
 };
 
@@ -49,7 +61,7 @@ export const isPhoneLocallyRegistered = (phone: string): boolean => {
     if (!raw) return false;
     const list: string[] = JSON.parse(raw);
     const clean = normalizePhone(phone);
-    return list.some(item => normalizePhone(item) === clean);
+    return list.some((item) => normalizePhone(item) === clean);
   } catch {
     return false;
   }
@@ -73,23 +85,24 @@ export const recordLocalPhone = (phone: string): void => {
 };
 
 /**
- * Directly check if contact number exists in MongoDB Atlas collection
+ * Directly check if contact number exists in backend database
  */
 export const checkDuplicateContact = async (contactNumber: string): Promise<boolean> => {
   const cleanPhone = normalizePhone(contactNumber);
   if (!cleanPhone) return false;
 
-  // First fast-check local client history
+  // Fast-check client local storage cache
   if (isPhoneLocallyRegistered(cleanPhone)) {
     return true;
   }
 
   try {
-    const res = await fetch(`/api/contacts/check?phone=${encodeURIComponent(contactNumber)}`, {
+    const endpoint = getApiUrl(`/api/contacts/check?phone=${encodeURIComponent(contactNumber)}`);
+    const res = await fetch(endpoint, {
       method: 'GET',
       headers: {
-        'Accept': 'application/json',
-      }
+        Accept: 'application/json',
+      },
     });
 
     if (res.ok) {
@@ -107,8 +120,8 @@ export const checkDuplicateContact = async (contactNumber: string): Promise<bool
 };
 
 /**
- * Save contact info into MongoDB Atlas UserInfo database, ContactDetails collection.
- * Prevents duplicate entries based on contact number.
+ * Save contact info into MongoDB via the backend API.
+ * Prevents duplicate entries based on normalized contact number.
  */
 export const saveContactDetails = async (
   payload: ContactSubmission
@@ -120,7 +133,7 @@ export const saveContactDetails = async (
       success: false,
       isDuplicate: false,
       message: 'Please provide a valid 10-digit mobile number.',
-      error: 'INVALID_PHONE'
+      error: 'INVALID_PHONE',
     };
   }
 
@@ -129,26 +142,21 @@ export const saveContactDetails = async (
       success: false,
       isDuplicate: false,
       message: 'Please enter your full name.',
-      error: 'INVALID_NAME'
+      error: 'INVALID_NAME',
     };
   }
-
 
   const submissionData = {
     name: payload.name.trim(),
     contactNumber: payload.contactNumber.trim(),
     email: payload.email?.trim() || '',
-    source: payload.source || 'Brochure Download Popup',
+    source: payload.source || 'Brochure Modal Popup',
     project: payload.project || 'Sangrilla Meadows',
-    database: ATLAS_ENV.database,
-    collection: ATLAS_ENV.collection,
-    submittedAt: new Date().toISOString()
   };
 
   try {
-    console.log(`[MongoService] Submitting to Mongo Atlas (${ATLAS_ENV.database}.${ATLAS_ENV.collection}):`, submissionData);
-
-    const response = await fetch('/api/contacts', {
+    const endpoint = getApiUrl('/api/contacts');
+    const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -165,7 +173,7 @@ export const saveContactDetails = async (
           success: true,
           isDuplicate: true,
           message: 'Contact already exists. Downloading your brochure...',
-          id: data.data?.id
+          id: data.data?.id,
         };
       }
 
@@ -173,21 +181,51 @@ export const saveContactDetails = async (
         success: true,
         isDuplicate: false,
         message: 'Details saved, Downloading your brochure...',
-        id: data.data?.id
+        id: data.data?.id,
       };
     } else {
       const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.error || `HTTP ${response.status}`);
+      const errorMsg = errorData.error || errorData.message || `HTTP ${response.status}`;
+      throw new Error(errorMsg);
     }
   } catch (error: any) {
-    console.error('[MongoService] MongoDB connection error:', error.message);
+    console.error('[MongoService] Save contact error:', error.message || error);
 
     return {
       success: false,
       isDuplicate: false,
       message: 'Failed to save, Please try again later: ' + (error.message || 'Server error'),
-      error: error.message
+      error: error.message,
     };
+  }
+};
+
+/**
+ * Resolves the full URL to the brochure PDF reliably across development,
+ * GitHub Pages custom domain, or repository subpaths.
+ */
+export const resolveBrochureUrl = (
+  brochureUrl: string = '/sangrilla-meadows-brochure.pdf'
+): string => {
+  if (!brochureUrl) return '/sangrilla-meadows-brochure.pdf';
+
+  // If already absolute URL, use as is
+  if (brochureUrl.startsWith('http://') || brochureUrl.startsWith('https://')) {
+    return brochureUrl;
+  }
+
+  try {
+    const cleanPath = brochureUrl.startsWith('/') ? brochureUrl : `/${brochureUrl}`;
+    const base = import.meta.env.BASE_URL || '/';
+    const normalizedBase = base.endsWith('/') ? base.slice(0, -1) : base;
+    const pathWithBase =
+      normalizedBase && !cleanPath.startsWith(normalizedBase)
+        ? `${normalizedBase}${cleanPath}`
+        : cleanPath;
+
+    return new URL(pathWithBase, window.location.origin).href;
+  } catch {
+    return brochureUrl;
   }
 };
 
@@ -198,18 +236,22 @@ export const downloadBrochure = (
   brochureUrl: string = '/sangrilla-meadows-brochure.pdf',
   filename: string = 'sangrilla-meadows-brochure.pdf'
 ): void => {
+  const targetUrl = resolveBrochureUrl(brochureUrl);
   const link = document.createElement('a');
-  link.href = brochureUrl;
+  link.href = targetUrl;
   link.download = filename;
   link.target = '_blank';
   link.rel = 'noopener noreferrer';
   document.body.appendChild(link);
   link.click();
+
   setTimeout(() => {
     try {
-      document.body.removeChild(link);
+      if (document.body.contains(link)) {
+        document.body.removeChild(link);
+      }
     } catch {
       // Ignore if already removed
     }
-  }, 200);
+  }, 500);
 };

@@ -4,35 +4,50 @@ import { MongoClient } from 'mongodb';
 let cachedClient: MongoClient | null = null;
 
 async function getCollection() {
-  const uri =
-    process.env.MONGODB_URI ||
-    process.env.VITE_MONGODB_URI ||
-    'mongodb+srv://sangrillagroup_db_user:jHTBPs86IPvK9Vxu@cluster0.087gxna.mongodb.net';
-  const dbName =
-    process.env.MONGODB_DATABASE ||
-    process.env.VITE_MONGODB_DATABASE ||
-    'UserInfo';
-  const collectionName =
-    process.env.MONGODB_COLLECTION ||
-    process.env.VITE_MONGODB_COLLECTION ||
-    'ContactDetails';
+  const uri = process.env.MONGODB_URI;
+  const dbName = process.env.MONGODB_DATABASE || 'UserInfo';
+  const collectionName = process.env.MONGODB_COLLECTION || 'ContactDetails';
+
+  if (!uri) {
+    throw new Error('MONGODB_URI environment variable is missing.');
+  }
 
   if (!cachedClient) {
-    cachedClient = new MongoClient(uri);
+    cachedClient = new MongoClient(uri, {
+      maxPoolSize: 10,
+      serverSelectionTimeoutMS: 8000,
+    });
     await cachedClient.connect();
   }
 
   return cachedClient.db(dbName).collection(collectionName);
 }
 
-const headers = {
-  'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-};
+const allowedOrigins = [
+  'https://www.sangrillagroup.com',
+  'https://sangrillagroup.com',
+  'http://localhost:5173',
+  'http://localhost:3000',
+];
+
+function getCorsHeaders(requestOrigin?: string) {
+  const isAllowed =
+    requestOrigin &&
+    (allowedOrigins.includes(requestOrigin) ||
+      /^https:\/\/[a-zA-Z0-9-]+\.github\.io$/.test(requestOrigin));
+
+  return {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': isAllowed ? requestOrigin : 'https://www.sangrillagroup.com',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  };
+}
 
 export const handler = async (event: any) => {
+  const origin = event.headers?.origin || event.headers?.Origin;
+  const headers = getCorsHeaders(origin);
+
   // Handle preflight OPTIONS request
   if (event.httpMethod === 'OPTIONS') {
     return {
@@ -57,10 +72,18 @@ export const handler = async (event: any) => {
       }
 
       const cleanPhone = String(phone).replace(/\D/g, '');
-      const last10 = cleanPhone.length >= 10 ? cleanPhone.slice(-10) : cleanPhone;
+      if (cleanPhone.length < 10) {
+        return {
+          statusCode: 200,
+          headers,
+          body: JSON.stringify({ success: true, isDuplicate: false }),
+        };
+      }
 
+      const last10 = cleanPhone.slice(-10);
       const existing = await collection.findOne({
         $or: [
+          { normalizedContactNumber: cleanPhone },
           { contactNumber: String(phone).trim() },
           { contactNumber: cleanPhone },
           ...(last10.length >= 10 ? [{ contactNumber: { $regex: last10 + '$' } }] : []),
@@ -82,20 +105,35 @@ export const handler = async (event: any) => {
       const data = JSON.parse(event.body || '{}');
       const { name, contactNumber, email, source, project } = data;
 
+      if (!name || typeof name !== 'string' || name.trim().length < 2) {
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ success: false, error: 'Please enter your full name (at least 2 characters).' }),
+        };
+      }
+
       if (!contactNumber) {
         return {
           statusCode: 400,
           headers,
-          body: JSON.stringify({ success: false, error: 'Contact number is required' }),
+          body: JSON.stringify({ success: false, error: 'Contact number is required.' }),
         };
       }
 
       const cleanPhone = String(contactNumber).replace(/\D/g, '');
-      const last10 = cleanPhone.length >= 10 ? cleanPhone.slice(-10) : cleanPhone;
+      if (!cleanPhone || cleanPhone.length < 10) {
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ success: false, error: 'Please enter a valid 10-digit mobile number.' }),
+        };
+      }
 
-      // Duplicate check
+      const last10 = cleanPhone.slice(-10);
       const existing = await collection.findOne({
         $or: [
+          { normalizedContactNumber: cleanPhone },
           { contactNumber: String(contactNumber).trim() },
           { contactNumber: cleanPhone },
           ...(last10.length >= 10 ? [{ contactNumber: { $regex: last10 + '$' } }] : []),
@@ -109,7 +147,7 @@ export const handler = async (event: any) => {
           body: JSON.stringify({
             success: true,
             isDuplicate: true,
-            message: 'Contact already exists in database',
+            message: 'Contact already exists.',
             data: {
               id: existing._id,
               name: existing.name,
@@ -120,10 +158,11 @@ export const handler = async (event: any) => {
       }
 
       const newDoc = {
-        name: (name || '').trim(),
+        name: name.trim(),
         contactNumber: String(contactNumber).trim(),
+        normalizedContactNumber: cleanPhone,
         email: (email || '').trim(),
-        source: source || 'Brochure Download',
+        source: source || 'Brochure Modal Popup',
         project: project || 'Sangrilla Meadows',
         createdAt: new Date(),
       };
@@ -136,7 +175,7 @@ export const handler = async (event: any) => {
           body: JSON.stringify({
             success: true,
             isDuplicate: false,
-            message: 'Saved to MongoDB UserInfo.ContactDetails successfully',
+            message: 'Contact saved successfully.',
             data: {
               id: result.insertedId,
               name: newDoc.name,
@@ -152,7 +191,7 @@ export const handler = async (event: any) => {
             body: JSON.stringify({
               success: true,
               isDuplicate: true,
-              message: 'Contact already exists in database',
+              message: 'Contact already exists.',
               data: {
                 name: newDoc.name,
                 contactNumber: newDoc.contactNumber,
@@ -170,13 +209,13 @@ export const handler = async (event: any) => {
       body: JSON.stringify({ error: 'Method Not Allowed' }),
     };
   } catch (err: any) {
-    console.error('[Netlify Function /contacts] Error:', err);
+    console.error('[Netlify Function /contacts] Error:', err.message);
     return {
       statusCode: 500,
       headers,
       body: JSON.stringify({
         success: false,
-        error: err.message || 'Internal Server Error',
+        error: 'Failed to process request. Please try again later.',
       }),
     };
   }
