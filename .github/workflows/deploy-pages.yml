@@ -1,0 +1,42 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - run: npm ci
+
+      - name: Check API URL configuration
+        env:
+          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
+        run: |
+          if [[ -n "$VITE_API_BASE_URL" ]]; then
+            echo "Building with configured API Base URL: $VITE_API_BASE_URL"
+          else
+            echo "::notice::VITE_API_BASE_URL is not set. Site will use smart fallback until backend is deployed."
+          fi
+
+      - name: Build and deploy
+        env:
+          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
+        run: npm run deploy

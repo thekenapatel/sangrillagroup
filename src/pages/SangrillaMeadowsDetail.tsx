@@ -33,8 +33,8 @@ import {
 } from "lucide-react";
 import "../styles/sangrilla-meadows.css";
 import "../styles/lifestyle.css";
-import BrochureModal from "../components/BrochureModal";
 import OptimizedImage from "../components/OptimizedImage";
+import { downloadBrochure } from "../services/mongoService";
 
 const galleryImages = [
   { src: "/assets/meadows/up_res_1.jpg" },
@@ -171,7 +171,6 @@ const SangrillaMeadowsDetail: React.FC = () => {
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
-  const [isBrochureModalOpen, setIsBrochureModalOpen] = useState(false);
 
   const handlePhotosMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
     isDraggingPhotos.current = true;
@@ -216,7 +215,7 @@ const SangrillaMeadowsDetail: React.FC = () => {
   };
 
   const handleDownloadBrochure = () => {
-    setIsBrochureModalOpen(true);
+    downloadBrochure("/sangrilla-meadows-brochure.pdf", "sangrilla-meadows-brochure.pdf");
   };
 
   const handleBookVisit = () => {
@@ -1420,14 +1419,6 @@ const SangrillaMeadowsDetail: React.FC = () => {
 
       </div>
 
-      {/* Brochure Download Popup Modal */}
-      <BrochureModal
-        isOpen={isBrochureModalOpen}
-        onClose={() => setIsBrochureModalOpen(false)}
-        projectName="Sangrilla Meadows"
-        brochureUrl="/sangrilla-meadows-brochure.pdf"
-        brochureFileName="sangrilla-meadows-brochure.pdf"
-      />
     </div>
   );
 };

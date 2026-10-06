@@ -12,14 +12,12 @@ import skyline from "../assets/upcoming/skyline.jpg";
 const upcomingProjects = [
   {
     title: "Sangrilla Blossom",
-    location: "South Bopal, Ahmedabad",
     description: "Ultra-luxury 4BHK apartments with private decks.",
     launchDate: "2026-06-15",
     image: blossom,
   },
   {
     title: "Sangrilla Skyline",
-    location: "Prahlad Nagar, Ahmedabad",
     description: "Next-gen smart offices with sky gardens.",
     launchDate: "2026-08-01",
     image: skyline,
@@ -177,8 +175,6 @@ const UpcomingTeaser: React.FC = () => {
               
               <div className="upcoming-info">
                 <h3>{project.title}</h3>
-                <p>{project.location}</p>
-                
                 <CountdownTimer targetDate={project.launchDate} />
 
                 <NotifyForm projectTitle={project.title} />

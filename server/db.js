@@ -18,39 +18,55 @@ async function connectToDatabase() {
   }
 
   if (cachedClient && cachedDb) {
-    const collection = cachedDb.collection(collectionName);
-    return { client: cachedClient, db: cachedDb, collection };
+    try {
+      // Quick ping to check if existing connection is still healthy
+      const collection = cachedDb.collection(collectionName);
+      return { client: cachedClient, db: cachedDb, collection };
+    } catch {
+      cachedClient = null;
+      cachedDb = null;
+    }
   }
 
   const client = new MongoClient(uri, {
     maxPoolSize: 10,
     minPoolSize: 1,
-    serverSelectionTimeoutMS: 8000,
-    connectTimeoutMS: 10000,
+    serverSelectionTimeoutMS: 5000,
+    connectTimeoutMS: 5000,
   });
 
-  await client.connect();
-  const db = client.db(dbName);
-  const collection = db.collection(collectionName);
+  try {
+    await client.connect();
+    const db = client.db(dbName);
+    const collection = db.collection(collectionName);
 
-  cachedClient = client;
-  cachedDb = db;
+    cachedClient = client;
+    cachedDb = db;
 
-  // Ensure index on normalizedContactNumber in background
-  if (!indexEnsured) {
-    indexEnsured = true;
-    collection
-      .createIndex(
-        { normalizedContactNumber: 1 },
-        { unique: true, sparse: true, background: true }
-      )
-      .catch((err) => {
-        // Non-critical: index might already exist or collection has existing duplicates
-        console.warn('[MongoDB] Index notice:', err.message);
-      });
+    // Ensure index on normalizedContactNumber in background
+    if (!indexEnsured) {
+      indexEnsured = true;
+      collection
+        .createIndex(
+          { normalizedContactNumber: 1 },
+          { unique: true, sparse: true, background: true }
+        )
+        .catch((err) => {
+          console.warn('[MongoDB] Index notice:', err.message);
+        });
+    }
+
+    return { client, db, collection };
+  } catch (err) {
+    cachedClient = null;
+    cachedDb = null;
+    if (err.message && (err.message.includes('SSL') || err.message.includes('alert'))) {
+      console.error(
+        '[MongoDB] Atlas Network Access Warning: IP address is not whitelisted in MongoDB Atlas. Go to MongoDB Atlas -> Network Access -> Add IP Address -> Allow Access from Anywhere (0.0.0.0/0).'
+      );
+    }
+    throw err;
   }
-
-  return { client, db, collection };
 }
 
 module.exports = { connectToDatabase };

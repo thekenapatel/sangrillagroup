@@ -130,7 +130,7 @@ export interface Project {
   id: string;
   name: string;
   tagline: string;
-  location: string;
+  location?: string;
   year?: string;
   status: ProjectStatus;
   type: ProjectType;
@@ -188,14 +188,13 @@ export const allProjects: Project[] = [
     id: 'sangrilla-city-centre',
     name: 'Sangrilla City Centre',
     tagline: 'Prime Commercial Hub',
-    location: 'Dahegam',
     year: '2025',
     status: 'completed',
     type: 'commercial',
     specs: [
       { label: 'Year Completed', value: '2025' },
     ],
-    description: 'A well-designed commercial complex offering prime shop and office spaces with high footfall and excellent connectivity in Dahegam.',
+    description: 'A well-designed commercial complex offering prime shop and office spaces with high footfall and excellent connectivity.',
     amenities: ['Basement & Open Parking Facilities', '24/7 CCTV Surveillance & Security', 'Power Backup for Common Areas', 'Fire Safety & Compliance Systems', 'Wide Corridors & High Visibility Shop Fronts', 'Dedicated Signage Spaces', 'Common Washrooms on Each Floor', 'Efficient Vertical Connectivity (Staircases)'],
     images: [citycentre4, citycentre2, citycentre3, citycentre1, citycentre5],
     inventory: [
@@ -208,7 +207,6 @@ export const allProjects: Project[] = [
     id: 'sangrilla-business-centre',
     name: 'Sangrilla Business Centre',
     tagline: 'Where Business Thrives',
-    location: 'Himmatnagar',
     year: '2023',
     status: 'completed',
     type: 'commercial',
@@ -216,7 +214,7 @@ export const allProjects: Project[] = [
       { label: 'Shops & Offices', value: 'Multiple Units' },
       { label: 'Year Completed', value: '2023' },
     ],
-    description: 'A strategically located business centre in Himmatnagar designed for corporate offices and retail spaces with modern infrastructure.',
+    description: 'A strategically located business centre designed for corporate offices and retail spaces with modern infrastructure.',
     amenities: ['Multi-level Parking Facilities', 'High-Speed Elevators', '24/7 Security with CCTV Monitoring', 'Power Backup for Offices & Common Areas', 'Fire Safety Systems', 'Reception & Waiting Lobby', 'Dedicated Office Zones (Upper Floors)', 'Professional Building Management'],
     images: [businesscentre4, businesscentre2, businesscentre3, businesscentre1, businesscentre5],
     inventory: [
@@ -229,7 +227,6 @@ export const allProjects: Project[] = [
     id: 'sangrilla-arcade',
     name: 'Sangrilla Arcade',
     tagline: 'Retail Excellence',
-    location: 'Kadi',
     year: '2020',
     status: 'completed',
     type: 'commercial',
@@ -237,7 +234,7 @@ export const allProjects: Project[] = [
       { label: 'Shops', value: 'Multiple Units' },
       { label: 'Year Completed', value: '2020' },
     ],
-    description: 'A vibrant retail arcade in Kadi offering excellent commercial spaces for retail businesses with high visibility and customer footfall.',
+    description: 'A vibrant retail arcade offering excellent commercial spaces for retail businesses with high visibility and customer footfall.',
     amenities: ['Ample Surface Parking', 'Wide Frontage for Maximum Visibility', 'CCTV Surveillance', 'Power Backup (Common Areas)', 'Fire Safety Systems', 'Spacious Common Walkways', 'High Footfall Location Advantage', 'Easy Loading/Unloading Access'],
     images: [arcade2, arcade1, arcade3, arcade4, arcade5],
     inventory: [
@@ -251,7 +248,6 @@ export const allProjects: Project[] = [
     id: 'sangrilla-white-house',
     name: 'SWH & SM',
     tagline: 'Iconic Commercial Landmark',
-    location: 'Mehsana',
     year: '2017',
     status: 'completed',
     type: 'commercial',
@@ -274,7 +270,6 @@ export const allProjects: Project[] = [
     id: 'sangrilla-business-park',
     name: 'Sangrilla Business Park',
     tagline: 'Modern Commercial Plaza',
-    location: 'Mehsana',
     year: '2013',
     status: 'completed',
     type: 'commercial',
@@ -282,7 +277,7 @@ export const allProjects: Project[] = [
       { label: 'Shops & Offices', value: 'Multiple Units' },
       { label: 'Year Completed', value: '2013' },
     ],
-    description: 'Modern commercial plaza ideal for retail, showrooms, and business establishments in the heart of Mehsana.',
+    description: 'Modern commercial plaza ideal for retail, showrooms, and business establishments.',
     amenities: ['Dedicated Parking Areas', 'Power Backup Support', 'Security & Surveillance', 'Common Lobby & Circulation Areas', 'Fire Safety Systems', 'Signage & Branding Spaces', 'Wide Access Roads', 'Functional Layout Design'],
     images: [businesspark5, businesspark2, businesspark3, businesspark4, businesspark1],
     inventory: [
@@ -296,7 +291,6 @@ export const allProjects: Project[] = [
     id: 'sangrilla-plaza',
     name: 'Sangrilla Plaza',
     tagline: 'Premium Business Spaces',
-    location: 'Mehsana',
     year: '2011',
     status: 'completed',
     type: 'commercial',
@@ -304,7 +298,7 @@ export const allProjects: Project[] = [
       { label: 'Shops & Offices', value: 'Multiple Units' },
       { label: 'Year Completed', value: '2011' },
     ],
-    description: 'Premium business park developed for offices, corporate spaces, and professional services in Mehsana — a trusted address for commerce.',
+    description: 'Premium business park developed for offices, corporate spaces, and professional services — a trusted address for commerce.',
     amenities: ['Reception & Waiting Lounge', 'Elevators for Easy Access', 'Parking Facilities', '24/7 Security', 'Power Backup', 'Fire Safety Systems', 'Structured Office Layouts', 'Common Utility Areas'],
     images: [plaza5, plaza2, plaza3, plaza4, plaza1],
     inventory: [
@@ -318,14 +312,13 @@ export const allProjects: Project[] = [
     id: 'sangrilla-complex',
     name: 'Sangrilla Complex',
     tagline: 'The Foundation of Excellence',
-    location: 'Mehsana',
     year: '2001',
     status: 'completed',
     type: 'commercial',
     specs: [
       { label: 'Year Completed', value: '2001' },
     ],
-    description: 'The landmark that started it all — Sangrilla Complex in Mehsana laid the foundation for Sangrilla Group\'s legacy of commercial excellence spanning over two decades.',
+    description: 'The landmark that started it all — Sangrilla Complex laid the foundation for Sangrilla Group\'s legacy of commercial excellence spanning over two decades.',
     amenities: ['Basic Parking Provision', 'Security Presence', 'Power Backup (Common Areas)', 'Fire Safety Measures', 'Functional Shop Layouts', 'Established Business Ecosystem', 'Easy Accessibility', 'Strong Local Market Presence'],
     images: [complex2, complex4, complex3, complex1, complex5],
     inventory: [
@@ -340,7 +333,6 @@ export const allProjects: Project[] = [
     id: 'sangrilla-plots-villas',
     name: 'Sangrilla Plots & Villas',
     tagline: 'Where Land Meets Luxury',
-    location: 'Dahegam',
     year: '2024',
     status: 'completed',
     type: 'residential',
@@ -349,7 +341,7 @@ export const allProjects: Project[] = [
       { label: 'Year Completed', value: '2024' },
       { label: 'Total Units', value: '84' },
     ],
-    description: 'Elegant premium residential plots and villas in Dahegam with a distinctive modern design — a perfect blend of open spaces and luxury living.',
+    description: 'Elegant premium residential plots and villas with a distinctive modern design — a perfect blend of open spaces and luxury living.',
     amenities: ['Gated Community', 'Landscaped Gardens', 'Common Plots', 'Wide Roads', 'Street Lighting', '24/7 Security'],
     images: [plotsandvillas3, plotsandvillas2, plotsandvillas4, plotsandvillas1, plotsandvillas5],
     inventory: [
@@ -361,7 +353,6 @@ export const allProjects: Project[] = [
     id: 'sangrilla-meredian',
     name: 'Sangrilla Meredian',
     tagline: 'Refined Residential Living',
-    location: 'Mehsana',
     year: '2017',
     status: 'completed',
     type: 'residential',
@@ -382,7 +373,6 @@ export const allProjects: Project[] = [
     id: 'sangrilla-homes',
     name: 'Sangrilla Homes',
     tagline: 'Premium Independent Living',
-    location: 'Mehsana',
     year: '2012',
     status: 'completed',
     type: 'residential',
@@ -391,7 +381,7 @@ export const allProjects: Project[] = [
       { label: 'Year Completed', value: '2012' },
       { label: 'Total Bungalows', value: '70 Premium Luxury' },
     ],
-    description: 'Premium independent bungalows featuring luxurious living spaces in a prime Mehsana location, built with exceptional quality and care.',
+    description: 'Premium independent bungalows featuring luxurious living spaces, built with exceptional quality and care.',
     amenities: ['1 Common Plot', '2 Gardens', '1 Club House', '4 Gates'],
     images: [homes1, homes4, homes5, homes3, homes2],
     inventory: [
@@ -402,7 +392,6 @@ export const allProjects: Project[] = [
     id: 'sangrilla-villa',
     name: 'Sangrilla Villa',
     tagline: 'Township Life Elevated',
-    location: 'Mehsana',
     year: '2010',
     status: 'completed',
     type: 'residential',
@@ -411,7 +400,7 @@ export const allProjects: Project[] = [
       { label: 'Year Completed', value: '2010' },
       { label: 'Total Bungalows', value: '79' },
     ],
-    description: 'A large-scale, well-planned residential township with comprehensive amenities and vibrant community living in Mehsana.',
+    description: 'A large-scale, well-planned residential township with comprehensive amenities and vibrant community living.',
     amenities: ['2 Common Plots', '3 Gates', '1 Club House'],
     images: [villa5, villa4, villa2, villa1, villa3],
     inventory: [
@@ -423,7 +412,6 @@ export const allProjects: Project[] = [
     id: 'sangrilla-residency',
     name: 'Sangrilla Residency',
     tagline: 'Quality Crafted Homes',
-    location: 'Mehsana',
     year: '2007',
     status: 'completed',
     type: 'residential',
@@ -432,7 +420,7 @@ export const allProjects: Project[] = [
       { label: 'Year Completed', value: '2007' },
       { label: 'Total Flats', value: '8 Premium Luxury' },
     ],
-    description: 'Elegant and spacious flats known for superior quality construction and comfortable family homes in Mehsana.',
+    description: 'Elegant and spacious flats known for superior quality construction and comfortable family homes.',
     amenities: ['Gated Community', 'Gardens', 'Security', 'Parking', 'Community Hall', 'Children\'s Play Area'],
     images: [residency3, residency4, residency5, residency1, residency2],
     inventory: [
@@ -443,7 +431,6 @@ export const allProjects: Project[] = [
     id: 'sangrilla-park',
     name: 'Sangrilla Park',
     tagline: 'Serene Homes, Green Spaces',
-    location: 'Mehsana',
     year: '2006',
     status: 'completed',
     type: 'residential',
@@ -452,7 +439,7 @@ export const allProjects: Project[] = [
       { label: 'Year Completed', value: '2006' },
       { label: 'Total Bungalows', value: '76 Premium' },
     ],
-    description: 'A serene residential project with beautiful landscaping and modern homes in Mehsana, offering a peaceful and green environment.',
+    description: 'A serene residential project with beautiful landscaping and modern homes, offering a peaceful and green environment.',
     amenities: ['2 Common Plots', '2 Gates', '1 Club House'],
     images: [park3, park4, park5, park2, park1],
     inventory: [
@@ -463,7 +450,6 @@ export const allProjects: Project[] = [
     id: 'sangrilla-society',
     name: 'Sangrilla Society',
     tagline: 'Modern Apartment Living',
-    location: 'Ahmedabad',
     year: '2004',
     status: 'completed',
     type: 'residential',
@@ -472,7 +458,7 @@ export const allProjects: Project[] = [
       { label: 'Year Completed', value: '2004' },
       { label: 'Total Bungalows', value: '191 (Parts A, B & C)' },
     ],
-    description: 'High-quality residential bungalows in Ahmedabad offering excellent value and a modern lifestyle with all essential amenities.',
+    description: 'High-quality residential bungalows offering excellent value and a modern lifestyle with all essential amenities.',
     amenities: ['3 Common Plots', '2 Gardens', '1 Club House', '3 Gates'],
     images: [society3, society2, society5, society4, society1],
     inventory: [
@@ -485,7 +471,6 @@ export const allProjects: Project[] = [
     id: 'sangrilla-township',
     name: 'Sangrilla Township',
     tagline: 'Classic Community Living',
-    location: 'Mehsana',
     year: '2004',
     status: 'completed',
     type: 'residential',
@@ -494,7 +479,7 @@ export const allProjects: Project[] = [
       { label: 'Year Completed', value: '2004' },
       { label: 'Total Bungalows', value: '185 (Parts A, B & C)' },
     ],
-    description: 'Classic and spacious bungalows built with trust and superior workmanship in Mehsana, creating a warm and connected community living experience.',
+    description: 'Classic and spacious bungalows built with trust and superior workmanship, creating a warm and connected community living experience.',
     amenities: ['2 Common Plots', '2 Gardens', '2 Gates', '1 Club House'],
     images: [township4, township2, township5, township1, township3],
     inventory: [
@@ -507,7 +492,6 @@ export const allProjects: Project[] = [
     id: 'sangrilla-bunglows',
     name: 'Sangrilla Bunglows',
     tagline: 'Where Heritage Meets Home',
-    location: 'Mehsana',
     year: '2003',
     status: 'completed',
     type: 'residential',
@@ -516,7 +500,7 @@ export const allProjects: Project[] = [
       { label: 'Year Completed', value: '2003' },
       { label: 'Total Bungalows', value: '94 (Parts A & B)' },
     ],
-    description: 'Premium bungalow project delivering luxurious and spacious independent homes in Mehsana — a testament to Sangrilla\'s enduring legacy of quality.',
+    description: 'Premium bungalow project delivering luxurious and spacious independent homes — a testament to Sangrilla\'s enduring legacy of quality.',
     amenities: ['1 Common Plot', '1 Garden', '2 Parks (Playground)', '1 Water Tank', '2 Gates', '1 Club House'],
     images: [bunglows5, bunglows3, bunglows4, bunglows1, bunglows2],
     inventory: [

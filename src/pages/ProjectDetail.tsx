@@ -90,9 +90,11 @@ const ProjectDetail = () => {
           <p className="pd-linear-tagline">{project.tagline}</p>
 
           <div className="pd-meta-row">
-            <span className="pd-badge pd-location">
-              <MapPin size={14} /> {project.location}
-            </span>
+            {project.location && (
+              <span className="pd-badge pd-location">
+                <MapPin size={14} /> {project.location}
+              </span>
+            )}
             <span className={`pd-badge pd-status ${project.status === "under-construction" ? "uc" : "done"}`}>
               <span className={`status-dot ${project.status === "under-construction" ? "pulse" : ""}`} />
               {project.status === "under-construction"

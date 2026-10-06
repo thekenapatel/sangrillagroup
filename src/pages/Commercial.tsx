@@ -111,12 +111,14 @@ const Commercial = () => {
                 <h1 className="fs-title">{project.name}</h1>
                 <p className="fs-tagline">{project.tagline}</p>
                 
-                <div className="fs-meta">
-                  <div className="fs-badge">
-                    <MapPin size={18} />
-                    {project.location}{project.year ? ` · ${project.year}` : ""}
+                {project.location && (
+                  <div className="fs-meta">
+                    <div className="fs-badge">
+                      <MapPin size={18} />
+                      {project.location}{project.year ? ` · ${project.year}` : ""}
+                    </div>
                   </div>
-                </div>
+                )}
 
                 <p className="fs-description">{project.description}</p>
 

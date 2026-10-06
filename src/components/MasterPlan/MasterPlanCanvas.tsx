@@ -12,7 +12,6 @@ import {
   Crown,
   Eye,
   Layers,
-  MapPin,
   CheckCircle2,
   Plane,
   Car,
@@ -39,8 +38,6 @@ interface MasterPlanCanvasProps {
   onToggleFullscreen: () => void;
   navigationLevel?: MasterPlanNavLevel;
   onNavigateToVillas?: () => void;
-  themeStyle?: "luxury" | "cad";
-  onSwitchToMap?: (landmark?: SurroundingLandmark) => void;
 }
 
 export const MasterPlanCanvas: React.FC<MasterPlanCanvasProps> = ({
@@ -51,9 +48,7 @@ export const MasterPlanCanvas: React.FC<MasterPlanCanvasProps> = ({
   isFullscreen,
   onToggleFullscreen,
   navigationLevel = "master",
-  onNavigateToVillas,
-  themeStyle = "luxury",
-  onSwitchToMap
+  onNavigateToVillas
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -66,43 +61,60 @@ export const MasterPlanCanvas: React.FC<MasterPlanCanvasProps> = ({
   // Touch Gesture State (Pinch-to-zoom & Touch Pan)
   const lastTouchRef = useRef<{ x: number; y: number } | null>(null);
   const lastTouchDistRef = useRef<number | null>(null);
+  const lastTouchMidpointRef = useRef<{ x: number; y: number } | null>(null);
+  const scaleRef = useRef(1);
+  const positionRef = useRef({ x: 0, y: 0 });
 
   // Hover & Tooltip State
   const [hoveredPlot, setHoveredPlot] = useState<PlotUnit | null>(null);
   const [hoveredAmenity, setHoveredAmenity] = useState<CommonAmenityArea | null>(null);
   const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null);
   const [showUserInstruction, setShowUserInstruction] = useState<boolean>(true);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedLandmark, setSelectedLandmark] = useState<SurroundingLandmark | null>(null);
 
-  // Zoom handlers with smooth scaling (allows zooming out to 0.35 to explore surroundings)
+  const clampScale = (value: number) => Math.min(Math.max(value, 0.35), 4.5);
+
+  const applyTransform = (
+    nextScale: number,
+    nextPosition: { x: number; y: number } = positionRef.current
+  ) => {
+    scaleRef.current = nextScale;
+    positionRef.current = nextPosition;
+    setScale(nextScale);
+    setPosition(nextPosition);
+  };
+
   const handleZoomIn = () => {
-    setScale((prev) => Math.min(prev + 0.35, 4.5));
+    applyTransform(clampScale(scaleRef.current * 1.2));
     setShowUserInstruction(false);
   };
   const handleZoomOut = () => {
-    setScale((prev) => Math.max(prev - 0.35, 0.35));
+    applyTransform(clampScale(scaleRef.current / 1.2));
     setShowUserInstruction(false);
   };
   const handleResetZoom = () => {
-    setScale(1);
-    setPosition({ x: 0, y: 0 });
+    applyTransform(1, { x: 0, y: 0 });
   };
 
   // Mouse Drag handlers
   const handleMouseDown = (e: React.MouseEvent) => {
     if (e.button !== 0) return;
     setIsDragging(true);
-    setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
+    setDragStart({
+      x: e.clientX - positionRef.current.x,
+      y: e.clientY - positionRef.current.y
+    });
     setShowUserInstruction(false);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (isDragging) {
-      setPosition({
+      const nextPosition = {
         x: e.clientX - dragStart.x,
         y: e.clientY - dragStart.y
-      });
+      };
+      positionRef.current = nextPosition;
+      setPosition(nextPosition);
     }
 
     if (hoveredPlot || hoveredAmenity) {
@@ -116,8 +128,19 @@ export const MasterPlanCanvas: React.FC<MasterPlanCanvasProps> = ({
   const handleWheel = (e: React.WheelEvent) => {
     e.preventDefault();
     setShowUserInstruction(false);
-    const zoomFactor = e.deltaY > 0 ? 0.88 : 1.14;
-    setScale((prev) => Math.min(Math.max(prev * zoomFactor, 0.35), 4.5));
+    const currentScale = scaleRef.current;
+    const nextScale = clampScale(currentScale * (e.deltaY > 0 ? 0.9 : 1.1));
+    const rect = e.currentTarget.getBoundingClientRect();
+    const focus = {
+      x: e.clientX - rect.left - rect.width / 2,
+      y: e.clientY - rect.top - rect.height / 2
+    };
+    const currentPosition = positionRef.current;
+    const scaleRatio = nextScale / currentScale;
+    applyTransform(nextScale, {
+      x: focus.x - (focus.x - currentPosition.x) * scaleRatio,
+      y: focus.y - (focus.y - currentPosition.y) * scaleRatio
+    });
   };
 
   // Touch gesture handlers for mobile & tablet
@@ -126,27 +149,53 @@ export const MasterPlanCanvas: React.FC<MasterPlanCanvasProps> = ({
     if (e.touches.length === 1) {
       setIsDragging(true);
       lastTouchRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      lastTouchDistRef.current = null;
+      lastTouchMidpointRef.current = null;
     } else if (e.touches.length === 2) {
       setIsDragging(false);
       const dx = e.touches[0].clientX - e.touches[1].clientX;
       const dy = e.touches[0].clientY - e.touches[1].clientY;
       lastTouchDistRef.current = Math.hypot(dx, dy);
+      const rect = e.currentTarget.getBoundingClientRect();
+      lastTouchMidpointRef.current = {
+        x: (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left - rect.width / 2,
+        y: (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top - rect.height / 2
+      };
     }
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length > 1) e.preventDefault();
+
     if (e.touches.length === 1 && isDragging && lastTouchRef.current) {
       const dx = e.touches[0].clientX - lastTouchRef.current.x;
       const dy = e.touches[0].clientY - lastTouchRef.current.y;
       setPosition((prev) => ({ x: prev.x + dx, y: prev.y + dy }));
       lastTouchRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-    } else if (e.touches.length === 2 && lastTouchDistRef.current !== null) {
+    } else if (
+      e.touches.length === 2 &&
+      lastTouchDistRef.current !== null &&
+      lastTouchMidpointRef.current
+    ) {
       const dx = e.touches[0].clientX - e.touches[1].clientX;
       const dy = e.touches[0].clientY - e.touches[1].clientY;
       const newDist = Math.hypot(dx, dy);
-      const factor = newDist / lastTouchDistRef.current;
-      setScale((prev) => Math.min(Math.max(prev * factor, 0.35), 4.5));
+      const currentScale = scaleRef.current;
+      const nextScale = clampScale(currentScale * (newDist / lastTouchDistRef.current));
+      const rect = e.currentTarget.getBoundingClientRect();
+      const nextMidpoint = {
+        x: (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left - rect.width / 2,
+        y: (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top - rect.height / 2
+      };
+      const previousMidpoint = lastTouchMidpointRef.current;
+      const currentPosition = positionRef.current;
+      const scaleRatio = nextScale / currentScale;
+      applyTransform(nextScale, {
+        x: nextMidpoint.x - (previousMidpoint.x - currentPosition.x) * scaleRatio,
+        y: nextMidpoint.y - (previousMidpoint.y - currentPosition.y) * scaleRatio
+      });
       lastTouchDistRef.current = newDist;
+      lastTouchMidpointRef.current = nextMidpoint;
     }
   };
 
@@ -154,6 +203,7 @@ export const MasterPlanCanvas: React.FC<MasterPlanCanvasProps> = ({
     setIsDragging(false);
     lastTouchRef.current = null;
     lastTouchDistRef.current = null;
+    lastTouchMidpointRef.current = null;
   };
 
   // Keyboard controls
@@ -182,12 +232,6 @@ export const MasterPlanCanvas: React.FC<MasterPlanCanvasProps> = ({
   const bookedCount = plots.filter((p) => p.status === "booked").length;
   const villaCount = plots.filter((p) => p.type === "Luxurious Villa").length;
 
-  // Background image based on theme
-  const layoutImageSrc =
-    themeStyle === "luxury"
-      ? "/assets/meadows/layout_luxury_gold.png"
-      : "/assets/meadows/layout_clean_cropped.png";
-
   return (
     <div
       ref={containerRef}
@@ -204,7 +248,8 @@ export const MasterPlanCanvas: React.FC<MasterPlanCanvasProps> = ({
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className="relative w-full h-full min-h-[550px] overflow-hidden bg-[#060a12] cursor-grab active:cursor-grabbing select-none"
+      className="relative w-full h-full min-h-[550px] overflow-hidden bg-[#060a12] cursor-grab active:cursor-grabbing select-none touch-none"
+      style={{ touchAction: "none" }}
     >
       {/* Ambient luxury backdrop glow */}
       <div
@@ -215,27 +260,12 @@ export const MasterPlanCanvas: React.FC<MasterPlanCanvasProps> = ({
         }}
       />
 
-      {/* Real Map Mode Switch Callout */}
-      {onSwitchToMap && (
-        <div className="absolute top-4 left-4 z-20 transition-all pointer-events-auto hidden sm:block">
-          <button
-            onClick={() => onSwitchToMap()}
-            className="flex items-center gap-2 bg-slate-950/95 hover:bg-slate-900 border border-emerald-500/50 hover:border-emerald-400 text-emerald-300 hover:text-white px-3.5 py-1.5 rounded-full text-xs font-bold shadow-2xl backdrop-blur-md transition-all hover:scale-105"
-            title="Switch to Real Google Satellite Map with all 24 surrounding locations"
-          >
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <MapPin size={13} className="text-emerald-400" />
-            <span>Real Map Mode (Google Satellite) →</span>
-          </button>
-        </div>
-      )}
-
       {/* Floating Instructions Banner (Requirement 8) */}
       {showUserInstruction && (
         <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 transition-all pointer-events-none animate-in fade-in duration-500 hidden md:block">
           <div className="bg-slate-950/90 backdrop-blur-xl border border-amber-500/30 text-amber-200/90 px-4 py-2 rounded-full text-xs font-semibold shadow-2xl flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
-            <span>Drag to explore • Click a plot to view details • Zoom out to reveal surrounding Smart City &amp; Expressway</span>
+            <span>Drag to pan • Pinch or use the controls to zoom • Tap a plot for details</span>
           </div>
         </div>
       )}
@@ -245,21 +275,21 @@ export const MasterPlanCanvas: React.FC<MasterPlanCanvasProps> = ({
         <button
           onClick={handleZoomIn}
           title="Zoom In (+)"
-          className="w-8 h-8 rounded-xl flex items-center justify-center hover:bg-slate-800 text-slate-300 hover:text-white transition-colors"
+          className="w-11 h-11 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center hover:bg-slate-800 text-slate-300 hover:text-white transition-colors"
         >
           <ZoomIn size={16} />
         </button>
         <button
           onClick={handleZoomOut}
           title="Zoom Out (-)"
-          className="w-8 h-8 rounded-xl flex items-center justify-center hover:bg-slate-800 text-slate-300 hover:text-white transition-colors"
+          className="w-11 h-11 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center hover:bg-slate-800 text-slate-300 hover:text-white transition-colors"
         >
           <ZoomOut size={16} />
         </button>
         <button
           onClick={handleResetZoom}
           title="Reset to Fit View (0)"
-          className="w-8 h-8 rounded-xl flex items-center justify-center hover:bg-slate-800 text-slate-300 hover:text-white transition-colors"
+          className="w-11 h-11 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center hover:bg-slate-800 text-slate-300 hover:text-white transition-colors"
         >
           <RotateCcw size={15} />
         </button>
@@ -267,7 +297,7 @@ export const MasterPlanCanvas: React.FC<MasterPlanCanvasProps> = ({
         <button
           onClick={onToggleFullscreen}
           title={isFullscreen ? "Exit Fullscreen" : "Fullscreen View"}
-          className="w-8 h-8 rounded-xl flex items-center justify-center hover:bg-slate-800 text-slate-300 hover:text-white transition-colors"
+          className="w-11 h-11 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center hover:bg-slate-800 text-slate-300 hover:text-white transition-colors"
         >
           {isFullscreen ? <Minimize2 size={15} /> : <Maximize2 size={15} />}
         </button>
@@ -294,10 +324,10 @@ export const MasterPlanCanvas: React.FC<MasterPlanCanvasProps> = ({
           transformOrigin: "center center"
         }}
       >
-        <div className="relative flex items-center justify-center shrink-0">
+        <div className="relative flex h-full w-full items-center justify-center shrink-0">
           {/* Surrounding Places Environment (Expanded when zooming out, like Google Maps) */}
           <div
-            className="absolute pointer-events-none transition-opacity duration-300 select-none"
+            className="hidden absolute pointer-events-none transition-opacity duration-300 select-none"
             style={{
               width: "1600px",
               height: "1500px",
@@ -498,30 +528,26 @@ export const MasterPlanCanvas: React.FC<MasterPlanCanvasProps> = ({
 
           {/* Core Master Plan Canvas Card (exact portrait proportion of the cropped layout: 450x770) */}
           <div
-            className="relative z-10 max-h-[88%] aspect-[450/770] rounded-3xl overflow-hidden shadow-2xl transition-all"
+            className="relative z-10 h-[88%] w-auto max-w-[90vw] aspect-[450/770] rounded-3xl overflow-hidden shadow-2xl transition-all"
             style={{
               boxShadow:
                 "0 25px 50px -12px rgba(0, 0, 0, 0.95), 0 0 50px rgba(212, 175, 55, 0.12), 0 0 0 1.5px rgba(212, 175, 55, 0.35)"
             }}
           >
-          {/* Base Layout Clean/Luxury Image (exact coordinates: x=95, y=305, w=450, h=770) */}
-          <img
-            src={layoutImageSrc}
-            alt="Sangrilla Meadows Digital Master Plan"
-            onLoad={() => setIsLoaded(true)}
-            className="w-full h-full object-contain pointer-events-none select-none"
-            style={{
-              filter: themeStyle === "cad" ? "brightness(0.9) contrast(1.1) invert(0.9)" : "none"
-            }}
-          />
-
-          {/* SVG Overlay for Vector Plot Polygons & Amenities */}
+          {/* Interactive vector blueprint */}
           <svg
             viewBox="95 305 450 770"
             preserveAspectRatio="xMidYMid meet"
             className="absolute inset-0 w-full h-full pointer-events-auto select-none"
           >
             <defs>
+              <pattern id="blueprint-grid-minor" width="12" height="12" patternUnits="userSpaceOnUse">
+                <path d="M 12 0 L 0 0 0 12" fill="none" stroke="#16445b" strokeWidth="0.55" />
+              </pattern>
+              <pattern id="blueprint-grid-major" width="60" height="60" patternUnits="userSpaceOnUse">
+                <rect width="60" height="60" fill="url(#blueprint-grid-minor)" />
+                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#27627a" strokeWidth="0.9" />
+              </pattern>
               {/* Pulse glowing filter for selected plot */}
               <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
                 <feDropShadow dx="0" dy="0" stdDeviation="3.5" floodColor="#f59e0b" floodOpacity="0.9" />
@@ -530,6 +556,10 @@ export const MasterPlanCanvas: React.FC<MasterPlanCanvasProps> = ({
                 <feDropShadow dx="0" dy="0" stdDeviation="2.5" floodColor="#10b981" floodOpacity="0.8" />
               </filter>
             </defs>
+
+            <rect x="95" y="305" width="450" height="770" fill="#071521" />
+            <rect x="95" y="305" width="450" height="770" fill="url(#blueprint-grid-major)" />
+            <rect x="95" y="305" width="450" height="770" fill="none" stroke="#4b91aa" strokeWidth="1.2" />
 
             {/* 1. Common Open Amenity Areas (COP-1 to COP-7) */}
             <g className="amenities-layer pointer-events-auto">
@@ -754,20 +784,7 @@ export const MasterPlanCanvas: React.FC<MasterPlanCanvasProps> = ({
               {selectedLandmark.description}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-2">
-              {onSwitchToMap && (
-                <button
-                  onClick={() => {
-                    const lm = selectedLandmark;
-                    setSelectedLandmark(null);
-                    onSwitchToMap(lm);
-                  }}
-                  className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold text-xs text-center transition-all shadow-lg flex items-center justify-center gap-1.5"
-                >
-                  <MapPin size={14} />
-                  <span>Explore on Real Satellite Map →</span>
-                </button>
-              )}
+            <div className="flex justify-end">
               <button
                 onClick={() => setSelectedLandmark(null)}
                 className="py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 font-bold text-xs text-center transition-all border border-slate-700"

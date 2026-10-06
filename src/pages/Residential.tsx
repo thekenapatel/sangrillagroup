@@ -110,17 +110,14 @@ const Residential = () => {
                 <h1 className="fs-title">{project.name}</h1>
                 <p className="fs-tagline">{project.tagline}</p>
                 
-                <div className="fs-meta">
-                  <div className="fs-badge">
-                    <MapPin size={18} />
-                    {project.location}{project.year ? ` · ${project.year}` : ""}
-                  </div>
-                  {/* {project.status === "under-construction" && (
-                    <div className="fs-badge" style={{ background: '#007ADD', color: '#fff', border: 'none', fontWeight: 600 }}>
-                      Under Construction
+                {project.location && (
+                  <div className="fs-meta">
+                    <div className="fs-badge">
+                      <MapPin size={18} />
+                      {project.location}{project.year ? ` · ${project.year}` : ""}
                     </div>
-                  )} */}
-                </div>
+                  </div>
+                )}
 
                 <p className="fs-description">{project.description}</p>
 

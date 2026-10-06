@@ -64,12 +64,14 @@ const ProjectCard = ({ project }: { project: Project }) => {
                 {project.tagline || projectType}
               </p>
             </div>
-            <div className="location-tag">
-              <span className="icon">
-                <MapPin size={14} style={{ display: "inline", verticalAlign: "middle" }} />
-              </span>
-              {project.location}
-            </div>
+            {project.location && (
+              <div className="location-tag">
+                <span className="icon">
+                  <MapPin size={14} style={{ display: "inline", verticalAlign: "middle" }} />
+                </span>
+                {project.location}
+              </div>
+            )}
           </div>
 
           <p className="card-desc" style={{ fontSize: "0.92rem", color: "#4b5563", lineHeight: 1.6, margin: "14px 0" }}>

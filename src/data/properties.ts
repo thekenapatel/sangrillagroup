@@ -5,7 +5,7 @@ export interface Project {
   status: 'active' | 'completed';
   type: 'Apartments' | 'Villas' | 'Commercial' | 'Plots';
   bhk: string[];
-  location: string;
+  location?: string;
   description: string;
   highlights: string[];
   images: string[];
@@ -36,7 +36,6 @@ export const properties: Project[] = [
     status: 'active',
     type: 'Apartments',
     bhk: ['2 BHK', '3 BHK'],
-    location: 'Satellite/SG Highway area, Ahmedabad',
     description: 'Anantaa Homes offers a blend of luxury and convenience with modern amenities and prime location advantages.',
     highlights: ['Prime Location', 'Modern Club House', '24/7 Security', 'High ROI'],
     images: [
@@ -52,7 +51,6 @@ export const properties: Project[] = [
     status: 'active',
     type: 'Villas',
     bhk: ['3 BHK', '4 BHK Villas'],
-    location: 'Bopal/Shela area, Ahmedabad',
     description: 'Supan Residency is a premium gated community featuring spacious villas and modern infrastructure for an elevated lifestyle.',
     highlights: ['Gated Community', 'Private Gardens', 'Community Hall', 'Ready Possession'],
     images: [
@@ -68,7 +66,6 @@ export const properties: Project[] = [
     status: 'completed',
     type: 'Apartments',
     bhk: ['2 BHK', '3 BHK'],
-    location: 'Ahmedabad',
     description: 'A benchmark in luxury living, completed with 100% occupancy and happy families.',
     highlights: ['Developed Area', 'Strong Community', 'Completed Project'],
     images: ['https://images.unsplash.com/photo-1600607686527-6fb886090705'],

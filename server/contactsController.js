@@ -287,8 +287,37 @@ async function handleCheckContact(req, res) {
   }
 }
 
+/**
+ * GET /api/contacts
+ * Returns list of leads from MongoDB Atlas or local store.
+ */
+async function handleGetContacts(req, res) {
+  try {
+    let contacts = [];
+    try {
+      const { collection } = await connectToDatabase();
+      contacts = await collection.find({}).sort({ createdAt: -1 }).toArray();
+    } catch {
+      contacts = getStoredContacts();
+    }
+
+    return res.status(200).json({
+      success: true,
+      count: contacts.length,
+      data: contacts
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: 'Failed to retrieve contacts'
+    });
+  }
+}
+
 module.exports = {
   handlePostContact,
   handleCheckContact,
+  handleGetContacts,
   normalizePhone
 };
+

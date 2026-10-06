@@ -35,10 +35,12 @@ const ProjectCard = ({ project }: { project: Project }) => {
               <h3>{project.name}</h3>
               <p className="card-type-minimal">{projectType} {projectYear ? `· ${projectYear}` : ""}</p>
             </div>
-            <div className="location-tag">
-              <span className="icon">📍</span>
-              {project.location}
-            </div>
+            {project.location && (
+              <div className="location-tag">
+                <span className="icon">📍</span>
+                {project.location}
+              </div>
+            )}
           </div>
           
           {/* <p className="card-desc">{project.description}</p> */}

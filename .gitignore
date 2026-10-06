@@ -15,6 +15,9 @@ dist-ssr
 # Environment & Secrets (Never commit secrets)
 .env
 .env.*
+.env.local
+.env.development.local
+.env.production.local
 !.env.example
 atlas-credentials.env
 

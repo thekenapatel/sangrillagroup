@@ -4,12 +4,11 @@ import {
   SAN_GRILLA_MEADOWS_PLOTS,
   SAN_GRILLA_MEADOWS_META
 } from "../../data/sangrillaMeadowsData";
-import MasterPlanStatsBar, { type ViewEngineMode } from "./MasterPlanStatsBar";
+import MasterPlanStatsBar from "./MasterPlanStatsBar";
 import MasterPlanNavigation, { type MasterPlanNavLevel } from "./MasterPlanNavigation";
 import type { FilterState } from "./MasterPlanToolbar";
 import MasterPlanToolbar from "./MasterPlanToolbar";
 import MasterPlanCanvas from "./MasterPlanCanvas";
-import MasterPlanMapCanvas from "./MasterPlanMapCanvas";
 import VillaFloorPlanViewer from "./VillaFloorPlanViewer";
 import PlotDrawer from "./PlotDrawer";
 import NaavikPlotDetailsCard from "./NaavikPlotDetailsCard";
@@ -32,18 +31,6 @@ export const MasterPlanViewer: React.FC<MasterPlanViewerProps> = ({
   // 1. Navigation Hierarchy (Requirement 4: Master Plan → Plot Layout → Villa Layout → Individual Plot/Villa)
   const [navLevel, setNavLevel] = useState<MasterPlanNavLevel>("master");
   const [showVillaFloorPlans, setShowVillaFloorPlans] = useState<boolean>(false);
-
-  // 2. View Engine Mode: 'satellite' (GIS Google Satellite + Master Plan - default!) | 'streets' (Google Streets) | 'dark' (Cyber Dark) | 'luxury' (2D Digital Master Plan Layout) | 'cad' (Technical CAD)
-  const [viewMode, setViewMode] = useState<ViewEngineMode>(() => {
-    const params = new URLSearchParams(window.location.search);
-    const modeParam = params.get("mode") || params.get("view");
-    if (modeParam === "luxury") return "luxury";
-    if (modeParam === "cad") return "cad";
-    if (modeParam === "streets") return "streets";
-    if (modeParam === "dark") return "dark";
-    if (modeParam === "map" || modeParam === "satellite") return "satellite";
-    return "satellite"; // Default to Unified Google Map + Master Plan Style!
-  });
 
   // 3. Filter state
   const [filters, setFilters] = useState<FilterState>({
@@ -265,8 +252,6 @@ export const MasterPlanViewer: React.FC<MasterPlanViewerProps> = ({
         onToggleFullscreen={toggleFullscreen}
         onSelectStatusFilter={(status) => handleFilterChange({ status })}
         currentStatusFilter={filters.status}
-        viewMode={viewMode}
-        onToggleViewMode={setViewMode}
       />
 
       {/* 2. 4-Tier Interactive Navigation (Master Plan → Plot Layout → Villa Layout → Individual Plot/Villa) */}
@@ -299,8 +284,8 @@ export const MasterPlanViewer: React.FC<MasterPlanViewerProps> = ({
             onBackToMaster={() => setShowVillaFloorPlans(false)}
             selectedPlotNumber={selectedPlot?.plotNumber}
           />
-        ) : viewMode === "luxury" || viewMode === "cad" ? (
-          /* Digital Master Plan Canvas (Luxury Gold or Clean CAD) */
+        ) : (
+          /* Single interactive 2D blueprint canvas */
           <MasterPlanCanvas
             plots={SAN_GRILLA_MEADOWS_PLOTS}
             filteredPlotIds={filteredPlotIds}
@@ -310,24 +295,6 @@ export const MasterPlanViewer: React.FC<MasterPlanViewerProps> = ({
             onToggleFullscreen={toggleFullscreen}
             navigationLevel={navLevel}
             onNavigateToVillas={() => setShowVillaFloorPlans(true)}
-            themeStyle={viewMode === "cad" ? "cad" : "luxury"}
-            onSwitchToMap={() => setViewMode("satellite")}
-          />
-        ) : (
-          /* Unified Google Map & Master Plan GIS Style (satellite, streets, dark) */
-          <MasterPlanMapCanvas
-            plots={SAN_GRILLA_MEADOWS_PLOTS}
-            filteredPlotIds={filteredPlotIds}
-            selectedPlot={selectedPlot}
-            onSelectPlot={handleSelectPlot}
-            isFullscreen={isFullscreen}
-            onToggleFullscreen={toggleFullscreen}
-            navigationLevel={navLevel}
-            onNavigateToVillas={() => setShowVillaFloorPlans(true)}
-            tileStyle={
-              viewMode === "streets" ? "streets" : viewMode === "dark" ? "dark" : "satellite"
-            }
-            onTileStyleChange={(style) => setViewMode(style as ViewEngineMode)}
           />
         )}
 

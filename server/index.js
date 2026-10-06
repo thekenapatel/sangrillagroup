@@ -7,64 +7,17 @@ const dotenv = require('dotenv');
 dotenv.config();
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
-const { handlePostContact, handleCheckContact } = require('./contactsController');
+const { handlePostContact, handleCheckContact, handleGetContacts } = require('./contactsController');
 
 const app = express();
 
 /**
- * Validates whether an incoming origin is permitted.
- * Allows production site, all localhost ports, and GitHub Pages.
+ * Universal permissive CORS configuration for robust cross-origin access.
+ * Allows frontend on GitHub Pages, custom domain, Vercel, Netlify, and local dev.
  */
-function isOriginAllowed(origin) {
-  if (!origin) return true;
-
-  // Allow all localhost / 127.0.0.1 on any port (5173, 5174, 3000, etc.)
-  if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) {
-    return true;
-  }
-
-  // Allow production domains
-  if (
-    origin === 'https://www.sangrillagroup.com' ||
-    origin === 'https://sangrillagroup.com'
-  ) {
-    return true;
-  }
-
-  // Allow GitHub Pages (*.github.io)
-  if (/^https:\/\/[a-zA-Z0-9-]+\.github\.io$/.test(origin)) {
-    return true;
-  }
-
-  // Allow Vercel preview domains
-  if (/^https:\/\/[a-zA-Z0-9-]+\.vercel\.app$/.test(origin)) {
-    return true;
-  }
-
-  // Allow Netlify preview domains
-  if (/^https:\/\/[a-zA-Z0-9-]+\.netlify\.app$/.test(origin)) {
-    return true;
-  }
-
-  // Check custom allowed origins from environment variable
-  if (process.env.ALLOWED_ORIGINS) {
-    const list = process.env.ALLOWED_ORIGINS.split(',').map((o) => o.trim());
-    if (list.includes(origin) || list.includes('*')) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (isOriginAllowed(origin)) {
-        return callback(null, true);
-      }
-      return callback(null, false);
-    },
+    origin: true,
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: false
@@ -79,6 +32,7 @@ app.get('/', (req, res) => {
     status: 'ok',
     service: 'Sangrilla Group Backend API',
     endpoints: {
+      getContacts: 'GET /api/contacts',
       postContacts: 'POST /api/contacts',
       checkContacts: 'GET /api/contacts/check?phone=XXXXXXXXXX',
       health: 'GET /health'
@@ -95,8 +49,10 @@ app.get('/health', (req, res) => {
 });
 
 // Primary Contact Endpoints
+app.get('/api/contacts', handleGetContacts);
 app.post('/api/contacts', handlePostContact);
 app.get('/api/contacts/check', handleCheckContact);
+
 
 // 404 Handler
 app.use((req, res) => {
@@ -115,9 +71,10 @@ app.use((err, req, res, next) => {
 // Start HTTP server when executed directly
 if (require.main === module) {
   const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => {
-    console.log(`[Sangrilla API] Server is listening on http://localhost:${PORT}`);
-  });
+  
+  app.listen(PORT, '0.0.0.0', () => {
+  console.log(`[Sangrilla API] Server is listening on port ${PORT}`);
+});
 }
 
 module.exports = app;

@@ -1,19 +1,11 @@
 import React from "react";
 import {
-  Map,
   Layers,
-  Compass,
   Maximize2,
-  Minimize2,
-  ShieldCheck,
-  CheckCircle2,
-  Sparkles,
-  Crown
+  Minimize2
 } from "lucide-react";
 import type { PlotUnit } from "../../data/sangrillaMeadowsData";
 import { SAN_GRILLA_MEADOWS_META } from "../../data/sangrillaMeadowsData";
-
-export type ViewEngineMode = "luxury" | "cad" | "map" | "satellite" | "streets" | "dark";
 
 interface MasterPlanStatsBarProps {
   plots: PlotUnit[];
@@ -21,8 +13,6 @@ interface MasterPlanStatsBarProps {
   onToggleFullscreen: () => void;
   onSelectStatusFilter: (status: "all" | "available" | "booked" | "reserved") => void;
   currentStatusFilter: string;
-  viewMode: ViewEngineMode;
-  onToggleViewMode: (mode: ViewEngineMode) => void;
 }
 
 export const MasterPlanStatsBar: React.FC<MasterPlanStatsBarProps> = ({
@@ -30,17 +20,13 @@ export const MasterPlanStatsBar: React.FC<MasterPlanStatsBarProps> = ({
   isFullscreen,
   onToggleFullscreen,
   onSelectStatusFilter,
-  currentStatusFilter,
-  viewMode,
-  onToggleViewMode
+  currentStatusFilter
 }) => {
   const availablePlots = plots.filter((p) => p.status === "available");
   const bookedPlots = plots.filter((p) => p.status === "booked");
   const reservedPlots = plots.filter((p) => p.status === "reserved");
 
   const availablePercent = Math.round((availablePlots.length / plots.length) * 100);
-
-  const isMapMode = viewMode === "map" || viewMode === "satellite";
 
   return (
     <div className="w-full bg-slate-950/95 border-b border-slate-800/90 px-3 sm:px-6 py-2.5 z-30 flex flex-wrap items-center justify-between gap-3 text-xs text-white select-none">
@@ -123,68 +109,11 @@ export const MasterPlanStatsBar: React.FC<MasterPlanStatsBarProps> = ({
         </button>
       </div>
 
-      {/* Right: View Mode Engine Switcher & Fullscreen */}
+      {/* Right: Active blueprint mode & Fullscreen */}
       <div className="flex items-center gap-2">
-        <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-0.5 flex items-center">
-          {/* 1. Google Satellite Map (Default Unified Map Style) */}
-          <button
-            onClick={() => onToggleViewMode("satellite")}
-            className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
-              isMapMode
-                ? "bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 shadow-md font-bold"
-                : "text-slate-400 hover:text-white"
-            }`}
-            title="Google Satellite Hybrid Map with Master Plan Layout Overlay"
-          >
-            <Map size={12} />
-            <span className="hidden sm:inline">Satellite Map</span>
-            <span className="sm:hidden">Satellite</span>
-          </button>
-
-          {/* 2. Google Streets */}
-          <button
-            onClick={() => onToggleViewMode("streets")}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
-              viewMode === "streets"
-                ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-md font-bold"
-                : "text-slate-400 hover:text-white"
-            }`}
-            title="Google Streets Roadmap with Master Plan Demarcations"
-          >
-            <Compass size={12} />
-            <span className="hidden md:inline">Google Streets</span>
-            <span className="md:hidden">Streets</span>
-          </button>
-
-          {/* 3. Cyber Dark */}
-          <button
-            onClick={() => onToggleViewMode("dark")}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
-              viewMode === "dark"
-                ? "bg-indigo-600 text-white shadow-md font-bold"
-                : "text-slate-400 hover:text-white"
-            }`}
-            title="Cyber Dark Map Style"
-          >
-            <Sparkles size={12} />
-            <span className="hidden md:inline">Dark Map</span>
-            <span className="md:hidden">Dark</span>
-          </button>
-
-          {/* 4. 2D Blueprint Plan */}
-          <button
-            onClick={() => onToggleViewMode("luxury")}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
-              viewMode === "luxury"
-                ? "bg-slate-800 text-white shadow-md font-bold border border-slate-700"
-                : "text-slate-400 hover:text-white"
-            }`}
-            title="2D Digital Blueprint Canvas"
-          >
-            <Layers size={12} />
-            <span className="hidden sm:inline">2D Blueprint</span>
-            <span className="sm:hidden">2D</span>
-          </button>
+        <div className="inline-flex items-center gap-1.5 rounded-lg border border-sky-500/30 bg-sky-500/10 px-2.5 py-1.5 text-xs font-semibold text-sky-200">
+          <Layers size={14} />
+          <span>2D Blueprint</span>
         </div>
 
         {/* Fullscreen Button */}

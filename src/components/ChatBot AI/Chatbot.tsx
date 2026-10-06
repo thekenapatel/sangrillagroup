@@ -119,7 +119,7 @@ const Chatbot: React.FC = () => {
         response.buttons = ['Enquire Now', 'Book Site Visit', 'Talk to Human', 'Main Menu'];
       } else if (q.includes('2 bhk')) {
         const p = properties.find(item => item.id === 'anantaa-homes');
-        response.content = `Namaste! Anantaa Homes in Ahmedabad is perfect for you. it's RERA-approved with luxurious 2 & 3 BHK options starting at ₹80 Lakh. 🏠\n\n[IMAGE: ${p?.images[0]}]\n[IMAGE: ${p?.images[1]}]\nWould you like the floor plan or a site visit?`;
+        response.content = `Namaste! Anantaa Homes is perfect for you. it's RERA-approved with luxurious 2 & 3 BHK options starting at ₹80 Lakh. 🏠\n\n[IMAGE: ${p?.images[0]}]\n[IMAGE: ${p?.images[1]}]\nWould you like the floor plan or a site visit?`;
         response.buttons = ['Anantaa Floor Plan', 'Book Site Visit', 'Pricing Details', 'Main Menu'];
       } else if (q.includes('3 bhk') || q.includes('villas')) {
         const p = properties.find(item => item.id === 'supan-residency');
