@@ -1,4 +1,4 @@
-/* NAVBAR - Shivalik Style */
+/* NAVBAR */
 .navbar {
     position: fixed;
     top: 0;
@@ -176,14 +176,18 @@
 
 @media (max-width: 480px) {
     .full-menu.open {
-        max-height: 540px;
+        max-height: 560px;
     }
 
     .navbar-container {
-        padding: 45px 24px;
+        padding: 30px 24px;
     }
 
     .menu-grid {
-        gap: 40px 60px;
+        gap: 40px 70px;
+    }
+
+    .menu-column {
+        gap: 9px;
     }
 }

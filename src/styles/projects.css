@@ -252,16 +252,16 @@
 
     .projects-title {
         /* font-weight: 500; */
-        font-size: 2rem;
+        font-size: 1.7rem;
         margin-bottom: 20px;
     }
 
     .filter-item.active {
-        padding: 9px 22px;
+        padding: 9px 15px;
     }
 
     .filter-item {
-        padding: 9px 22px;
+        padding: 9px 15px;
     }
 
     .projects-filters {
