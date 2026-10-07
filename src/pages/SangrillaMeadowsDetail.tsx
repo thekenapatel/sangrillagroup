@@ -576,7 +576,7 @@ const SangrillaMeadowsDetail: React.FC = () => {
         {/* ============================================================
             INTERACTIVE PLOTTER CALLOUT (BELOW LOCATION SECTION)
             ============================================================ */}
-        <section className="meadows-section" style={{ paddingTop: "0.5rem", paddingBottom: "1.5rem" }}>
+        {/* <section className="meadows-section" style={{ paddingTop: "0.5rem", paddingBottom: "1.5rem" }}>
           <div
             className="meadows-plotter-feature-banner"
             style={{
@@ -593,9 +593,9 @@ const SangrillaMeadowsDetail: React.FC = () => {
               justifyContent: "space-between",
               gap: "2rem"
             }}
-          >
+          > */}
             {/* Ambient Background Glow Effect */}
-            <div
+            {/* <div
               style={{
                 position: "absolute",
                 top: "-60px",
@@ -725,7 +725,7 @@ const SangrillaMeadowsDetail: React.FC = () => {
               </a>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* ============================================================
             4. LAYOUT & PLOT DETAILS
@@ -785,7 +785,7 @@ const SangrillaMeadowsDetail: React.FC = () => {
           </div>
 
           {/* Interactive Master Plan & Plotter Callout */}
-          <div
+          {/* <div
             style={{
               marginTop: "2rem",
               padding: "1.75rem 2rem",
@@ -856,7 +856,7 @@ const SangrillaMeadowsDetail: React.FC = () => {
               <Layers size={16} />
               <span>Launch Interactive Master Plan ↗</span>
             </a>
-          </div>
+          </div> */}
 
           {/* Layout Note Callout */}
           {/* <div className="meadows-layout-note-card">
