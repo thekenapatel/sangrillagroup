@@ -160,6 +160,15 @@
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
+    .navbar-container {
+        padding: 35px 40px;
+    }
+
+    .nav-menu {
+        gap: 18px;
+        font-size: 13.5px;
+    }
+
     .menu-grid {
         grid-template-columns: repeat(5, 1fr);
         padding: 40px 40px;

@@ -1,97 +1,74 @@
-import { motion, animate, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { Compass, Handshake, ShieldCheck, TrendingUp } from "lucide-react";
 import "../styles/why-sangrilla.css";
 
-const reasons = [
+const pillars = [
   {
-    icon: "📍",
-    title: "Strategic Locations",
-    description: "Our projects are situated in the fastest-growing corridors of Ahmedabad, ensuring maximum connectivity and future growth.",
+    number: "01",
+    Icon: Compass,
+    title: "Strategic Growth Corridors",
+    description: "Prime developments situated directly across Gujarat’s highest-appreciation zones, including Dholera SIR and prime Ahmedabad hubs.",
   },
   {
-    icon: "📈",
-    title: "Investment Value",
-    description: "Historically, Sangrilla properties have shown exceptional appreciation, making them a safe and high-yielding investment.",
+    number: "02",
+    Icon: ShieldCheck,
+    title: "Absolute Legal Transparency",
+    description: "100% RERA-registered projects with verified title documentation, clear land history, and hassle-free ownership transfers.",
   },
   {
-    icon: "🏠",
-    title: "Community First",
-    description: "We don't just build houses; we curate thriving communities where luxury lifestyle and comfort coexist seamlessly.",
-  }
+    number: "03",
+    Icon: TrendingUp,
+    title: "High-Yield Asset Curation",
+    description: "Expertly selected residential plotting and commercial spaces structured for maximum capital growth and generational wealth.",
+  },
+  {
+    number: "04",
+    Icon: Handshake,
+    title: "Dedicated Investor Ecosystem",
+    description: "End-to-end guidance from personalized site visit assistance to strategic channel partner support and long-term asset management.",
+  },
 ];
-
-const stats = [
-  { value: 15, suffix: "+", text: "Completed Projects" },
-  { value: 25, suffix: "+", text: "Years of Excellence" },
-  { value: 1000, suffix: "+", text: "Happy Families" },
-  { value: 1000000, suffix: "+", text: "Total sq.ft" }
-];
-
-const AnimatedCounter: React.FC<{ value: number; suffix?: string }> = ({ value, suffix = "" }) => {
-  const [displayValue, setDisplayValue] = useState("0");
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  useEffect(() => {
-    if (isInView) {
-      const controls = animate(0, value, {
-        duration: 2,
-        ease: "easeOut",
-        onUpdate: (latest) => {
-          setDisplayValue(Math.round(latest).toLocaleString('en-IN'));
-        }
-      });
-      return controls.stop;
-    }
-  }, [isInView, value]);
-
-  return <span ref={ref}>{displayValue}{suffix}</span>;
-};
 
 const WhySangrilla: React.FC = () => {
   return (
     <section className="why-sangrilla">
       <div className="why-header">
+        <span className="why-eyebrow">WHY SANGRILLA GROUP</span>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6 }}
         >
-          Why Sangrilla
+          Redefining Real Estate &amp; Smart City Growth
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          A localized touch for the city we call home. Discover why Sangrilla is the preferred choice for premium living.
+          Strategic location choices, absolute legal transparency, and future-proof developments designed for living and high-return investments.
         </motion.p>
       </div>
 
       <div className="why-grid">
-        {reasons.map((reason, index) => (
-          <div
-            key={index}
+        {pillars.map(({ number, Icon, title, description }, index) => (
+          <motion.article
+            key={number}
             className="why-card"
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.45, delay: index * 0.08 }}
           >
-            <span className="why-card-icon">{reason.icon}</span>
-            <h3>{reason.title}</h3>
-            <p>{reason.description}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="stats-grid">
-        {stats.map((stat, index) => (
-          <div
-            key={index}
-            className="stat-box"
-          >
-            <span className="stat-number">
-              <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-            </span>
-            <span className="stat-text">{stat.text}</span>
-          </div>
+            <div className="why-card-topline">
+              <span className="why-card-number">{number}</span>
+              <span className="why-card-icon"><Icon size={24} strokeWidth={1.8} /></span>
+            </div>
+            <h3>{title}</h3>
+            <p>{description}</p>
+          </motion.article>
         ))}
       </div>
     </section>

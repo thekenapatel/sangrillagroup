@@ -1,0 +1,815 @@
+/* Channel Partner Page Styles - Sangrilla Group */
+
+.channel-partner-page {
+  padding: 120px 0 90px 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 10% 15%, rgba(0, 122, 221, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 90% 85%, rgba(0, 122, 221, 0.04) 0%, transparent 40%),
+    linear-gradient(180deg, #f8faff 0%, #ffffff 40%, #f4f8fc 100%);
+  color: #17191c;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle background accent grid */
+.channel-partner-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 600px;
+  background-image: radial-gradient(rgba(0, 122, 221, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.cp-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 80px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Split screen layout */
+.cp-split-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 56px;
+  align-items: start;
+}
+
+/* ==================== LEFT COLUMN: HERO & BENEFITS ==================== */
+.cp-left-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Badge */
+.cp-badge-wrapper {
+  margin-bottom: 20px;
+}
+
+.cp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: rgba(0, 122, 221, 0.09);
+  color: #007add;
+  border: 1px solid rgba(0, 122, 221, 0.25);
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 8px rgba(0, 122, 221, 0.08);
+}
+
+.cp-badge-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #007add;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #007add;
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.35);
+    opacity: 0.6;
+  }
+}
+
+/* Hero Titles */
+.cp-hero-title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: clamp(2.3rem, 4vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #0f172a;
+  letter-spacing: -0.8px;
+  margin-bottom: 20px;
+}
+
+.cp-hero-subtitle {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: #4b5563;
+  max-width: 680px;
+  margin-bottom: 36px;
+}
+
+/* Quick Trust Highlights */
+.cp-trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.cp-trust-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #334155;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+}
+
+.cp-trust-pill svg {
+  color: #007add;
+}
+
+/* Section Divider / Label */
+.cp-benefits-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.cp-benefits-header span {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #007add;
+}
+
+.cp-benefits-header hr {
+  flex: 1;
+  border: none;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* 4 Benefits Grid */
+.cp-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.cp-benefit-card {
+  background: #ffffff;
+  border: 1px solid #e4e7eb;
+  border-radius: 16px;
+  /* rounded-xl */
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 18px -2px rgba(15, 23, 42, 0.04);
+}
+
+.cp-benefit-card:hover {
+  transform: translateY(-4px);
+  border-color: #007add;
+  box-shadow: 0 16px 36px -6px rgba(0, 122, 221, 0.12);
+}
+
+.cp-benefit-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.cp-benefit-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #eaf3fa 0%, #dbeefe 100%);
+  color: #007add;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.cp-benefit-card:hover .cp-benefit-icon-box {
+  background: #007add;
+  color: #ffffff;
+  transform: scale(1.06);
+}
+
+.cp-card-badge-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 1px;
+}
+
+.cp-benefit-title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.cp-benefit-desc {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #5f6670;
+  margin: 0;
+}
+
+
+/* ==================== RIGHT COLUMN: REGISTRATION FORM ==================== */
+.cp-right-content {
+  position: sticky;
+  top: 100px;
+}
+
+.cp-form-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  /* rounded-xl+ */
+  padding: 40px;
+  box-shadow:
+    0 24px 48px -12px rgba(0, 122, 221, 0.11),
+    0 4px 16px rgba(15, 23, 42, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.cp-form-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #007add, #38bdf8, #005fa3);
+}
+
+/* Form Header */
+.cp-form-header {
+  margin-bottom: 28px;
+}
+
+.cp-form-header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #007add;
+  background: #f0f7ff;
+  padding: 4px 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.cp-form-title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+
+.cp-form-subtitle {
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Form Grid */
+.cp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.cp-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.cp-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cp-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cp-optional-tag {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #94a3b8;
+}
+
+.cp-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cp-input-icon {
+  position: absolute;
+  left: 16px;
+  color: #94a3b8;
+  pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+.cp-input,
+.cp-select {
+  width: 100%;
+  padding: 13px 16px 13px 44px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  font-size: 0.94rem;
+  font-family: "Poppins", sans-serif;
+  color: #1e293b;
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.cp-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 38px;
+}
+
+.cp-input:focus,
+.cp-select:focus {
+  background: #ffffff;
+  border-color: #007add;
+  box-shadow: 0 0 0 3px rgba(0, 122, 221, 0.15);
+}
+
+.cp-input-wrap:focus-within .cp-input-icon {
+  color: #007add;
+}
+
+.cp-input::placeholder {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.cp-field-error {
+  font-size: 0.78rem;
+  color: #ef4444;
+  margin-top: 2px;
+}
+
+.cp-submit-btn {
+  width: 100%;
+  padding: 15px 24px;
+  margin-top: 8px;
+  background: #007add;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 6px 18px rgba(0, 122, 221, 0.24);
+}
+
+.cp-submit-btn .cp-wa-icon {
+  font-size: 1.2rem;
+  transition: transform 0.25s ease;
+}
+
+.cp-submit-btn:hover:not(:disabled) {
+  background: #20bc59;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(37, 211, 102, 0.35);
+}
+
+.cp-submit-btn:hover:not(:disabled) .cp-wa-icon {
+  transform: scale(1.12);
+}
+
+.cp-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.cp-form-footer-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: #64748b;
+  text-align: center;
+  margin-top: 14px;
+}
+
+/* Direct WhatsApp Link in Form Card */
+.cp-direct-whatsapp-wrap {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.cp-direct-wa-divider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 600;
+}
+
+.cp-direct-wa-divider::before,
+.cp-direct-wa-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.cp-direct-wa-link {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: rgba(37, 211, 102, 0.08);
+  border: 1px solid rgba(37, 211, 102, 0.35);
+  color: #15803d;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.cp-direct-wa-link:hover {
+  background: #20bc59;
+  color: #ffffff;
+  border-color: #20bc59;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
+}
+
+.cp-direct-wa-link svg {
+  font-size: 1.15rem;
+}
+
+.cp-direct-wa-hint {
+  font-size: 0.78rem;
+  color: #64748b;
+  text-align: center;
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* Quick WhatsApp Direct Connect Card */
+.cp-direct-connect-card {
+  margin-top: 28px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+  border: 1px solid rgba(37, 211, 102, 0.28);
+  border-radius: 16px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.06);
+}
+
+.cp-direct-connect-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cp-direct-connect-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #20bc59;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+}
+
+.cp-direct-connect-info h4 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.cp-direct-connect-info p {
+  font-size: 0.85rem;
+  color: #4b5563;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.cp-direct-connect-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  background: #20bc59;
+  color: #ffffff;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25);
+  transition: all 0.25s ease;
+}
+
+.cp-direct-connect-btn:hover {
+  background: #20bc59;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+}
+
+/* ==================== SUCCESS CARD STATE ==================== */
+.cp-success-card {
+  text-align: center;
+  padding: 24px 10px 10px 10px;
+  animation: fadeInScale 0.4s ease forwards;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.cp-success-icon-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #ecfdf5;
+  color: #10b981;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
+}
+
+.cp-success-title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.cp-success-desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #4b5563;
+  margin-bottom: 24px;
+}
+
+.cp-success-summary {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: left;
+  margin-bottom: 24px;
+  font-size: 0.88rem;
+  color: #334155;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cp-summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cp-summary-label {
+  color: #64748b;
+}
+
+.cp-summary-val {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.cp-success-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cp-wa-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  background: #20bc59;
+  color: #ffffff;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.22);
+  transition: all 0.25s ease;
+}
+
+.cp-wa-btn:hover {
+  background: #20bc59;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(37, 211, 102, 0.3);
+}
+
+.cp-reset-btn {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cp-reset-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+/* Spinner */
+.cp-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.7s infinite linear;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==================== RESPONSIVE BREAKPOINTS ==================== */
+@media (max-width: 1200px) {
+  .cp-container {
+    padding: 0 40px;
+  }
+
+  .cp-split-layout {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .channel-partner-page {
+    padding: 100px 0 70px 0;
+  }
+
+  .cp-split-layout {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .cp-right-content {
+    position: static;
+  }
+
+  .cp-form-card {
+    padding: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cp-container {
+    padding: 0 20px;
+  }
+
+  .cp-hero-title {
+    font-size: 2.1rem;
+  }
+
+  .cp-hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 28px;
+  }
+
+  .cp-benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .cp-form-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .cp-form-card {
+    padding: 26px 20px;
+    border-radius: 16px;
+  }
+
+  .cp-form-title {
+    font-size: 1.45rem;
+  }
+
+  .cp-direct-connect-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 18px;
+  }
+
+  .cp-direct-connect-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .channel-partner-page {
+    padding: 90px 0 50px 0;
+  }
+
+  .cp-hero-title {
+    font-size: 1.85rem;
+  }
+
+  .cp-badge {
+    font-size: 11px;
+    padding: 6px 14px;
+  }
+
+  .cp-benefit-card {
+    padding: 22px 18px;
+  }
+}

@@ -28,7 +28,7 @@ const Footer = () => {
               <li><Link to="/propose-land">Propose Land</Link></li>
               <li><Link to="/propose-project">Propose Project</Link></li>
               <li><Link to="/register-vendor">Register as a Vendor</Link></li>
-              <li><Link to="/register-channel-partner">Register as a Channel Partner</Link></li>
+              <li><Link to="/channel-partner">Register as a Channel Partner</Link></li>
             </ul>
           </div>
 

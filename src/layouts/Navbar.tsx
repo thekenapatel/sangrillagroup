@@ -43,13 +43,11 @@ const Navbar = () => {
 
           {/* DESKTOP MENU - Hidden on mobile */}
           <div className="nav-menu">
-            <NavLink to="/project/sangrilla-meadows">Dholera</NavLink>
-            <NavLink to="/commercial">Commercial</NavLink>
-            <NavLink to="/residential">Residential</NavLink>
-            <NavLink to="/plots">Plots</NavLink>
-            <NavLink to="/services">Services</NavLink>
-            <NavLink to="/about-us">About Us</NavLink>
-            <NavLink to="/contact">Contact</NavLink>
+            <NavLink to="/project/sangrilla-meadows">DHOLERA</NavLink>
+            <NavLink to="/projects">PROJECTS</NavLink>
+            <NavLink to="/register-channel-partner">CHANNEL PARTNER</NavLink>
+            <NavLink to="/about-us">ABOUT US</NavLink>
+            <NavLink to="/contact">CONTACT</NavLink>
           </div>
 
           {/* RIGHT SIDE */}
@@ -68,14 +66,18 @@ const Navbar = () => {
           <div className="menu-grid">
             {/* Column 1 */}
             <div className="menu-column">
-              <Link to="/project/sangrilla-meadows" onClick={closeMobileMenu}>Dholera</Link>
-              <Link to="/commercial" onClick={closeMobileMenu}>Commercial</Link>
-              <Link to="/residential" onClick={closeMobileMenu}>Residential</Link>
-              <Link to="/plots" onClick={closeMobileMenu}>Plots</Link>
+              <Link to="/project/sangrilla-meadows" onClick={closeMobileMenu}>DHOLERA</Link>
+              <Link to="/projects" onClick={closeMobileMenu}>PROJECTS</Link>
+              <Link to="/register-channel-partner" onClick={closeMobileMenu}>CHANNEL PARTNER</Link>
+              <Link to="/about-us" onClick={closeMobileMenu}>ABOUT US</Link>
+              <Link to="/contact" onClick={closeMobileMenu}>CONTACT</Link>
             </div>
 
             {/* Column 2 */}
             <div className="menu-column">
+              <Link to="/commercial" onClick={closeMobileMenu}>Commercial</Link>
+              <Link to="/residential" onClick={closeMobileMenu}>Residential</Link>
+              <Link to="/plots" onClick={closeMobileMenu}>Plots</Link>
               <Link to="/services" onClick={closeMobileMenu}>Services</Link>
               <Link to="/insights" onClick={closeMobileMenu}>Insights</Link>
             </div>
@@ -89,17 +91,10 @@ const Navbar = () => {
 
             {/* Column 4 */}
             <div className="menu-column">
-              <Link to="/about-us" onClick={closeMobileMenu}>About Us</Link>
               <Link to="/articles" onClick={closeMobileMenu}>Articles</Link>
-              <Link to="/contact" onClick={closeMobileMenu}>Contact</Link>
-            </div>
-
-            {/* Column 5 */}
-            <div className="menu-column">
               <Link to="/propose-land" onClick={closeMobileMenu}>Propose Land</Link>
               <Link to="/propose-project" onClick={closeMobileMenu}>Propose Project</Link>
               <Link to="/register-vendor" onClick={closeMobileMenu}>Register as a Vendor</Link>
-              <Link to="/register-channel-partner" onClick={closeMobileMenu}>Register as a Channel Partner</Link>
             </div>
           </div>
         </div>

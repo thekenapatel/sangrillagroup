@@ -8,7 +8,7 @@ import MasterPlanStatsBar from "./MasterPlanStatsBar";
 import MasterPlanNavigation, { type MasterPlanNavLevel } from "./MasterPlanNavigation";
 import type { FilterState } from "./MasterPlanToolbar";
 import MasterPlanToolbar from "./MasterPlanToolbar";
-import MasterPlanCanvas from "./MasterPlanCanvas";
+import MeadowsMapCanvas from "./MeadowsMapCanvas";
 import VillaFloorPlanViewer from "./VillaFloorPlanViewer";
 import PlotDrawer from "./PlotDrawer";
 import NaavikPlotDetailsCard from "./NaavikPlotDetailsCard";
@@ -285,16 +285,12 @@ export const MasterPlanViewer: React.FC<MasterPlanViewerProps> = ({
             selectedPlotNumber={selectedPlot?.plotNumber}
           />
         ) : (
-          /* Single interactive 2D blueprint canvas */
-          <MasterPlanCanvas
+          /* Geographic project map with interactive plot overlays */
+          <MeadowsMapCanvas
             plots={SAN_GRILLA_MEADOWS_PLOTS}
             filteredPlotIds={filteredPlotIds}
             selectedPlot={selectedPlot}
             onSelectPlot={handleSelectPlot}
-            isFullscreen={isFullscreen}
-            onToggleFullscreen={toggleFullscreen}
-            navigationLevel={navLevel}
-            onNavigateToVillas={() => setShowVillaFloorPlans(true)}
           />
         )}
 

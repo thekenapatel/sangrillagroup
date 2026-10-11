@@ -59,7 +59,6 @@ function AppContent() {
           element={
             <>
               <Hero />
-              <Projects />
               <Lifestyle />
               <UpcomingTeaser />
               <WhySangrilla />
@@ -71,6 +70,7 @@ function AppContent() {
 
         {/* Contact Page */}
         <Route path="/contact" element={<Contact />} />
+        <Route path="/projects" element={<Projects />} />
         
         {/* Dynamic Pages from Navbar */}
         <Route path="/about-us" element={<AboutUs />} />
@@ -100,6 +100,7 @@ function AppContent() {
         <Route path="/propose-project" element={<ProposeProject />} />
         <Route path="/register-vendor" element={<RegisterVendor />} />
         <Route path="/register-channel-partner" element={<RegisterChannelPartner />} />
+        <Route path="/channel-partner" element={<RegisterChannelPartner />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-of-use" element={<TermsOfUse />} />
         <Route path="/estate" element={<Estate />} />

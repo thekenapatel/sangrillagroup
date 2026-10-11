@@ -237,7 +237,7 @@ const SangrillaMeadowsDetail: React.FC = () => {
             <span className="meadows-breadcrumb-sep">/</span>
             {/* <Link to="/under-construction-projects">Under Construction</Link> */}
             {/* <span className="meadows-breadcrumb-sep">/</span> */}
-            <span className="meadows-breadcrumb-current" style={{ fontFamily: "'Philosopher', sans-serif" }}>SANGRILLA MEADOWS</span>
+            <span className="meadows-breadcrumb-current">SANGRILLA MEADOWS</span>
           </div>
 
           {/* Badges */}
@@ -264,7 +264,7 @@ const SangrillaMeadowsDetail: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            Sangrilla Meadows
+            SANGRILLA MEADOWS
           </motion.h1>
 
           <motion.h2
@@ -1198,7 +1198,7 @@ const SangrillaMeadowsDetail: React.FC = () => {
                   </div>
                   <div className="meadows-channel-text">
                     <h5>Email Support</h5>
-                    <a href="mailto:sangrillagroup@gmail.com">sangrillagroup@gmail.com</a>
+                    <a href="mailto:sales@sangrillagroup.com">sales@sangrillagroup.com</a>
                   </div>
                 </div>
 

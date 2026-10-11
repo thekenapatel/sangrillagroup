@@ -123,7 +123,7 @@ const Projects = () => {
                 alt={project.name}
               />
               {project.status === "under-construction" && (
-                <span className="project-card-badge">Under Construction</span>
+                <span className="project-card-badge">Newly Launched</span>
               )}
             </div>
 

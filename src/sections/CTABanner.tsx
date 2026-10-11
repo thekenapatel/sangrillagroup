@@ -49,7 +49,7 @@ const CTABanner: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h2>Ready to Find Your <br /> Dream Home?</h2>
+          <h2>Ready to Experience <br /> Luxury Living?</h2>
           <p>
             Connect with our experts today for a personalized consultation and 
             exclusive access to our premium residential and commercial projects.
