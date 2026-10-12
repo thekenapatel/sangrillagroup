@@ -813,3 +813,20 @@
     padding: 22px 18px;
   }
 }
+
+@media (max-width: 780px) {
+  .cp-benefits-grid {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding-bottom: 10px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cp-benefit-card {
+    flex: 0 0 52%;
+    scroll-snap-align: start;
+  }
+}

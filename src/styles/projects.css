@@ -253,7 +253,7 @@
     .projects-title {
         /* font-weight: 500; */
         font-size: 1.7rem;
-        margin-bottom: 20px;
+        padding: 50px 0 10px 0;
     }
 
     .filter-item.active {

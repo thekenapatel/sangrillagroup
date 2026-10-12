@@ -172,12 +172,12 @@
 
 @media (max-width: 768px) {
   .upcoming-grid {
-    width: 100vw;
+    width: calc(100% - 48px);
     max-width: none;
-    margin-left: calc(50% - 50vw);
-    padding-inline: max(0px, calc((100vw - min(85vw, 480px)) / 2));
+    margin: 0 auto;
+    padding-inline: 0;
     gap: 20px;
-    scroll-padding-inline: max(0px, calc((100vw - min(85vw, 480px)) / 2));
+    scroll-padding-inline: 0;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -224,6 +224,7 @@
   .upcoming-grid {
     grid-template-columns: 1fr;
     gap: 30px;
+    padding: 0 0 20px;
   }
 
   .upcoming-card {

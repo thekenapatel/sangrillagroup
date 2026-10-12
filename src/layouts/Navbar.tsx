@@ -43,11 +43,11 @@ const Navbar = () => {
 
           {/* DESKTOP MENU - Hidden on mobile */}
           <div className="nav-menu">
-            <NavLink to="/project/sangrilla-meadows">DHOLERA</NavLink>
-            <NavLink to="/projects">PROJECTS</NavLink>
-            <NavLink to="/register-channel-partner">CHANNEL PARTNER</NavLink>
-            <NavLink to="/about-us">ABOUT US</NavLink>
-            <NavLink to="/contact">CONTACT</NavLink>
+            <NavLink to="/project/sangrilla-meadows">Dholera</NavLink>
+            <NavLink to="/projects">Projects</NavLink>
+            <NavLink to="/register-channel-partner">Channel Partner</NavLink>
+            <NavLink to="/about-us">About Us</NavLink>
+            <NavLink to="/contact">Contact</NavLink>
           </div>
 
           {/* RIGHT SIDE */}
@@ -61,41 +61,41 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* FULL MENU DROPDOWN - Shivalik Style */}
+        {/* FULL MENU DROPDOWN */}
         <div className={`full-menu ${isMobileMenuOpen ? 'open' : ''}`}>
           <div className="menu-grid">
             {/* Column 1 */}
             <div className="menu-column">
-              <Link to="/project/sangrilla-meadows" onClick={closeMobileMenu}>DHOLERA</Link>
-              <Link to="/projects" onClick={closeMobileMenu}>PROJECTS</Link>
-              <Link to="/register-channel-partner" onClick={closeMobileMenu}>CHANNEL PARTNER</Link>
-              <Link to="/about-us" onClick={closeMobileMenu}>ABOUT US</Link>
-              <Link to="/contact" onClick={closeMobileMenu}>CONTACT</Link>
+              <Link to="/project/sangrilla-meadows" onClick={closeMobileMenu}>Dholera</Link>
+              <Link to="/projects" onClick={closeMobileMenu}>Projects</Link>
+              <Link to="/register-channel-partner" onClick={closeMobileMenu}>Channel Partner</Link>
+              <Link to="/about-us" onClick={closeMobileMenu}>About Us</Link>
+              <Link to="/contact" onClick={closeMobileMenu}>Contact</Link>
             </div>
 
             {/* Column 2 */}
-            <div className="menu-column">
+            {/* <div className="menu-column">
               <Link to="/commercial" onClick={closeMobileMenu}>Commercial</Link>
               <Link to="/residential" onClick={closeMobileMenu}>Residential</Link>
               <Link to="/plots" onClick={closeMobileMenu}>Plots</Link>
               <Link to="/services" onClick={closeMobileMenu}>Services</Link>
               <Link to="/insights" onClick={closeMobileMenu}>Insights</Link>
-            </div>
+            </div> */}
 
             {/* Column 3 */}
-            <div className="menu-column">
+            {/* <div className="menu-column">
               <Link to="/under-construction-projects" onClick={closeMobileMenu}>Under Construction</Link>
               <Link to="/ready-property" onClick={closeMobileMenu}>Ready Property</Link>
               <Link to="/completed-projects" onClick={closeMobileMenu}>Completed Projects</Link>
-            </div>
+            </div> */}
 
             {/* Column 4 */}
-            <div className="menu-column">
+            {/* <div className="menu-column">
               <Link to="/articles" onClick={closeMobileMenu}>Articles</Link>
               <Link to="/propose-land" onClick={closeMobileMenu}>Propose Land</Link>
               <Link to="/propose-project" onClick={closeMobileMenu}>Propose Project</Link>
               <Link to="/register-vendor" onClick={closeMobileMenu}>Register as a Vendor</Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </motion.nav>

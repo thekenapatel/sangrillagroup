@@ -224,7 +224,7 @@ const RegisterChannelPartner: React.FC = () => {
             {/* 1. Hero Section */}
             <div className="cp-badge-wrapper">
               <span className="cp-badge">
-                <span className="cp-badge-dot" />
+                {/* <span className="cp-badge-dot" /> */}
                 SANGRILLA PARTNER NETWORK
               </span>
             </div>
@@ -328,7 +328,7 @@ const RegisterChannelPartner: React.FC = () => {
             </div>
 
             {/* Direct WhatsApp Connect Card */}
-            <div className="cp-direct-connect-card">
+            {/* <div className="cp-direct-connect-card">
               <div className="cp-direct-connect-left">
                 <div className="cp-direct-connect-icon">
                   <FaWhatsapp size={26} />
@@ -350,7 +350,7 @@ const RegisterChannelPartner: React.FC = () => {
                 <FaWhatsapp size={16} />
                 <span>Chat on WhatsApp</span>
               </a>
-            </div>
+            </div> */}
           </div>
 
           {/* ================= RIGHT COLUMN: REGISTRATION FORM ================= */}
@@ -385,7 +385,7 @@ const RegisterChannelPartner: React.FC = () => {
                           name="fullName"
                           type="text"
                           className="cp-input"
-                          placeholder="e.g. Rajesh Sharma"
+                          placeholder="e.g. Dev Patel"
                           value={formData.fullName}
                           onChange={handleInputChange}
                           required
@@ -408,7 +408,7 @@ const RegisterChannelPartner: React.FC = () => {
                           name="agencyName"
                           type="text"
                           className="cp-input"
-                          placeholder="e.g. Apex Realty Ventures"
+                          placeholder="e.g. Anantaa Realty Ventures"
                           value={formData.agencyName}
                           onChange={handleInputChange}
                           required
