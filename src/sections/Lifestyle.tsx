@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { motion } from "framer-motion";
+import type { FC } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import "../styles/lifestyle.css";
 import OptimizedImage from "../components/OptimizedImage";
 import ZenGarden from "../assets/lifestyle images/zen_garden.png";
@@ -13,104 +13,71 @@ import ClubHouse from "../assets/lifestyle images/club_house.png";
 
 const lifestyleMoments = [
   {
-    title: "The Grand Clubhouse",
-    description: "A space where luxury meets community. Designed for celebrations and everyday leisure.",
+    title: "The Clubhouse",
+    description: "Gather, celebrate, or take time to unwind.",
     image: ClubHouse,
   },
   {
     title: "Zen Gardens",
-    description: "Quiet mornings amidst manicured landscapes. Find your peace in the heart of the city.",
+    description: "A quieter corner to begin the day.",
     image: ZenGarden,
   },
   {
-    title: "Community Spirit",
-    description: "Memorable events and festive gatherings. Building bonds that last a lifetime.",
+    title: "Community",
+    description: "Shared celebrations. Lasting connections.",
     image: CommunitySpirit,
   },
   {
-    title: "Refresh & Rejuvenate",
-    description: "Dive into luxury. Our temperature-controlled pools are perfect for any season.",
+    title: "Poolside",
+    description: "Make room for a refreshing pause.",
     image: SwimmingPool,
   },
   {
-    title: "The Kids' Arena",
-    description: "Safe, vibrant, and fun. Where every child's imagination finds a home.",
+    title: "Kids' Play",
+    description: "Room to play, imagine, and grow.",
     image: KidsArena,
   }
 ];
 
-const Lifestyle: React.FC = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const isDown = useRef(false);
-  const startX = useRef(0);
-  const scrollLeft = useRef(0);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    isDown.current = true;
-    if (scrollRef.current) {
-      startX.current = e.pageX - scrollRef.current.offsetLeft;
-      scrollLeft.current = scrollRef.current.scrollLeft;
-    }
-  };
-
-  const handleMouseLeave = () => {
-    isDown.current = false;
-  };
-
-  const handleMouseUp = () => {
-    isDown.current = false;
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDown.current) return;
-    e.preventDefault();
-    if (scrollRef.current) {
-      const x = e.pageX - scrollRef.current.offsetLeft;
-      const walk = (x - startX.current) * 2; // scroll speed
-      scrollRef.current.scrollLeft = scrollLeft.current - walk;
-    }
-  };
+const Lifestyle: FC = () => {
+  const reduceMotion = useReducedMotion();
+  const initialState = reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 };
+  const animationDuration = reduceMotion ? 0 : 0.55;
 
   return (
-    <section className="lifestyle-section">
-      <div className="lifestyle-header container">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          The Sangrilla Life
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          Show how life feels inside our projects — the perfect blend of luxury,
-          nature, and community designed for those who seek the extraordinary.
-        </motion.p>
-      </div>
-
-      <div
-        className="lifestyle-scroll-container"
-        ref={scrollRef}
-        onMouseDown={handleMouseDown}
-        onMouseLeave={handleMouseLeave}
-        onMouseUp={handleMouseUp}
-        onMouseMove={handleMouseMove}
-      >
-        {lifestyleMoments.map((moment, index) => (
-          <div
-            key={index}
-            className="lifestyle-card"
+    <section className="lifestyle-section" aria-labelledby="lifestyle-heading">
+      <div className="lifestyle-inner">
+        <div className="lifestyle-gallery">
+          <motion.header
+            className="lifestyle-intro"
+            initial={initialState}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: animationDuration }}
           >
-            <OptimizedImage src={moment.image} alt={moment.title} />
-            <div className="lifestyle-overlay">
-              <h3>{moment.title}</h3>
-              <p>{moment.description}</p>
-            </div>
-          </div>
+            <span className="lifestyle-eyebrow">A PLACE TO FEEL AT HOME</span>
+            <h2 id="lifestyle-heading">The Sangrilla Life</h2>
+            <p>Space to slow down, come together, and make every day count.</p>
+          </motion.header>
+
+        {lifestyleMoments.map((moment, index) => (
+            <motion.figure
+              key={moment.title}
+              className={`lifestyle-moment lifestyle-moment-${index}`}
+              initial={initialState}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: animationDuration, delay: reduceMotion ? 0 : 0.08 + index * 0.07 }}
+            >
+              <OptimizedImage src={moment.image} alt={moment.title} />
+              <figcaption className="lifestyle-caption">
+                <span className="lifestyle-moment-index">{String(index + 1).padStart(2, "0")} / 05</span>
+                <h3>{moment.title}</h3>
+                <p>{moment.description}</p>
+              </figcaption>
+            </motion.figure>
         ))}
+        </div>
       </div>
     </section>
   );

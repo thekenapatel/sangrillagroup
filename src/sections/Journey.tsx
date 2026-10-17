@@ -13,7 +13,7 @@ const Journey = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h2>Our Journey & <br /> Achievements</h2>
+          <h2>Our Legacy</h2>
           <p className="journey-intro">
             From humble beginnings in 2000 to becoming a reputed name in real estate development. 
             Driven by a strong vision to create not just buildings, but happy and prosperous communities for generations to come.

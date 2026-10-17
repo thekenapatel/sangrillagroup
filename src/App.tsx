@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./layouts/Navbar";
 import Hero from "./sections/Hero";
+import NumbersShowcase from "./sections/NumbersShowcase";
 import Projects from "./sections/Projects";
 import Journey from "./sections/Journey";
 import Lifestyle from "./sections/Lifestyle";
@@ -59,6 +60,7 @@ function AppContent() {
           element={
             <>
               <Hero />
+              <NumbersShowcase />
               <Lifestyle />
               <UpcomingTeaser />
               <WhySangrilla />
@@ -71,7 +73,7 @@ function AppContent() {
         {/* Contact Page */}
         <Route path="/contact" element={<Contact />} />
         <Route path="/projects" element={<Projects />} />
-        
+
         {/* Dynamic Pages from Navbar */}
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/commercial" element={<Commercial />} />

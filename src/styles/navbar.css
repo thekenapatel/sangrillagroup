@@ -149,13 +149,21 @@
 
     .menu-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 40px 30px;
+        gap: 20px 10px;
         padding: 30px 24px;
     }
 
     .menu-column {
         border-right: none;
         padding: 0;
+    }
+
+    .menu-column a {
+        padding-bottom: 20px;
+    }
+
+    .menu-column a[href="/register-channel-partner"] {
+        white-space: nowrap;
     }
 }
 

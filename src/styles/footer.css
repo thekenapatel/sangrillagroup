@@ -26,6 +26,37 @@
     margin-bottom: 50px;
 }
 
+.footer-purpose {
+    flex: 1 1 260px;
+    max-width: 300px;
+}
+
+.footer-purpose h2 {
+    /* margin: 0 0 5px; */
+    color: #ffffff;
+    font-size: 28px;
+    letter-spacing: 0.15em;
+    font-family: 'Philosopher', sans-serif;
+    font-weight: 600;
+    text-align: center;
+}
+
+.footer-purpose h3 {
+    margin: 0 0 7px;
+    color: #b5b5b7;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.footer-purpose p {
+    margin-top: 30px;
+    color: #9ca3af;
+    font-size: 12px;
+    line-height: 1.7;
+    text-align: center;
+}
+
 /* Each column */
 .footer-column {
     min-width: 180px;

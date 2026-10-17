@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Compass, Handshake, ShieldCheck, TrendingUp } from "lucide-react";
 import "../styles/why-sangrilla.css";
 
@@ -6,70 +6,86 @@ const pillars = [
   {
     number: "01",
     Icon: Compass,
-    title: "Strategic Growth Corridors",
-    description: "Prime developments situated directly across Gujarat’s highest-appreciation zones, including Dholera SIR and prime Ahmedabad hubs.",
+    title: "Strategic Locations",
+    lead: "Well-connected locations.",
+    description: "Explore opportunities across Ahmedabad and Dholera.",
   },
   {
     number: "02",
     Icon: ShieldCheck,
-    title: "Absolute Legal Transparency",
-    description: "100% RERA-registered projects with verified title documentation, clear land history, and hassle-free ownership transfers.",
+    title: "Transparency First",
+    lead: "Clarity at every step.",
+    description: "Verified project documentation and clear ownership processes.",
   },
   {
     number: "03",
     Icon: TrendingUp,
-    title: "High-Yield Asset Curation",
-    description: "Expertly selected residential plotting and commercial spaces structured for maximum capital growth and generational wealth.",
+    title: "Long-Term Value",
+    lead: "Invest with perspective.",
+    description: "Explore residential and commercial opportunities aligned with your goals.",
   },
   {
     number: "04",
     Icon: Handshake,
-    title: "Dedicated Investor Ecosystem",
-    description: "End-to-end guidance from personalized site visit assistance to strategic channel partner support and long-term asset management.",
+    title: "Personal Guidance",
+    lead: "With you at every step.",
+    description: "From site visits to purchase assistance, we make the process simpler.",
   },
 ];
 
 const WhySangrilla: React.FC = () => {
-  return (
-    <section className="why-sangrilla">
-      <div className="why-header">
-        <span className="why-eyebrow">WHY SANGRILLA GROUP</span>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6 }}
-        >
-          Redefining Real Estate &amp; Smart City Growth
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          Strategic location choices, absolute legal transparency, and future-proof developments designed for living and high-return investments.
-        </motion.p>
-      </div>
+  const reduceMotion = useReducedMotion();
+  const initialState = reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 };
+  const animationDuration = reduceMotion ? 0 : 0.55;
 
-      <div className="why-grid">
-        {pillars.map(({ number, Icon, title, description }, index) => (
+  return (
+    <section className="why-sangrilla" aria-labelledby="why-heading">
+      <div className="why-inner">
+        <header className="why-header">
+          <span className="why-eyebrow">WHY SANGRILLA</span>
+          <div className="why-heading-row">
+            <motion.h2
+              id="why-heading"
+              initial={initialState}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: animationDuration }}
+            >
+              Built on Trust. Focused on Tomorrow.
+            </motion.h2>
+            <motion.p
+              initial={initialState}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: animationDuration, delay: reduceMotion ? 0 : 0.12 }}
+            >
+              Thoughtfully chosen locations, transparent processes, and personalized guidance for your real estate journey.
+            </motion.p>
+          </div>
+        </header>
+
+        <div className="why-grid">
+          {pillars.map(({ number, Icon, title, lead, description }, index) => (
           <motion.article
             key={number}
-            className="why-card"
-            initial={{ opacity: 0, y: 18 }}
+            className="why-pillar"
+            initial={initialState}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.45, delay: index * 0.08 }}
+            transition={{ duration: animationDuration, delay: reduceMotion ? 0 : index * 0.08 }}
           >
-            <div className="why-card-topline">
-              <span className="why-card-number">{number}</span>
-              <span className="why-card-icon"><Icon size={24} strokeWidth={1.8} /></span>
+            <div className="why-pillar-marker" aria-hidden="true">
+              <span className="why-pillar-number">{number}</span>
+              <span className="why-pillar-icon"><Icon size={22} strokeWidth={1.6} /></span>
             </div>
-            <h3>{title}</h3>
-            <p>{description}</p>
+            <div className="why-pillar-copy">
+              <h3>{title}</h3>
+              <p className="why-pillar-lead">{lead}</p>
+              <p className="why-pillar-description">{description}</p>
+            </div>
           </motion.article>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

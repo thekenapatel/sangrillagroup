@@ -8,6 +8,12 @@ const Footer = () => {
     <footer className="footer">
       <div className="container">
         <div className="footer-container">
+          <div className="footer-purpose">
+            <h2>SANGRILLA</h2>
+            <h3>BUILD PURPOSEFULLY</h3>
+            <p>Building purposefully for over two decades, <br/>every story has a purpose.</p>
+          </div>
+
           {/* Column 1: Properties */}
           <div className="footer-column">
             {/* <h4>Properties</h4> */}
@@ -15,22 +21,22 @@ const Footer = () => {
               <li><Link to="/commercial">Commercial</Link></li>
               <li><Link to="/residential">Residential</Link></li>
               <li><Link to="/plots">Plotting</Link></li>
-              <li><Link to="/ready-property">Ready Property</Link></li>
+              {/* <li><Link to="/ready-property">Ready Property</Link></li> */}
               <li><Link to="/completed-projects">Completed Projects</Link></li>
-              <li><Link to="/estate" className="estate-brand-link">Estate</Link></li>
+              {/* <li><Link to="/estate" className="estate-brand-link">Estate</Link></li> */}
             </ul>
           </div>
 
           {/* Column 2: Collaborate */}
-          <div className="footer-column">
+          {/* <div className="footer-column"> */}
             {/* <h4>Collaborate</h4> */}
-            <ul>
-              <li><Link to="/propose-land">Propose Land</Link></li>
-              <li><Link to="/propose-project">Propose Project</Link></li>
-              <li><Link to="/register-vendor">Register as a Vendor</Link></li>
-              <li><Link to="/channel-partner">Register as a Channel Partner</Link></li>
-            </ul>
-          </div>
+            {/* <ul> */}
+              {/* <li><Link to="/propose-land">Propose Land</Link></li> */}
+              {/* <li><Link to="/propose-project">Propose Project</Link></li> */}
+              {/* <li><Link to="/register-vendor">Register as a Vendor</Link></li> */}
+              {/* <li><Link to="/channel-partner">Register as a Channel Partner</Link></li> */}
+            {/* </ul> */}
+          {/* </div> */}
 
           {/* Column 3: Company */}
           <div className="footer-column">
