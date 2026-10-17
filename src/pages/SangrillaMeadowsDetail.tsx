@@ -480,13 +480,13 @@ const SangrillaMeadowsDetail: React.FC = () => {
         {/* ============================================================
             PHOTOS (HORIZONTAL SCROLLER)
             ============================================================ */}
-        <section className="meadows-section" id="photos-section">
+        <section className="meadows-section meadows-photos-section" id="photos-section">
           <div className="meadows-section-header" style={{ marginBottom: "20px" }}>
             <h2 className="meadows-section-title">PHOTOS</h2>
           </div>
 
           <div
-            className="lifestyle-scroll-container"
+            className="meadows-photos-scroller"
             ref={photosScrollerRef}
             onMouseDown={handlePhotosMouseDown}
             onMouseLeave={handlePhotosMouseUp}
@@ -494,7 +494,7 @@ const SangrillaMeadowsDetail: React.FC = () => {
             onMouseMove={handlePhotosMouseMove}
           >
             {galleryImages.map((img, idx) => (
-              <div key={idx} className="lifestyle-card">
+              <div key={idx} className="meadows-photo-slide">
                 <OptimizedImage src={img.src} alt="" />
               </div>
             ))}

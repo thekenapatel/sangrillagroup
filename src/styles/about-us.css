@@ -243,6 +243,25 @@
   max-width: 950px;
 }
 
+.sn-story-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 1.25rem;
+  color: var(--sn-accent-blue-light);
+  font-family: var(--sn-font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.sn-story-title::before {
+  width: 28px;
+  height: 1px;
+  background: var(--sn-accent-blue);
+  content: "";
+}
+
 .sn-hero-pill-badge {
   display: inline-flex;
   align-items: center;

@@ -122,7 +122,7 @@ const AboutUs = () => {
 
         <div className="sn-container sn-hero-layout">
           {/* Film Metadata Reel */}
-          <div className="sn-film-meta-bar">
+          {/* <div className="sn-film-meta-bar">
             <div className="sn-meta-item">
               <Film size={14} className="sn-blue-icon" />
               <span>A SANGRILLA STORY &bull; 35MM ESSAY</span>
@@ -137,14 +137,15 @@ const AboutUs = () => {
               <MapPin size={14} className="sn-blue-icon" />
               <span>23.0225° N, 72.5714° E &bull; GUJARAT</span>
             </div>
-          </div>
+          </div> */}
 
           {/* Hero Center Editorial */}
           <div className="sn-hero-lead-box">
-            <div className="sn-hero-pill-badge">
+            <p className="sn-story-title">THE SANGRILLA STORY</p>
+            {/* <div className="sn-hero-pill-badge">
               <span className="sn-pulse-dot" />
               <span>SANGRILLA GROUP &bull; ESTABLISHED 2000</span>
-            </div>
+            </div> */}
 
             <h1 className="sn-cinema-h1">
               Not Just Better Spaces. <br />
