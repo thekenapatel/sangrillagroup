@@ -60,10 +60,10 @@ function AppContent() {
           element={
             <>
               <Hero />
-              <NumbersShowcase />
               <Lifestyle />
               <UpcomingTeaser />
               <WhySangrilla />
+              <NumbersShowcase />
               <Journey />
               <CTABanner />
             </>

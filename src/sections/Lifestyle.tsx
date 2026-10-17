@@ -60,23 +60,25 @@ const Lifestyle: FC = () => {
             <p>Space to slow down, come together, and make every day count.</p>
           </motion.header>
 
-        {lifestyleMoments.map((moment, index) => (
-            <motion.figure
-              key={moment.title}
-              className={`lifestyle-moment lifestyle-moment-${index}`}
-              initial={initialState}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{ duration: animationDuration, delay: reduceMotion ? 0 : 0.08 + index * 0.07 }}
-            >
-              <OptimizedImage src={moment.image} alt={moment.title} />
-              <figcaption className="lifestyle-caption">
-                <span className="lifestyle-moment-index">{String(index + 1).padStart(2, "0")} / 05</span>
-                <h3>{moment.title}</h3>
-                <p>{moment.description}</p>
-              </figcaption>
-            </motion.figure>
-        ))}
+          <div className="lifestyle-scroller" aria-label="Lifestyle highlights">
+            {lifestyleMoments.map((moment, index) => (
+              <motion.figure
+                key={moment.title}
+                className={`lifestyle-moment lifestyle-moment-${index}`}
+                initial={initialState}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: animationDuration, delay: reduceMotion ? 0 : 0.08 + index * 0.07 }}
+              >
+                <OptimizedImage src={moment.image} alt={moment.title} />
+                <figcaption className="lifestyle-caption">
+                  <span className="lifestyle-moment-index">{String(index + 1).padStart(2, "0")} / 05</span>
+                  <h3>{moment.title}</h3>
+                  <p>{moment.description}</p>
+                </figcaption>
+              </motion.figure>
+            ))}
+          </div>
         </div>
       </div>
     </section>

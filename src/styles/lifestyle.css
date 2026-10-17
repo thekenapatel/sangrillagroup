@@ -24,6 +24,10 @@
   gap: 12px;
 }
 
+.lifestyle-scroller {
+  display: contents;
+}
+
 .lifestyle-intro {
   grid-area: intro;
   display: flex;
@@ -168,14 +172,37 @@
 
   .lifestyle-gallery {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto 340px repeat(4, 220px);
+    grid-template-rows: auto 340px;
     grid-template-areas:
       "intro"
-      "feature"
-      "scene-one"
-      "scene-two"
-      "scene-three"
-      "scene-four";
+      "moments";
+  }
+
+  .lifestyle-scroller {
+    grid-area: moments;
+    display: flex;
+    gap: 12px;
+    width: calc(100% + 22px);
+    margin-right: -22px;
+    padding: 0 22px 12px 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-color: #e8e6e6;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .lifestyle-scroller::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  .lifestyle-scroller::-webkit-scrollbar-track {
+    background: #e8e6e6;
+  }
+
+  .lifestyle-scroller::-webkit-scrollbar-thumb {
+    background: var(--lifestyle-blue);
   }
 
   .lifestyle-intro {
@@ -198,6 +225,12 @@
 
   .lifestyle-caption {
     padding: 24px 18px 18px;
+  }
+
+  .lifestyle-scroller .lifestyle-moment {
+    flex: 0 0 min(82vw, 360px);
+    height: 340px;
+    scroll-snap-align: start;
   }
 
   .lifestyle-caption h3 {
