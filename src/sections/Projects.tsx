@@ -28,7 +28,9 @@ const Projects = () => {
   const filteredProjects =
     activeFilter === "all"
       ? allProjects
-      : allProjects.filter((p) => p.type === activeFilter);
+      : activeFilter === "ongoing"
+        ? allProjects.filter((project) => project.status === "under-construction")
+        : allProjects.filter((project) => project.type === activeFilter);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     isDown.current = true;
@@ -86,6 +88,7 @@ const Projects = () => {
         <div className="projects-filters">
           {[
             { key: "all", label: "All" },
+            { key: "ongoing", label: "Ongoing" },
             { key: "residential", label: "Residential" },
             { key: "commercial", label: "Commercial" },
           ].map(({ key, label }) => (
@@ -122,7 +125,8 @@ const Projects = () => {
                 className="project-image"
                 alt={project.name}
               />
-              {project.status === "under-construction" && (
+              {project.status === "under-construction" &&
+                !["sangrilla-meadows", "neejdham-sangrilla-2", "baghbaan-sangrilla"].includes(project.id) && (
                 <span className="project-card-badge">Newly Launched</span>
               )}
             </div>

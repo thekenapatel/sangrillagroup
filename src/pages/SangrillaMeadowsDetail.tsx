@@ -106,12 +106,12 @@ const investorTestimonials = [
   {
     name: "Prashant K. Shah",
     role: "Senior Director, Tech Enterprise",
-    location: "Ahmedabad / Singapore NRI",
+    location: "Ahmedabad / Singapore",
     plot: "Plot #42 · 250 Sq. Yd.",
     badge: "Verified NRI Investor",
     rating: 5,
     avatar: "PS",
-    accentColor: "#007ADD",
+    accentColor: "#8ac8fb",
     highlight: "100% Transparent Documentation & Fast Registry",
     quote:
       "Finding clear title NA/NOC approved land in Dholera SIR with immediate registry was our top priority. Sangrilla Group made the entire transaction 100% transparent. The direct proximity to the 250m express corridor and upcoming international airport makes Meadows our highest-potential asset in Gujarat."
@@ -120,11 +120,11 @@ const investorTestimonials = [
     name: "Dr. Hemali & Vikram Trivedi",
     role: "Healthcare Consultants",
     location: "Ahmedabad",
-    plot: "2BHK Porch Villa",
+    plot: "2BHK Luxurious Villa",
     badge: "Villa Homeowner",
     rating: 5,
     avatar: "VT",
-    accentColor: "#10b981",
+    accentColor: "#8ffad7",
     highlight: "Compounding Asset & Resort-Like Township",
     quote:
       "We were looking for a weekend villa getaway that doubles as a compounding generational asset. The planned clubhouse, landscaped parks, and wide tree-lined roads give Sangrilla Meadows a resort-like aura. It's rare to see a developer execute exactly according to the Dholera Smart City masterplan."
@@ -137,7 +137,7 @@ const investorTestimonials = [
     badge: "Multi-Plot Investor",
     rating: 5,
     avatar: "MP",
-    accentColor: "#f59e0b",
+    accentColor: "#f7c878",
     highlight: "High Ground Elevation & High Growth Corridor",
     quote:
       "With Tata's semiconductor plant and the Dholera Expressway driving rapid momentum, timelines are speeding up significantly. Sangrilla Meadows stands out because of its natural high elevation — zero waterlogging risks during monsoon. Highly recommended for strategic portfolio growth."
@@ -150,7 +150,7 @@ const investorTestimonials = [
     badge: "Verified First-Time Buyer",
     rating: 5,
     avatar: "KM",
-    accentColor: "#8b5cf6",
+    accentColor: "#c5adfd",
     highlight: "Complete Remote Paperwork & Frictionless Process",
     quote:
       "As an outstation buyer from Mumbai, I was initially cautious about remote land purchases. The Sangrilla team provided complete paperwork verification in advance, coordinated our site visit, and facilitated legal registration without any friction. The customer support is exemplary."
@@ -481,7 +481,7 @@ const SangrillaMeadowsDetail: React.FC = () => {
             PHOTOS (HORIZONTAL SCROLLER)
             ============================================================ */}
         <section className="meadows-section meadows-photos-section" id="photos-section">
-          <div className="meadows-section-header" style={{ marginBottom: "20px" }}>
+          <div className="meadows-section-header">
             <h2 className="meadows-section-title">PHOTOS</h2>
           </div>
 
@@ -495,7 +495,7 @@ const SangrillaMeadowsDetail: React.FC = () => {
           >
             {galleryImages.map((img, idx) => (
               <div key={idx} className="meadows-photo-slide">
-                <OptimizedImage src={img.src} alt="" />
+                <OptimizedImage src={img.src} alt="" draggable={false} />
               </div>
             ))}
           </div>
@@ -1356,7 +1356,7 @@ const SangrillaMeadowsDetail: React.FC = () => {
                 <UserCheck size={20} />
               </div>
               <div>
-                <div className="meadows-investor-stat-val">500+ Buyers</div>
+                <div className="meadows-investor-stat-val">650+ Buyers</div>
                 <div className="meadows-investor-stat-label">Across Sangrilla Developments</div>
               </div>
             </div>

@@ -35,7 +35,6 @@ import ProjectDetail from "./pages/ProjectDetail";
 import UnderConstructionProjects from "./pages/UnderConstructionProjects";
 import SangrillaMeadowsDetail from "./pages/SangrillaMeadowsDetail";
 import MasterPlanPage from "./pages/MasterPlanPage";
-import AvirahiCityPage from "./pages/AvirahiCityPage";
 
 import Chatbot from "./components/ChatBot AI/Chatbot";
 
@@ -43,7 +42,6 @@ function AppContent() {
   const location = useLocation();
   const isPlotter =
     location.pathname.includes("plotter") ||
-    location.pathname.includes("avirahi-city") ||
     location.pathname.includes("meadows-plan") ||
     location.pathname.includes("sangrilla-meadows-plan") ||
     location.pathname.includes("master-plan");
@@ -93,10 +91,6 @@ function AppContent() {
         {/* Sangrilla Meadows Plan - High Resolution Interactive GIS Plotter */}
         <Route path="/sangrilla-meadows-plan" element={<MasterPlanPage />} />
         <Route path="/meadows-plan" element={<MasterPlanPage />} />
-        <Route path="/avirahi-city" element={<AvirahiCityPage />} />
-        <Route path="/avirahi-city/plotter" element={<AvirahiCityPage />} />
-        <Route path="/dholera/avirahi-city" element={<AvirahiCityPage />} />
-        <Route path="/project/avirahi-city" element={<AvirahiCityPage />} />
         <Route path="/articles" element={<Articles />} />
         <Route path="/propose-land" element={<ProposeLand />} />
         <Route path="/propose-project" element={<ProposeProject />} />

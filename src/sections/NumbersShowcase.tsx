@@ -89,12 +89,8 @@ function NumbersShowcase(): ReactElement {
           viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="numbers-eyebrow">
-            <span>Performance &amp; Legacy</span>
-            <span className="numbers-eyebrow-divider" aria-hidden="true" />
-            <span>Since 2000</span>
-          </p>
-          <h2 id="numbers-title">A legacy built over time.</h2>
+          <h2 id="numbers-title">SANGRILLA IN NUMBERS</h2>
+          <p className="numbers-eyebrow">Since 2000</p>
         </motion.header>
 
         <div className="numbers-grid">

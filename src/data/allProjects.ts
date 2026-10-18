@@ -110,6 +110,7 @@ import villa2 from '../assets/residential/res-villa/villa2.jpg';
 import villa3 from '../assets/residential/res-villa/villa3.jpg';
 import villa4 from '../assets/residential/res-villa/villa4.jpg';
 import villa5 from '../assets/residential/res-villa/villa5.jpg';
+import blossom from '../assets/upcoming/blossom.jpg';
 
 
 export type ProjectStatus = 'completed' | 'under-construction';
@@ -180,6 +181,75 @@ export const allProjects: Project[] = [
       '/assets/meadows/up_res_2.jpg',
       'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200',
       'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200',
+    ],
+  },
+  {
+    id: 'neejdham-sangrilla-2',
+    name: 'Neejdham (Sangrilla 2)',
+    tagline: 'Ultra-Luxury 4 BHK Apartments with Private Decks',
+    location: 'Gujarat',
+    status: 'under-construction',
+    type: 'residential',
+    specs: [
+      { label: 'Project Status', value: 'Ongoing' },
+      { label: 'Residence Type', value: 'Ultra-luxury 4 BHK Apartments' },
+      { label: 'Outdoor Space', value: 'Private Decks' },
+      { label: 'Floor Plans', value: 'To be announced' },
+      { label: 'Possession', value: 'To be announced' },
+    ],
+    description: 'Sangrilla Neejdham is an upcoming residential address featuring ultra-luxury 4 BHK apartments with private decks. Further project and floor-plan details will be announced soon.',
+    amenities: [
+      'Private Decks',
+      'Landscaped Gardens',
+      'Residents’ Clubhouse',
+      'Fitness Centre',
+      'Children’s Play Area',
+      'Dedicated Parking',
+      'CCTV Security',
+      'Power Backup for Common Areas',
+    ],
+    images: [
+      blossom,
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1200',
+      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200',
+    ],
+    inventory: [
+      { floor: '4 BHK Residences', count: 'Multiple Apartments', size: 'Details to be announced' },
+    ],
+  },
+  {
+    id: 'baghbaan-sangrilla',
+    name: 'BaghBaan (Sangrilla)',
+    tagline: 'A Greener Way to Come Home',
+    location: 'Gujarat',
+    status: 'under-construction',
+    type: 'residential',
+    specs: [
+      { label: 'Project Status', value: 'Ongoing' },
+      { label: 'Residence Type', value: 'Residential Plots & Villas' },
+      { label: 'Plot Sizes', value: 'Indicative 100 to 300 Sq. Yards' },
+      { label: 'Community', value: 'Gated Residential Development' },
+      { label: 'Possession', value: 'To be announced' },
+    ],
+    description: 'BaghBaan by Sangrilla is a planned residential community bringing together open spaces, thoughtfully laid out plots, and villa living. Final layouts and project specifications will be announced soon.',
+    amenities: [
+      'Landscaped Gardens',
+      'Tree-Lined Internal Roads',
+      'Children’s Play Area',
+      'Community Gathering Space',
+      'Gated Entry',
+      'CCTV Security',
+      'Street Lighting',
+      'Water Supply',
+    ],
+    images: [
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200',
+      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200',
+      'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=1200',
+    ],
+    inventory: [
+      { floor: 'Residential Plots', count: 'Planned Inventory', size: 'Indicative 100 to 300 sq. yards' },
+      { floor: 'Villas', count: 'Planned Inventory', size: 'Details to be announced' },
     ],
   },
 

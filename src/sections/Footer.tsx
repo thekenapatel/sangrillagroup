@@ -18,6 +18,7 @@ const Footer = () => {
           <div className="footer-column">
             {/* <h4>Properties</h4> */}
             <ul>
+              <li><Link to="/projects">All Projects</Link></li>
               <li><Link to="/commercial">Commercial</Link></li>
               <li><Link to="/residential">Residential</Link></li>
               <li><Link to="/plots">Plotting</Link></li>
@@ -42,7 +43,7 @@ const Footer = () => {
           <div className="footer-column">
             {/* <h4>Company</h4> */}
             <ul>
-              <li><Link to="/about-us">About Us</Link></li>
+              <li><Link to="/about-us">Our Story</Link></li>
               <li><Link to="/articles">Articles</Link></li>
               <li><Link to="/contact">Contact</Link></li>
             </ul>

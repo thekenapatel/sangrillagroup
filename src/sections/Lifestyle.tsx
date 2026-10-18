@@ -62,13 +62,9 @@ const Lifestyle: FC = () => {
 
           <div className="lifestyle-scroller" aria-label="Lifestyle highlights">
             {lifestyleMoments.map((moment, index) => (
-              <motion.figure
+              <figure
                 key={moment.title}
                 className={`lifestyle-moment lifestyle-moment-${index}`}
-                initial={initialState}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: animationDuration, delay: reduceMotion ? 0 : 0.08 + index * 0.07 }}
               >
                 <OptimizedImage src={moment.image} alt={moment.title} />
                 <figcaption className="lifestyle-caption">
@@ -76,7 +72,7 @@ const Lifestyle: FC = () => {
                   <h3>{moment.title}</h3>
                   <p>{moment.description}</p>
                 </figcaption>
-              </motion.figure>
+              </figure>
             ))}
           </div>
         </div>

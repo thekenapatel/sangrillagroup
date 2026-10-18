@@ -38,13 +38,13 @@ interface FormErrors {
 
 const POPULAR_LOCATIONS = [
   "Ahmedabad",
-  "Dholera SIR / Bhal Region",
+  "Dholera SIR",
   "Surat",
   "Vadodara",
   "Rajkot",
   "Gandhinagar",
-  "Mumbai / MMR",
-  "Delhi NCR",
+  "Mumbai",
+  "Delhi",
   "Bengaluru",
   "Pune",
   "Other"
@@ -569,7 +569,7 @@ const RegisterChannelPartner: React.FC = () => {
                         className="cp-direct-wa-link"
                       >
                         <FaWhatsapp size={18} />
-                        <span>Direct Chat on WhatsApp (+91 97372 27999)</span>
+                        <span>Connect with Our Team</span>
                       </a>
                       <p className="cp-direct-wa-hint">
                         Prefer to talk right away? Tap above to start an instant WhatsApp conversation.
