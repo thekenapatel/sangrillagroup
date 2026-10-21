@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Caveat:wght@400..700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* ==========================================================================
+   SANGRILA GROUP — GLOBAL TYPOGRAPHY SYSTEM
+   All website fonts consolidated into a single authoritative file.
+   ========================================================================== */
+
+:root {
+  /* Primary Font Families */
+  --font-playfair: "Playfair Display", Georgia, serif;
+  --font-inter: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-bricolage: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-poppins: "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-philosopher: "Philosopher", Georgia, serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-caveat: "Caveat", cursive;
+  --font-instrument: "Instrument Serif", Georgia, serif;
+  --font-exo: "Exo 2", sans-serif;
+
+  /* Semantic Typography Tokens */
+  --sn-font-serif: var(--font-playfair);
+  --sn-font-sans: var(--font-inter);
+  --sn-font-heading: var(--font-playfair);
+  --sn-font-body: var(--font-inter);
+  --sn-font-brand: var(--font-playfair);
+}
+
+/* ==========================================================================
+   Font Utility Classes
+   ========================================================================== */
+
+.font-playfair {
+  font-family: var(--font-playfair) !important;
+}
+
+.font-inter {
+  font-family: var(--font-inter) !important;
+}
+
+.font-bricolage {
+  font-family: var(--font-bricolage) !important;
+}
+
+.font-poppins {
+  font-family: var(--font-poppins) !important;
+}
+
+.font-philosopher {
+  font-family: var(--font-philosopher) !important;
+}
+
+.font-montserrat {
+  font-family: var(--font-montserrat) !important;
+}
+
+.font-caveat {
+  font-family: var(--font-caveat) !important;
+}
+
+.font-instrument {
+  font-family: var(--font-instrument) !important;
+}
+
+.font-exo {
+  font-family: var(--font-exo) !important;
+}
+
+/* Semantic Role Utilities */
+.font-serif {
+  font-family: var(--sn-font-serif) !important;
+}
+
+.font-sans {
+  font-family: var(--sn-font-sans) !important;
+}
+
+.font-heading {
+  font-family: var(--sn-font-heading) !important;
+}
+
+.font-body {
+  font-family: var(--sn-font-body) !important;
+}

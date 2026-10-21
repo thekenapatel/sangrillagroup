@@ -1,57 +1,95 @@
 /* CONTAINER WRAPPERS */
 .hp-projects-wrap {
-    /* padding: 100px 0; */
-    padding: 100px max(100px, calc((100% - 1400px) / 2 + 100px));
-    font-family: "Poppins", sans-serif;
+    padding: 125px max(24px, calc((100% - 1400px) / 2 + 24px)) 80px;
+    font-family: var(--sn-font-sans, "Poppins", sans-serif);
     overflow: hidden;
     background-color: #fff;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .hp-projects-container {
     max-width: 1400px;
     margin: 0 auto;
-    /* padding: 0 100px; */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* TITLE */
 .projects-title {
     font-weight: 700;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: 35px;
+    font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+    margin-bottom: 28px;
     margin-top: 0;
     text-align: left;
-    color: #1a1a1a;
-    letter-spacing: -1px;
+    color: #111827;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    word-break: break-word;
 }
 
 /* FILTERS */
 .projects-filters {
     display: flex;
-    gap: 10px;
-    margin-bottom: 40px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 36px;
+    width: 100%;
 }
 
-/* FILTER BUTTON */
+/* FILTER BUTTON (Luxury Capsule Pill) */
 .filter-item {
-    padding: 10px 25px;
-    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 26px;
+    border-radius: 9999px;
     cursor: pointer;
-    transition: 0.3s ease;
-    font-size: 16px;
+    /* transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); */
+    font-size: 14.5px;
     font-weight: 500;
+    letter-spacing: 0.3px;
     text-align: center;
-    border: 1px solid transparent;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #4b5563;
+    font-family: var(--sn-font-sans, "Inter", "Poppins", sans-serif);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .filter-item:hover {
-    color: #676767;
+    color: #111827;
+    /* border-color: var(--sn-gold, #007ADD); */
+    background: #f4f4f4;
+    /* transform: translateY(-1px); */
+    /* box-shadow: 0 4px 14px rgba(197, 164, 109, 0.15); */
 }
 
-/* ACTIVE */
+/* 
+.filter-item:active {
+    transform: scale(0.97);
+} */
+
+/* ACTIVE FILTER BUTTON */
 .filter-item.active {
-    background: black;
-    color: white;
+    background: #0f172a;
+    color: #ffffff;
+    border-color: #0f172a;
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.22);
+    /* transform: translateY(-1px); */
 }
+
+.filter-item.active:hover {
+    background: #1e293b;
+    border-color: #1e293b;
+    color: #ffffff;
+}
+
 
 /* SCROLL CONTAINER */
 .projects-scroll {
@@ -244,34 +282,82 @@
     /* backdrop-filter: blur(4px); */
 }
 
-/* Responsive adjustment for Mobile to match everything else */
-@media (max-width: 480px) {
+/* Responsive adjustment for Mobile and Tablets */
+@media (max-width: 1024px) {
     .hp-projects-wrap {
-        padding: 60px 20px;
-    }
-
-    .projects-title {
-        /* font-weight: 500; */
-        font-size: 1.7rem;
-        padding: 50px 0 10px 0;
-    }
-
-    .filter-item.active {
-        padding: 9px 15px;
-    }
-
-    .filter-item {
-        padding: 9px 15px;
-    }
-
-    .projects-filters {
-        margin-bottom: 15px;
+        padding: 110px 32px 70px;
     }
 
     .projects-scroll {
-        grid-auto-columns: 89vw;
-        scrollbar-width: none;
+        grid-auto-columns: 340px;
+        gap: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hp-projects-wrap {
+        padding: 100px 20px 55px;
+    }
+
+    .projects-title {
+        font-size: clamp(1.8rem, 4.5vw, 2.3rem);
+        margin-bottom: 22px;
+    }
+
+    .projects-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 24px;
+        width: 100%;
+    }
+
+    .filter-item {
+        padding: 9px 20px;
+        font-size: 13.5px;
+        border-radius: 9999px;
+    }
+
+    .projects-scroll {
+        grid-auto-columns: 310px;
         gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hp-projects-wrap {
+        padding: 95px 16px 45px;
+    }
+
+    .projects-title {
+        font-size: 1.65rem;
+        margin-bottom: 16px;
+        padding: 0;
+    }
+
+    .projects-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 8px;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .filter-item {
+        padding: 8px 16px;
+        font-size: 13px;
+        border-radius: 9999px;
+        flex-shrink: 0;
+    }
+
+    .filter-item.active {
+        padding: 8px 16px;
+    }
+
+    .projects-scroll {
+        grid-auto-columns: 88vw;
+        scrollbar-width: none;
+        gap: 16px;
         padding-bottom: 0px;
     }
 

@@ -32,24 +32,22 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
     <div className={`splash ${phase === "exit" ? "splash--exit" : ""}`}>
       {/* Impact ring that expands on stamp */}
       <div
-        className={`splash-ring ${
-          phase === "stamp" || phase === "settle" || phase === "hold" || phase === "exit"
+        className={`splash-ring ${phase === "stamp" || phase === "settle" || phase === "hold" || phase === "exit"
             ? "splash-ring--active"
             : ""
-        }`}
+          }`}
       />
 
       {/* The logo — the stamp itself */}
       <div
-        className={`splash-logo-wrapper ${
-          phase === "idle"
+        className={`splash-logo-wrapper ${phase === "idle"
             ? ""
             : phase === "stamp"
-            ? "splash-logo--stamp"
-            : phase === "settle"
-            ? "splash-logo--settle"
-            : "splash-logo--done"
-        }`}
+              ? "splash-logo--stamp"
+              : phase === "settle"
+                ? "splash-logo--settle"
+                : "splash-logo--done"
+          }`}
       >
         <img src={logoImage} alt="Sangrilla" className="splash-logo" />
       </div>

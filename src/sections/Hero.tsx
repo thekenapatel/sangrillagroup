@@ -39,10 +39,10 @@ const Hero = () => {
 
       {/* 2. Side Socials (Minimalist) */}
       <div className="hero-socials-fixed">
-        <motion.a 
-          href="https://wa.me/919737227999" 
-          className="social-box whatsapp" 
-          target="_blank" 
+        <motion.a
+          href="https://wa.me/919737227999"
+          className="social-box whatsapp"
+          target="_blank"
           rel="noreferrer"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -50,8 +50,8 @@ const Hero = () => {
         >
           <FaWhatsapp size={20} />
         </motion.a>
-        <motion.a 
-          href="tel:+919737227999" 
+        <motion.a
+          href="tel:+919737227999"
           className="social-box phone"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -63,7 +63,7 @@ const Hero = () => {
 
       {/* 3. Central Branding (Static & Elegant) */}
       <div className="hero-branding">
-        <motion.h1 
+        <motion.h1
           className="hero-title"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -71,7 +71,7 @@ const Hero = () => {
         >
           SANGRILLA
         </motion.h1>
-        <motion.p 
+        <motion.p
           className="brand-tagline-moral"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

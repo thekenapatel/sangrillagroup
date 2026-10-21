@@ -5,9 +5,9 @@ const Journey = () => {
   return (
     <section className="journey-section">
       <div className="journey-container">
-        
+
         {/* Left Side: Massive Title and Hero Tagline */}
-        <motion.div 
+        <motion.div
           className="journey-header"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -15,7 +15,7 @@ const Journey = () => {
         >
           <h2>Our Legacy</h2>
           <p className="journey-intro">
-            From humble beginnings in 2000 to becoming a reputed name in real estate development. 
+            From humble beginnings in 2000 to becoming a reputed name in real estate development.
             Driven by a strong vision to create not just buildings, but happy and prosperous communities for generations to come.
           </p>
           <div className="journey-tagline">
@@ -25,7 +25,7 @@ const Journey = () => {
 
         {/* Right Side: Key Achievements & Timeline formatting */}
         <div className="journey-stats">
-          
+
           <div className="stat-item">
             <div className="stat-metric">25+ Years</div>
             <p>For over two decades, <strong>SANGRILLA</strong> has been a trusted name in construction, transforming dreams into reality since 2000.</p>

@@ -63,7 +63,7 @@ const Projects = () => {
     if (scrollRef.current) {
       const firstCard = scrollRef.current.children[0] as HTMLElement;
       const cardWidth = firstCard.offsetWidth + 20; // card width + gap
-      
+
       scrollRef.current.scrollTo({
         left: index * cardWidth,
         behavior: "smooth"
@@ -80,20 +80,23 @@ const Projects = () => {
   }, [activeIndex, filteredProjects]);
 
   return (
-    <div className="hp-projects-wrap">
+    <div className="hp-projects-wrap" id="projects-section">
       <div className="hp-projects-container">
         <h2 className="projects-title">Explore Our Landmarks</h2>
 
         {/* FILTERS */}
-        <div className="projects-filters">
+        <div className="projects-filters" role="tablist" aria-label="Project Categories">
           {[
             { key: "all", label: "All" },
             { key: "ongoing", label: "Ongoing" },
             { key: "residential", label: "Residential" },
             { key: "commercial", label: "Commercial" },
           ].map(({ key, label }) => (
-            <div
+            <button
               key={key}
+              type="button"
+              role="tab"
+              aria-selected={activeFilter === key}
               className={`filter-item ${activeFilter === key ? "active" : ""}`}
               onClick={() => {
                 setActiveFilter(key);
@@ -102,7 +105,7 @@ const Projects = () => {
               }}
             >
               {label}
-            </div>
+            </button>
           ))}
         </div>
       </div>
@@ -127,8 +130,8 @@ const Projects = () => {
               />
               {project.status === "under-construction" &&
                 !["sangrilla-meadows", "neejdham-sangrilla-2", "baghbaan-sangrilla"].includes(project.id) && (
-                <span className="project-card-badge">Newly Launched</span>
-              )}
+                  <span className="project-card-badge">Newly Launched</span>
+                )}
             </div>
 
             {/* Info */}
@@ -172,4 +175,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default Projects;

@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="footer-purpose">
             <h2>SANGRILLA</h2>
             <h3>BUILD PURPOSEFULLY</h3>
-            <p>Building purposefully for over two decades, <br/>every story has a purpose.</p>
+            <p>Building purposefully for over two decades, <br />every story has a purpose.</p>
           </div>
 
           {/* Column 1: Properties */}
@@ -30,13 +30,13 @@ const Footer = () => {
 
           {/* Column 2: Collaborate */}
           {/* <div className="footer-column"> */}
-            {/* <h4>Collaborate</h4> */}
-            {/* <ul> */}
-              {/* <li><Link to="/propose-land">Propose Land</Link></li> */}
-              {/* <li><Link to="/propose-project">Propose Project</Link></li> */}
-              {/* <li><Link to="/register-vendor">Register as a Vendor</Link></li> */}
-              {/* <li><Link to="/channel-partner">Register as a Channel Partner</Link></li> */}
-            {/* </ul> */}
+          {/* <h4>Collaborate</h4> */}
+          {/* <ul> */}
+          {/* <li><Link to="/propose-land">Propose Land</Link></li> */}
+          {/* <li><Link to="/propose-project">Propose Project</Link></li> */}
+          {/* <li><Link to="/register-vendor">Register as a Vendor</Link></li> */}
+          {/* <li><Link to="/channel-partner">Register as a Channel Partner</Link></li> */}
+          {/* </ul> */}
           {/* </div> */}
 
           {/* Column 3: Company */}
