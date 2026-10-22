@@ -1,0 +1,1500 @@
+/* ==========================================================================
+   SANGRILA GROUP · DHOLERA SIR STRATEGIC DEVELOPMENTS
+   Apple & Shivalik Group Minimalist Luxury Corporate Aesthetic
+   ========================================================================== */
+
+:root {
+  --dholera-bg: #fbfbfd;
+  --dholera-surface: #ffffff;
+  --dholera-surface-subtle: #f5f5f7;
+  --dholera-text-primary: #1d1d1f;
+  --dholera-text-secondary: #6e6e73;
+  --dholera-text-muted: #86868b;
+  --dholera-border: rgba(0, 0, 0, 0.08);
+  --dholera-border-strong: #d2d2d7;
+  --dholera-accent-blue: #0071e3;
+  --dholera-accent-blue-hover: #0077ed;
+  --dholera-accent-dark: #111111;
+  --dholera-accent-green: #15803d;
+  --dholera-radius-sm: 8px;
+  --dholera-radius-md: 14px;
+  --dholera-radius-lg: 20px;
+  --dholera-radius-xl: 28px;
+  --dholera-radius-full: 9999px;
+  --dholera-shadow-subtle: 0 4px 16px rgba(0, 0, 0, 0.04);
+  --dholera-shadow-card: 0 10px 30px rgba(0, 0, 0, 0.06);
+  --dholera-shadow-hover: 0 20px 48px rgba(0, 0, 0, 0.1);
+  --dholera-font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+}
+
+/* ── Base Container ── */
+.dholera-page-wrapper {
+  background-color: var(--dholera-bg);
+  color: var(--dholera-text-primary);
+  font-family: var(--dholera-font-sans);
+  min-height: 100vh;
+  padding: 100px 0 120px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dholera-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Hero Section (Minimalist Apple/Shivalik) ── */
+.dholera-hero {
+  text-align: center;
+  padding: 48px 0 36px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.dholera-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dholera-text-secondary);
+  background: rgba(0, 0, 0, 0.04);
+  padding: 6px 14px;
+  border-radius: var(--dholera-radius-full);
+  border: 1px solid var(--dholera-border);
+  margin-bottom: 20px;
+}
+
+.dholera-eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--dholera-accent-blue);
+}
+
+.dholera-hero-title {
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--dholera-text-primary);
+  margin: 0 0 18px;
+}
+
+.dholera-hero-subtitle {
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--dholera-text-secondary);
+  max-width: 800px;
+  margin: 0 auto 36px;
+  font-weight: 400;
+}
+
+/* ── Macroeconomic Metrics Strip (Clean Hairline Grid) ── */
+.dholera-metrics-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--dholera-border);
+  border: 1px solid var(--dholera-border);
+  border-radius: var(--dholera-radius-md);
+  overflow: hidden;
+  margin-bottom: 56px;
+  background-clip: padding-box;
+}
+
+.dholera-metric-item {
+  background: var(--dholera-surface);
+  padding: 20px 16px;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.dholera-metric-item:hover {
+  background: #fafafc;
+}
+
+.dholera-metric-val {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--dholera-text-primary);
+  margin-bottom: 4px;
+}
+
+.dholera-metric-lbl {
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--dholera-text-secondary);
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+/* ── Section Header ── */
+.dholera-section-header {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dholera-section-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dholera-text-muted);
+}
+
+.dholera-section-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--dholera-text-primary);
+  margin: 0;
+}
+
+.dholera-section-desc {
+  font-size: 0.95rem;
+  color: var(--dholera-text-secondary);
+  margin: 0;
+}
+
+/* ── The Two Master Project Showcase Cards ── */
+.dholera-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-bottom: 64px;
+}
+
+.dholera-project-card {
+  background: var(--dholera-surface);
+  border-radius: var(--dholera-radius-lg);
+  border: 1px solid var(--dholera-border);
+  box-shadow: var(--dholera-shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  position: relative;
+}
+
+.dholera-project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--dholera-shadow-hover);
+  border-color: var(--dholera-border-strong);
+}
+
+/* Card Visual Media Header */
+.dholera-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #e5e5ea;
+}
+
+.dholera-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dholera-project-card:hover .dholera-card-img {
+  transform: scale(1.04);
+}
+
+.dholera-card-media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.35) 100%);
+  pointer-events: none;
+}
+
+.dholera-card-status-badge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  padding: 5px 12px;
+  border-radius: var(--dholera-radius-full);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--dholera-text-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dholera-status-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--dholera-accent-blue);
+}
+
+.dholera-status-indicator.is-baghban {
+  background: var(--dholera-accent-green);
+}
+
+/* Card Body */
+.dholera-card-body {
+  padding: 30px 28px 26px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.dholera-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dholera-text-secondary);
+  margin-bottom: 8px;
+}
+
+.dholera-card-title {
+  font-family: 'Philosopher', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--dholera-text-primary);
+  margin: 0 0 10px;
+}
+
+.dholera-card-desc {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--dholera-text-secondary);
+  margin: 0 0 20px;
+  flex-grow: 1;
+}
+
+/* Pill Specs List */
+.dholera-card-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 26px;
+}
+
+.dholera-spec-pill {
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--dholera-text-primary);
+  background: var(--dholera-surface-subtle);
+  padding: 6px 12px;
+  border-radius: var(--dholera-radius-sm);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Card Action Buttons */
+.dholera-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.dholera-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--dholera-text-primary);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 13px 22px;
+  border-radius: var(--dholera-radius-sm);
+  border: 1px solid var(--dholera-text-primary);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  width: 100%;
+}
+
+.dholera-btn-primary:hover {
+  background: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.dholera-btn-secondary-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.dholera-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--dholera-surface-subtle);
+  color: var(--dholera-text-primary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: var(--dholera-radius-sm);
+  border: 1px solid var(--dholera-border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.dholera-btn-secondary:hover {
+  background: #e8e8ed;
+  border-color: var(--dholera-border-strong);
+}
+
+/* ── Single Unified Dholera CTA Contact Section (Apple/Shivalik Executive Style) ── */
+.dholera-contact-section {
+  background: var(--dholera-surface);
+  border: 1px solid var(--dholera-border);
+  border-radius: var(--dholera-radius-xl);
+  padding: 52px 44px;
+  box-shadow: var(--dholera-shadow-card);
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dholera-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 44px;
+  align-items: start;
+}
+
+/* Left Column */
+.dholera-contact-info-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.dholera-contact-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dholera-text-muted);
+  margin-bottom: 12px;
+}
+
+.dholera-contact-heading {
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--dholera-text-primary);
+  line-height: 1.25;
+  margin: 0 0 14px;
+}
+
+.dholera-contact-lead {
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: var(--dholera-text-secondary);
+  margin: 0 0 24px;
+}
+
+/* Channels List */
+.dholera-contact-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.dholera-channel-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  background: var(--dholera-surface-subtle);
+  border: 1px solid var(--dholera-border);
+  border-radius: var(--dholera-radius-md);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.dholera-channel-card:hover {
+  background: #ebebee;
+  border-color: var(--dholera-border-strong);
+  transform: translateY(-1px);
+}
+
+.dholera-channel-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dholera-text-primary);
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.dholera-channel-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--dholera-text-muted);
+  margin-bottom: 2px;
+}
+
+.dholera-channel-value {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--dholera-text-primary);
+}
+
+/* Trust Pills */
+.dholera-trust-pills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--dholera-border);
+}
+
+.dholera-trust-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--dholera-text-secondary);
+  background: var(--dholera-surface-subtle);
+  padding: 6px 12px;
+  border-radius: var(--dholera-radius-full);
+  border: 1px solid var(--dholera-border);
+}
+
+.dholera-trust-pill svg {
+  color: var(--dholera-accent-green);
+  flex-shrink: 0;
+}
+
+/* Brochure Buttons */
+.dholera-brochure-download-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dholera-brochure-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--dholera-text-primary);
+  background: #ffffff;
+  border: 1px solid var(--dholera-border-strong);
+  padding: 8px 14px;
+  border-radius: var(--dholera-radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dholera-brochure-btn:hover {
+  background: var(--dholera-surface-subtle);
+  border-color: var(--dholera-text-primary);
+}
+
+/* Right Column: Unified Form Card */
+.dholera-contact-form-card {
+  background: var(--dholera-surface-subtle);
+  border: 1px solid var(--dholera-border);
+  border-radius: var(--dholera-radius-lg);
+  padding: 30px 28px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.dholera-form-card-header {
+  margin-bottom: 20px;
+}
+
+.dholera-form-card-title {
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: var(--dholera-text-primary);
+  margin: 0 0 6px;
+}
+
+.dholera-form-card-desc {
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--dholera-text-secondary);
+  margin: 0;
+}
+
+.dholera-unified-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.dholera-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.dholera-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+
+.dholera-form-lbl {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--dholera-text-secondary);
+}
+
+.dholera-input,
+.dholera-select,
+.dholera-textarea {
+  width: 100%;
+  padding: 10px 13px;
+  border-radius: var(--dholera-radius-sm);
+  border: 1px solid var(--dholera-border-strong);
+  background: #ffffff;
+  font-family: inherit;
+  font-size: 0.86rem;
+  color: var(--dholera-text-primary);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.dholera-input:focus,
+.dholera-select:focus,
+.dholera-textarea:focus {
+  border-color: var(--dholera-text-primary);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+}
+
+.dholera-textarea {
+  resize: vertical;
+  min-height: 72px;
+}
+
+.dholera-submit-btn {
+  width: 100%;
+  padding: 13px 20px;
+  background: var(--dholera-accent-dark);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--dholera-radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.dholera-submit-btn:hover {
+  background: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+}
+
+.dholera-form-footnote {
+  font-size: 0.74rem;
+  color: var(--dholera-text-muted);
+  text-align: center;
+  margin: 10px 0 0;
+}
+
+/* Success Card */
+.dholera-form-success-box {
+  padding: 36px 20px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: var(--dholera-radius-md);
+  text-align: center;
+}
+
+.dholera-form-success-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #166534;
+  margin: 8px 0 6px;
+}
+
+.dholera-form-success-text {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: #15803d;
+  max-width: 440px;
+  margin: 0 auto 18px;
+}
+
+.dholera-form-reset-btn {
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  padding: 9px 18px;
+  border-radius: var(--dholera-radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dholera-form-reset-btn:hover {
+  background: #15803d;
+}
+
+/* ── Sticky Bottom Floating Corporate Bar ── */
+.dholera-sticky-bar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.14);
+  padding: 8px 16px;
+  border-radius: var(--dholera-radius-full);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 92vw;
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: bottom, opacity, transform;
+}
+
+.dholera-sticky-bar.is-footer-hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translate(-50%, 16px) !important;
+}
+
+.dholera-btn-lbl-desktop {
+  display: inline;
+}
+
+.dholera-btn-lbl-mobile {
+  display: none;
+}
+
+.dholera-sticky-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--dholera-text-primary);
+  white-space: nowrap;
+}
+
+.dholera-sticky-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dholera-sticky-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--dholera-surface-subtle);
+  color: var(--dholera-text-primary);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: var(--dholera-radius-full);
+  border: 1px solid var(--dholera-border);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.dholera-sticky-btn:hover {
+  background: #e5e5ea;
+}
+
+.dholera-sticky-btn.is-cta {
+  background: var(--dholera-accent-dark);
+  color: #ffffff;
+  border-color: var(--dholera-accent-dark);
+}
+
+.dholera-sticky-btn.is-cta:hover {
+  background: #000000;
+}
+
+/* ==========================================================================
+   IMMERSIVE PROJECT DETAIL MODAL / DRAWER
+   (Full-screen architectural view for Sangrilla Baghban & Sangrilla Meadows)
+   ========================================================================== */
+
+.dholera-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.dholera-modal-container {
+  background: var(--dholera-surface);
+  border-radius: var(--dholera-radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.28);
+  width: 100%;
+  max-width: 1120px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  animation: modalSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Modal Top Header */
+.dholera-modal-header {
+  padding: 22px 30px;
+  border-bottom: 1px solid var(--dholera-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--dholera-surface);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.dholera-modal-title-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.dholera-modal-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--dholera-text-primary);
+  margin: 0;
+}
+
+.dholera-modal-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--dholera-radius-full);
+  background: var(--dholera-surface-subtle);
+  color: var(--dholera-text-secondary);
+  border: 1px solid var(--dholera-border);
+}
+
+.dholera-modal-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dholera-modal-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--dholera-accent-blue);
+  background: rgba(0, 113, 227, 0.08);
+  border: 1px solid rgba(0, 113, 227, 0.2);
+  padding: 6px 12px;
+  border-radius: var(--dholera-radius-full);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dholera-modal-switch-btn:hover {
+  background: rgba(0, 113, 227, 0.15);
+}
+
+.dholera-modal-close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--dholera-border);
+  background: var(--dholera-surface-subtle);
+  color: var(--dholera-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dholera-modal-close-btn:hover {
+  background: #e5e5ea;
+  color: #000000;
+}
+
+/* Modal Navigation Tabs (Apple Segmented Style) */
+.dholera-modal-tabs {
+  padding: 12px 30px;
+  background: var(--dholera-surface-subtle);
+  border-bottom: 1px solid var(--dholera-border);
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.dholera-modal-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.dholera-modal-tab-btn {
+  padding: 8px 16px;
+  border-radius: var(--dholera-radius-full);
+  border: none;
+  background: transparent;
+  color: var(--dholera-text-secondary);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dholera-modal-tab-btn:hover {
+  color: var(--dholera-text-primary);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.dholera-modal-tab-btn.is-active {
+  background: var(--dholera-surface);
+  color: var(--dholera-text-primary);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Modal Body Content */
+.dholera-modal-body {
+  padding: 36px 32px 48px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Tab Panels */
+.dholera-tab-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Overview Section in Modal */
+.dholera-overview-intro {
+  max-width: 880px;
+}
+
+.dholera-overview-lead,
+.dholera-lead-text {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--dholera-text-primary);
+  font-weight: 500;
+  margin: 0 0 16px;
+}
+
+.dholera-overview-text {
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: var(--dholera-text-secondary);
+  margin: 0;
+}
+
+/* Highlights Grid */
+.dholera-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.dholera-highlight-card {
+  background: var(--dholera-surface-subtle);
+  border: 1px solid var(--dholera-border);
+  border-radius: var(--dholera-radius-md);
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+
+.dholera-highlight-card:hover {
+  background: #ffffff;
+  border-color: var(--dholera-border-strong);
+  box-shadow: var(--dholera-shadow-subtle);
+}
+
+.dholera-highlight-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid var(--dholera-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dholera-text-primary);
+}
+
+.dholera-highlight-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--dholera-text-primary);
+  margin: 0;
+}
+
+.dholera-highlight-desc {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--dholera-text-secondary);
+  margin: 0;
+}
+
+/* Master Plan / Layout Section */
+.dholera-layout-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.dholera-layout-media {
+  position: relative;
+  background: #0f172a;
+  border-radius: var(--dholera-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--dholera-border);
+  cursor: zoom-in;
+}
+
+.dholera-layout-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 520px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.dholera-layout-zoom-hint {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: var(--dholera-radius-full);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+}
+
+/* Layout Stats Row */
+.dholera-layout-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.dholera-layout-stat-box {
+  background: var(--dholera-surface-subtle);
+  border: 1px solid var(--dholera-border);
+  border-radius: var(--dholera-radius-sm);
+  padding: 16px 18px;
+}
+
+.dholera-stat-val {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--dholera-text-primary);
+  margin-bottom: 2px;
+}
+
+.dholera-stat-label {
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--dholera-text-secondary);
+}
+
+/* Amenities Grid (Clean Minimalist Presentation) */
+.dholera-amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.dholera-amenity-tile {
+  background: var(--dholera-surface-subtle);
+  border: 1px solid var(--dholera-border);
+  border-radius: var(--dholera-radius-md);
+  padding: 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: all 0.2s ease;
+}
+
+.dholera-amenity-tile:hover {
+  background: #ffffff;
+  border-color: var(--dholera-border-strong);
+  box-shadow: var(--dholera-shadow-subtle);
+}
+
+.dholera-amenity-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid var(--dholera-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dholera-text-primary);
+  flex-shrink: 0;
+}
+
+.dholera-amenity-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dholera-amenity-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--dholera-text-primary);
+  margin: 0;
+}
+
+.dholera-amenity-desc {
+  font-size: 0.75rem;
+  color: var(--dholera-text-secondary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Location Advantages & Distances Table */
+.dholera-distances-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.dholera-table-wrapper {
+  background: var(--dholera-surface);
+  border: 1px solid var(--dholera-border);
+  border-radius: var(--dholera-radius-md);
+  overflow: hidden;
+}
+
+.dholera-distances-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.dholera-distances-table th {
+  background: var(--dholera-surface-subtle);
+  padding: 14px 18px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dholera-text-secondary);
+  border-bottom: 1px solid var(--dholera-border);
+}
+
+.dholera-distances-table td {
+  padding: 13px 18px;
+  font-size: 0.85rem;
+  color: var(--dholera-text-primary);
+  border-bottom: 1px solid var(--dholera-border);
+}
+
+.dholera-distances-table tr:last-child td {
+  border-bottom: none;
+}
+
+.dholera-distances-table tr:hover td {
+  background: #fafafc;
+}
+
+.dholera-distance-val {
+  font-weight: 600;
+  color: var(--dholera-accent-blue);
+  white-space: nowrap;
+}
+
+.dholera-time-val {
+  color: var(--dholera-text-secondary);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.dholera-location-map-card {
+  border: 1px solid var(--dholera-border);
+  border-radius: var(--dholera-radius-md);
+  overflow: hidden;
+  background: var(--dholera-surface-subtle);
+  position: relative;
+  cursor: zoom-in;
+}
+
+.dholera-location-map-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Modal Inquiry Form */
+.dholera-modal-form-wrapper {
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--dholera-surface);
+  border: 1px solid var(--dholera-border);
+  border-radius: var(--dholera-radius-lg);
+  padding: 36px 32px;
+}
+
+.dholera-form-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.dholera-form-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--dholera-text-primary);
+  margin: 0 0 6px;
+}
+
+.dholera-form-subtitle {
+  font-size: 0.85rem;
+  color: var(--dholera-text-secondary);
+  margin: 0;
+}
+
+.dholera-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.dholera-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dholera-form-group.is-full {
+  grid-column: 1 / -1;
+}
+
+.dholera-form-label {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--dholera-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.dholera-form-input,
+.dholera-form-select,
+.dholera-form-textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: var(--dholera-radius-sm);
+  border: 1px solid var(--dholera-border-strong);
+  background: var(--dholera-surface);
+  font-family: inherit;
+  font-size: 0.88rem;
+  color: var(--dholera-text-primary);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dholera-form-input:focus,
+.dholera-form-select:focus,
+.dholera-form-textarea:focus {
+  border-color: var(--dholera-text-primary);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+.dholera-form-textarea {
+  resize: vertical;
+  min-height: 84px;
+}
+
+.dholera-form-submit-btn {
+  width: 100%;
+  padding: 13px;
+  background: var(--dholera-accent-dark);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--dholera-radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dholera-form-submit-btn:hover {
+  background: #000000;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Lightbox Modal (For Zooming into Master Plans & Maps) */
+.dholera-lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.dholera-lightbox-img {
+  max-width: 95vw;
+  max-height: 92vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.dholera-lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dholera-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Responsive Queries ── */
+@media (max-width: 1024px) {
+  .dholera-metrics-strip {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .dholera-highlights-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dholera-amenities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dholera-distances-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .dholera-layout-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .dholera-projects-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .dholera-metrics-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dholera-corporate-cta {
+    padding: 36px 24px;
+  }
+
+  .dholera-btn-lbl-desktop {
+    display: none;
+  }
+
+  .dholera-btn-lbl-mobile {
+    display: inline;
+  }
+
+  .dholera-sticky-bar {
+    width: calc(100% - 24px);
+    max-width: 440px;
+    bottom: 14px;
+    padding: 5px 6px;
+    gap: 0;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+    background: rgba(255, 255, 255, 0.96);
+  }
+
+  .dholera-sticky-brand {
+    display: none;
+  }
+
+  .dholera-sticky-actions {
+    display: flex;
+    width: 100%;
+    gap: 5px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .dholera-sticky-btn {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 6px;
+    font-size: 0.74rem;
+    justify-content: center;
+    text-align: center;
+    border-radius: var(--dholera-radius-full);
+  }
+
+  .dholera-sticky-btn.is-cta {
+    flex: 1.15;
+    padding: 10px 8px;
+    gap: 5px;
+  }
+
+  /* Chatbot offset on mobile to avoid overlapping floating bar */
+  .dholera-page-wrapper ~ .sangrilla-ai-container,
+  body:has(.dholera-sticky-bar) .sangrilla-ai-container {
+    bottom: 80px;
+  }
+
+  .dholera-modal-backdrop {
+    padding: 12px;
+  }
+
+  .dholera-modal-container {
+    max-height: 94vh;
+  }
+
+  .dholera-modal-header {
+    padding: 16px 20px;
+  }
+
+  .dholera-modal-tabs {
+    padding: 10px 16px;
+  }
+
+  .dholera-modal-body {
+    padding: 24px 18px 36px;
+  }
+
+  .dholera-highlights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dholera-amenities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dholera-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dholera-contact-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .dholera-contact-section {
+    padding: 36px 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dholera-form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

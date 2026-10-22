@@ -218,38 +218,51 @@ export const allProjects: Project[] = [
     ],
   },
   {
-    id: 'baghbaan-sangrilla',
-    name: 'BaghBaan (Sangrilla)',
-    tagline: 'A Greener Way to Come Home',
-    location: 'Gujarat',
+    id: 'sangrilla-baghban',
+    name: 'Sangrilla Baghban, Dholera-SIR',
+    tagline: 'A Rare Lifestyle Address in Dholera / Residential Plots & Porch Villas',
+    location: 'Kamiyala, Dholera-SIR, Gujarat',
     status: 'under-construction',
     type: 'residential',
     specs: [
-      { label: 'Project Status', value: 'Ongoing' },
-      { label: 'Residence Type', value: 'Residential Plots & Villas' },
-      { label: 'Plot Sizes', value: 'Indicative 100 to 300 Sq. Yards' },
-      { label: 'Community', value: 'Gated Residential Development' },
-      { label: 'Possession', value: 'To be announced' },
+      { label: 'Project Status', value: 'Under Construction / Pre-Launch' },
+      { label: 'Location', value: 'Kamiyala, Dholera-SIR, Gujarat' },
+      { label: 'Number of Plots', value: '96 Thoughtfully Planned Villa Plots' },
+      { label: 'Plot Arrangement', value: 'Organized Plot Arrangement & Individual Ownership' },
+      { label: 'Freedom to Personalize', value: 'Freedom to personalize future villas' },
+      { label: 'Internal Roads', value: '9 MT & 12 MT Wide Internal Roads' },
+      { label: 'Security', value: '24/7 CCTV Security / Gated Community' },
     ],
-    description: 'BaghBaan by Sangrilla is a planned residential community bringing together open spaces, thoughtfully laid out plots, and villa living. Final layouts and project specifications will be announced soon.',
+    description: 'Strategically located at the gateway of Dholera SIR (India\'s first and fastest-emerging greenfield smart city), Sangrilla Baghban offers well-planned residential plots and luxurious porch villas designed for a refined lifestyle and long-term investment potential.',
     amenities: [
-      'Landscaped Gardens',
-      'Tree-Lined Internal Roads',
-      'Children’s Play Area',
-      'Community Gathering Space',
-      'Gated Entry',
-      'CCTV Security',
-      'Street Lighting',
-      'Water Supply',
+      'Plot Demarcation',
+      'Internal Roads (9 mt and 12 mt wide roads)',
+      'Boundary Wall',
+      '24/7 CCTV Security / Gated Community',
+      'Garden & Gazebo',
+      'Children\'s Park',
+      'Senior Citizen Park',
+      'Clubhouse',
+      'Gym',
+      'Community Hall',
+      'Indoor Games Ground',
+      'Mandir',
+      'Cricket Ground',
+      'Swimming Pool',
+      'Street lighting',
+      'Landscaped green spaces',
+      'Secure environment',
     ],
     images: [
+      '/assets/baghban/baghban-amenities.png',
+      '/assets/baghban/baghban-master-plan.jpg',
+      '/assets/baghban/baghban-key-plan.png',
+      '/assets/baghban/baghban-advantages.png',
       'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=1200',
     ],
     inventory: [
-      { floor: 'Residential Plots', count: 'Planned Inventory', size: 'Indicative 100 to 300 sq. yards' },
-      { floor: 'Villas', count: 'Planned Inventory', size: 'Details to be announced' },
+      { floor: 'Villa Plots', count: '96 Plots', size: 'Thoughtfully planned villa plots' },
+      { floor: 'Porch Villas', count: 'Custom Construction', size: 'Villa construction available at additional cost' },
     ],
   },
 
@@ -582,6 +595,15 @@ export const allProjects: Project[] = [
 
 export const getProjectById = (id: string): Project | undefined => {
   const normalizedId = id.toLowerCase().trim().replace(/\s+/g, '-');
+  if (
+    normalizedId === 'baghbaan-sangrilla' ||
+    normalizedId === 'sangrilla-baghbaan' ||
+    normalizedId === 'baghban' ||
+    normalizedId === 'baghbaan' ||
+    normalizedId === 'sangrilla-baghban'
+  ) {
+    return allProjects.find(p => p.id === 'sangrilla-baghban');
+  }
   return allProjects.find(p => p.id === normalizedId || p.id.toLowerCase() === id.toLowerCase());
 };
 

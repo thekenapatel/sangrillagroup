@@ -26,9 +26,23 @@ const pageSearchEntries: SearchEntry[] = [
   {
     label: "Dholera",
     category: "Project",
+    to: "/dholera",
+    subtitle: "Sangrilla Meadows & Sangrilla Baghban · Dholera SIR",
+    keywords: "dholera sir smart city residential plots luxury villas meadows baghban baghbaan investment",
+  },
+  {
+    label: "Sangrilla Baghban",
+    category: "Project",
+    to: "/project/sangrilla-baghban",
+    subtitle: "96 Planned Villa Plots & Porch Villas · Kamiyala, Dholera SIR",
+    keywords: "sangrilla baghban baghbaan dholera sir kamiyala porch villas residential plots 96 plots",
+  },
+  {
+    label: "Sangrilla Meadows",
+    category: "Project",
     to: "/project/sangrilla-meadows",
-    subtitle: "Sangrilla Meadows · Dholera SIR Smart City",
-    keywords: "dholera sir smart city residential plots luxury villas meadows investment",
+    subtitle: "145 Planned Villa Plots & Luxury Villas · Aakru, Dholera SIR",
+    keywords: "sangrilla meadows dholera sir aakru 145 plots luxury villas master plan",
   },
   {
     label: "Projects",
@@ -200,6 +214,13 @@ const sectionSearchEntries: SearchEntry[] = [
     to: "/about-us#sn-future-title",
     subtitle: "About Us · Growth & possibility in Gujarat",
     keywords: "future gujarat development potential economy",
+  },
+  {
+    label: "Upcoming Projects",
+    category: "Section",
+    to: "/#upcoming-projects",
+    subtitle: "Preview upcoming luxury developments & smart offices",
+    keywords: "upcoming projects teaser neejdham skyline luxury apartments future launch",
   },
   {
     label: "Project Overview",
@@ -483,7 +504,7 @@ const Navbar = () => {
 
           {/* DESKTOP & TABLET MENU - Centered Links */}
           <div className="nav-menu">
-            <NavLink to="/project/sangrilla-meadows">Dholera</NavLink>
+            <NavLink to="/dholera">Dholera</NavLink>
             <NavLink to="/projects">Projects</NavLink>
             <NavLink to="/register-channel-partner">Channel Partner</NavLink>
             <NavLink to="/about-us">About Us</NavLink>
@@ -656,7 +677,7 @@ const Navbar = () => {
         <div className={`full-menu ${isMobileMenuOpen ? "open" : ""}`}>
           <div className="menu-grid">
             <div className="menu-column">
-              <Link to="/project/sangrilla-meadows" onClick={closeMobileMenu}>
+              <Link to="/dholera" onClick={closeMobileMenu}>
                 Dholera
               </Link>
               <Link to="/projects" onClick={closeMobileMenu}>

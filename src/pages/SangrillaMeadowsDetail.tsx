@@ -13,12 +13,8 @@ import {
   Home,
   Dumbbell,
   Clock,
-  Phone,
-  Mail,
   Globe,
   Download,
-  Calendar,
-  Send,
   Layers,
   Sparkles,
   Award,
@@ -29,7 +25,9 @@ import {
   Star,
   Quote,
   TrendingUp,
-  UserCheck
+  UserCheck,
+  Maximize2,
+  X
 } from "lucide-react";
 import "../styles/sangrilla-meadows.css";
 import "../styles/lifestyle.css";
@@ -162,15 +160,19 @@ const SangrillaMeadowsDetail: React.FC = () => {
   const isDraggingPhotos = useRef(false);
   const photosDragStartX = useRef(0);
   const photosScrollStart = useRef(0);
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    interest: "Residential Plots",
-    message: ""
-  });
-  const [formSubmitted, setFormSubmitted] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+
+  // ESC key listener for lightbox modal
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && lightboxImage) {
+        setLightboxImage(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightboxImage]);
 
   const handlePhotosMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
     isDraggingPhotos.current = true;
@@ -203,24 +205,8 @@ const SangrillaMeadowsDetail: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name || !formData.phone) return;
-
-    const text = encodeURIComponent(
-      `Hello Sangrilla Group! I am interested in *Sangrilla Meadows (Dholera-SIR)*.\n\nName: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email || 'N/A'}\nInterested in: ${formData.interest}\nMessage: ${formData.message || 'Please share more details.'}`
-    );
-    window.open(`https://wa.me/919737327999?text=${text}`, '_blank');
-    setFormSubmitted(true);
-  };
-
   const handleDownloadBrochure = () => {
     downloadBrochure("/sangrilla-meadows-brochure.pdf", "sangrilla-meadows-brochure.pdf");
-  };
-
-  const handleBookVisit = () => {
-    setFormData(prev => ({ ...prev, interest: "Site Visit Booking" }));
-    scrollTo("contact-section", "contact");
   };
 
   return (
@@ -235,8 +221,8 @@ const SangrillaMeadowsDetail: React.FC = () => {
           <div className="meadows-breadcrumb">
             <Link to="/">Home</Link>
             <span className="meadows-breadcrumb-sep">/</span>
-            {/* <Link to="/under-construction-projects">Under Construction</Link> */}
-            {/* <span className="meadows-breadcrumb-sep">/</span> */}
+            <Link to="/dholera">Dholera Developments</Link>
+            <span className="meadows-breadcrumb-sep">/</span>
             <span className="meadows-breadcrumb-current">SANGRILLA MEADOWS</span>
           </div>
 
@@ -287,22 +273,16 @@ const SangrillaMeadowsDetail: React.FC = () => {
 
           {/* Action Bar */}
           <div className="meadows-hero-cta-bar">
-            <button onClick={() => scrollTo("contact-section", "contact")} className="meadows-btn-primary">
-              <Send size={15} /> Enquire Now
-            </button>
             <Link
               to="/project/sangrilla-meadows/master-plan"
-              className="meadows-btn-ghost"
+              className="meadows-btn-primary"
               style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}
             >
-              <Layers size={15} className="text-emerald-400" />
+              <Layers size={15} />
               <span>Interactive Master Plan</span>
             </Link>
             <button type="button" onClick={handleDownloadBrochure} className="meadows-btn-secondary">
               <Download size={15} /> Download Brochure
-            </button>
-            <button onClick={handleBookVisit} className="meadows-btn-ghost">
-              <Calendar size={15} /> Book Site Visit
             </button>
           </div>
 
@@ -349,18 +329,6 @@ const SangrillaMeadowsDetail: React.FC = () => {
               onClick={() => scrollTo("dholera-section", "dholera")}
             >
               Why Dholera SIR
-            </button>
-            {/* <button
-              className={`meadows-quick-nav-item ${activeTab === 'pricing' ? 'active' : ''}`}
-              onClick={() => scrollTo("pricing-section", "pricing")}
-            >
-              Pricing
-            </button> */}
-            <button
-              className={`meadows-quick-nav-item ${activeTab === 'contact' ? 'active' : ''}`}
-              onClick={() => scrollTo("contact-section", "contact")}
-            >
-              Enquire
             </button>
             <button
               className={`meadows-quick-nav-item ${activeTab === 'investors' ? 'active' : ''}`}
@@ -494,8 +462,15 @@ const SangrillaMeadowsDetail: React.FC = () => {
             onMouseMove={handlePhotosMouseMove}
           >
             {galleryImages.map((img, idx) => (
-              <div key={idx} className="meadows-photo-slide">
-                <OptimizedImage src={img.src} alt="" draggable={false} />
+              <div
+                key={idx}
+                className="meadows-photo-slide"
+                onClick={() => setLightboxImage(img.src)}
+              >
+                <OptimizedImage src={img.src} alt="Sangrilla Meadows" draggable={false} />
+                <div className="meadows-slide-zoom-hint">
+                  <Maximize2 size={16} />
+                </div>
               </div>
             ))}
           </div>
@@ -543,6 +518,28 @@ const SangrillaMeadowsDetail: React.FC = () => {
               <div className="meadows-address-item">
                 <span className="meadows-address-label">Survey No.</span>
                 <span className="meadows-address-val">New – 642 | Old – 420/4/12</span>
+              </div>
+            </div>
+
+            {/* Strategic Proximities & Connectivity Table (16 Key Corridors) */}
+            <div className="meadows-unified-divider" />
+            <div className="meadows-connectivity-table-wrap">
+              <h4 className="meadows-connectivity-table-title">
+                Strategic Proximities &amp; Travel Connectivity
+              </h4>
+              <div className="meadows-connectivity-table">
+                <div className="meadows-conn-row meadows-conn-header">
+                  <span>Destination / Landmark</span>
+                  <span>Distance</span>
+                  <span>Estimated Time</span>
+                </div>
+                {connectivityData.map((d, idx) => (
+                  <div key={idx} className="meadows-conn-row">
+                    <span className="meadows-conn-landmark">{d.landmark}</span>
+                    <span className="meadows-conn-dist">{d.distance}</span>
+                    <span className="meadows-conn-time">{d.time}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -594,8 +591,8 @@ const SangrillaMeadowsDetail: React.FC = () => {
               gap: "2rem"
             }}
           > */}
-            {/* Ambient Background Glow Effect */}
-            {/* <div
+        {/* Ambient Background Glow Effect */}
+        {/* <div
               style={{
                 position: "absolute",
                 top: "-60px",
@@ -784,6 +781,37 @@ const SangrillaMeadowsDetail: React.FC = () => {
 
           </div>
 
+          {/* Master Demarcation Plan Card */}
+          {/* <div
+            className="meadows-plan-preview-card"
+            onClick={() => setLightboxImage("/assets/meadows/master-plan-layout.png")}
+          >
+            <div className="meadows-plan-preview-header">
+              <div>
+                <span className="meadows-plan-badge">Official Demarcation Plan</span>
+                <h3 className="meadows-plan-title">Sangrilla Meadows Master Demarcation &amp; Plot Layout</h3>
+              </div>
+              <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                <Link
+                  to="/project/sangrilla-meadows/master-plan"
+                  className="meadows-plan-gis-link"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Layers size={14} /> Open 3D GIS Plotter ↗
+                </Link>
+                <span className="meadows-plan-zoom-cta">
+                  <Maximize2 size={15} /> Click to Expand Plan
+                </span>
+              </div>
+            </div>
+            <img
+              src="/assets/meadows/master-plan-layout.png"
+              alt="Sangrilla Meadows Master Demarcation Plan"
+              className="meadows-plan-preview-img"
+              loading="lazy"
+            />
+          </div> */}
+
           {/* Interactive Master Plan & Plotter Callout */}
           {/* <div
             style={{
@@ -880,8 +908,8 @@ const SangrillaMeadowsDetail: React.FC = () => {
           </div>
 
           <div className="meadows-villa-grid"> */}
-            {/* Card 1: Sample Villa Plan */}
-            {/* <div className="meadows-villa-card">
+        {/* Card 1: Sample Villa Plan */}
+        {/* <div className="meadows-villa-card">
               <div>
                 <div className="meadows-villa-header">
                   <h3>Sample Villa Plan</h3>
@@ -923,8 +951,8 @@ const SangrillaMeadowsDetail: React.FC = () => {
               </div>
             </div> */}
 
-            {/* Card 2: Optional 2BHK Weekend Villa Package */}
-            {/* <div className="meadows-villa-card featured">
+        {/* Card 2: Optional 2BHK Weekend Villa Package */}
+        {/* <div className="meadows-villa-card featured">
               <span className="meadows-villa-card-badge">Turnkey Package</span>
               <div>
                 <div className="meadows-villa-header">
@@ -954,8 +982,8 @@ const SangrillaMeadowsDetail: React.FC = () => {
                   </div>
                 </div> */}
 
-                {/* Guaranteed Rental Feature */}
-                {/* <div className="meadows-villa-perks">
+        {/* Guaranteed Rental Feature */}
+        {/* <div className="meadows-villa-perks">
                   <div className="meadows-villa-perks-title">Guaranteed Rental Income</div>
                   <div className="meadows-villa-perks-desc">₹36,000 / month for up to 36 months</div>
                   <span className="meadows-rental-note">(Subject to formal agreement &amp; terms)</span>
@@ -1105,8 +1133,8 @@ const SangrillaMeadowsDetail: React.FC = () => {
           </div>
 
           <div className="meadows-pricing-grid"> */}
-            {/* Plot Pricing */}
-            {/* <div className="meadows-pricing-card">
+        {/* Plot Pricing */}
+        {/* <div className="meadows-pricing-card">
               <div>
                 <div className="meadows-pricing-tag">Residential Plots</div>
                 <h3 className="meadows-pricing-title">Villa Plots</h3>
@@ -1134,8 +1162,8 @@ const SangrillaMeadowsDetail: React.FC = () => {
               </div>
             </div> */}
 
-            {/* Weekend Villa Pricing */}
-            {/* <div className="meadows-pricing-card premium">
+        {/* Weekend Villa Pricing */}
+        {/* <div className="meadows-pricing-card premium">
               <div>
                 <div className="meadows-pricing-tag">Turnkey Package</div>
                 <h3 className="meadows-pricing-title">2BHK Weekend Villa</h3>
@@ -1169,143 +1197,7 @@ const SangrillaMeadowsDetail: React.FC = () => {
           </div>
         </section> */}
 
-        {/* ============================================================
-            9. CONTACT / CTA SECTION
-            ============================================================ */}
-        <section className="meadows-section" id="contact-section">
-          <div className="meadows-contact-grid">
-            <div className="meadows-contact-info">
-              <span className="meadows-section-subtitle">Get in Touch</span>
-              <h3>Connect With Sangrilla Group</h3>
-              <p>
-                Interested in owning a plot or luxury villa at Sangrilla Meadows? Connect with our dedicated sales and investment advisory team today.
-              </p>
 
-              <div className="meadows-contact-channels">
-                <div className="meadows-channel-row">
-                  <div className="meadows-channel-icon">
-                    <Phone size={16} />
-                  </div>
-                  <div className="meadows-channel-text">
-                    <h5>Call Us</h5>
-                    <a href="tel:+919737327999">+91 973 7327 999</a> / <a href="tel:+919737328999">+91 973 7328 999</a>
-                  </div>
-                </div>
-
-                <div className="meadows-channel-row">
-                  <div className="meadows-channel-icon">
-                    <Mail size={16} />
-                  </div>
-                  <div className="meadows-channel-text">
-                    <h5>Email Support</h5>
-                    <a href="mailto:sales@sangrillagroup.com">sales@sangrillagroup.com</a>
-                  </div>
-                </div>
-
-                <div className="meadows-channel-row">
-                  <div className="meadows-channel-icon">
-                    <Globe size={16} />
-                  </div>
-                  <div className="meadows-channel-text">
-                    <h5>Official Website</h5>
-                    <a href="https://www.sangrillagroup.com" target="_blank" rel="noreferrer">www.sangrillagroup.com</a>
-                  </div>
-                </div>
-
-                <div className="meadows-channel-row">
-                  <div className="meadows-channel-icon">
-                    <MapPin size={16} />
-                  </div>
-                  <div className="meadows-channel-text">
-                    <h5>Sales Office</h5>
-                    <p>A/507, Money Plant High Street, Jagatpur, S.G. Highway, Gota, Ahmedabad – 382470, Gujarat, India.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Working Form */}
-            <div className="meadows-form-wrap">
-              <h4>Request Callback</h4>
-              <p>Fill out the form below to receive detailed cost sheet and brochure via WhatsApp.</p>
-
-              {formSubmitted ? (
-                <div style={{ padding: "24px", background: "#f0fdf4", borderRadius: "12px", textAlign: "center", border: "1px solid #bbf7d0" }}>
-                  <CheckCircle2 size={36} color="#16a34a" style={{ margin: "0 auto 8px" }} />
-                  <h4 style={{ color: "#166534", margin: "0 0 4px", fontSize: "0.98rem" }}>Thank You!</h4>
-                  <p style={{ color: "#15803d", margin: 0, fontSize: "0.82rem" }}>
-                    Your inquiry has been submitted. Our executive will reach out to you shortly.
-                  </p>
-                </div>
-              ) : (
-                <form className="meadows-form" onSubmit={handleSubmit}>
-                  <div className="meadows-input-group">
-                    <label>Your Name *</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="e.g. Dev Patel"
-                      className="meadows-input"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    />
-                  </div>
-
-                  <div className="meadows-input-group">
-                    <label>Phone Number *</label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder="+91 95270 27222"
-                      className="meadows-input"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    />
-                  </div>
-
-                  <div className="meadows-input-group">
-                    <label>Email Address</label>
-                    <input
-                      type="email"
-                      placeholder="name@example.com"
-                      className="meadows-input"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    />
-                  </div>
-
-                  <div className="meadows-input-group">
-                    <label>I Am Interested In</label>
-                    <select
-                      className="meadows-select"
-                      value={formData.interest}
-                      onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
-                    >
-                      <option value="Residential Plots">Residential Plots (120–350 Sq. Yd.)</option>
-                      <option value="2BHK Weekend Villa">2BHK Weekend Villa (₹36 Lakhs)</option>
-                      <option value="Site Visit Booking">Book Complimentary Site Visit</option>
-                      <option value="General Information">General Investment Inquiry</option>
-                    </select>
-                  </div>
-
-                  <div className="meadows-input-group">
-                    <label>Questions / Message</label>
-                    <textarea
-                      placeholder="Any specific requirement or scheduled date for visit..."
-                      className="meadows-textarea"
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    />
-                  </div>
-
-                  <button type="submit" className="meadows-form-submit">
-                    Send Inquiry on WhatsApp →
-                  </button>
-                </form>
-              )}
-            </div>
-          </div>
-        </section>
 
         {/* ============================================================
             10. WHAT OUR INVESTORS SAY
@@ -1418,6 +1310,22 @@ const SangrillaMeadowsDetail: React.FC = () => {
         </section>
 
       </div>
+
+      {/* Lightbox Modal for High-Res Visuals & Demarcation Plans */}
+      {lightboxImage && (
+        <div className="meadows-lightbox-backdrop" onClick={() => setLightboxImage(null)}>
+          <button
+            type="button"
+            className="meadows-lightbox-close"
+            onClick={() => setLightboxImage(null)}
+          >
+            <X size={20} />
+          </button>
+          <div className="meadows-lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <img src={lightboxImage} alt="Sangrilla Meadows Visual" />
+          </div>
+        </div>
+      )}
 
     </div>
   );

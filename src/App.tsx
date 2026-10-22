@@ -34,6 +34,8 @@ import Estate from "./pages/Estate";
 import ProjectDetail from "./pages/ProjectDetail";
 import UnderConstructionProjects from "./pages/UnderConstructionProjects";
 import SangrillaMeadowsDetail from "./pages/SangrillaMeadowsDetail";
+import SangrillaBaghbanDetail from "./pages/SangrillaBaghbanDetail";
+import DholeraProjectsPage from "./pages/DholeraProjectsPage";
 import MasterPlanPage from "./pages/MasterPlanPage";
 
 import Chatbot from "./components/ChatBot AI/Chatbot";
@@ -83,8 +85,13 @@ function AppContent() {
         <Route path="/completed-projects" element={<CompletedProjects />} />
         <Route path="/under-construction-projects" element={<UnderConstructionProjects />} />
         <Route path="/under-construction" element={<UnderConstructionProjects />} />
+        <Route path="/dholera" element={<DholeraProjectsPage />} />
         <Route path="/project/sangrilla-meadows" element={<SangrillaMeadowsDetail />} />
         <Route path="/under-construction/sangrilla-meadows" element={<SangrillaMeadowsDetail />} />
+        <Route path="/project/sangrilla-baghban" element={<SangrillaBaghbanDetail />} />
+        <Route path="/under-construction/sangrilla-baghban" element={<SangrillaBaghbanDetail />} />
+        <Route path="/project/baghbaan-sangrilla" element={<SangrillaBaghbanDetail />} />
+        <Route path="/under-construction/baghbaan-sangrilla" element={<SangrillaBaghbanDetail />} />
         <Route path="/project/sangrilla-meadows/master-plan" element={<MasterPlanPage />} />
         <Route path="/sangrilla-meadows/master-plan" element={<MasterPlanPage />} />
         <Route path="/under-construction/sangrilla-meadows/master-plan" element={<MasterPlanPage />} />

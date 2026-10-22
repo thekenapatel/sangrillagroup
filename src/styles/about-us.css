@@ -248,8 +248,8 @@
     align-items: center;
     gap: 0.75rem;
     margin: 0 0 1.25rem;
-    color: var(--sn-accent-blue-light);
-    font-family: var(--sn-font-mono);
+    color: var(--sn-accent-blue);
+    font-family: 'Philosopher', sans-serif;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.16em;
@@ -314,7 +314,7 @@
     font-family: var(--sn-font-serif);
     font-style: italic;
     font-weight: 400;
-    color: #007ADD;
+    color: var(--sn-accent-blue-light);
 }
 
 .sn-cinema-thesis {

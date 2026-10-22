@@ -30,6 +30,22 @@ export const properties: Project[] = [
     rera: 'Govt. Approved / Plan Pass'
   },
   {
+    id: 'sangrilla-baghban',
+    name: 'Sangrilla Baghban, Dholera-SIR',
+    tagline: 'A Rare Lifestyle Address in Dholera / Residential Plots & Porch Villas',
+    status: 'active',
+    type: 'Plots',
+    bhk: ['96 Planned Villa Plots', 'Luxurious Porch Villas'],
+    location: 'Kamiyala, Dholera-SIR, Gujarat',
+    description: 'Strategically located at the gateway of Dholera SIR, Sangrilla Baghban offers 96 well-planned residential plots and luxurious porch villas with 9m and 12m wide internal roads.',
+    highlights: ['96 Villa Plots', 'Porch Villas', 'Kamiyala Near Mandir', 'Clubhouse & Pool', '24/7 CCTV Gated'],
+    images: [
+      '/assets/baghban/baghban-amenities.png',
+      '/assets/baghban/baghban-master-plan.jpg'
+    ],
+    rera: 'Govt. Approved / Plan Pass'
+  },
+  {
     id: 'anantaa-homes',
     name: 'Anantaa Homes',
     tagline: 'Luxury Reimagined',

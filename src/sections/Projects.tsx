@@ -128,10 +128,20 @@ const Projects = () => {
                 className="project-image"
                 alt={project.name}
               />
-              {project.status === "under-construction" &&
-                !["sangrilla-meadows", "neejdham-sangrilla-2", "baghbaan-sangrilla"].includes(project.id) && (
+              {project.id === "sangrilla-baghban" ? (
+                <span className="project-card-badge" style={{ background: "linear-gradient(135deg, #15803d, #16a34a)" }}>
+                  Featured · Dholera SIR
+                </span>
+              ) : project.id === "sangrilla-meadows" ? (
+                <span className="project-card-badge">
+                  Featured · Dholera SIR
+                </span>
+              ) : (
+                project.status === "under-construction" &&
+                !["neejdham-sangrilla-2", "baghbaan-sangrilla"].includes(project.id) && (
                   <span className="project-card-badge">Newly Launched</span>
-                )}
+                )
+              )}
             </div>
 
             {/* Info */}

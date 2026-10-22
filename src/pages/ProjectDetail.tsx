@@ -6,6 +6,7 @@ import "../styles/project-detail.css";
 import OptimizedImage from "../components/OptimizedImage";
 import { getProjectById } from "../data/allProjects";
 import SangrillaMeadowsDetail from "./SangrillaMeadowsDetail";
+import SangrillaBaghbanDetail from "./SangrillaBaghbanDetail";
 
 const resolveImage = (path: string): string => {
   if (!path) return "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200";
@@ -25,6 +26,15 @@ const ProjectDetail = () => {
 
   if (id === "sangrilla-meadows") {
     return <SangrillaMeadowsDetail />;
+  }
+
+  if (
+    id === "sangrilla-baghban" ||
+    id === "baghbaan-sangrilla" ||
+    id === "sangrilla-baghbaan" ||
+    id === "baghban"
+  ) {
+    return <SangrillaBaghbanDetail />;
   }
 
   const project = id ? getProjectById(id) : undefined;
