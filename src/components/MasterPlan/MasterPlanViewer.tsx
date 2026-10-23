@@ -8,6 +8,7 @@ import MasterPlanStatsBar from "./MasterPlanStatsBar";
 import MasterPlanNavigation, { type MasterPlanNavLevel } from "./MasterPlanNavigation";
 import type { FilterState } from "./MasterPlanToolbar";
 import MasterPlanToolbar from "./MasterPlanToolbar";
+import MasterPlanCanvas from "./MasterPlanCanvas";
 import MeadowsMapCanvas from "./MeadowsMapCanvas";
 import VillaFloorPlanViewer from "./VillaFloorPlanViewer";
 import PlotDrawer from "./PlotDrawer";
@@ -28,7 +29,8 @@ export const MasterPlanViewer: React.FC<MasterPlanViewerProps> = ({
 }) => {
   const containerWrapperRef = useRef<HTMLDivElement>(null);
 
-  // 1. Navigation Hierarchy (Requirement 4: Master Plan → Plot Layout → Villa Layout → Individual Plot/Villa)
+  // 1. Navigation Hierarchy & View Mode (Master Plan vs Surroundings)
+  const [viewMode, setViewMode] = useState<"master-plan" | "surroundings">("master-plan");
   const [navLevel, setNavLevel] = useState<MasterPlanNavLevel>("master");
   const [showVillaFloorPlans, setShowVillaFloorPlans] = useState<boolean>(false);
 
@@ -159,6 +161,16 @@ export const MasterPlanViewer: React.FC<MasterPlanViewerProps> = ({
     return new Set(filteredPlots.map((p) => p.id));
   }, [filteredPlots]);
 
+  // Gracefully handle when currently selected plot is filtered out
+  useEffect(() => {
+    if (selectedPlot && !filteredPlotIds.has(selectedPlot.id)) {
+      setSelectedPlot(null);
+      if (navLevel === "detail") {
+        setNavLevel("master");
+      }
+    }
+  }, [filteredPlotIds, selectedPlot, navLevel]);
+
   const handleFilterChange = (newFilters: Partial<FilterState>) => {
     setFilters((prev) => ({ ...prev, ...newFilters }));
   };
@@ -252,6 +264,8 @@ export const MasterPlanViewer: React.FC<MasterPlanViewerProps> = ({
         onToggleFullscreen={toggleFullscreen}
         onSelectStatusFilter={(status) => handleFilterChange({ status })}
         currentStatusFilter={filters.status}
+        viewMode={viewMode}
+        onViewModeChange={setViewMode}
       />
 
       {/* 2. 4-Tier Interactive Navigation (Master Plan → Plot Layout → Villa Layout → Individual Plot/Villa) */}
@@ -266,7 +280,7 @@ export const MasterPlanViewer: React.FC<MasterPlanViewerProps> = ({
       />
 
       {/* 3. Control & Filter Toolbar (only when in master, residential, or detail mode) */}
-      {!showVillaFloorPlans && (
+      {!showVillaFloorPlans && viewMode === "master-plan" && (
         <MasterPlanToolbar
           filters={filters}
           onFilterChange={handleFilterChange}
@@ -284,13 +298,25 @@ export const MasterPlanViewer: React.FC<MasterPlanViewerProps> = ({
             onBackToMaster={() => setShowVillaFloorPlans(false)}
             selectedPlotNumber={selectedPlot?.plotNumber}
           />
-        ) : (
-          /* Geographic project map with interactive plot overlays */
+        ) : viewMode === "surroundings" ? (
+          /* Geographic Surroundings & Infrastructure Map */
           <MeadowsMapCanvas
             plots={SAN_GRILLA_MEADOWS_PLOTS}
             filteredPlotIds={filteredPlotIds}
             selectedPlot={selectedPlot}
             onSelectPlot={handleSelectPlot}
+          />
+        ) : (
+          /* Core Interactive Master Plan Layout (Accurate SVG Vector Demarcation from PDF) */
+          <MasterPlanCanvas
+            plots={SAN_GRILLA_MEADOWS_PLOTS}
+            filteredPlotIds={filteredPlotIds}
+            selectedPlot={selectedPlot}
+            onSelectPlot={handleSelectPlot}
+            isFullscreen={isFullscreen}
+            onToggleFullscreen={toggleFullscreen}
+            navigationLevel={navLevel}
+            onNavigateToVillas={() => setShowVillaFloorPlans(true)}
           />
         )}
 
@@ -302,6 +328,8 @@ export const MasterPlanViewer: React.FC<MasterPlanViewerProps> = ({
             areaSqYards={selectedPlot.areaSqYards}
             facing={selectedPlot.facing}
             type={selectedPlot.type}
+            roadAccess={selectedPlot.roadAccess}
+            isCorner={selectedPlot.isCorner}
             price={selectedPlot.totalPrice ? `₹${(selectedPlot.totalPrice / 100000).toFixed(2)} Lakhs` : undefined}
             dimensionsMeter={
               selectedPlot.dimensionsMeter ||

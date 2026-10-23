@@ -85,6 +85,7 @@ const makeBoundaryFeature = (): Feature<Polygon> => ({
 
 const makeRoadStyle = (style: BaseMapStyle): maplibregl.StyleSpecification => ({
   version: 8,
+  glyphs: "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
   sources: {
     "meadows-basemap": style === "satellite"
       ? {
@@ -266,21 +267,34 @@ const MeadowsMapCanvas: React.FC<MeadowsMapCanvasProps> = ({
       container: mapContainerRef.current,
       style: makeRoadStyle(baseMapStyle),
       center: [SAN_GRILLA_MEADOWS_META.centerCoordinates[1], SAN_GRILLA_MEADOWS_META.centerCoordinates[0]],
-      zoom: 17.2,
-      minZoom: 10,
+      zoom: 16.8,
+      minZoom: 9,
       maxZoom: 21,
       maxBounds: [
-        [SAN_GRILLA_MEADOWS_META.siteBounds[0][1] - 0.06, SAN_GRILLA_MEADOWS_META.siteBounds[0][0] - 0.06],
-        [SAN_GRILLA_MEADOWS_META.siteBounds[1][1] + 0.06, SAN_GRILLA_MEADOWS_META.siteBounds[1][0] + 0.06]
+        [71.2, 21.6],
+        [73.2, 23.5]
       ],
     });
     mapRef.current = map;
     map.addControl(new maplibregl.NavigationControl({ showCompass: true }), "bottom-right");
     map.on("load", () => {
+      map.resize();
       addProjectLayers(map);
       setMapLoaded(true);
     });
+    map.on("error", (e) => {
+      console.warn("MapLibre map error:", e);
+    });
+
+    const handleResize = () => {
+      if (mapRef.current) mapRef.current.resize();
+    };
+    window.addEventListener("resize", handleResize);
+    const resizeTimer = setTimeout(handleResize, 200);
+
     return () => {
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", handleResize);
       map.remove();
       mapRef.current = null;
     };
@@ -292,7 +306,10 @@ const MeadowsMapCanvas: React.FC<MeadowsMapCanvasProps> = ({
     if (previousBaseMapStyleRef.current === baseMapStyle) return;
     previousBaseMapStyleRef.current = baseMapStyle;
     map.setStyle(makeRoadStyle(baseMapStyle));
-    map.once("style.load", () => addProjectLayers(map));
+    map.once("style.load", () => {
+      map.resize();
+      addProjectLayers(map);
+    });
   }, [baseMapStyle, addProjectLayers, mapLoaded]);
 
   useEffect(() => {
@@ -340,13 +357,23 @@ const MeadowsMapCanvas: React.FC<MeadowsMapCanvasProps> = ({
   };
 
   return (
-    <div className="relative h-full w-full bg-slate-950">
-      <div ref={mapContainerRef} className="absolute inset-0" />
+    <div className="relative h-full w-full bg-slate-950 overflow-hidden">
+      <div ref={mapContainerRef} className="absolute inset-0 w-full h-full" />
+
+      {/* Loading Overlay */}
+      {!mapLoaded && (
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-slate-950/85 backdrop-blur-sm text-white">
+          <div className="w-9 h-9 border-2 border-sky-400 border-t-transparent rounded-full animate-spin mb-3" />
+          <p className="text-xs text-sky-200 font-semibold tracking-wide">Loading Dholera Satellite Surroundings Map...</p>
+        </div>
+      )}
+
+      {/* Controls Top Left */}
       <div className="absolute left-3 top-3 z-10 flex flex-wrap gap-2">
         <button
           type="button"
           onClick={() => setBaseMapStyle((current) => current === "satellite" ? "streets" : "satellite")}
-          className="flex items-center gap-2 rounded-md border border-white/20 bg-slate-950/90 px-3 py-2 text-xs font-semibold text-white shadow-lg"
+          className="flex items-center gap-2 rounded-xl border border-white/20 bg-slate-950/90 px-3 py-2 text-xs font-semibold text-white shadow-xl hover:bg-slate-900 transition-colors"
           title="Switch satellite and street map"
         >
           <Layers size={15} /> {baseMapStyle === "satellite" ? "Satellite" : "Streets"}
@@ -355,7 +382,7 @@ const MeadowsMapCanvas: React.FC<MeadowsMapCanvasProps> = ({
           type="button"
           onClick={() => setShowSurroundings((visible) => !visible)}
           aria-pressed={showSurroundings}
-          className="flex items-center gap-2 rounded-md border border-white/20 bg-slate-950/90 px-3 py-2 text-xs font-semibold text-white shadow-lg"
+          className="flex items-center gap-2 rounded-xl border border-white/20 bg-slate-950/90 px-3 py-2 text-xs font-semibold text-white shadow-xl hover:bg-slate-900 transition-colors"
         >
           <MapPin size={15} /> Surroundings {showSurroundings ? "On" : "Off"}
         </button>
@@ -363,18 +390,31 @@ const MeadowsMapCanvas: React.FC<MeadowsMapCanvasProps> = ({
           type="button"
           onClick={() => setShowAmenities((visible) => !visible)}
           aria-pressed={showAmenities}
-          className="rounded-md border border-white/20 bg-slate-950/90 px-3 py-2 text-xs font-semibold text-white shadow-lg"
+          className="rounded-xl border border-white/20 bg-slate-950/90 px-3 py-2 text-xs font-semibold text-white shadow-xl hover:bg-slate-900 transition-colors"
         >
           Amenities {showAmenities ? "On" : "Off"}
         </button>
+        <a
+          href={SAN_GRILLA_MEADOWS_META.googleMapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 rounded-xl border border-amber-500/40 bg-slate-950/90 px-3 py-2 text-xs font-semibold text-amber-300 hover:text-white hover:bg-slate-900 shadow-xl transition-colors"
+          title="Open Project Coordinates in Google Maps"
+        >
+          <LocateFixed size={14} className="text-amber-400" /> Google Maps Pin ↗
+        </a>
       </div>
-      <div className="absolute bottom-5 left-3 z-10 flex items-center gap-1 rounded-md border border-white/15 bg-slate-950/90 p-1 shadow-lg">
-        <button type="button" onClick={() => mapRef.current?.zoomIn()} className="rounded p-2 text-white hover:bg-white/10" title="Zoom in"><Plus size={17} /></button>
-        <button type="button" onClick={() => mapRef.current?.zoomOut()} className="rounded p-2 text-white hover:bg-white/10" title="Zoom out"><Minus size={17} /></button>
-        <button type="button" onClick={goToProject} className="rounded p-2 text-white hover:bg-white/10" title="Center on Sangrilla Meadows"><Crosshair size={17} /></button>
-        <button type="button" onClick={trackLocation} className="rounded p-2 text-white hover:bg-white/10" title="Show my location"><LocateFixed size={17} /></button>
+
+      {/* Navigation Controls Bottom Left */}
+      <div className="absolute bottom-5 left-3 z-10 flex items-center gap-1 rounded-xl border border-white/15 bg-slate-950/90 p-1 shadow-2xl">
+        <button type="button" onClick={() => mapRef.current?.zoomIn()} className="rounded-lg p-2 text-white hover:bg-white/10" title="Zoom in"><Plus size={17} /></button>
+        <button type="button" onClick={() => mapRef.current?.zoomOut()} className="rounded-lg p-2 text-white hover:bg-white/10" title="Zoom out"><Minus size={17} /></button>
+        <button type="button" onClick={goToProject} className="rounded-lg p-2 text-white hover:bg-white/10" title="Center on Sangrilla Meadows"><Crosshair size={17} /></button>
+        <button type="button" onClick={trackLocation} className="rounded-lg p-2 text-white hover:bg-white/10" title="Show my location"><LocateFixed size={17} /></button>
       </div>
-      <div className="absolute bottom-5 right-14 z-10 flex flex-wrap gap-x-3 gap-y-1 rounded-md border border-white/15 bg-slate-950/90 px-3 py-2 text-[11px] font-medium text-white shadow-lg">
+
+      {/* Status Legend Bottom Right */}
+      <div className="absolute bottom-5 right-14 z-10 flex flex-wrap gap-x-3 gap-y-1 rounded-xl border border-white/15 bg-slate-950/90 px-3 py-2 text-[11px] font-medium text-white shadow-2xl">
         <span className="flex items-center gap-1.5"><i className="h-2.5 w-2.5 rounded-sm bg-green-600" />Available</span>
         <span className="flex items-center gap-1.5"><i className="h-2.5 w-2.5 rounded-sm bg-red-600" />Booked</span>
         <span className="flex items-center gap-1.5"><i className="h-2.5 w-2.5 rounded-sm bg-amber-600" />Reserved</span>

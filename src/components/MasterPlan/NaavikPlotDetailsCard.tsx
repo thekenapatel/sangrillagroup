@@ -1,5 +1,5 @@
-import React from "react";
-import { X, Send, Compass, Eye, Sparkles } from "lucide-react";
+import React, { useState } from "react";
+import { X, Send, Compass, Eye, Sparkles, Share2, Check, Star } from "lucide-react";
 
 interface NaavikPlotDetailsCardProps {
   plotNumber: number;
@@ -9,6 +9,8 @@ interface NaavikPlotDetailsCardProps {
   type?: string;
   price?: string;
   dimensionsMeter?: string;
+  roadAccess?: string;
+  isCorner?: boolean;
   onClose: () => void;
   onInquire?: () => void;
   onOpenDrawer?: () => void;
@@ -23,17 +25,27 @@ export const NaavikPlotDetailsCard: React.FC<NaavikPlotDetailsCardProps> = ({
   type,
   price,
   dimensionsMeter = "12.50 x 23.40 x 12.50 x 23.40",
+  roadAccess,
+  isCorner,
   onClose,
   onInquire,
   onOpenDrawer,
   className = ""
 }) => {
+  const [copied, setCopied] = useState(false);
   const isAvailable = status.toLowerCase() === "available";
   const isSold = status.toLowerCase() === "sold" || status.toLowerCase() === "booked";
 
+  const handleCopyLink = () => {
+    const url = `${window.location.origin}${window.location.pathname}?plot=${plotNumber}`;
+    navigator.clipboard.writeText(url);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <div
-      className={`absolute top-4 right-4 z-[600] w-80 sm:w-88 bg-slate-950/95 backdrop-blur-2xl border border-amber-500/30 rounded-2xl p-5 text-white shadow-2xl shadow-black/90 animate-in fade-in zoom-in-95 duration-200 select-none ${className}`}
+      className={`absolute top-3 right-3 sm:top-4 sm:right-4 z-[600] w-[calc(100vw-1.5rem)] sm:w-88 max-w-sm bg-slate-950/95 backdrop-blur-2xl border border-amber-500/30 rounded-2xl p-4 sm:p-5 text-white shadow-2xl shadow-black/90 animate-in fade-in zoom-in-95 duration-200 select-none ${className}`}
     >
       {/* Header */}
       <div className="flex items-center justify-between pb-3 border-b border-white/10">
@@ -41,24 +53,38 @@ export const NaavikPlotDetailsCard: React.FC<NaavikPlotDetailsCardProps> = ({
           <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
           <h3 className="text-base font-extrabold text-white tracking-wide flex items-center gap-1.5">
             <span>Plot #{plotNumber}</span>
+            {isCorner && (
+              <span className="text-[10px] font-bold text-amber-300 bg-amber-500/20 px-1.5 py-0.5 rounded border border-amber-500/40 flex items-center gap-1">
+                <Star size={10} className="fill-amber-400 text-amber-400" /> Corner
+              </span>
+            )}
             {type && (
-              <span className="text-[11px] font-semibold text-amber-300/80 bg-amber-500/10 px-2 py-0.5 rounded-md border border-amber-500/20">
+              <span className="text-[10px] font-semibold text-slate-300 bg-slate-800/80 px-1.5 py-0.5 rounded-md border border-slate-700">
                 {type}
               </span>
             )}
           </h3>
         </div>
-        <button
-          onClick={onClose}
-          className="w-7 h-7 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
-          title="Close Details"
-        >
-          <X size={16} />
-        </button>
+        <div className="flex items-center gap-1">
+          <button
+            onClick={handleCopyLink}
+            className="w-7 h-7 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+            title="Share Plot Link"
+          >
+            {copied ? <Check size={14} className="text-emerald-400" /> : <Share2 size={14} />}
+          </button>
+          <button
+            onClick={onClose}
+            className="w-7 h-7 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+            title="Close Details"
+          >
+            <X size={16} />
+          </button>
+        </div>
       </div>
 
       {/* Rows */}
-      <div className="mt-4 space-y-3 text-xs sm:text-sm">
+      <div className="mt-3 sm:mt-4 space-y-2.5 sm:space-y-3 text-xs sm:text-sm">
         {/* Availability */}
         <div className="flex items-center justify-between">
           <span className="text-slate-400 font-medium">Availability</span>
@@ -107,10 +133,20 @@ export const NaavikPlotDetailsCard: React.FC<NaavikPlotDetailsCardProps> = ({
         {/* Size (meter) */}
         <div className="flex items-center justify-between">
           <span className="text-slate-400 font-medium">Dimensions</span>
-          <span className="text-slate-200 font-semibold text-xs">
+          <span className="text-slate-200 font-semibold text-xs truncate max-w-[180px]">
             {dimensionsMeter}
           </span>
         </div>
+
+        {/* Road Frontage */}
+        {roadAccess && (
+          <div className="flex items-center justify-between">
+            <span className="text-slate-400 font-medium">Road Frontage</span>
+            <span className="text-emerald-400 font-bold text-xs">
+              {roadAccess}
+            </span>
+          </div>
+        )}
 
         {/* Estimated Price */}
         {price && (
@@ -124,7 +160,7 @@ export const NaavikPlotDetailsCard: React.FC<NaavikPlotDetailsCardProps> = ({
       </div>
 
       {/* Action Buttons */}
-      <div className="mt-5 pt-3 border-t border-white/10 flex gap-2">
+      <div className="mt-4 sm:mt-5 pt-3 border-t border-white/10 flex gap-2">
         {onOpenDrawer && (
           <button
             onClick={onOpenDrawer}

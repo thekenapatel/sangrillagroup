@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Layers,
+  Compass,
   Maximize2,
   Minimize2
 } from "lucide-react";
@@ -13,6 +14,8 @@ interface MasterPlanStatsBarProps {
   onToggleFullscreen: () => void;
   onSelectStatusFilter: (status: "all" | "available" | "booked" | "reserved") => void;
   currentStatusFilter: string;
+  viewMode?: "master-plan" | "surroundings";
+  onViewModeChange?: (mode: "master-plan" | "surroundings") => void;
 }
 
 export const MasterPlanStatsBar: React.FC<MasterPlanStatsBarProps> = ({
@@ -20,7 +23,9 @@ export const MasterPlanStatsBar: React.FC<MasterPlanStatsBarProps> = ({
   isFullscreen,
   onToggleFullscreen,
   onSelectStatusFilter,
-  currentStatusFilter
+  currentStatusFilter,
+  viewMode = "master-plan",
+  onViewModeChange
 }) => {
   const availablePlots = plots.filter((p) => p.status === "available");
   const bookedPlots = plots.filter((p) => p.status === "booked");
@@ -109,11 +114,35 @@ export const MasterPlanStatsBar: React.FC<MasterPlanStatsBarProps> = ({
         </button>
       </div>
 
-      {/* Right: Active blueprint mode & Fullscreen */}
+      {/* Right: View Mode Toggle & Fullscreen */}
       <div className="flex items-center gap-2">
-        <div className="inline-flex items-center gap-1.5 rounded-lg border border-sky-500/30 bg-sky-500/10 px-2.5 py-1.5 text-xs font-semibold text-sky-200">
-          <Layers size={14} />
-          <span>2D Blueprint</span>
+        <div className="flex items-center rounded-xl bg-slate-900/90 border border-slate-800 p-0.5">
+          <button
+            type="button"
+            onClick={() => onViewModeChange?.("master-plan")}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              viewMode === "master-plan"
+                ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
+                : "text-slate-400 hover:text-white"
+            }`}
+            title="Interactive Master Plan Layout"
+          >
+            <Layers size={13} />
+            <span>Master Plan</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => onViewModeChange?.("surroundings")}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              viewMode === "surroundings"
+                ? "bg-sky-500 text-slate-950 shadow-md shadow-sky-500/20"
+                : "text-slate-400 hover:text-white"
+            }`}
+            title="Explore Geographic Location & Dholera SIR Infrastructure"
+          >
+            <Compass size={13} />
+            <span>Surroundings</span>
+          </button>
         </div>
 
         {/* Fullscreen Button */}
