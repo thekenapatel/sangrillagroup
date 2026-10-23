@@ -159,10 +159,10 @@ const SangrillaBaghbanDetail: React.FC = () => {
 
           {/* Badges */}
           <div className="meadows-badges-row">
-            <span className="meadows-badge meadows-badge-cat" style={{ background: "#dcfce7", color: "#15803d", borderColor: "#bbf7d0" }}>
+            {/* <span className="meadows-badge meadows-badge-cat" style={{ background: "#dcfce7", color: "#15803d", borderColor: "#bbf7d0" }}>
               <span className="meadows-badge-pulse" style={{ background: "#15803d" }} />
               96 Planned Villa Plots
-            </span>
+            </span> */}
             <span className="meadows-badge meadows-badge-cat">
               Residential Plots &amp; Porch Villas
             </span>
@@ -212,14 +212,14 @@ const SangrillaBaghbanDetail: React.FC = () => {
               <Download size={15} /> Download Brochure
             </button>
 
-            <button
+            {/* <button
               onClick={() => scrollTo("layout-section", "layout")}
               className="meadows-btn-secondary"
               style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}
             >
               <Layers size={15} color="#15803d" />
               <span>Master Demarcation Plan</span>
-            </button>
+            </button> */}
           </div>
 
           {/* Quick-Jump Navigation Bar */}
@@ -505,37 +505,37 @@ const SangrillaBaghbanDetail: React.FC = () => {
 
           <div className="meadows-stats-grid">
             <div className="meadows-stat-card">
-              <div className="meadows-stat-num" style={{ color: "#15803d" }}>96 Plots</div>
+              <div className="meadows-stat-num">96 Plots</div>
               <div className="meadows-stat-title">Total Planned Plots</div>
               <div className="meadows-stat-desc">Organized geometry &amp; solar access</div>
             </div>
 
             <div className="meadows-stat-card">
-              <div className="meadows-stat-num" style={{ color: "#15803d" }}>9 &amp; 12 MT</div>
+              <div className="meadows-stat-num">9 &amp; 12 MT</div>
               <div className="meadows-stat-title">Road Infrastructure</div>
               <div className="meadows-stat-desc">Wide asphalt internal roads</div>
             </div>
 
             <div className="meadows-stat-card">
-              <div className="meadows-stat-num" style={{ color: "#15803d" }}>715 m²</div>
+              <div className="meadows-stat-num">715 sq. m</div>
               <div className="meadows-stat-title">Common Plot COP-1</div>
               <div className="meadows-stat-desc">Clubhouse, Pool &amp; Garden Lawn</div>
             </div>
 
             <div className="meadows-stat-card">
-              <div className="meadows-stat-num" style={{ color: "#15803d" }}>553 m²</div>
+              <div className="meadows-stat-num">553 sq. m</div>
               <div className="meadows-stat-title">Common Plot COP-2</div>
               <div className="meadows-stat-desc">Central Green Landscaped Garden</div>
             </div>
 
             <div className="meadows-stat-card">
-              <div className="meadows-stat-num" style={{ color: "#15803d" }}>524 m²</div>
+              <div className="meadows-stat-num">524 sq. m</div>
               <div className="meadows-stat-title">Common Plot COP-3</div>
               <div className="meadows-stat-desc">Recreation Arena &amp; Gazebo Park</div>
             </div>
 
             <div className="meadows-stat-card">
-              <div className="meadows-stat-num" style={{ color: "#15803d" }}>100% Clear</div>
+              <div className="meadows-stat-num">100% Clear</div>
               <div className="meadows-stat-title">Individual Ownership</div>
               <div className="meadows-stat-desc">Complete legal registry facilitation</div>
             </div>
@@ -586,7 +586,7 @@ const SangrillaBaghbanDetail: React.FC = () => {
         <section className="meadows-section" id="amenities-section">
           <div className="meadows-section-header">
             <span className="meadows-section-subtitle">Comfort &amp; Security</span>
-            <h2 className="meadows-section-title">16 Curated Amenities &amp; Infrastructure</h2>
+            <h2 className="meadows-section-title">Amenities &amp; Infrastructure</h2>
           </div>
 
           <div className="meadows-amenities-grid">

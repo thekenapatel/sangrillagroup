@@ -1,6 +1,7 @@
-/* CONTAINER WRAPPERS */
+/* CONTAINER WRAPPERS - Aligned 1:1 with Navbar */
 .hp-projects-wrap {
-    padding: 125px max(24px, calc((100% - 1400px) / 2 + 24px)) 80px;
+    padding-top: 116px;
+    padding-bottom: 80px;
     font-family: var(--sn-font-sans, "Poppins", sans-serif);
     overflow: hidden;
     background-color: #fff;
@@ -11,6 +12,7 @@
 .hp-projects-container {
     max-width: 1400px;
     margin: 0 auto;
+    padding: 0 100px;
     width: 100%;
     box-sizing: border-box;
 }
@@ -107,9 +109,9 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
 
-    /* Align start of scroll with container padding */
-    /* padding-left: calc((100vw - 1400px) / 2 + 100px);
-    padding-right: 100px; */
+    /* Align start of scroll with container and navbar padding */
+    padding-left: max(100px, calc((100vw - 1400px) / 2 + 100px));
+    padding-right: max(100px, calc((100vw - 1400px) / 2 + 100px));
 }
 
 .projects-scroll:active {
@@ -282,13 +284,20 @@
     /* backdrop-filter: blur(4px); */
 }
 
-/* Responsive adjustment for Mobile and Tablets */
-@media (max-width: 1024px) {
+/* Responsive adjustment for Mobile and Tablets - Aligned 1:1 with Navbar */
+@media (min-width: 769px) and (max-width: 1024px) {
     .hp-projects-wrap {
-        padding: 110px 32px 70px;
+        padding-top: 108px;
+        padding-bottom: 70px;
+    }
+
+    .hp-projects-container {
+        padding: 0 36px;
     }
 
     .projects-scroll {
+        padding-left: 36px;
+        padding-right: 36px;
         grid-auto-columns: 340px;
         gap: 28px;
     }
@@ -296,11 +305,17 @@
 
 @media (max-width: 768px) {
     .hp-projects-wrap {
-        padding: 100px 20px 55px;
+        padding-top: 96px;
+        padding-bottom: 55px;
+    }
+
+    .hp-projects-container {
+        padding: 0 24px;
     }
 
     .projects-title {
         font-size: clamp(1.8rem, 4.5vw, 2.3rem);
+        margin-top: 0;
         margin-bottom: 22px;
     }
 
@@ -319,6 +334,8 @@
     }
 
     .projects-scroll {
+        padding-left: 24px;
+        padding-right: 24px;
         grid-auto-columns: 310px;
         gap: 20px;
     }
@@ -326,11 +343,17 @@
 
 @media (max-width: 480px) {
     .hp-projects-wrap {
-        padding: 95px 16px 45px;
+        padding-top: 92px;
+        padding-bottom: 45px;
+    }
+
+    .hp-projects-container {
+        padding: 0 20px;
     }
 
     .projects-title {
         font-size: 1.65rem;
+        margin-top: 0;
         margin-bottom: 16px;
         padding: 0;
     }

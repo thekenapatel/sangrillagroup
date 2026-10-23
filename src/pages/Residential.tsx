@@ -125,7 +125,16 @@ const Residential = () => {
                   <Link to={`/project/${project.id}`} className="fs-btn fs-btn-explore">
                     Explore Lifestyle <ArrowRight size={20} />
                   </Link>
-                  <Link to="/contact" className="fs-btn fs-btn-enquire">
+                  <Link
+                    to={
+                      project.id === "sangrilla-meadows"
+                        ? "/dholera?project=sangrilla-meadows#dholera-contact"
+                        : project.id === "sangrilla-baghban" || project.id === "baghbaan-sangrilla"
+                        ? "/dholera?project=sangrilla-baghban#dholera-contact"
+                        : "/contact"
+                    }
+                    className="fs-btn fs-btn-enquire"
+                  >
                     <MessageCircle size={20} /> Enquire
                   </Link>
                 </div>

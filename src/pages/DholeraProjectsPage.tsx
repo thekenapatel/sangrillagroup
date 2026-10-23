@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   MapPin,
   CheckCircle2,
@@ -16,6 +16,7 @@ import "../styles/dholera-hub.css";
 import { downloadBrochure, saveContactDetails } from "../services/mongoService";
 
 const DholeraProjectsPage: React.FC = () => {
+  const location = useLocation();
   const stickyBarRef = useRef<HTMLElement>(null);
   const [siteVisitModalOpen, setSiteVisitModalOpen] = useState(false);
   const [visitSubmitted, setVisitSubmitted] = useState(false);
@@ -40,6 +41,36 @@ const DholeraProjectsPage: React.FC = () => {
     message: ""
   });
   const [contactSubmitted, setContactSubmitted] = useState(false);
+
+  // Pre-select project and auto-scroll to CTA contact form if linked from project cards
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const projParam = (searchParams.get("project") || (location.state as any)?.project || "").toLowerCase();
+
+    if (projParam) {
+      if (projParam.includes("meadow")) {
+        setContactForm((prev) => ({
+          ...prev,
+          project: "Sangrilla Meadows (145 Villa Plots · Aakru Village)"
+        }));
+      } else if (projParam.includes("baghban")) {
+        setContactForm((prev) => ({
+          ...prev,
+          project: "Sangrilla Baghban (96 Villa Plots & Porch Villas · Kamiyala)"
+        }));
+      }
+    }
+
+    if (location.hash === "#dholera-contact") {
+      const scrollTimer = setTimeout(() => {
+        const el = document.getElementById("dholera-contact");
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 150);
+      return () => clearTimeout(scrollTimer);
+    }
+  }, [location.search, location.hash, location.state]);
 
   // Unified CTA Contact Form Submit
   const handleContactSubmit = async (e: React.FormEvent) => {

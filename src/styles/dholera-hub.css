@@ -361,6 +361,7 @@
 
 /* ── Single Unified Dholera CTA Contact Section (Apple/Shivalik Executive Style) ── */
 .dholera-contact-section {
+  scroll-margin-top: 100px;
   background: var(--dholera-surface);
   border: 1px solid var(--dholera-border);
   border-radius: var(--dholera-radius-xl);
@@ -369,6 +370,12 @@
   margin-bottom: 40px;
   position: relative;
   overflow: hidden;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.dholera-contact-section:target {
+  border-color: rgba(0, 122, 221, 0.45);
+  box-shadow: 0 16px 48px rgba(0, 122, 221, 0.12);
 }
 
 .dholera-contact-grid {

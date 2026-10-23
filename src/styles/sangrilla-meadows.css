@@ -462,14 +462,14 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  /* transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); */
   position: relative;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
 .meadows-highlight-card:hover {
-  transform: translateY(-3px);
+  /* transform: translateY(-1px); */
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
   border-color: #cbd5e1;
 }
@@ -1576,19 +1576,19 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-  transition: all 0.25s ease;
+  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02); */
+  /* transition: all 0.25s ease; */
 }
 
 .meadows-stat-card:hover {
-  transform: translateY(-2px);
-  border-color: #cbd5e1;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+  /* transform: translateY(-2px); */
+  border-color: #c1c5c9;
+  /* box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04); */
 }
 
 .meadows-stat-num {
-  font-size: 2.2rem;
-  font-weight: 800;
+  font-size: 1.7rem;
+  font-weight: 700;
   color: #0f172a;
   line-height: 1.05;
   letter-spacing: -0.03em;
@@ -1936,13 +1936,13 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  transition: all 0.3s ease;
+  /* transition: all 0.3s ease; */
 }
 
 .meadows-amenity-box:hover {
   border-color: #007ADD;
-  transform: translateY(-3px);
-  box-shadow: 0 12px 24px rgba(0, 122, 221, 0.08);
+  /* transform: translateY(-3px); */
+  /* box-shadow: 0 12px 24px rgba(0, 122, 221, 0.08); */
 }
 
 .meadows-amenity-icon {
@@ -2768,12 +2768,13 @@
   /* Quick Nav on mobile */
   .meadows-quick-nav-bar {
     padding: 8px 0 12px;
-    gap: 6px;
+    /* gap: 6px; */
     margin: 50px 0 16px;
   }
 
   .meadows-quick-nav-item {
-    padding: 4px 10px;
+    margin: 0 10px;
+    padding: 4px 7px;
     font-size: 0.68rem;
     border-radius: 20px;
   }

@@ -80,109 +80,120 @@ const Projects = () => {
   }, [activeIndex, filteredProjects]);
 
   return (
-    <div className="hp-projects-wrap" id="projects-section">
-      <div className="hp-projects-container">
-        <h2 className="projects-title">Explore Our Landmarks</h2>
+    <>
+      {/* ====================================================================
+          PORTFOLIO BROWSING SECTION
+          ==================================================================== */}
+      <div className="hp-projects-wrap" id="projects-section">
+        <div className="hp-projects-container">
+          <h2 className="projects-title">Explore Our Landmarks</h2>
 
-        {/* FILTERS */}
-        <div className="projects-filters" role="tablist" aria-label="Project Categories">
-          {[
-            { key: "all", label: "All" },
-            { key: "ongoing", label: "Ongoing" },
-            { key: "residential", label: "Residential" },
-            { key: "commercial", label: "Commercial" },
-          ].map(({ key, label }) => (
-            <button
-              key={key}
-              type="button"
-              role="tab"
-              aria-selected={activeFilter === key}
-              className={`filter-item ${activeFilter === key ? "active" : ""}`}
-              onClick={() => {
-                setActiveFilter(key);
-                setActiveIndex(0);
-                if (scrollRef.current) scrollRef.current.scrollLeft = 0;
-              }}
-            >
-              {label}
-            </button>
+          {/* FILTERS */}
+          <div className="projects-filters" role="tablist" aria-label="Project Categories">
+            {[
+              { key: "all", label: "All" },
+              { key: "ongoing", label: "Ongoing" },
+              { key: "residential", label: "Residential" },
+              { key: "commercial", label: "Commercial" },
+            ].map(({ key, label }) => (
+              <button
+                key={key}
+                type="button"
+                role="tab"
+                aria-selected={activeFilter === key}
+                className={`filter-item ${activeFilter === key ? "active" : ""}`}
+                onClick={() => {
+                  setActiveFilter(key);
+                  setActiveIndex(0);
+                  if (scrollRef.current) scrollRef.current.scrollLeft = 0;
+                }}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* SCROLL CONTAINER */}
+        <div
+          ref={scrollRef}
+          className="projects-scroll"
+          onMouseDown={handleMouseDown}
+          onMouseLeave={handleMouseLeave}
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
+        >
+          {filteredProjects.map((project, index) => (
+            <div key={index} className="project-card">
+              {/* Image */}
+              <div className="project-image-wrapper">
+                <OptimizedImage
+                  src={resolveImage(project.images[0])}
+                  className="project-image"
+                  alt={project.name}
+                />
+                {project.id === "sangrilla-baghban" ? (
+                  <span className="project-card-badge" style={{ background: "linear-gradient(135deg, #15803d, #16a34a)" }}>
+                    Featured · Dholera SIR
+                  </span>
+                ) : project.id === "sangrilla-meadows" ? (
+                  <span className="project-card-badge">
+                    Featured · Dholera SIR
+                  </span>
+                ) : (
+                  project.status === "under-construction" &&
+                  !["neejdham-sangrilla-2", "baghbaan-sangrilla"].includes(project.id) && (
+                    <span className="project-card-badge">Newly Launched</span>
+                  )
+                )}
+              </div>
+
+              {/* Info */}
+              <div className="project-info">
+                <h3 className="project-name">{project.name}</h3>
+                <p className="project-location">{project.location}</p>
+
+                {/* Action Buttons */}
+                <div className="project-card-actions" onMouseDown={(e) => e.stopPropagation()}>
+                  <Link
+                    to={
+                      project.id === "sangrilla-meadows"
+                        ? "/dholera?project=sangrilla-meadows#dholera-contact"
+                        : project.id === "sangrilla-baghban" || project.id === "baghbaan-sangrilla"
+                        ? "/dholera?project=sangrilla-baghban#dholera-contact"
+                        : "/contact"
+                    }
+                    className="pc-btn pc-btn-enquire"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Enquire
+                  </Link>
+                  <Link
+                    to={`/project/${project.id}`}
+                    className="pc-btn pc-btn-explore"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Explore →
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* PAGINATION DOTS (MOBILE ONLY) */}
+        <div className="projects-dots">
+          {filteredProjects.map((_, index) => (
+            <div
+              key={index}
+              className={`project-dot ${activeIndex === index ? "active" : ""}`}
+              onClick={() => scrollToSection(index)}
+            />
           ))}
         </div>
       </div>
-
-      {/* SCROLL CONTAINER */}
-      <div
-        ref={scrollRef}
-        className="projects-scroll"
-        onMouseDown={handleMouseDown}
-        onMouseLeave={handleMouseLeave}
-        onMouseUp={handleMouseUp}
-        onMouseMove={handleMouseMove}
-      >
-        {filteredProjects.map((project, index) => (
-          <div key={index} className="project-card">
-            {/* Image */}
-            <div className="project-image-wrapper">
-              <OptimizedImage
-                src={resolveImage(project.images[0])}
-                className="project-image"
-                alt={project.name}
-              />
-              {project.id === "sangrilla-baghban" ? (
-                <span className="project-card-badge" style={{ background: "linear-gradient(135deg, #15803d, #16a34a)" }}>
-                  Featured · Dholera SIR
-                </span>
-              ) : project.id === "sangrilla-meadows" ? (
-                <span className="project-card-badge">
-                  Featured · Dholera SIR
-                </span>
-              ) : (
-                project.status === "under-construction" &&
-                !["neejdham-sangrilla-2", "baghbaan-sangrilla"].includes(project.id) && (
-                  <span className="project-card-badge">Newly Launched</span>
-                )
-              )}
-            </div>
-
-            {/* Info */}
-            <div className="project-info">
-              <h3 className="project-name">{project.name}</h3>
-              <p className="project-location">{project.location}</p>
-
-              {/* Action Buttons */}
-              <div className="project-card-actions">
-                <Link
-                  to="/contact"
-                  className="pc-btn pc-btn-enquire"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  Enquire
-                </Link>
-                <Link
-                  to={`/project/${project.id}`}
-                  className="pc-btn pc-btn-explore"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  Explore →
-                </Link>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* PAGINATION DOTS (MOBILE ONLY) */}
-      <div className="projects-dots">
-        {filteredProjects.map((_, index) => (
-          <div
-            key={index}
-            className={`project-dot ${activeIndex === index ? "active" : ""}`}
-            onClick={() => scrollToSection(index)}
-          />
-        ))}
-      </div>
-    </div>
+    </>
   );
 };
 
-export default Projects;
+export default Projects;

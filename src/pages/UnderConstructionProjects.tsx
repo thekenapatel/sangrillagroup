@@ -113,7 +113,13 @@ const ProjectCard = ({ project }: { project: Project }) => {
             </Link>
 
             <Link
-              to="/contact"
+              to={
+                project.id === "sangrilla-meadows"
+                  ? "/dholera?project=sangrilla-meadows#dholera-contact"
+                  : project.id === "sangrilla-baghban" || project.id === "baghbaan-sangrilla"
+                  ? "/dholera?project=sangrilla-baghban#dholera-contact"
+                  : "/contact"
+              }
               className="pc-btn pc-btn-enquire"
               style={{
                 padding: "10px 18px",
