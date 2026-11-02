@@ -3,21 +3,21 @@ import { motion } from "framer-motion";
 import "../styles/upcoming.css";
 import OptimizedImage from "../components/OptimizedImage";
 
-import blossom from "../assets/upcoming/blossom.jpg";
-import skyline from "../assets/upcoming/skyline.jpg";
+import baghban from "../assets/sangrilla-baghban-coverpage.png";
+import neejdham from "../assets/residential/res-neejdham/neejdham-cover.jpg";
 
 const upcomingProjects = [
   {
-    title: "SANGRILLA NEEJDHAM",
-    description: "Ultra-luxury 4BHK apartments with private decks.",
-    launchDate: "2026-06-15",
-    image: blossom,
+    title: "SANGRILLA BAGHBAN",
+    description: "Residential Plots & Luxurious Villas.",
+    launchDate: "2026-08-15",
+    image: baghban,
   },
   {
-    title: "SANGRILLA SKYLINE",
-    description: "Next-gen smart offices with sky gardens.",
-    launchDate: "2026-08-01",
-    image: skyline,
+    title: "SANGRILLA 11",
+    description: "Ultra-luxury 3 BHK Apartments.",
+    launchDate: "2026-6-27",
+    image: neejdham,
   }
 ];
 
@@ -198,4 +198,3 @@ const UpcomingTeaser: React.FC = () => {
 };
 
 export default UpcomingTeaser;
-

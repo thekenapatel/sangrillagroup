@@ -7,18 +7,12 @@ import OptimizedImage from "../components/OptimizedImage";
 import { getProjectById } from "../data/allProjects";
 import SangrillaMeadowsDetail from "./SangrillaMeadowsDetail";
 import SangrillaBaghbanDetail from "./SangrillaBaghbanDetail";
-
-const resolveImage = (path: string): string => {
-  if (!path) return "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200";
-  if (path.startsWith('http') || path.startsWith('data:') || path.startsWith('/') || path.startsWith('blob:')) {
-    return path;
-  }
-  try {
-    return new URL(`../assets/${path}`, import.meta.url).href;
-  } catch {
-    return "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200";
-  }
-};
+import {
+  shouldShowProjectPhotosSection,
+  isProjectUsingPlaceholder,
+  resolveProjectImage,
+} from "../utils/projectImages";
+import NoImageCover from "../components/NoImageCover";
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -75,9 +69,9 @@ const ProjectDetail = () => {
   return (
     <div className="project-detail-page">
       <div className="project-detail-linear-container">
-        
+
         {/* ── TOP: Breadcrumb & Header ── */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -116,7 +110,7 @@ const ProjectDetail = () => {
 
         {/* ── SECTION: Key Specifications ── */}
         {project.specs && project.specs.length > 0 && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.05 }}
@@ -133,7 +127,7 @@ const ProjectDetail = () => {
 
         {/* ── SECTION: Project Configuration (Inventory) ── */}
         {project.inventory && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -164,7 +158,7 @@ const ProjectDetail = () => {
         )}
 
         {/* ── SECTION: Description ── */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -172,36 +166,46 @@ const ProjectDetail = () => {
         >
           <h3 className="pd-section-title">About the Project</h3>
           <p className="pd-description-text">{project.description}</p>
-{/*           
+          {/*           
             <Link to="/contact" className="pd-contact-btn">
               <Mail size={18} /> Enquire Now
             </Link> */}
         </motion.div>
 
-        {/* ── SECTION: Photos (Horizontal Scroller) ── */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="pd-photos-section"
-        >
-          <h3 className="pd-section-title">Photos</h3>
-          <div className="pd-horizontal-scroller">
-            {project.images.map((imgPath, idx) => (
-              <div key={idx} className="pd-photo-wrapper">
-                <OptimizedImage
-                  src={resolveImage(imgPath)}
-                  alt={`${project.name} view ${idx + 1}`}
-                  className="pd-photo-img"
-                  containerClassName="pd-photo-container"
-                />
+        {/* ── SECTION: Photos (Removed for Commercial, Replaced for 7 Residential, Original for Unaffected) ── */}
+        {shouldShowProjectPhotosSection(project) && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="pd-photos-section"
+          >
+            <h3 className="pd-section-title">Photos</h3>
+            {isProjectUsingPlaceholder(project) ? (
+              <NoImageCover
+                alt={`${project.name} visuals updating`}
+                containerClassName="pd-no-image-wrapper"
+                className="pd-no-image-cover"
+              />
+            ) : (
+              <div className="pd-horizontal-scroller">
+                {project.images.map((imgPath, idx) => (
+                  <div key={idx} className="pd-photo-wrapper">
+                    <OptimizedImage
+                      src={resolveProjectImage(imgPath)}
+                      alt={`${project.name} view ${idx + 1}`}
+                      className="pd-photo-img"
+                      containerClassName="pd-photo-container"
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </motion.div>
+            )}
+          </motion.div>
+        )}
 
         {/* ── SECTION: Amenities ── */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}

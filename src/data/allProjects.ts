@@ -1,16 +1,16 @@
 // arcade
-import arcade1 from '../assets/commercial/arcade/arcade1.jpg';
-import arcade2 from '../assets/commercial/arcade/arcade2.jpg';
-import arcade3 from '../assets/commercial/arcade/arcade3.jpg';
-import arcade4 from '../assets/commercial/arcade/arcade4.jpg';
-import arcade5 from '../assets/commercial/arcade/arcade5.jpg';
+// import arcade1 from '../assets/commercial/arcade/arcade1.jpg';
+// import arcade2 from '../assets/commercial/arcade/arcade2.jpg';
+// import arcade3 from '../assets/commercial/arcade/arcade3.jpg';
+// import arcade4 from '../assets/commercial/arcade/arcade4.jpg';
+// import arcade5 from '../assets/commercial/arcade/arcade5.jpg';
 
 // business-centre
-import businesscentre1 from '../assets/commercial/business-centre/bc1.jpg';
-import businesscentre2 from '../assets/commercial/business-centre/bc2.jpg';
-import businesscentre3 from '../assets/commercial/business-centre/bc3.jpg';
-import businesscentre4 from '../assets/commercial/business-centre/bc4.jpg';
-import businesscentre5 from '../assets/commercial/business-centre/bc5.jpg';
+// import businesscentre1 from '../assets/commercial/business-centre/bc1.jpg';
+// import businesscentre2 from '../assets/commercial/business-centre/bc2.jpg';
+// import businesscentre3 from '../assets/commercial/business-centre/bc3.jpg';
+// import businesscentre4 from '../assets/commercial/business-centre/bc4.jpg';
+// import businesscentre5 from '../assets/commercial/business-centre/bc5.jpg';
 
 // business-park
 import businesspark1 from '../assets/commercial/business-park/bp1.jpg';
@@ -20,11 +20,11 @@ import businesspark4 from '../assets/commercial/business-park/bp4.jpg';
 import businesspark5 from '../assets/commercial/business-park/bp5.jpg';
 
 // city-centre
-import citycentre1 from '../assets/commercial/city-centre/cc1.jpg';
-import citycentre2 from '../assets/commercial/city-centre/cc2.jpg';
-import citycentre3 from '../assets/commercial/city-centre/cc3.jpg';
-import citycentre4 from '../assets/commercial/city-centre/cc4.jpg';
-import citycentre5 from '../assets/commercial/city-centre/cc5.jpg';
+// import citycentre1 from '../assets/commercial/city-centre/cc1.jpg';
+// import citycentre2 from '../assets/commercial/city-centre/cc2.jpg';
+// import citycentre3 from '../assets/commercial/city-centre/cc3.jpg';
+// import citycentre4 from '../assets/commercial/city-centre/cc4.jpg';
+// import citycentre5 from '../assets/commercial/city-centre/cc5.jpg';
 
 // complex
 import complex1 from '../assets/commercial/complex/complex1.jpg';
@@ -49,6 +49,7 @@ import swhsm5 from '../assets/commercial/swh-sm/swh5.jpg';
 
 // RESIDENTIAL ASSETS
 // bunglows
+import bunglowsCover from '../assets/residential/res-bunglows/bunglows-cover.png';
 import bunglows1 from '../assets/residential/res-bunglows/bunglows1.jpg';
 import bunglows2 from '../assets/residential/res-bunglows/bunglows2.jpg';
 import bunglows3 from '../assets/residential/res-bunglows/bunglows3.jpg';
@@ -70,11 +71,11 @@ import park4 from '../assets/residential/res-park/park4.jpg';
 import park5 from '../assets/residential/res-park/park5.jpg';
 
 // plotsandvillas
-import plotsandvillas1 from '../assets/residential/res-plotsandvillas/plotsandvillas1.jpg';
-import plotsandvillas2 from '../assets/residential/res-plotsandvillas/plotsandvillas2.jpg';
-import plotsandvillas3 from '../assets/residential/res-plotsandvillas/plotsandvillas3.jpg';
-import plotsandvillas4 from '../assets/residential/res-plotsandvillas/plotsandvillas4.jpg';
-import plotsandvillas5 from '../assets/residential/res-plotsandvillas/plotsandvillas5.jpg';
+// import plotsandvillas1 from '../assets/residential/res-plotsandvillas/plotsandvillas1.jpg';
+// import plotsandvillas2 from '../assets/residential/res-plotsandvillas/plotsandvillas2.jpg';
+// import plotsandvillas3 from '../assets/residential/res-plotsandvillas/plotsandvillas3.jpg';
+// import plotsandvillas4 from '../assets/residential/res-plotsandvillas/plotsandvillas4.jpg';
+// import plotsandvillas5 from '../assets/residential/res-plotsandvillas/plotsandvillas5.jpg';
 
 // residency
 import residency1 from '../assets/residential/res-residency/residency1.jpg';
@@ -110,7 +111,7 @@ import villa2 from '../assets/residential/res-villa/villa2.jpg';
 import villa3 from '../assets/residential/res-villa/villa3.jpg';
 import villa4 from '../assets/residential/res-villa/villa4.jpg';
 import villa5 from '../assets/residential/res-villa/villa5.jpg';
-import blossom from '../assets/upcoming/blossom.jpg';
+import neejdhamCover from '../assets/residential/res-neejdham/neejdham-cover.jpg';
 
 
 export type ProjectStatus = 'completed' | 'under-construction';
@@ -237,14 +238,14 @@ export const allProjects: Project[] = [
   },
   {
     id: 'neejdham-sangrilla-2',
-    name: 'Neejdham (Sangrilla II)',
-    tagline: 'Ultra-Luxury 4 BHK Apartments with Private Decks',
+    name: 'Neejdham (Sangrilla 11)',
+    tagline: 'Ultra-Luxury 3 BHK Apartments',
     location: 'AHMEDABAD',
     status: 'under-construction',
     type: 'residential',
     specs: [
       { label: 'Project Status', value: 'Ongoing' },
-      { label: 'Residence Type', value: 'Ultra-luxury 4 BHK Apartments' },
+      { label: 'Residence Type', value: 'Ultra-luxury 3 BHK Apartments' },
       { label: 'Outdoor Space', value: 'Private Decks' },
       { label: 'Floor Plans', value: 'To be announced' },
       { label: 'Possession', value: 'To be announced' },
@@ -260,77 +261,73 @@ export const allProjects: Project[] = [
       'CCTV Security',
       'Power Backup for Common Areas',
     ],
-    images: [
-      blossom,
-      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200',
-    ],
+    images: [neejdhamCover],
     inventory: [
-      { floor: '4 BHK Residences', count: 'Multiple Apartments', size: 'Details to be announced' },
+      { floor: '3 BHK Residences', count: 'Multiple Apartments', size: 'Details to be announced' },
     ],
   },
 
   // ─── COMMERCIAL ───
-  {
-    id: 'sangrilla-city-centre',
-    name: 'Sangrilla City Centre',
-    tagline: 'Prime Commercial Hub',
-    year: '2025',
-    status: 'completed',
-    type: 'commercial',
-    specs: [
-      { label: 'Year Completed', value: '2025' },
-    ],
-    description: 'A well-designed commercial complex offering prime shop and office spaces with high footfall and excellent connectivity.',
-    amenities: ['Basement & Open Parking Facilities', '24/7 CCTV Surveillance & Security', 'Power Backup for Common Areas', 'Fire Safety & Compliance Systems', 'Wide Corridors & High Visibility Shop Fronts', 'Dedicated Signage Spaces', 'Common Washrooms on Each Floor', 'Efficient Vertical Connectivity (Staircases)'],
-    images: [citycentre4, citycentre2, citycentre3, citycentre1, citycentre5],
-    inventory: [
-      { floor: 'Ground Floor', count: "42 Shops", size: '300 sq.ft.' },
-      { floor: '1st Floor', count: "42 Shops", size: '300 sq.ft.' },
-      { floor: '2nd Floor', count: "20 Offices", size: '590 sq.ft.' },
-    ],
-  },
-  {
-    id: 'sangrilla-business-centre',
-    name: 'Sangrilla Business Centre',
-    tagline: 'Where Business Thrives',
-    year: '2023',
-    status: 'completed',
-    type: 'commercial',
-    specs: [
-      { label: 'Shops & Offices', value: 'Multiple Units' },
-      { label: 'Year Completed', value: '2023' },
-    ],
-    description: 'A strategically located business centre designed for corporate offices and retail spaces with modern infrastructure.',
-    amenities: ['Multi-level Parking Facilities', 'High-Speed Elevators', '24/7 Security with CCTV Monitoring', 'Power Backup for Offices & Common Areas', 'Fire Safety Systems', 'Reception & Waiting Lobby', 'Dedicated Office Zones (Upper Floors)', 'Professional Building Management'],
-    images: [businesscentre4, businesscentre2, businesscentre3, businesscentre1, businesscentre5],
-    inventory: [
-      { floor: 'Ground Floor', count: "66 Shops", size: '280 sq.ft.' },
-      { floor: '1st Floor', count: "66 Shops", size: '280 sq.ft.' },
-      { floor: '2nd Floor', count: "30 Offices", size: '615 sq.ft. to 700 sq.ft.' },
-    ],
-  },
-  {
-    id: 'sangrilla-arcade',
-    name: 'Sangrilla Arcade',
-    tagline: 'Retail Excellence',
-    year: '2020',
-    status: 'completed',
-    type: 'commercial',
-    specs: [
-      { label: 'Shops', value: 'Multiple Units' },
-      { label: 'Year Completed', value: '2020' },
-    ],
-    description: 'A vibrant retail arcade offering excellent commercial spaces for retail businesses with high visibility and customer footfall.',
-    amenities: ['Ample Surface Parking', 'Wide Frontage for Maximum Visibility', 'CCTV Surveillance', 'Power Backup (Common Areas)', 'Fire Safety Systems', 'Spacious Common Walkways', 'High Footfall Location Advantage', 'Easy Loading/Unloading Access'],
-    images: [arcade2, arcade1, arcade3, arcade4, arcade5],
-    inventory: [
-      { floor: 'Ground Floor', count: "70 Shops", size: '210 sq.ft.' },
-      { floor: '1st Floor', count: "70 Shops", size: '230 sq.ft.' },
-      { floor: '2nd Floor', count: "30 Offices", size: '550 sq.ft.' },
-      { floor: '3rd Floor', count: "20 Offices", size: '700 sq.ft.' },
-    ],
-  },
+  // {
+  //   id: 'sangrilla-city-centre',
+  //   name: 'Sangrilla City Centre',
+  //   tagline: 'Prime Commercial Hub',
+  //   year: '2025',
+  //   status: 'completed',
+  //   type: 'commercial',
+  //   specs: [
+  //     { label: 'Year Completed', value: '2025' },
+  //   ],
+  //   description: 'A well-designed commercial complex offering prime shop and office spaces with high footfall and excellent connectivity.',
+  //   amenities: ['Basement & Open Parking Facilities', '24/7 CCTV Surveillance & Security', 'Power Backup for Common Areas', 'Fire Safety & Compliance Systems', 'Wide Corridors & High Visibility Shop Fronts', 'Dedicated Signage Spaces', 'Common Washrooms on Each Floor', 'Efficient Vertical Connectivity (Staircases)'],
+  //   images: [citycentre4, citycentre2, citycentre3, citycentre1, citycentre5],
+  //   inventory: [
+  //     { floor: 'Ground Floor', count: "42 Shops", size: '300 sq.ft.' },
+  //     { floor: '1st Floor', count: "42 Shops", size: '300 sq.ft.' },
+  //     { floor: '2nd Floor', count: "20 Offices", size: '590 sq.ft.' },
+  //   ],
+  // },
+  // {
+  //   id: 'sangrilla-business-centre',
+  //   name: 'Sangrilla Business Centre',
+  //   tagline: 'Where Business Thrives',
+  //   year: '2023',
+  //   status: 'completed',
+  //   type: 'commercial',
+  //   specs: [
+  //     { label: 'Shops & Offices', value: 'Multiple Units' },
+  //     { label: 'Year Completed', value: '2023' },
+  //   ],
+  //   description: 'A strategically located business centre designed for corporate offices and retail spaces with modern infrastructure.',
+  //   amenities: ['Multi-level Parking Facilities', 'High-Speed Elevators', '24/7 Security with CCTV Monitoring', 'Power Backup for Offices & Common Areas', 'Fire Safety Systems', 'Reception & Waiting Lobby', 'Dedicated Office Zones (Upper Floors)', 'Professional Building Management'],
+  //   images: [businesscentre4, businesscentre2, businesscentre3, businesscentre1, businesscentre5],
+  //   inventory: [
+  //     { floor: 'Ground Floor', count: "66 Shops", size: '280 sq.ft.' },
+  //     { floor: '1st Floor', count: "66 Shops", size: '280 sq.ft.' },
+  //     { floor: '2nd Floor', count: "30 Offices", size: '615 sq.ft. to 700 sq.ft.' },
+  //   ],
+  // },
+  // {
+  //   id: 'sangrilla-arcade',
+  //   name: 'Sangrilla Arcade',
+  //   tagline: 'Retail Excellence',
+  //   year: '2020',
+  //   status: 'completed',
+  //   type: 'commercial',
+  //   specs: [
+  //     { label: 'Shops', value: 'Multiple Units' },
+  //     { label: 'Year Completed', value: '2020' },
+  //   ],
+  //   description: 'A vibrant retail arcade offering excellent commercial spaces for retail businesses with high visibility and customer footfall.',
+  //   amenities: ['Ample Surface Parking', 'Wide Frontage for Maximum Visibility', 'CCTV Surveillance', 'Power Backup (Common Areas)', 'Fire Safety Systems', 'Spacious Common Walkways', 'High Footfall Location Advantage', 'Easy Loading/Unloading Access'],
+  //   images: [arcade2, arcade1, arcade3, arcade4, arcade5],
+  //   inventory: [
+  //     { floor: 'Ground Floor', count: "70 Shops", size: '210 sq.ft.' },
+  //     { floor: '1st Floor', count: "70 Shops", size: '230 sq.ft.' },
+  //     { floor: '2nd Floor', count: "30 Offices", size: '550 sq.ft.' },
+  //     { floor: '3rd Floor', count: "20 Offices", size: '700 sq.ft.' },
+  //   ],
+  // },
   {
     id: 'sangrilla-white-house',
     name: 'SWH & SM',
@@ -416,26 +413,26 @@ export const allProjects: Project[] = [
   },
 
   // ─── RESIDENTIAL ───
-  {
-    id: 'sangrilla-plots-villas',
-    name: 'Sangrilla Plots & Villas',
-    tagline: 'Where Land Meets Luxury',
-    year: '2024',
-    status: 'completed',
-    type: 'residential',
-    specs: [
-      { label: 'Type', value: 'Plots & Villas' },
-      { label: 'Year Completed', value: '2024' },
-      { label: 'Total Units', value: '84' },
-    ],
-    description: 'Elegant premium residential plots and villas with a distinctive modern design — a perfect blend of open spaces and luxury living.',
-    amenities: ['Gated Community', 'Landscaped Gardens', 'Common Plots', 'Wide Roads', 'Street Lighting', '24/7 Security'],
-    images: [plotsandvillas3, plotsandvillas2, plotsandvillas4, plotsandvillas1, plotsandvillas5],
-    inventory: [
-      { floor: 'Plots', count: '58 Plots', size: '300 sq. yards' },
-      { floor: 'Villas', count: '26 Villas', size: '440 sq. yards' },
-    ],
-  },
+  // {
+  //   id: 'sangrilla-plots-villas',
+  //   name: 'Sangrilla Plots & Villas',
+  //   tagline: 'Where Land Meets Luxury',
+  //   year: '2024',
+  //   status: 'completed',
+  //   type: 'residential',
+  //   specs: [
+  //     { label: 'Type', value: 'Plots & Villas' },
+  //     { label: 'Year Completed', value: '2024' },
+  //     { label: 'Total Units', value: '84' },
+  //   ],
+  //   description: 'Elegant premium residential plots and villas with a distinctive modern design — a perfect blend of open spaces and luxury living.',
+  //   amenities: ['Gated Community', 'Landscaped Gardens', 'Common Plots', 'Wide Roads', 'Street Lighting', '24/7 Security'],
+  //   images: [plotsandvillas3, plotsandvillas2, plotsandvillas4, plotsandvillas1, plotsandvillas5],
+  //   inventory: [
+  //     { floor: 'Plots', count: '58 Plots', size: '300 sq. yards' },
+  //     { floor: 'Villas', count: '26 Villas', size: '440 sq. yards' },
+  //   ],
+  // },
   {
     id: 'sangrilla-meredian',
     name: 'Sangrilla Meredian',
@@ -589,7 +586,7 @@ export const allProjects: Project[] = [
     ],
     description: 'Premium bungalow project delivering luxurious and spacious independent homes — a testament to Sangrilla\'s enduring legacy of quality.',
     amenities: ['1 Common Plot', '1 Garden', '2 Parks (Playground)', '1 Water Tank', '2 Gates', '1 Club House'],
-    images: [bunglows5, bunglows3, bunglows4, bunglows1, bunglows2],
+    images: [bunglowsCover, bunglows5, bunglows3, bunglows4, bunglows1, bunglows2],
     inventory: [
       { floor: 'First Floor', count: '42 Shops', size: '230 sq.ft.' },
       { floor: 'Second Floor', count: '42 Shops', size: '230 sq.ft.' },

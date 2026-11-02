@@ -5,18 +5,7 @@ import { MapPin, ArrowRight, MessageCircle } from "lucide-react";
 import { commercialProjects } from "../data/allProjects";
 import "../styles/fullscreen-listing.css";
 import OptimizedImage from "../components/OptimizedImage";
-
-const resolveImage = (path: string): string => {
-  if (!path) return "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200";
-  if (path.startsWith('http') || path.startsWith('data:') || path.startsWith('/') || path.startsWith('blob:')) {
-    return path;
-  }
-  try {
-    return new URL(`../assets/${path}`, import.meta.url).href;
-  } catch {
-    return "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200";
-  }
-};
+import { getProjectCoverImage } from "../utils/projectImages";
 
 const Commercial = () => {
   const [activeIndex, setActiveIndex] = useState(() => {
@@ -86,7 +75,7 @@ const Commercial = () => {
             {/* Background Layer */}
             <div className="fs-bg-layer">
               <OptimizedImage
-                src={resolveImage(project.images[0])}
+                src={getProjectCoverImage(project)}
                 className="fs-bg-image"
                 alt={project.name}
                 containerClassName="fs-bg-image-container"

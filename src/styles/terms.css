@@ -16,7 +16,7 @@
 }
 
 .terms-page h1 {
-  font-size: 2.3rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: #1a1a1a;
 }
@@ -26,7 +26,7 @@
 }
 
 .terms-section h2 {
-  font-size: 1.5rem;
+  font-size: 18px;
   font-weight: 500;
   margin-bottom: 5px;
   letter-spacing: -0.5px;
@@ -36,12 +36,12 @@
 .terms-section p {
   margin-bottom: 15px;
   color: #666;
-  font-size: 1.05rem;
+  font-size: 15px;
 }
 
 
 .terms-group h3 {
-  font-size: 1.05rem;
+  font-size: 15px;
   font-weight: 400;
   color: #666;
 }
@@ -55,7 +55,7 @@
 
 .terms-contact p {
   margin-bottom: 8px;
-  font-size: 1rem;
+  font-size: 15px;
   color: #555;
 }
 

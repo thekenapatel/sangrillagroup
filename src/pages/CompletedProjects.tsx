@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import "../styles/completed-projects.css";
 import OptimizedImage from "../components/OptimizedImage";
 import { allProjects, type Project } from "../data/allProjects";
+import { getProjectCoverImage } from "../utils/projectImages";
 
 const ProjectCard = ({ project }: { project: Project }) => {
   const projectType = project.specs.find(s => s.label === "Type")?.value || (project.type === 'commercial' ? 'Commercial' : 'Residential');
@@ -21,7 +22,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
       >
         <div className="card-image-box">
           <OptimizedImage 
-            src={project.images[0]} 
+            src={getProjectCoverImage(project)} 
             alt={project.name} 
             className="project-image"
           />

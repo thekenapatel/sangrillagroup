@@ -3,18 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { allProjects } from "../data/allProjects";
 import OptimizedImage from "../components/OptimizedImage";
-
-const resolveImage = (path: string): string => {
-  if (!path) return "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800";
-  if (path.startsWith('http') || path.startsWith('data:') || path.startsWith('/') || path.startsWith('blob:')) {
-    return path;
-  }
-  try {
-    return new URL(`../assets/${path}`, import.meta.url).href;
-  } catch {
-    return "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800";
-  }
-};
+import { getProjectCoverImage } from "../utils/projectImages";
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -128,7 +117,7 @@ const Projects = () => {
               {/* Image */}
               <div className="project-image-wrapper">
                 <OptimizedImage
-                  src={resolveImage(project.images[0])}
+                  src={getProjectCoverImage(project)}
                   className="project-image"
                   alt={project.name}
                 />
